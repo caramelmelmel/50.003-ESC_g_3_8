@@ -1,4 +1,4 @@
-# 50.003-ESC_g_3_8
+# Installation guide to react
 
 For this project, we are going to perform a Progressive Web App to serve the purpose of being able to work across multiple devices. Visual Studio Code can be used. Alternatively, we can also choose jetbrains Webstorm to do so. 
 
@@ -23,12 +23,41 @@ To do the web app we are going to use Node to execute the project.
      
  Fourth, if all of the above is set, ya ready to go! Run the following commands to ensure that everything is working. Before you do so, make a new directory for the new react app using mkdir system call.
  
+ The following is for you to run the app only if you have previously created a react-app.
+ 
      npx create-react-app my-app
      
      cd my-app 
      
      npm start 
  You should be able to see a running web page on your local host.
+ 
+ Other than that, if the above commands throw an error, run the following in order.
+ 
+ For npm >= 5.2:
+ 
+     npx create-react-app my-app
+     
+ For npm 6+:
+ 
+     npm init react-app my-app
+
+ For yarn 0.25 + (which is what I use personally):
+     
+     yarn create react-app my-app
+
+ After you have executed either of the above commands, do the following:
+     
+     cd react-app
+     
+ For those who installed yarn:
+ 
+     yarn start
+ 
+ For npm user:
+ 
+     npm start
+ 
  
  ### For Windows users
  Try this link:
