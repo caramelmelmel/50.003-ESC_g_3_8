@@ -6,6 +6,7 @@ import TenantStaff from './views/TenantStaff';
 import ReportsStaff from './views/ReportsStaff';
 import React, { Component } from 'react';
 import Sidebar from './components/Sidebar';
+import ChecklistFBStaff from './components/ChecklistFBStaff';
 
 class App extends Component {
   render() { 
@@ -18,6 +19,7 @@ class App extends Component {
             <Route path="/audits-staff" component={AuditsStaff} />
             <Route path="/tenant-staff" component={TenantStaff} />
             <Route path="/reports-staff" component={ReportsStaff} />
+            <Route path="/checklist-fb-staff" component={ChecklistFBStaff}/>
             <Route path="/sidebar" component={Sidebar} />
             <Route path="/" exact component={DashboardStaff} />
           </Switch>

@@ -10,6 +10,7 @@ class Sidebar extends Component {
             <Link className="header-style" to="/reports-staff">Reports</Link>
             <Link className="header-style" to="/audits-staff">Audits</Link>
             <Link className="header-style" to="/tenant-staff">Tenants</Link>
+            <Link className="header-style" to="/checklist-fb-staff">Checklist FB</Link>
         </div> );
     }
 }

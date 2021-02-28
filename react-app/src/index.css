@@ -35,3 +35,10 @@ code {
   font-weight: "Black";
   color: #464162;
 }
+
+.checklist-header-style {
+  font-family: "Sofia Pro";
+  font-weight: "Black";
+  font-size: medium;
+  color: #464162
+}
