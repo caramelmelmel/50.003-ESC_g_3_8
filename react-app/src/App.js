@@ -1,4 +1,5 @@
 import { Route, Switch } from 'react-router-dom';
+import "./bootstrap-4.3.1-dist/css/bootstrap.min.css";
 import './App.css';
 import DashboardStaff from './views/DashboardStaff';
 import AuditsStaff from './views/AuditsStaff';
