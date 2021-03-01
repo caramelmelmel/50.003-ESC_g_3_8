@@ -1,4 +1,5 @@
-import { Route, Switch } from 'react-router-dom';
+
+import {  BrowserRouter, Route, Switch } from 'react-router-dom';
 import "./bootstrap-4.3.1-dist/css/bootstrap.min.css";
 import './App.css';
 import DashboardStaff from './views/DashboardStaff';
@@ -9,11 +10,13 @@ import React, { Component } from 'react';
 import Sidebar from './components/Sidebar';
 import ChecklistFBStaff from './components/ChecklistFBStaff';
 
+
 class App extends Component {
-  render() { 
-    return ( 
-      <div>
+  render() {
+    return (
+      <BrowserRouter>
         <div className="content">
+          
           <Switch>
             {/* Route is a wrapper around the component. It contains history, location and match (info about URL) */}
             <Route path="/dashboard-staff" component={DashboardStaff} />
@@ -25,8 +28,9 @@ class App extends Component {
             <Route path="/" exact component={DashboardStaff} />
           </Switch>
         </div>
-      </div> );
+      </BrowserRouter>
+    );
   }
 }
- 
+
 export default App;
