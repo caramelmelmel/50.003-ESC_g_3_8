@@ -45,7 +45,7 @@ const Side = props => {
             </Nav.Item>
 
             <Nav.Item>
-                <Nav.Link>href="/checklist-fb-staff">Checklist FB</Nav.Link>
+                <Nav.Link href="/checklist-fb-staff">Checklist FB</Nav.Link>
             </Nav.Item>
     
           </ul>
