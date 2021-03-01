@@ -36,6 +36,7 @@ code {
   color: #464162;
 }
 
+
 .sidebar {
   position: fixed;
   top: 0;
@@ -59,3 +60,10 @@ code {
     padding: 0.875rem 1.25rem;
     font-size: 1.2rem;
   }
+
+.checklist-header-style {
+  font-family: "Sofia Pro";
+  font-weight: "Black";
+  font-size: medium;
+  color: #464162
+}

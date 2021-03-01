@@ -37,19 +37,22 @@ const Side = props => {
             </Nav.Item>
                
             <Nav.Item>
-                <Nav.Link href="/tenant-staff">View Tenants</Nav.Link>
+                <Nav.Link href="/tenant-staff">Tenants</Nav.Link>
             </Nav.Item>
                     
             <Nav.Item>
                 <Nav.Link>Logout</Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+                <Nav.Link>href="/checklist-fb-staff">Checklist FB</Nav.Link>
             </Nav.Item>
     
           </ul>
         </Nav>
       </div>
     );
+
 }
-
-
 const Sidebar = withRouter(Side);
 export default Sidebar
