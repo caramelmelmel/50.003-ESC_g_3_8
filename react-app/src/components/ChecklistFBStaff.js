@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { getAllChecklistItems } from "./../data/checklistFB";
 
 class ChecklistFBStaff extends Component {
-  state = {
+  /*state = {
     checklistFB: getAllChecklistItems(),
-  };
+  };*/
 
   render() {
     return (

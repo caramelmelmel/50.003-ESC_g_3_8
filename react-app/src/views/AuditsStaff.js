@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import Sidebar from "../components/Sidebar";
-import Table from "../components/Table";
-import Tabs from "react-bootstrap/Tabs";
-import Tab from "react-bootstrap/Tab";
-import '../index.css'
-import { Container, Row, Col } from "react-bootstrap";
-
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "../index.css";
+import OngoingAudits from "./OngoingAudits";
+import ResolvedAudits from "./ResolvedAudits";
+import "react-tabs/style/react-tabs.css";
 
 class AuditStaff extends Component {
   render() {
@@ -17,33 +15,19 @@ class AuditStaff extends Component {
       //button to saved audits page
       //button to create new audit page
 
-      <div>
-        
-        <Container fluid>
-            <Row>
-                <Col xs={2} id="sidebar-wrapper">      
-                    <Sidebar />
-                </Col>
-                
-                <Col  xs={10} id="page-content-wrapper">
-                    
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                    <i class="fas fa-align-left"></i>
-                    <span>Toggle Sidebar</span>
-                </button>
-        
-                <Tabs defaultActiveKey="profile">
-                    <Tab eventKey="Ongoing" title="Ongoing Audits"></Tab>
-                    <Tab eventKey="Resolved" title="Resolved Audits"></Tab>
-                </Tabs>
-                <Table />
-                        
-                </Col> 
-                
-            </Row>
-
-        </Container>
-        
+      <div className="auditsstaff">
+        <Tabs onSelect={(index) => console.log(index)}>
+          <TabList>
+            <Tab>Ongoing Audits</Tab>
+            <Tab>ResolvedAudits</Tab>
+          </TabList>
+          <TabPanel>
+            <OngoingAudits />
+          </TabPanel>
+          <TabPanel>
+            <ResolvedAudits />
+          </TabPanel>
+        </Tabs>
       </div>
     );
   }

@@ -1,4 +1,6 @@
 import { Button } from "react-bootstrap";
+import React, { Component, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export const audits = [
   {
@@ -24,13 +26,15 @@ export const audits = [
   },
 ];
 
-export const renderAudit = (audit, index) => {
+export const RenderAudit = (audit, index) => {
   return (
     <tr key={index}>
       <td>{audit.tenantname}</td>
       <td>{audit.auditdate}</td>
       <td>
-        <Button variant="primary">Primary</Button>{" "}
+        <Button variant="primary">
+          <NavLink to="/see-updates">Open Updates File</NavLink>
+        </Button>
       </td>
       <td>{audit.performancescore}</td>
     </tr>
