@@ -37,7 +37,6 @@ code {
   color: #464162;
 }
 
-
 .navbar {
   background-color: #ffffff;
   height: 80px;
@@ -58,9 +57,6 @@ code {
   height: 100vh;
   display: flex;
   justify-content: center;
-
-.sidebar {
-
   position: fixed;
   top: 0;
   left: -100%;
@@ -157,5 +153,4 @@ span {
   font-weight: "Regular";
   font-size: small;
   color: #464162;
-
 }

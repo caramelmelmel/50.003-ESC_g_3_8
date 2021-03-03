@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import TextField from './TextField';
-import Sidebar from './Sidebar';
+import {Sidebar}  from './Sidebar';
 
 class TextFieldStaff extends Component {
     sidebarStyle = {

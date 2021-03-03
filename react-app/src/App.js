@@ -12,7 +12,7 @@ import ResolvedAudits from "./views/ResolvedAudits";
 import OngoingAudits from "./views/OngoingAudits";
 import ChecklistFBStaff from "./components/ChecklistFBStaff";
 import Navbar from "./components/Navbar";
-import Sidebar from './components/Sidebar';
+import { Sidebar } from './components/Sidebar';
 import TextFieldStaff from './components/TextFieldStaff'
 
 
