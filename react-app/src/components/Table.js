@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { audits, renderAudit } from "../services/NewAudit";
+import { audits, RenderAudit } from "../services/NewAudit";
 import * as ReactBootStrap from "react-bootstrap";
 
 class Tables extends Component {
@@ -17,7 +17,7 @@ class Tables extends Component {
             <th></th>
           </tr>
         </thead>
-        <tbody>{audits.map(renderAudit)}</tbody>
+        <tbody>{audits.map(RenderAudit)}</tbody>
       </ReactBootStrap.Table>
     );
   }

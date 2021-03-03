@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import { getAllChecklistItems } from './../data/checklistFB';
+import React, { Component } from "react";
+import { getAllChecklistItems } from "./../data/checklistFB";
 
 class ChecklistFBStaff extends Component {
-    state = {
-        checklistFB: getAllChecklistItems()
-    };
+  /*state = {
+    checklistFB: getAllChecklistItems(),
+  };*/
 
     render() { 
         return <React.Fragment>
@@ -64,7 +64,7 @@ class ChecklistFBStaff extends Component {
         <button className="button align-right primary">Next</button>
         </React.Fragment>;
     }
-}
- 
-export default ChecklistFBStaff;
 
+}
+
+export default ChecklistFBStaff;
