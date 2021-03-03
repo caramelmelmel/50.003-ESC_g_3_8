@@ -9,6 +9,7 @@ import ReportsStaff from './views/ReportsStaff';
 import React, { Component } from 'react';
 import Sidebar from './components/Sidebar';
 import ChecklistFBStaff from './components/ChecklistFBStaff';
+import TextFieldStaff from './components/TextFieldStaff'
 
 
 class App extends Component {
@@ -25,6 +26,9 @@ class App extends Component {
             <Route path="/reports-staff" component={ReportsStaff} />
             <Route path="/checklist-fb-staff" component={ChecklistFBStaff}/>
             <Route path="/sidebar" component={Sidebar} />
+            <Route path="/textfield-staff" component={TextFieldStaff} />
+
+
             <Route path="/" exact component={DashboardStaff} />
           </Switch>
         </div>
