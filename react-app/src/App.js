@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./bootstrap-4.3.1-dist/css/bootstrap.min.css";
+
 import "./App.css";
 import DashboardStaff from "./views/DashboardStaff";
 import AuditsStaff from "./views/AuditsStaff";
@@ -11,6 +12,11 @@ import ResolvedAudits from "./views/ResolvedAudits";
 import OngoingAudits from "./views/OngoingAudits";
 import ChecklistFBStaff from "./components/ChecklistFBStaff";
 import Navbar from "./components/Navbar";
+import Sidebar from './components/Sidebar';
+import TextFieldStaff from './components/TextFieldStaff'
+
+
+
 
 class App extends Component {
   render() {
@@ -30,6 +36,9 @@ class App extends Component {
             <Route path="/resolved-audits" component={ResolvedAudits} />
             <Route path="/ongoing-audits" component={OngoingAudits} />
             <Route path="/checklist-fb-staff" component={ChecklistFBStaff} />
+            <Route path="/sidebar" component={Sidebar} />
+            <Route path="/textfield-staff" component={TextFieldStaff} />
+
             <Route path="/" exact component={DashboardStaff} />
           </Switch>
         </div>

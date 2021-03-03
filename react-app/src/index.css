@@ -37,6 +37,7 @@ code {
   color: #464162;
 }
 
+
 .navbar {
   background-color: #ffffff;
   height: 80px;
@@ -57,6 +58,9 @@ code {
   height: 100vh;
   display: flex;
   justify-content: center;
+
+.sidebar {
+
   position: fixed;
   top: 0;
   left: -100%;
@@ -115,4 +119,43 @@ span {
 
 .auditsstaff {
   outline: none !important;
+  min-height: 100vh !important;
+  z-index: 100;
+  padding: 48px 0 0;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+}
+#sidebar-wrapper {
+  min-height: 100vh !important;
+  width: 100vw;
+  margin-left: -1rem;
+  -webkit-transition: margin 0.25s ease-out;
+  -moz-transition: margin 0.25s ease-out;
+  -o-transition: margin 0.25s ease-out;
+  transition: margin 0.25s ease-out;
+}
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+.checklist-header-style {
+  font-family: "Sofia Pro";
+  font-weight: "Black";
+  font-size: medium;
+  color: #464162;
+}
+
+.checklist-sideheader-style {
+  font-family: "Sofia Pro";
+  font-weight: "Black";
+  font-size: small;
+  color: #464162;
+}
+
+.checklist-body-style {
+  font-family: "Sofia Pro";
+  font-weight: "Regular";
+  font-size: small;
+  color: #464162;
+
 }
