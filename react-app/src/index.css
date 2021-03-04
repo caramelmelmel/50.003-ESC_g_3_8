@@ -154,3 +154,10 @@ span {
   font-size: small;
   color: #464162;
 }
+
+.non-compliance-header {
+  font-family: "Sofia Pro";
+  font-weight: "Black";
+  font-size: large;
+  color: #f06d1a;
+}

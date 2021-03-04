@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { getAllChecklistItems } from './../data/checklistFB';
 import Sidebar from "../components/Sidebar";
 import { Container, Row, Col } from "react-bootstrap";
-import {  BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AddNCButton from "../components/AddNCButton";
 
 
@@ -11,11 +11,6 @@ class ChecklistFBStaff extends Component {
   state = {
     checklistFB: getAllChecklistItems(),
   };
-
-    handleAddNC = (checklistItem) => {
-        // Need to pass the checklistItem id to a non-compliance page
-        console.log(checklistItem);
-    }
 
     handleNext() {
         console.log("Next button selected");
@@ -26,7 +21,7 @@ class ChecklistFBStaff extends Component {
             <Container fluid>
                 <Row>
                     <Col xs={2} id="sidebar-wrapper">      
-                        <Sidebar />
+                        {/*<Sidebar />*/}
                     </Col>
                     <Col>
                 <table className="table" xs={10}>
@@ -51,7 +46,7 @@ class ChecklistFBStaff extends Component {
                         <td className="checklist-body-style">{checklistItem.item}</td>
                         <td><input type="checkbox" aria-label="Checkbox for following text input"/></td>
                         <td>
-                            <AddNCButton/>
+                            <AddNCButton key={checklistItem.id} itemId={checklistItem.id}/>
                         </td>
                     </tr> : null)}
                     <tr>
@@ -64,7 +59,7 @@ class ChecklistFBStaff extends Component {
                         <td className="checklist-body-style">{checklistItem.item}</td>
                         <td><input type="checkbox" aria-label="Checkbox for following text input"/></td>
                         <td>
-                            <AddNCButton />
+                            <AddNCButton key={checklistItem.id} itemId={checklistItem.id}/>
                         </td>
                     </tr> : null)}
 
