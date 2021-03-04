@@ -1,13 +1,18 @@
+<<<<<<< HEAD
 import React, { Component } from 'react';
 import { getAllChecklistItems } from './../data/checklistFB';
 import Sidebar from "../components/Sidebar";
 import { Container, Row, Col } from "react-bootstrap";
 import {  BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+=======
+import React, { Component } from "react";
+import { getAllChecklistItems } from "./../data/checklistFB";
+>>>>>>> 6e32f2481caed10d2cc610cad83532c22250b40c
 
 class ChecklistFBStaff extends Component {
-    state = {
-        checklistFB: getAllChecklistItems()
-    };
+  /*state = {
+    checklistFB: getAllChecklistItems(),
+  };*/
 
     handleAddNC = (checklistItem) => {
         // Need to pass the checklistItem id to a non-compliance page
@@ -89,7 +94,7 @@ class ChecklistFBStaff extends Component {
             </Container>
         </React.Fragment>;
     }
-}
- 
-export default ChecklistFBStaff;
 
+}
+
+export default ChecklistFBStaff;
