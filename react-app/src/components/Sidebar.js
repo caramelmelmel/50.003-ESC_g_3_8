@@ -53,3 +53,4 @@ export const Sidebar = [
 ]
 
 //Messages use FaIcons.FaEnvelopeOpenText
+export default Sidebar;
