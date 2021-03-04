@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getAllChecklistItems } from './../data/checklistFB';
+import { getAllChecklistItems, getChecklistItem } from './../data/checklistFB';
 import Sidebar from "../components/Sidebar";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from 'react-router-dom';
@@ -10,10 +10,21 @@ import AddNCButton from "../components/AddNCButton";
 class ChecklistFBStaff extends Component {
   state = {
     checklistFB: getAllChecklistItems(),
+    score: 0,
+    clickedItems: []
   };
 
     handleNext() {
         console.log("Next button selected");
+    }
+
+    handleCheck = (itemId) => {
+        console.log("CHECKLIST ITEM: ", getChecklistItem(itemId));
+        const item = getChecklistItem(itemId);
+        const clickedItems = this.state.clickedItems;
+        this.setState({clickedItems: clickedItems.includes(item.id) ? clickedItems.filter(i => i != itemId) : [...clickedItems, itemId]})
+        this.state.clickedItems.includes(itemId) ? this.state.score-=1 : this.state.score+=1;
+        console.log("SCORE: ", this.state.score);
     }
 
     render() { 
@@ -44,7 +55,7 @@ class ChecklistFBStaff extends Component {
                     {this.state.checklistFB.map(checklistItem => checklistItem.category == "professionalism" ?                
                     <tr>
                         <td className="checklist-body-style">{checklistItem.item}</td>
-                        <td><input type="checkbox" aria-label="Checkbox for following text input"/></td>
+                        <td><input type="checkbox" aria-label="Checkbox for following text input" onClick={() => this.handleCheck(checklistItem.id)}/></td>
                         <td>
                             <AddNCButton key={checklistItem.id} itemId={checklistItem.id}/>
                         </td>
@@ -57,7 +68,7 @@ class ChecklistFBStaff extends Component {
                     {this.state.checklistFB.map(checklistItem => checklistItem.category == "staff_hygiene" ?                
                     <tr>
                         <td className="checklist-body-style">{checklistItem.item}</td>
-                        <td><input type="checkbox" aria-label="Checkbox for following text input"/></td>
+                        <td><input type="checkbox" aria-label="Checkbox for following text input" onClick={() => this.handleCheck(checklistItem.id)}/></td>
                         <td>
                             <AddNCButton key={checklistItem.id} itemId={checklistItem.id}/>
                         </td>
@@ -65,8 +76,13 @@ class ChecklistFBStaff extends Component {
 
                 </tbody>
             </table>
-                        <Link to="/add-nc-staff">
-                            <button type="button" className="btn btn-primary btn-lg checklist-header-style" style={{float: 'right'}} onClick={this.handleNext}>Next</button>
+                        <Link to="/">
+                            <button 
+                            type="button" 
+                            className="btn btn-primary btn-lg checklist-header-style" 
+                            style={{float: 'right'}} 
+                            onClick={this.handleNext}
+                            score={this.state.score}>Next</button>
                         </Link>
                     </Col>
                 </Row>

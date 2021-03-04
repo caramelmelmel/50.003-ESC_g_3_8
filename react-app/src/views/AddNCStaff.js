@@ -13,6 +13,10 @@ class AddNCStaff extends Component {
     itemName: this.props.itemName
   };
 
+  handleUploadImage() {
+    console.log("Upload Image Button Clicked");
+  }
+
   render() {
     console.log("NC recieved itemId: ", this.props.location.state);
     console.log("Checklist Item: ", this.state.checklistItem);
@@ -28,12 +32,12 @@ class AddNCStaff extends Component {
               <Col className="non-compliance-header" xs={12}>Add Non-Complinance</Col>
             </Row>
             <Row className="lg">
-              <Col className="checklist-header-style">Item: {this.state.checklistItem.item}
+              <Col className="checklist-header-style">{this.state.checklistItem.item}
               </Col>
             </Row>
             <Row>
               <Col xs = {4}>
-                <button className="btn btn-block btn-lg btn-outline-dark checklist-sideheader-style">Upload Image</button>
+                <button className="btn btn-block btn-lg btn-outline-dark checklist-sideheader-style" onClick={this.handleUploadImage}>Upload Image</button>
               </Col>
               <Col xs = {8}>Text field for description goes here</Col>
             </Row>
