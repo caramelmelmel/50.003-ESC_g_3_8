@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import Sidebar from './components/Sidebar';
 import ChecklistFBStaff from './components/ChecklistFBStaff';
 import TextFieldStaff from './components/TextFieldStaff'
+import AddNCStaff from './views/AddNCStaff';
 
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
             <Route path="/checklist-fb-staff" component={ChecklistFBStaff}/>
             <Route path="/sidebar" component={Sidebar} />
             <Route path="/textfield-staff" component={TextFieldStaff} />
+            <Route path="/add-nc-staff" component={AddNCStaff} />
 
 
             <Route path="/" exact component={DashboardStaff} />
