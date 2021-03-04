@@ -27,8 +27,12 @@ class AddNCStaff extends Component {
               <Col className="checklist-header-style" xs={12}>Add Non-Complinance</Col>
             </Row>
             <Row>
-              <Col>{this.itemName}
+              <Col>Item Name goes here
               </Col>
+            </Row>
+            <Row>
+              <Col>Upload image button goes here</Col>
+              <Col>Text field for description goes here</Col>
             </Row>
           </Col>
         </Row>
