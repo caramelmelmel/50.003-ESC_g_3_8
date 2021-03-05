@@ -14,7 +14,7 @@ class TextFieldStaff extends Component {
     render() { 
         return <React.Fragment>
             <div style={this.sidebarStyle}>
-                <Sidebar></Sidebar>
+                {/*<Sidebar></Sidebar>*/}
             </div>
 
             <div style={this.textfieldStyle}>
