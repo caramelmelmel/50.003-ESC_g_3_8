@@ -3,6 +3,12 @@ import { Dropdown } from 'react-bootstrap';
 import fontSofiaBold from './../fonts/Sofia\ Pro\ Bold\ Az.otf';
 
 class TextField extends Component {
+    constructor(props) {
+        super(props);
+        this.handleInstitutionChange = this.handleInstitutionChange.bind(this);
+        this.handleTenantChange = this.handleTenantChange.bind(this);
+        this.handleCategoryChange = this.handleCategoryChange.bind(this);
+    }
     state = {
         institution: {
             header: "Institution",
@@ -20,9 +26,9 @@ class TextField extends Component {
         tenant: {
             header: "Tenant",
             options: [
-                "Changi General Hospital",
-                "Singapore General Hospital",
-                "KK Hospital"
+                "Kopitiam",
+                "FairPrice",
+                "Starbucks"
             ],
             hrefs: [
                 "#/action-1",
@@ -33,9 +39,8 @@ class TextField extends Component {
         category: {
             header: "Category",
             options: [
-                "Changi General Hospital",
-                "Singapore General Hospital",
-                "KK Hospital"
+                "F&B",
+                "Non-F&B"
             ],
             hrefs: [
                 "#/action-1",
@@ -43,25 +48,28 @@ class TextField extends Component {
                 "#/action-3"
             ]
         },
-        // date: {
-        //     header: "Date",
-        //     options: [
-        //         "Changi General Hospital",
-        //         "Singapore General Hospital",
-        //         "KK Hospital"
-        //     ],
-        //     hrefs: [
-        //         "#/action-1",
-        //         "#/action-2", 
-        //         "#/action-3"
-        //     ]
-        // }
+        institutionSelected: "Select Institution",
+        tenantSelected: "Select Tenant",
+        categorySelected: "Select Category"
     };
 
-    debug() {
-        this.state.items.hrefs.map(ref => (console.log({ref})));
-        this.state.items.options.map(option => (console.log({option})));
+    
+    handleInstitutionChange(value) {
+        console.log(value.option);
+        this.setState({institutionSelected: value.option})
+        this.props.onToggle(value.option);
     }
+    handleTenantChange(value) {
+        console.log(value.option);
+        this.setState({tenantSelected: value.option})
+        this.props.onToggle(value.option);
+    }
+    handleCategoryChange(value) {
+        console.log(value.option);
+        this.setState({categorySelected: value.option})
+        this.props.onToggle(value.option);
+    }
+
 
     render() { 
         const titleStyle = {
@@ -89,8 +97,8 @@ class TextField extends Component {
             fontSize: 12,
             padding: 2
         }
+
         return <React.Fragment>
-            {/* {this.debug()} */}
 
             <h1 style={titleStyle}>Tenant Information</h1>
             <hr style={titleStyle}></hr>
@@ -102,14 +110,15 @@ class TextField extends Component {
 
                 <Dropdown.Toggle variant="success" id="dropdown-basic"
                 style={buttonStyle}>
-                    Select {this.state.institution.header}
+                    {this.state.institutionSelected}
                 </Dropdown.Toggle>
 
 
                 <Dropdown.Menu
                 style={{width: 300}}>
                     {this.state.institution.options.map(option => 
-                        (<Dropdown.Item >
+                        (<Dropdown.Item 
+                        onSelect={() => this.handleInstitutionChange({option})}>
                             { option }
                         </Dropdown.Item>))}
                     {/* <Dropdown.Item href="#/action-2">SGH</Dropdown.Item>
@@ -124,13 +133,14 @@ class TextField extends Component {
                 
                 <Dropdown.Toggle variant="success" id="dropdown-basic"
                 style={buttonStyle}>
-                    Select {this.state.tenant.header}
+                    {this.state.tenantSelected}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu
                 style={{width: 300}}>
                     {this.state.tenant.options.map(option => 
-                        (<Dropdown.Item>
+                        (<Dropdown.Item 
+                        onSelect={() => this.handleTenantChange({option})}>
                             { option }
                         </Dropdown.Item>))}
                 </Dropdown.Menu>
@@ -143,13 +153,14 @@ class TextField extends Component {
                 
                 <Dropdown.Toggle variant="success" id="dropdown-basic"
                 style={buttonStyle}>
-                    Select {this.state.category.header}
+                    {this.state.categorySelected}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu
                 style={{width: 300}}>
                     {this.state.category.options.map(option => 
-                        (<Dropdown.Item>
+                        (<Dropdown.Item 
+                        onSelect={() => this.handleCategoryChange({option})}>
                             { option }
                         </Dropdown.Item>))}
                 </Dropdown.Menu>
