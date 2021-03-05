@@ -21,7 +21,7 @@ class TextFieldStaff extends Component {
             this.props.history.push("/checklist-fb-staff");
         } else if (this.state.checklistType == "Non-F&B") {
             console.log("going to non f&b checklist");
-            this.props.history.push("/checklist-fb-staff");
+            this.props.history.push("/checklist-non-fb-staff");
         }
     }
     sidebarStyle = {

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import '../index.css'
 import { Container, Row, Col } from "react-bootstrap";
 import { getAllChecklistItems } from './../data/checklistFB';
-import { Link } from 'react-router-dom';
 import { getChecklistItem } from "../data/checklistFB";
 
 
