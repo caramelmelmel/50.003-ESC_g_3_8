@@ -24,6 +24,36 @@ export const audits = [
     performancescore: "96",
     noofnoncompliances: "3",
   },
+  {
+    auditid: "5b21ca3eeb7f6fbccd471815",
+    institution: "CGH",
+    tenantname: "Subway",
+    category: "Food & Beverage Tenant",
+    auditdate: "2018-01-03T19:04:28.809Z",
+    resolveaudit: 0, //this should auto =1 when noofnoncompliances =0
+    performancescore: "96",
+    noofnoncompliances: "3",
+  },
+  {
+    auditid: "5b21ca3eeb7f6fbccd471815",
+    institution: "CGH",
+    tenantname: "Subway",
+    category: "Food & Beverage Tenant",
+    auditdate: "2018-01-03T19:04:28.809Z",
+    resolveaudit: 0, //this should auto =1 when noofnoncompliances =0
+    performancescore: "96",
+    noofnoncompliances: "3",
+  },
+  {
+    auditid: "5b21ca3eeb7f6fbccd471815",
+    institution: "CGH",
+    tenantname: "Subway",
+    category: "Food & Beverage Tenant",
+    auditdate: "2018-01-03T19:04:28.809Z",
+    resolveaudit: 0, //this should auto =1 when noofnoncompliances =0
+    performancescore: "96",
+    noofnoncompliances: "3",
+  },
 ];
 
 export const RenderAudit = (audit, index) => {

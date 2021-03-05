@@ -12,21 +12,21 @@ import ResolvedAudits from "./views/ResolvedAudits";
 import OngoingAudits from "./views/OngoingAudits";
 import ChecklistFBStaff from "./components/ChecklistFBStaff";
 import Navbar from "./components/Navbar";
-import { Sidebar } from './components/Sidebar';
-import TextFieldStaff from './components/TextFieldStaff'
-import AddNCStaff from './views/AddNCStaff';
-
-
-
+import { Sidebar } from "./components/Sidebar";
+import TextFieldStaff from "./components/TextFieldStaff";
+import AddNCStaff from "./views/AddNCStaff";
 
 class App extends Component {
+  
+
   render() {
     return (
       <BrowserRouter>
         <div className="content">
+           
           <Navbar />
-        
-
+          
+      
           <Switch>
             {/* Route is a wrapper around the component. It contains history, location and match (info about URL) */}
             <Route path="/dashboard-staff" component={DashboardStaff} />
@@ -40,7 +40,6 @@ class App extends Component {
             <Route path="/sidebar" component={Sidebar} />
             <Route path="/textfield-staff" component={TextFieldStaff} />
             <Route path="/add-nc-staff" component={AddNCStaff} />
-
             <Route path="/" exact component={DashboardStaff} />
           </Switch>
         </div>

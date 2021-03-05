@@ -61,6 +61,8 @@ code {
   top: 0;
   left: -100%;
   transition: 850ms;
+  z-index: 1;
+  
 }
 
 .nav-menu.active {
