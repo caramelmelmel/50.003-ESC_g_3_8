@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import { audits, RenderAudit } from "../services/NewAudit";
 import * as ReactBootStrap from "react-bootstrap";
+import Dropdown, { filtereddata } from "./Dropdown";
 
 class Tables extends Component {
   ///only show audits that have not been resolved
 
+
   render() {
+    //console.log(Dropdown.Filterthis); //this is still undefined
+    //console.log(audits);
     return (
       <ReactBootStrap.Table>
         <thead>
@@ -24,3 +28,4 @@ class Tables extends Component {
 }
 
 export default Tables;
+//audits.map(RenderAudit)
