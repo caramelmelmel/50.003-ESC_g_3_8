@@ -195,8 +195,496 @@ const checklistFB = [
         checked: false,
         noncompliance: false
     },
-
-
+    {
+        id: "hand_hygiene_01",
+        category: "hand_hygiene",
+        item: "Hand washing facilities are easily accessible, in good working condition and soap is provided",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "hand_hygiene_02",
+        category: "hand_hygiene",
+        item: "Adequate facilities for hand hygiene are available including liquid soap and disposable hand towels",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "hand_hygiene_03",
+        category: "hand_hygiene",
+        item: "Adequate facilities for hand hygiene are available including liquid soap and disposable hand towels",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_01",
+        category: "storage_prep_food",
+        item: "Food is stored in appropriate conditions and at an appropriate temperature",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_02",
+        category: "storage_prep_food",
+        item: "Food and non-food are clearly segregated; Non-food items (e.g insecticides, detergents and other chemicals) are not stored together with the food items",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_03",
+        category: "storage_prep_food",
+        item: "Food is not placed near sources of contamination",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_04",
+        category: "storage_prep_food",
+        item: "Storage of food does not invite pest infestation",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_05",
+        category: "storage_prep_food",
+        item: "Dry goods (e.g canned food and drinks) and other food items are stored neatly on shelves, off the floor and away from walls",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_06",
+        category: "storage_prep_food",
+        item: "Proper stock rotation system such as the First-Expired-First-Out (FEFO) system is used for inventory management",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_07",
+        category: "storage_prep_food",
+        item: "Food is protected from contamination; packaging is intact and no products are found with signs of spoilage",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_08",
+        category: "storage_prep_food",
+        item: "Ice machine is clean and well maintained",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_09",
+        category: "storage_prep_food",
+        item: "Ice machine is clean and well maintained; Only ice is stored in the ice machine to prevent contamination of the ice",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_10",
+        category: "storage_prep_food",
+        item: "Scoop for ice is stored outside the ice machine in a dedicated container",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_11",
+        category: "storage_prep_food",
+        item: "Food supplied is clean and not expired",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_12",
+        category: "storage_prep_food",
+        item: "Clear labelling of date of date of preparation/ manufacture/ expiry on all food containers/ packaging",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_13",
+        category: "storage_prep_food",
+        item: "Cooked food is properly covered to prevent cross-contamination",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_14",
+        category: "storage_prep_food",
+        item: "Proper work flow and segregation of areas to prevent cross-contamination between raw and cooked/ ready-to-eat food areas",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_15",
+        category: "storage_prep_food",
+        item: "Proper separation of cooked food/ ready-to-eat food, raw meat, seafood and vegetable to prevent cross-contamination; e.g different chopping boards, knives and other utensils are used for cooked/ ready-to-eat and raw food",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_16",
+        category: "storage_prep_food",
+        item: "Frozen food is thawed in the chiller, microwave or under running water",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_17",
+        category: "storage_prep_food",
+        item: "Ingredients used are clean and washed thoroughly before cooking",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_18",
+        category: "storage_prep_food",
+        item: "All cooking ingredient (e.g cooking oil, sauces) are properly covered in proper containers and properly labelled, including all the content and date of expiry",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_19",
+        category: "storage_prep_food",
+        item: "All sauces are stored at appropriate condition & temperature",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_20",
+        category: "storage_prep_food",
+        item: "Cooking oil is not used for more than 1 day",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_21",
+        category: "storage_prep_food",
+        item: "Cooking oil is properly stored with a cover",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_22",
+        category: "storage_prep_food",
+        item: "Perishable food is stored in the fridge",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_23",
+        category: "storage_prep_food",
+        item: "Raw food and cooked food/ ready to serve food are clearly segregated",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_24",
+        category: "storage_prep_food",
+        item: "Food preperation area is free of bird and animal (e.g dog or cat)",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_25",
+        category: "storage_prep_food",
+        item: "Food is not prepared on the floor, near drain or near/ in the toilet",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_prep_food_26",
+        category: "storage_prep_food",
+        item: "Personal belongings are kept separately in the staff locker area or cabinet, away from the food storage and preperation area",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_refrigerator_warmer_01",
+        category: "storage_refrigerator_warmer",
+        item: "Daily Temperature Log for food storage units (freezers, chillers, warmers, steamers, ovens) using independent thermometer, etc. is maintained for inspection from time to time",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_refrigerator_warmer_02",
+        category: "storage_refrigerator_warmer",
+        item: "Food storage units (freezers, chillers, warmers, steamers, ovens) are kept clean and well maintained. All rubber gaskets of refrigerators/ warmers are free from defect, dirt and mould",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_refrigerator_warmer_03",
+        category: "storage_refrigerator_warmer",
+        item: "Food storage units are not overstocked to allow good air circulation",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_refrigerator_warmer_04",
+        category: "storage_refrigerator_warmer",
+        item: "For walk-in freezers and chillers, food items are stored neatly on shelves and off the floor",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_refrigerator_warmer_05",
+        category: "storage_refrigerator_warmer",
+        item: "Frozen food is stored at a temperature of not more than -12 degrees celsius",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_refrigerator_warmer_06",
+        category: "storage_refrigerator_warmer",
+        item: "Chilled food is stored at a temperature of not more than 4 degrees celsius",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_refrigerator_warmer_07",
+        category: "storage_refrigerator_warmer",
+        item: "Hot food are held above 60 degrees celsius",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_refrigerator_warmer_08",
+        category: "storage_refrigerator_warmer",
+        item: "Perishable food is stored at a temperature of not more than 4 degrees celsius",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_refrigerator_warmer_09",
+        category: "storage_refrigerator_warmer",
+        item: "Dairy products are stored at a temperature of not more than 7 degrees celsius",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_refrigerator_warmer_10",
+        category: "storage_refrigerator_warmer",
+        item: "Cooked/ ready-to-eat food are stored above raw food",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "storage_refrigerator_warmer_11",
+        category: "storage_refrigerator_warmer",
+        item: "Food items are properly wrapped/ covered in proper containers and protected from contamination",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "food_01",
+        category: "food",
+        item: "Min. no. of healthier variety of food items per stall",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "food_02",
+        category: "food",
+        item: "Lease Term: 50% of food items",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "food_03",
+        category: "food",
+        item: "Label caloric count of healthier options",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "food_04",
+        category: "food",
+        item: "Include HPB's Identifiers beside healthier options",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "food_05",
+        category: "food",
+        item: "Use of healthier cooking oils",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "food_06",
+        category: "food",
+        item: "Offer wholemeal/ whole-grain option",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "food_07",
+        category: "food",
+        item: "Healthier option food sold at lower price than regular items",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "food_08",
+        category: "food",
+        item: "Limit deep-fried and pre-deep fried food items sold (<= 20% deep-fried items)",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "beverage_01",
+        category: "beverage",
+        item: "No sugar/ Lower-sugar brewed beverage offerings accoring to guidelines",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "beverage_02",
+        category: "beverage",
+        item: "Healthier option beverages sold at lower price than regular items",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "beverage_03",
+        category: "beverage",
+        item: "Label caloric count of healthier options",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "beverage_04",
+        category: "beverage",
+        item: "Limit sugar content on commercially-prepared sweetened beverages (>= 70% commercially-prepared sweetened beverages sold to have HCS)",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "general_safety_01",
+        category: "general_safety",
+        item: "All food handlers have Basic Food Hygiene certificate and a valid Refresher Food Hygiene certificate (if applicable)",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "general_safety_02",
+        category: "general_safety",
+        item: "MSDS for all industrial chemicals are available and up to date",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "general_safety_03",
+        category: "general_safety",
+        item: "Proper chemicals storage",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "general_safety_04",
+        category: "general_safety",
+        item: "All detergent and bottles containing liquids are labelled appropriately",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "general_safety_05",
+        category: "general_safety",
+        item: "All personnel to wear safety shoes and safety attire when necessary",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "general_safety_06",
+        category: "general_safety",
+        item: "Knives and sharp objects are kept at a safe place",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "general_safety_07",
+        category: "general_safety",
+        item: "Area under the sink should not be cluttered with items other than washing agents",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "general_safety_08",
+        category: "general_safety",
+        item: "Delivery personnel do not stack goods above the shoulder level",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "general_safety_09",
+        category: "general_safety",
+        item: "Stacking of goods does not exceed 600mm from the ceiling and heavy items at the bottom, light items on top",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "general_safety_10",
+        category: "general_safety",
+        item: "Proper signage/ label (fire, hazards, warnings, food stuff) and Exit signs in working order",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "general_safety_11",
+        category: "general_safety",
+        item: "Equipment, crockery and utensils are not chipped, broken or cracked",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "fire_01",
+        category: "fire",
+        item: "Fire extinguishers access is unobstructed; Fire extinguishers are not expired and employees know how to use them",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "fire_02",
+        category: "fire",
+        item: "Escape routes and exits are unobstructed",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "fire_03",
+        category: "fire",
+        item: "First aid box is available and well-equipped",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "electrical_01",
+        category: "electrical",
+        item: "Electrical sockets are not overloaded - one plug to one socket",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "electrical_02",
+        category: "electrical",
+        item: "Plugs and cords are intact and free from exposure/ tension with PSB safety mark",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "electrical_03",
+        category: "electrical",
+        item: "Power points that are in close proximity to flammable and/ or water sources are installed with a plastic cover",
+        checked: false,
+        noncompliance: false
+    },
+    {
+        id: "electrical_04",
+        category: "electrical",
+        item: "Electrical panel/ DBs are covered",
+        checked: false,
+        noncompliance: false
+    },
 ]
 
 export function getAllChecklistItems(){

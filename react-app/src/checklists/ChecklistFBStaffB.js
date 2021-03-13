@@ -7,9 +7,10 @@ import { getAllChecklistItems, getChecklistItem } from './../services/checklistF
 
 
 
-class ChecklistFBStaff extends Component {
+class ChecklistFBStaffB extends Component {
   state = {
     checklistFB: getAllChecklistItems(),
+    totalscore: this.props.location.state.totalscore,
     score: 0,
     clickedItems: []
   };
@@ -19,12 +20,21 @@ class ChecklistFBStaff extends Component {
     }
 
     handleCheck = (itemId) => {
+        console.log("TOTAL SCORE: ", this.state.totalscore);
         console.log("CHECKLIST ITEM: ", getChecklistItem(itemId));
         const item = getChecklistItem(itemId);
         const clickedItems = this.state.clickedItems;
         this.setState({clickedItems: clickedItems.includes(item.id) ? clickedItems.filter(i => i != itemId) : [...clickedItems, itemId]})
         this.state.clickedItems.includes(itemId) ? this.state.score-=1 : this.state.score+=1;
         console.log("SCORE: ", this.state.score);
+    }
+
+    handleSave() {
+        console.log("Saving...")
+    }
+
+    handlePassScore() {
+        console.log("TOTAL SCORE IN A and B: ", this.state.totalscore + this.state.score / 21 * 0.2);
     }
 
     render() { 
@@ -43,17 +53,17 @@ class ChecklistFBStaff extends Component {
                             <th></th>
                         </tr>
                         <tr>
-                            <th className="checklist-header-style">Professionalism and Staff Hygiene</th>
+                            <th className="checklist-header-style">Housekeeping and General Cleanliness</th>
                         </tr>
                     </thead>
                 <tbody>
                     <tr>
-                        <th className="checklist-sideheader-style">Professionalism</th>
+                        <th className="checklist-sideheader-style">General Environment Cleanliness</th>
                         <th/>
                         <th/>
                     </tr>
-                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "professionalism" ?                
-                    <tr>
+                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "environment_cleanliness" ?                
+                    <tr key={checklistItem.id}>
                         <td className="checklist-body-style">{checklistItem.item}</td>
                         <td><input type="checkbox" aria-label="Checkbox for following text input" onClick={() => this.handleCheck(checklistItem.id)}/></td>
                         <td>
@@ -61,12 +71,12 @@ class ChecklistFBStaff extends Component {
                         </td>
                     </tr> : null)}
                     <tr>
-                        <th className="checklist-sideheader-style">Staff Hygiene</th>
+                        <th className="checklist-sideheader-style">Hand Hygiene Facilities</th>
                         <th/>
                         <th/>
                     </tr>
-                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "staff_hygiene" ?                
-                    <tr>
+                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "hand_hygiene" ?                
+                    <tr key={checklistItem.id}>
                         <td className="checklist-body-style">{checklistItem.item}</td>
                         <td><input type="checkbox" aria-label="Checkbox for following text input" onClick={() => this.handleCheck(checklistItem.id)}/></td>
                         <td>
@@ -76,7 +86,7 @@ class ChecklistFBStaff extends Component {
 
                 </tbody>
             </table>
-                        <Link to="/">
+                        <Link to={{pathname: "/checklist-fb-staff-food-hygiene", state: {totalscore: this.state.totalscore + this.state.score / 21 * 0.2}}} onClick={() => this.handlePassScore()}>
                             <button 
                             type="button" 
                             className="btn btn-primary btn-lg checklist-header-style" 
@@ -84,6 +94,11 @@ class ChecklistFBStaff extends Component {
                             onClick={this.handleNext}
                             score={this.state.score}>Next</button>
                         </Link>
+                        <button 
+                            type="button" 
+                            className="btn btn-success btn-lg checklist-header-style" 
+                            style={{float: 'left'}} 
+                            onClick={this.handleSave}>Save</button>
                     </Col>
                 </Row>
             </Container>
@@ -92,4 +107,4 @@ class ChecklistFBStaff extends Component {
 
 }
 
-export default ChecklistFBStaff;
+export default ChecklistFBStaffB;
