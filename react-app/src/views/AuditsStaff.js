@@ -7,7 +7,6 @@ import "react-tabs/style/react-tabs.css";
 import { Button } from "react-bootstrap";
 import DropdownMenu from "react-overlays/DropdownMenu";
 import DropdownButton from "react-bootstrap/DropdownButton";
-import { View } from "react-view";
 import Dropdown from "../components/Dropdown";
 import { dropdownTypes, dropdownInstitutes } from "../services/Dropdownmenu";
 import { Container, Row } from "react-bootstrap";
