@@ -60,11 +60,16 @@ class TextFieldStaff extends Component {
             
           this.props.history.push("/checklist-fb-staff-professionalism-and-staff-hygiene");
         } 
-      else if (this.state.checklistType == "Non-F&B") {
+        
+     /* else if (this.state.checklistType == "Non-F&B") {
 
             console.log("going to non f&b checklist");
             this.props.history.push("/checklist-non-fb-staff");
-        }
+        }*/
+        
+        else if (this.state.selectedCategory === "Non-F&B" && this.state.checkAll === true){
+            console.log("going to non f & b checklist");
+            this.props.history.push("/checklist-non-fb-staff");
     }
 
     render() { 
