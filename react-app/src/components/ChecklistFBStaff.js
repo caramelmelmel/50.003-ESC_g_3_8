@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { getAllChecklistItems, getChecklistItem } from './../data/checklistFB';
 import Sidebar from "../components/Sidebar";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import AddNCButton from "../components/AddNCButton";
+import { getAllChecklistItems, getChecklistItem } from './../services/checklistFB';
 
 
 
