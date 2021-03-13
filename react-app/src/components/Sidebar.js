@@ -40,12 +40,6 @@ export const Sidebar = [
         icon: <IoIcons.IoMdPeople />,
         cName: 'nav-text'
     },
-    {
-        title: 'Checklist FB',
-        path: '/checklist-fb-staff',
-        icon: <IoIcons.IoIosList />,
-        cName: 'nav-text'
-    },
 
 
 

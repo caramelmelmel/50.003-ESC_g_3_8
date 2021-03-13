@@ -15,6 +15,7 @@ import Navbar from "./components/Navbar";
 import { Sidebar } from "./components/Sidebar";
 import TextFieldStaff from "./components/TextFieldStaff";
 import AddNCStaff from "./views/AddNCStaff";
+import ChecklistNonFBStaff from "./components/ChecklistNonFBStaff";
 
 class App extends Component {
   
@@ -36,6 +37,7 @@ class App extends Component {
             <Route path="/see-updates" component={SeeUpdates} />
             <Route path="/resolved-audits" component={ResolvedAudits} />
             <Route path="/ongoing-audits" component={OngoingAudits} />
+            <Route path="/checklist-non-fb-staff" component={ChecklistNonFBStaff} />
             <Route path="/checklist-fb-staff" component={ChecklistFBStaff} />
             <Route path="/sidebar" component={Sidebar} />
             <Route path="/textfield-staff" component={TextFieldStaff} />
