@@ -21,6 +21,9 @@ import TextFieldStaff from "./components/TextFieldStaff";
 import AddNCStaff from "./views/AddNCStaff";
 import ChecklistNonFBStaff from "./components/ChecklistNonFBStaff";
 
+import LoginStaff from "./components/LoginStaff";
+import LoginTenant from "./components/LoginTenant";
+
 
 class App extends Component {
   
@@ -51,6 +54,10 @@ class App extends Component {
             <Route path="/sidebar" component={Sidebar} />
             <Route path="/textfield-staff" component={TextFieldStaff} />
             <Route path="/add-nc-staff" component={AddNCStaff} />
+
+            <Route path="/login-staff" component={LoginStaff} />
+            <Route path="/login-tenant" component={LoginTenant} />
+
             <Route path="/" exact component={DashboardStaff} />
           </Switch>
         </div>
