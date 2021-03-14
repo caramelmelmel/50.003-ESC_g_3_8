@@ -4,11 +4,15 @@ import "../index.css";
 import OngoingAudits from "./OngoingAudits";
 import ResolvedAudits from "./ResolvedAudits";
 import "react-tabs/style/react-tabs.css";
+import { Button } from "react-bootstrap";
+import * as AiIcons from "react-icons/ai";
+import * as VscIcons from "react-icons/vsc";
+import { Link } from "react-router-dom";
 
 
 
 function AuditStaff() {
-  const [value, setValue] = useState(null);
+  //const [value, setValue] = useState(null);
 
   return (
     //side bar
@@ -27,11 +31,19 @@ function AuditStaff() {
       class="row"
       style={{ position: "absolute", left: 30 }}
     >
+      
       <Tabs onSelect={(index) => console.log(index)}>
         
           <TabList>
             <Tab>Ongoing Audits</Tab>
             <Tab>ResolvedAudits</Tab>
+            <Link to="/textfield-staff">
+              <Button variant="outline-dark" style={{ position: "absolute", left: 390 }}>
+                <AiIcons.AiOutlineFolderAdd size="17" style={{ marginRight: "5" }} />Create New Audit
+              </Button>
+            </Link>
+            <Button variant="outline-dark" style={{ position: "absolute", left: 230 }}>
+              <VscIcons.VscDebugContinue size="17" style={{ marginRight: "5" }}/>Continue Existing Audit</Button>
           </TabList>
           
         
@@ -43,6 +55,8 @@ function AuditStaff() {
           <ResolvedAudits />
         </TabPanel>
       </Tabs>
+      
+
     </div>
   );
 }
