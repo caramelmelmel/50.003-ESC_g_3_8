@@ -1,10 +1,14 @@
 import React, { Component } from "react";
+import ResolvedTable from "../components/ResolvedTable";
 
 class ResolvedAudits extends Component {
+
+  //function that sees scores and if totalscore == 100 then add to table of resolved
+  ///deleted from table of ongoing audits
   render() {
     return (
-      <div className="header-style">
-        <h1>Table of finished audits within one month</h1>
+      <div className="auditsstaff" >
+        <ResolvedTable />
       </div>
     );
   }
