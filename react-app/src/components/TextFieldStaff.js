@@ -53,25 +53,12 @@ class TextFieldStaff extends Component {
         this.setState({clicked: true});
         if (this.state.selectedCategory === "F&B" && this.state.checkAll === true) {
             console.log("going to f&b checklist");
-
-            this.props.history.push("/checklist-fb-staff");
-        } 
-      else if (this.state.selectedCategory === "Non-F&B" && this.state.checkAll === true){
-            
-          this.props.history.push("/checklist-fb-staff-professionalism-and-staff-hygiene");
-        } 
-    }
-        
-     /* else if (this.state.checklistType == "Non-F&B") {
-
+            this.props.history.push("/checklist-fb-staff-professionalism-and-staff-hygiene");
+        } else if (this.state.selectedCategory === "Non-F&B" && this.state.checkAll === true){
             console.log("going to non f&b checklist");
             this.props.history.push("/checklist-non-fb-staff");
-        }*/
-        
-        /*else if (this.state.selectedCategory === "Non-F&B" && this.state.checkAll === true){
-            console.log("going to non f & b checklist");
-            this.props.history.push("/checklist-non-fb-staff");
-    }*/
+        } 
+    }
 
     render() { 
         // const marginHorSpace = 15;
@@ -106,13 +93,14 @@ class TextFieldStaff extends Component {
             float: "right",
             marginTop: marginVertSpace + 10,
             marginRight: "5%", 
-            width: "30%",
+            width: "100px",
             padding: 4,
             borderRadius: 3,
             backgroundColor: "#f06d1a",
             color: "white",
             fontSize: 12,
-            fontWeight: "bold"
+            fontWeight: "bold",
+            border: "0px solid white",
         }
         const errorStyle = {
             float: "left",
