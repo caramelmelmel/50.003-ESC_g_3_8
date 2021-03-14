@@ -4,11 +4,11 @@ import * as ReactBootStrap from "react-bootstrap";
 import "../index.css";
 import { Dropdown } from "react-bootstrap";
 import { getTypes, getInstitutes } from "../services/Dropdownmenu";
-import SeeUpdates from "../components/SeeUpdatesButton";
+import SeeUpdates from "./SeeUpdatesButton";
 import ListGroup from "./ListGroup";
 import * as FiIcons from "react-icons/fi";
 
-class Tables extends Component {
+class OngoingTables extends Component {
   state = {
     audits: [], //initialise to empty array to allow time to get from server and ensure not undefined
     type: [],
@@ -37,11 +37,14 @@ class Tables extends Component {
 
     if (auditscount == 0)
       return <p>There are no ongoing audits in the database.</p>;
+    
+    const ongoingAudits = allAudits.filter((m) => m.noofnoncompliances > 0);
 
     const filtered =
       selectedType && selectedType._id
-        ? allAudits.filter((m) => m.type._id === selectedType._id)
-        : allAudits;
+        ? ongoingAudits.filter((m) => m.type._id === selectedType._id)
+        : ongoingAudits;
+    //console.log(ongoingAudits);
 
     const filtered2 =
       selectedInstitution && selectedInstitution._id
@@ -114,7 +117,7 @@ class Tables extends Component {
   }
 }
 
-export default Tables;
+export default OngoingTables;
 //audits.map(RenderAudit)
 {
   /*this.state.audits.map*/

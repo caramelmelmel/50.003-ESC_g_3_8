@@ -6,54 +6,85 @@ import SeeUpdates from "../components/SeeUpdatesButton";
 export const audits = [
   {
     auditid: "1",
-    institution: { _id:"1", name: "CGH" },
+    institution: { _id: "1", name: "CGH" },
     tenantname: "Subway",
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
-    resolveaudit: 0, //this should auto =1 when noofnoncompliances =0
-    performancescore: "96",
-    noofnoncompliances: "4",
+    performancescore: 96,
+    noofnoncompliances: 4,
   },
 
   {
     auditid: "2",
-    institution: { _id:"1", name: "CGH" },
+    institution: { _id: "1", name: "CGH" },
     tenantname: "Kopitiam",
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
-    resolveaudit: 0, //this should auto =1 when noofnoncompliances =0
-    performancescore: "96",
-    noofnoncompliances: "3",
+    performancescore: 96,
+    noofnoncompliances: 3,
   },
   {
     auditid: "3",
-    institution: { _id:"2", name: "SGH" },
+    institution: { _id: "2", name: "SGH" },
     tenantname: "Presents",
     type: { _id: "2", name: "Non Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
-    resolveaudit: 0, //this should auto =1 when noofnoncompliances =0
-    performancescore: "96",
-    noofnoncompliances: "3",
+    performancescore: 96,
+    noofnoncompliances: 3,
   },
   {
     auditid: "4",
-    institution:  { _id:"6", name: "OCH" },
+    institution: { _id: "6", name: "OCH" },
     tenantname: "ToastBox",
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
-    resolveaudit: 0, //this should auto =1 when noofnoncompliances =0
-    performancescore: "96",
-    noofnoncompliances: "3",
+    performancescore: 96,
+    noofnoncompliances: 3,
   },
   {
     auditid: "5",
-    institution: { _id:"1", name: "CGH" },
+    institution: { _id: "1", name: "CGH" },
     tenantname: "Popular",
     type: { _id: "2", name: "Non Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
-    resolveaudit: 0, //this should auto =1 when noofnoncompliances =0
-    performancescore: "96",
-    noofnoncompliances: "3",
+    performancescore: 96,
+    noofnoncompliances: 3,
+  },
+  {
+    auditid: "6",
+    institution: { _id: "1", name: "CGH" },
+    tenantname: "MrBean",
+    type: { _id: "1", name: "Food & Beverage Tenant" },
+    auditdate: "2018-01-03T19:04:28.809Z",
+    performancescore: 100,
+    noofnoncompliances: 0,
+  },
+  {
+    auditid: "7",
+    institution: { _id: "6", name: "OCH" },
+    tenantname: "Flowers",
+    type: { _id: "2", name: "Non Food & Beverage Tenant" },
+    auditdate: "2018-01-03T19:04:28.809Z",
+    performancescore: 98,
+    noofnoncompliances: 3,
+  },
+  {
+    auditid: "8",
+    institution: { _id: "4", name: "SKH" },
+    tenantname: "Chicken",
+    type: { _id: "1", name: "Food & Beverage Tenant" },
+    auditdate: "2018-01-03T19:04:28.809Z",
+    performancescore: 100,
+    noofnoncompliances: 0,
+  },
+  {
+    auditid: "9",
+    institution: { _id: "4", name: "SKH" },
+    tenantname: "Fairprice",
+    type: { _id: "1", name: "Food & Beverage Tenant" },
+    auditdate: "2018-01-03T19:04:28.809Z",
+    performancescore: 100,
+    noofnoncompliances: 2,
   },
 ];
 
@@ -79,25 +110,8 @@ export function getAudits() {
 export function getAudit(id) {
   return audits.find((m) => m._id === id);
 }
-/* 
-export function saveMovie(movie) {
-    let movieInDb = movies.find(m => m._id === movie._id) || {};
-    movieInDb.name = movie.name;
-    movieInDb.genre = genresAPI.genres.find(g => g._id === movie.genreId);
-    movieInDb.numberInStock = movie.numberInStock;
-    movieInDb.dailyRentalRate = movie.dailyRentalRate;
-  
-    if (!movieInDb._id) {
-      movieInDb._id = Date.now();
-      movies.push(movieInDb);
-    }
-  
-    return movieInDb;
-  }
-  
-export function finishAudit(id) {
-    let movieInDb = movies.find(m => m._id === id);
-    movies.splice(movies.indexOf(movieInDb), 1);
-    return movieInDb;
-//move audits to reports
-*/
+
+//need to find a way to link score state to no of non compliances
+// if score for checklist item == 0, noofnoncompliance+=1
+
+//performance score should be a function with percentages dep on each category of checklist
