@@ -1,14 +1,14 @@
 import { Button } from "react-bootstrap";
 import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
-import SeeUpdates from "../components/SeeUpdatesButton"
+import SeeUpdates from "../components/SeeUpdatesButton";
 
 export const audits = [
   {
     auditid: "1",
-    institution: "CGH",
+    institution: { _id:"1", name: "CGH" },
     tenantname: "Subway",
-    type: "Food & Beverage Tenant",
+    type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     resolveaudit: 0, //this should auto =1 when noofnoncompliances =0
     performancescore: "96",
@@ -17,9 +17,9 @@ export const audits = [
 
   {
     auditid: "2",
-    institution: "CGH",
+    institution: { _id:"1", name: "CGH" },
     tenantname: "Kopitiam",
-    type: "Food & Beverage Tenant",
+    type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     resolveaudit: 0, //this should auto =1 when noofnoncompliances =0
     performancescore: "96",
@@ -27,9 +27,9 @@ export const audits = [
   },
   {
     auditid: "3",
-    institution: "SGH",
+    institution: { _id:"2", name: "SGH" },
     tenantname: "Presents",
-    type: "Non Food & Beverage Tenant",
+    type: { _id: "2", name: "Non Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     resolveaudit: 0, //this should auto =1 when noofnoncompliances =0
     performancescore: "96",
@@ -37,9 +37,9 @@ export const audits = [
   },
   {
     auditid: "4",
-    institution: "NUH",
+    institution:  { _id:"6", name: "OCH" },
     tenantname: "ToastBox",
-    type: "Food & Beverage Tenant",
+    type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     resolveaudit: 0, //this should auto =1 when noofnoncompliances =0
     performancescore: "96",
@@ -47,9 +47,9 @@ export const audits = [
   },
   {
     auditid: "5",
-    institution: "CGH",
+    institution: { _id:"1", name: "CGH" },
     tenantname: "Popular",
-    type: "Non Food & Beverage Tenant",
+    type: { _id: "2", name: "Non Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     resolveaudit: 0, //this should auto =1 when noofnoncompliances =0
     performancescore: "96",
@@ -57,8 +57,7 @@ export const audits = [
   },
 ];
 
-
-
+/*
 export const RenderAudit = (audit, index) => {
   return (
     <tr key={index}>
@@ -71,19 +70,16 @@ export const RenderAudit = (audit, index) => {
     </tr>
   );
 };
+*/
 
-
-
-
- /* 
 export function getAudits() {
-    return audits;
-  }
-
-export function getAudit(id) {
-    return audits.find(m => m._id === id);
+  return audits;
 }
 
+export function getAudit(id) {
+  return audits.find((m) => m._id === id);
+}
+/* 
 export function saveMovie(movie) {
     let movieInDb = movies.find(m => m._id === movie._id) || {};
     movieInDb.name = movie.name;

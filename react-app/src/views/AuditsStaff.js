@@ -4,14 +4,6 @@ import "../index.css";
 import OngoingAudits from "./OngoingAudits";
 import ResolvedAudits from "./ResolvedAudits";
 import "react-tabs/style/react-tabs.css";
-import { Button } from "react-bootstrap";
-import DropdownMenu from "react-overlays/DropdownMenu";
-import DropdownButton from "react-bootstrap/DropdownButton";
-import { View } from "react-view";
-import Dropdown from "../components/Dropdown";
-import { dropdownTypes, dropdownInstitutes } from "../services/Dropdownmenu";
-import { Container, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 
 function AuditStaff() {
@@ -26,50 +18,25 @@ function AuditStaff() {
     //button to create new audit page
     //auto arrange in date
     //button shld lead to diff see updates in diff audit id
-      
+
     //can only filter by type OR institude currently
 
-    <div className="auditsstaff" class="row" >
+    <div
+      className="auditsstaff"
+      class="row"
+      style={{ position: "absolute", left: 30 }}
+    >
       <Tabs onSelect={(index) => console.log(index)}>
-        <div class="row">
-            
-            <TabList>
-                <Tab>Ongoing Audits</Tab>
-                <Tab>ResolvedAudits</Tab>
-            </TabList>
-           
-            
-            <div
-            style={{ width: 170, position: "absolute", right: 10}}
-            alignright = "true"
-            >
-                
-            <Dropdown 
-                options={dropdownTypes}
-                prompt="Type"
-                id="id"
-                label = "name"         
-                value={value}
-                onChange={(val) => setValue(val)}/>
-            </div>
-            
-            <div
-            style={{width: 130, position: "absolute", right: 180}}>
-            
-            <Dropdown
-                options={dropdownInstitutes}
-                prompt="Institute"
-                id="id"
-                label = "ins"
-                value={value}
-                onChange={(val) => setValue(val)}
-            />
-            </div>
-        </div>
+        
+          <TabList>
+            <Tab>Ongoing Audits</Tab>
+            <Tab>ResolvedAudits</Tab>
+          </TabList>
+          
         
 
         <TabPanel>
-          <OngoingAudits/>
+          <OngoingAudits />
         </TabPanel>
         <TabPanel>
           <ResolvedAudits />
@@ -77,7 +44,6 @@ function AuditStaff() {
       </Tabs>
     </div>
   );
-
 }
 
 export default AuditStaff;
