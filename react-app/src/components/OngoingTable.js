@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-import { getAudits } from "../services/NewAudit";
+import { audits, getAudits } from "../services/NewAudit";
 import * as ReactBootStrap from "react-bootstrap";
 import "../index.css";
 import { Dropdown } from "react-bootstrap";
 import { getTypes, getInstitutes } from "../services/Dropdownmenu";
-import SeeUpdates from "./SeeUpdatesButton";
+import SeeUpdatesButton from "./SeeUpdatesButton";
 import ListGroup from "./ListGroup";
 import * as FiIcons from "react-icons/fi";
+import * as FcIcons from "react-icons/fc";
+import { Button } from "react-bootstrap";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 
 class OngoingTables extends Component {
   state = {
@@ -31,13 +34,14 @@ class OngoingTables extends Component {
     this.setState({ selectedInstitution: institute });
   };
 
+  
   render() {
     const { length: auditscount } = this.state.audits;
     const { selectedType, audits: allAudits, selectedInstitution } = this.state;
 
     if (auditscount == 0)
       return <p>There are no ongoing audits in the database.</p>;
-    
+
     const ongoingAudits = allAudits.filter((m) => m.noofnoncompliances > 0);
 
     const filtered =
@@ -50,6 +54,7 @@ class OngoingTables extends Component {
       selectedInstitution && selectedInstitution._id
         ? filtered.filter((m) => m.institution._id === selectedInstitution._id)
         : filtered;
+    //console.log(this.state.audits);
 
     return (
       <div>
@@ -70,6 +75,7 @@ class OngoingTables extends Component {
                 <Dropdown.Divider />
                 <Dropdown.Header>By Type</Dropdown.Header>
                 <ListGroup
+                  key={this.state.type._id}
                   items={this.state.type}
                   selectedItem={this.state.selectedType} //apply active class to selectedItem
                   onItemSelect={this.handleTypeSelect}
@@ -78,6 +84,7 @@ class OngoingTables extends Component {
 
                 <Dropdown.Header>By Institute</Dropdown.Header>
                 <ListGroup
+                  key={this.state.institute._id}
                   items={this.state.institute}
                   selectedItem={this.state.selectedInstitution}
                   onItemSelect={this.handleInstituteSelect}
@@ -104,7 +111,9 @@ class OngoingTables extends Component {
                   <td>{audit.tenantname}</td>
                   <td>{audit.auditdate}</td>
                   <td>
-                    <SeeUpdates key={audit.auditid} itemId={audit.auditid} />
+
+                    <SeeUpdatesButton key={audit.auditid} itemId={audit.auditid}/>
+                    
                   </td>
                   <td>{audit.performancescore}</td>
                 </tr>
@@ -118,7 +127,3 @@ class OngoingTables extends Component {
 }
 
 export default OngoingTables;
-//audits.map(RenderAudit)
-{
-  /*this.state.audits.map*/
-}

@@ -3,6 +3,8 @@ import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
 import SeeUpdates from "../components/SeeUpdatesButton";
 
+//this should be the output from checklist
+//noofnoncomplainces = length of noncompliances array
 export const audits = [
   {
     auditid: "1",
@@ -11,6 +13,7 @@ export const audits = [
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 96,
+    noncomplainces: [{ name: "professionalism_02" }, { name: "staff_hygiene_02" }, { name: "environment_cleanliness_02" }, { name: "environment_cleanliness_05" }],
     noofnoncompliances: 4,
   },
 
@@ -21,6 +24,7 @@ export const audits = [
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 96,
+    noncomplainces:[{ name: "professionalism_02" }, { name: "staff_hygiene_02" }, { name: "environment_cleanliness_02" }],
     noofnoncompliances: 3,
   },
   {
@@ -30,6 +34,7 @@ export const audits = [
     type: { _id: "2", name: "Non Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 96,
+    noncomplainces:[{ name: "professionalism_02" }, { name: "staff_hygiene_02" }, { name: "environment_cleanliness_02" }],
     noofnoncompliances: 3,
   },
   {
@@ -39,6 +44,7 @@ export const audits = [
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 96,
+    noncomplainces:[{ name: "professionalism_02" }, { name: "staff_hygiene_02" }, { name: "environment_cleanliness_02" }],
     noofnoncompliances: 3,
   },
   {
@@ -48,6 +54,7 @@ export const audits = [
     type: { _id: "2", name: "Non Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 96,
+    noncomplainces:[{ name: "professionalism_02" }, { name: "staff_hygiene_02" }, { name: "environment_cleanliness_02" }],
     noofnoncompliances: 3,
   },
   {
@@ -57,6 +64,7 @@ export const audits = [
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 100,
+    noncomplainces:[],
     noofnoncompliances: 0,
   },
   {
@@ -66,6 +74,7 @@ export const audits = [
     type: { _id: "2", name: "Non Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 98,
+    noncomplainces:[{ name: "professionalism_02" }, { name: "staff_hygiene_02" }, { name: "environment_cleanliness_02" }],
     noofnoncompliances: 3,
   },
   {
@@ -75,6 +84,7 @@ export const audits = [
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 100,
+    noncomplainces:[],
     noofnoncompliances: 0,
   },
   {
@@ -84,6 +94,7 @@ export const audits = [
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 100,
+    noncomplainces:[{ name: "professionalism_02" }, { name: "staff_hygiene_02" }],
     noofnoncompliances: 2,
   },
 ];
