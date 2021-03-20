@@ -1,28 +1,37 @@
 import { Button } from "react-bootstrap";
 import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
+import { audits } from "./NewAudit";
 
 
-export const dropdownTypes = [
-  {"id":1, "name":"Non Food & Beverage"},
+export const types = [
+  { _id: "1", name: "Food & Beverage Tenant" },
 
-  {"id":2,"name":"Food & Beverage"},
+  { _id: "2", name: "Non Food & Beverage Tenant" },
 
-  {"id":3,"name":"None"},
+
 ];
 
-export const dropdownInstitutes = [
-  { "id":1, "ins": "CGH" },
+export function getTypes() {
+  return types.filter(g => g);
+}
 
-  { "id":2, "ins": "SGH" },
 
-  { "id":3, "ins": "KKH" },
+export const institutes = [
+  { _id:"1", name: "CGH" },
 
-  { "id":4, "ins": "SKH" },
+  { _id:"2", name: "SGH" },
 
-  { "id":5, "ins": "NCCS" },
+  { _id:"3", name: "KKH" },
 
-  { "id":6, "ins": "OCH" },
+  { _id:"4", name: "SKH" },
 
-  { "id":7, "ins": "None" },
+  { _id:"5", name: "NCCS" },
+
+  { _id:"6", name: "OCH" },
+
 ];
+
+export function getInstitutes() {
+  return institutes.filter(g => g);
+}

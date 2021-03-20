@@ -39,7 +39,7 @@ code {
 
 .navbar {
   background-color: #ffffff;
-  height: 80px;
+  height: 40px;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -118,8 +118,27 @@ span {
   outline: none !important;
   min-height: 100vh !important;
   z-index: 100;
-  padding: 48px 0 0;
+  padding: 10px 0 0;
   box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  width: 90vh;
+  
+}
+
+
+
+.ongoingtable{
+  display: inline;
+}
+
+.sentence{
+  display: inline-block;
+  padding-right:53px;
+}
+
+.dropdowntype{
+  display: inline-block;
+
 }
 #sidebar-wrapper {
   min-height: 100vh !important;
@@ -235,3 +254,8 @@ span {
   background-color: #f2f9fc;
   color: #333;
 }
+
+.form-control {
+  width: 70vh !important;
+}
+
