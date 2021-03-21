@@ -84,15 +84,15 @@ export default class SeeUpdates extends Component {
                 as="textarea"
                 placeholder="Additional comments"
                 rows={2}
-                style={{ position: "absolute", left: 20}}
+                style={{ marginLeft: "5%", marginRight: "0%", float: "left", width: "80%"}}
               />
-            </Col>
-            <Col>
+            {/* </Col>
+            <Col> */}
               <Button
                 variant="dark"
-                style={{ position: "absolute", right:20, }}
+                style={{ marginLeft: "0%", marginRight: "5%", float: "right", width: "10%"}}
               >
-                <IoIcons.IoIosSend size="30" />
+                <IoIcons.IoIosSend />
               </Button>
             </Col>
           </Row>
