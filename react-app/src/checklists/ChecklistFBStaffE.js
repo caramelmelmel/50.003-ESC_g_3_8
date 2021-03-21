@@ -3,6 +3,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import AddNCButton from "../components/AddNCButton";
 import { getAllChecklistItems, getChecklistItem } from './../services/checklistFB';
+import Category from './Category';
+import Header from './Header';
 
 
 
@@ -57,46 +59,32 @@ class ChecklistFBStaffE extends Component {
                         </tr>
                     </thead>
                 <tbody>
-                    <tr>
-                        <th className="checklist-sideheader-style">General Safety</th>
-                        <th/>
-                        <th/>
-                    </tr>
-                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "general_safety" ?                
-                    <tr key={checklistItem.id}>
-                        <td className="checklist-body-style">{checklistItem.item}</td>
-                        <td><input type="checkbox" aria-label="Checkbox for following text input" onClick={() => this.handleCheck(checklistItem.id)}/></td>
-                        <td>
-                            <AddNCButton key={checklistItem.id} itemId={checklistItem.id}/>
-                        </td>
-                    </tr> : null)}
-                    <tr>
-                        <th className="checklist-sideheader-style">Fire and Emergency Safety</th>
-                        <th/>
-                        <th/>
-                    </tr>
-                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "fire" ?                
-                    <tr key={checklistItem.id}>
-                        <td className="checklist-body-style">{checklistItem.item}</td>
-                        <td><input type="checkbox" aria-label="Checkbox for following text input" onClick={() => this.handleCheck(checklistItem.id)}/></td>
-                        <td>
-                            <AddNCButton key={checklistItem.id} itemId={checklistItem.id}/>
-                        </td>
-                    </tr> : null)}
-                    <tr>
-                        <th className="checklist-sideheader-style">Electrical Safety</th>
-                        <th/>
-                        <th/>
-                    </tr>
-                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "electrical" ?                
-                    <tr key={checklistItem.id}>
-                        <td className="checklist-body-style">{checklistItem.item}</td>
-                        <td><input type="checkbox" aria-label="Checkbox for following text input" onClick={() => this.handleCheck(checklistItem.id)}/></td>
-                        <td>
-                            <AddNCButton key={checklistItem.id} itemId={checklistItem.id}/>
-                        </td>
-                    </tr> : null)}
+                    <Header headerTitle="General Safety"/>
+                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "general_safety" ? 
+                    <Category 
+                    key={checklistItem.id}
+                    id={checklistItem.id}
+                    item={checklistItem.item}
+                    handleCheck={() => this.handleCheck(checklistItem.id)}
+                    /> : null)}
 
+                    <Header headerTitle="Fire and Emergency Safety"/>
+                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "fire" ? 
+                    <Category 
+                    key={checklistItem.id}
+                    id={checklistItem.id}
+                    item={checklistItem.item}
+                    handleCheck={() => this.handleCheck(checklistItem.id)}
+                    /> : null)}
+
+                    <Header headerTitle="Electrical Safety"/>
+                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "electrical" ? 
+                    <Category 
+                    key={checklistItem.id}
+                    id={checklistItem.id}
+                    item={checklistItem.item}
+                    handleCheck={() => this.handleCheck(checklistItem.id)}
+                    /> : null)}
                 </tbody>
             </table>
                         <Link to={{pathname: "/", state: {totalscore: this.state.totalscore + this.state.score / 18 * 0.2}}} onClick={() => this.handlePassScore()}>

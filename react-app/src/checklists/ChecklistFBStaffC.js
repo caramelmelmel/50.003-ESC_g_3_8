@@ -4,6 +4,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import AddNCButton from "../components/AddNCButton";
 import { getAllChecklistItems, getChecklistItem } from './../services/checklistFB';
+import Category from './Category';
+import Header from './Header';
 
 
 
@@ -34,7 +36,7 @@ class ChecklistFBStaffC extends Component {
     }
 
     handlePassScore() {
-        console.log("TOTAL SCORE IN A, B and C: ", this.state.totalscore + this.state.score / 37 * 0.35);
+        console.log("TOTAL SCORE IN A, B and C: ", this.state.totalscore + (this.state.score / 37) * 0.35);
 
     }
 
@@ -58,33 +60,23 @@ class ChecklistFBStaffC extends Component {
                         </tr>
                     </thead>
                 <tbody>
-                    <tr>
-                        <th className="checklist-sideheader-style">Storage and Preparation of Food</th>
-                        <th/>
-                        <th/>
-                    </tr>
-                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "storage_prep_food" ?                
-                    <tr key={checklistItem.id}>
-                        <td className="checklist-body-style">{checklistItem.item}</td>
-                        <td><input type="checkbox" aria-label="Checkbox for following text input" onClick={() => this.handleCheck(checklistItem.id)}/></td>
-                        <td>
-                            <AddNCButton key={checklistItem.id} itemId={checklistItem.id}/>
-                        </td>
-                    </tr> : null)}
-                    <tr>
-                        <th className="checklist-sideheader-style">Storage of Food in Refrigerator/ Warmer</th>
-                        <th/>
-                        <th/>
-                    </tr>
-                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "storage_refrigerator_warmer" ?                
-                    <tr key={checklistItem.id}>
-                        <td className="checklist-body-style">{checklistItem.item}</td>
-                        <td><input type="checkbox" aria-label="Checkbox for following text input" onClick={() => this.handleCheck(checklistItem.id)}/></td>
-                        <td>
-                            <AddNCButton key={checklistItem.id} itemId={checklistItem.id}/>
-                        </td>
-                    </tr> : null)}
+                    <Header headerTitle="Storage and Preparation of Food"/>
+                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "storage_prep_food" ? 
+                    <Category 
+                    key={checklistItem.id}
+                    id={checklistItem.id}
+                    item={checklistItem.item}
+                    handleCheck={() => this.handleCheck(checklistItem.id)}
+                    /> : null)}
 
+                    <Header headerTitle="Storage of Food in Refrigerator/ Warmer"/>
+                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "storage_refrigerator_warmer" ? 
+                    <Category 
+                    key={checklistItem.id}
+                    id={checklistItem.id}
+                    item={checklistItem.item}
+                    handleCheck={() => this.handleCheck(checklistItem.id)}
+                    /> : null)}
                 </tbody>
             </table>
                         <Link to={{pathname: "/checklist-fb-food-and-beverages", state: {totalscore: this.state.totalscore + this.state.score / 37 * 0.35}}} onClick={() => this.handlePassScore()}>

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import NCBadge from './../checklists/NCBadge';
+import { getChecklistItem } from './../services/checklistFB';
 
 class AddNCButton extends Component {
     state = {
@@ -22,6 +24,8 @@ class AddNCButton extends Component {
                 <path d="M13.5 10a.5.5 0 0 1 .5.5V12h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V13h-1.5a.5.5 0 0 1 0-1H13v-1.5a.5.5 0 0 1 .5-.5z"></path>
             </svg>
         </button>
+        <NCBadge item={getChecklistItem(this.state.itemId)}/>
+        
     </Link>);
     }
 }

@@ -4,6 +4,8 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import AddNCButton from "../components/AddNCButton";
 import { getAllChecklistItems, getChecklistItem } from './../services/checklistFB';
+import Category from './Category';
+import Header from './Header';
 
 
 
@@ -58,33 +60,23 @@ class ChecklistFBStaffD extends Component {
                         </tr>
                     </thead>
                 <tbody>
-                    <tr>
-                        <th className="checklist-sideheader-style">Food</th>
-                        <th/>
-                        <th/>
-                    </tr>
-                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "food" ?                
-                    <tr key={checklistItem.id}>
-                        <td className="checklist-body-style">{checklistItem.item}</td>
-                        <td><input type="checkbox" aria-label="Checkbox for following text input" onClick={() => this.handleCheck(checklistItem.id)}/></td>
-                        <td>
-                            <AddNCButton key={checklistItem.id} itemId={checklistItem.id}/>
-                        </td>
-                    </tr> : null)}
-                    <tr>
-                        <th className="checklist-sideheader-style">Beverage</th>
-                        <th/>
-                        <th/>
-                    </tr>
-                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "beverage" ?                
-                    <tr key={checklistItem.id}>
-                        <td className="checklist-body-style">{checklistItem.item}</td>
-                        <td><input type="checkbox" aria-label="Checkbox for following text input" onClick={() => this.handleCheck(checklistItem.id)}/></td>
-                        <td>
-                            <AddNCButton key={checklistItem.id} itemId={checklistItem.id}/>
-                        </td>
-                    </tr> : null)}
+                    <Header headerTitle="Food"/>
+                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "food" ? 
+                    <Category 
+                    key={checklistItem.id}
+                    id={checklistItem.id}
+                    item={checklistItem.item}
+                    handleCheck={() => this.handleCheck(checklistItem.id)}
+                    /> : null)}
 
+                    <Header headerTitle="Beverage"/>
+                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "beverage" ? 
+                    <Category 
+                    key={checklistItem.id}
+                    id={checklistItem.id}
+                    item={checklistItem.item}
+                    handleCheck={() => this.handleCheck(checklistItem.id)}
+                    /> : null)}                    
                 </tbody>
             </table>
                         <Link to={{pathname: "/checklist-fb-safety-and-health", state: {totalscore: this.state.totalscore + this.state.score / 12 * 0.15}}} onClick={() => this.handlePassScore()}>
