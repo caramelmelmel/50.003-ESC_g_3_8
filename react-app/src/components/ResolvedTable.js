@@ -53,3 +53,4 @@ class ResolvedTables extends Component {
     
 }
 export default ResolvedTables;
+//on press solved button should add finished datetime to the dataset, then call here 

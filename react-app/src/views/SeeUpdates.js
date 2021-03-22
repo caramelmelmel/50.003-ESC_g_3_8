@@ -73,7 +73,7 @@ export default class SeeUpdates extends Component {
         <h2 style={{
             position: "absolute",
             left: 20,
-            top: 250, }}>Photo here</h2>
+            top: 250, }}>Photo here testing</h2>
           
           
 
