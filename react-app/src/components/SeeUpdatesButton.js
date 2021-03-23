@@ -15,18 +15,32 @@ class SeeUpdatesButton extends Component {
   handleSeeUpdates = (itemId) => {
     console.log("ITEM CLICKED HAS ID OF:", this.state.itemId);
   };
+  
 
 
   render() {
-    let module = audits.find((audit) => audit.auditid === this.props.itemId);
-    let noncompliance = module.noncomplainces;
-    //console.log(module.noncomplainces[0]);
+    //audits that show have resolved == false
+
+    const module = audits.find((audit) => audit.auditid === this.props.itemId );
+    //console.log(module.noncomplainces);
+
+    const noncompliance = []
+   
+
+    for (var i = 0; i < module.noncomplainces.length; i++) {
+      //console.log(module.noncomplainces[i].resolved);
+      if (module.noncomplainces[i].resolved == false) {
+        noncompliance.push(module.noncomplainces[i]);
+      }
+    }
+    //console.log(noncompliance)
+          
 
 
     return (
       noncompliance.map(item => (
       
-       
+        
         <Link
           to={{
             pathname: `/see-updates/${this.state.itemId}/${item.name}`,
@@ -34,11 +48,12 @@ class SeeUpdatesButton extends Component {
               itemId: this.state.itemId,
               nonComId: item.name,
             },
-    
             
+    
           }}
           onClick={(itemId) => this.handleSeeUpdates(itemId)}
         >
+          <Route path='/see-updates/itemId/:id' component={SeeUpdates} />
           <Button variant="light">
             
             <FcIcons.FcOpenedFolder size="20" />
