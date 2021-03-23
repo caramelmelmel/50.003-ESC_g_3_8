@@ -14,7 +14,7 @@ import { getClickedItems, setClickedItems } from './../services/clickedItems';
 class ChecklistFBStaffA extends Component {
   state = {
     checklistFB: getAllChecklistItems(),
-    score: getClickedItems().length,
+    //score: getClickedItems().length,
     clickedItems: getClickedItems()
   };
 
@@ -28,8 +28,8 @@ class ChecklistFBStaffA extends Component {
         const clickedItems = this.state.clickedItems;
         //this.setState({clickedItems: clickedItems.includes(item.id) ? clickedItems.filter(i => i != itemId) : [...clickedItems, itemId]})
         this.setState({clickedItems: setClickedItems(this.state.clickedItems.includes(item.id)? clickedItems.filter(i => i != itemId) : [...getClickedItems(), itemId])});
-        this.state.clickedItems.includes(itemId) ? this.state.score-=1 : this.state.score+=1;
-        console.log("SCORE: ", this.state.score);
+        //this.state.clickedItems.includes(itemId) ? this.state.score-=1 : this.state.score+=1;
+        //console.log("SCORE: ", this.state.score);
         //console.log("CLICKED ITEMS PG1: ", this.state.clickedItems);
     }
 
@@ -37,9 +37,9 @@ class ChecklistFBStaffA extends Component {
         console.log("Saving...")
     }
 
-    handlePassScore() {
+    /*handlePassScore() {
         console.log("TOTAL SCORE IN A: ", this.state.score / 13 * 0.1);
-    }
+    }*/
 
     /*componentDidMount() {
         fetch(URL)
@@ -93,13 +93,12 @@ class ChecklistFBStaffA extends Component {
                     /> : null)}
                 </tbody>
             </table>
-                        <Link to={{pathname: "/checklist-fb-staff-housekeeping-and-cleanliness", state: {totalscore: this.state.score / 13 * 0.1}}} onClick={() => this.handlePassScore()}>
+                        <Link to={{pathname: "/checklist-fb-staff-housekeeping-and-cleanliness"}}>
                             <button 
                             type="button" 
                             className="btn btn-primary btn-lg checklist-header-style" 
                             style={{float: 'right'}} 
-                            onClick={this.handleNext}
-                            score={this.state.score}>Next</button>
+                            onClick={this.handleNext}>Next</button>
                         </Link>
                         <button 
                             type="button" 

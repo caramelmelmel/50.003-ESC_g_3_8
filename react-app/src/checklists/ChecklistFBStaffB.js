@@ -13,8 +13,8 @@ import { getClickedItems, setClickedItems } from './../services/clickedItems';
 class ChecklistFBStaffB extends Component {
   state = {
     checklistFB: getAllChecklistItems(),
-    totalscore: this.props.location.state.totalscore,
-    score: getClickedItems().length,
+    //totalscore: this.props.location.state.totalscore,
+    //score: getClickedItems().length,
     clickedItems: getClickedItems()
   };
 
@@ -28,8 +28,8 @@ class ChecklistFBStaffB extends Component {
         const clickedItems = this.state.clickedItems;
         //this.setState({clickedItems: clickedItems.includes(item.id) ? clickedItems.filter(i => i != itemId) : [...clickedItems, itemId]})
         this.setState({clickedItems: setClickedItems(this.state.clickedItems.includes(item.id)? clickedItems.filter(i => i != itemId) : [...getClickedItems(), itemId])});
-        this.state.clickedItems.includes(itemId) ? this.state.score-=1 : this.state.score+=1;
-        console.log("SCORE: ", this.state.score);
+        //this.state.clickedItems.includes(itemId) ? this.state.score-=1 : this.state.score+=1;
+        //console.log("SCORE: ", this.state.score);
         //console.log("CLICKED ITEMS PG1: ", this.state.clickedItems);
     }
 
@@ -37,9 +37,9 @@ class ChecklistFBStaffB extends Component {
         console.log("Saving...")
     }
 
-    handlePassScore() {
+    /*handlePassScore() {
         console.log("TOTAL SCORE IN A and B: ", this.state.totalscore + this.state.score / 18 * 0.2);
-    }
+    }*/
 
     render() { 
         return <React.Fragment>
@@ -82,13 +82,13 @@ class ChecklistFBStaffB extends Component {
                     /> : null)}
                 </tbody>
             </table>
-                        <Link to={{pathname: "/checklist-fb-staff-food-hygiene", state: {totalscore: this.state.totalscore + this.state.score / 18 * 0.2}}} onClick={() => this.handlePassScore()}>
+                        <Link to={{pathname: "/checklist-fb-staff-food-hygiene"}}>
                             <button 
                             type="button" 
                             className="btn btn-primary btn-lg checklist-header-style" 
                             style={{float: 'right'}} 
                             onClick={this.handleNext}
-                            score={this.state.score}>Next</button>
+                            >Next</button>
                         </Link>
                         <button 
                             type="button" 
