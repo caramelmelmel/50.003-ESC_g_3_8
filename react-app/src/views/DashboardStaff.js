@@ -7,7 +7,7 @@ import Chart from "react-apexcharts";
 class DashboardStaff extends Component {
     render() { 
         return (
-            <div class="container">
+            <div className="container">
                 <h1 className="header-style">Average Performance Score of each Institution</h1>
                 <h3 className="header-style">Last month</h3>
                 <div id="chart1">

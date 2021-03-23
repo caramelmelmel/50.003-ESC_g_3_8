@@ -6,6 +6,7 @@ import AddNCButton from "../components/AddNCButton";
 import { getAllChecklistItems, getChecklistItem } from './../services/checklistFB';
 import Category from './Category';
 import Header from './Header';
+import { getClickedItems, setClickedItems } from './../services/clickedItems';
 
 
 
@@ -13,8 +14,8 @@ class ChecklistFBStaffC extends Component {
   state = {
     checklistFB: getAllChecklistItems(),
     totalscore: this.props.location.state.totalscore,
-    score: 0,
-    clickedItems: []
+    score: getClickedItems().length,
+    clickedItems: getClickedItems()
   };
 
     handleNext() {
@@ -22,13 +23,14 @@ class ChecklistFBStaffC extends Component {
     }
 
     handleCheck = (itemId) => {
-        console.log("TOTAL SCORE: ", this.state.totalscore);
         console.log("CHECKLIST ITEM: ", getChecklistItem(itemId));
         const item = getChecklistItem(itemId);
         const clickedItems = this.state.clickedItems;
-        this.setState({clickedItems: clickedItems.includes(item.id) ? clickedItems.filter(i => i != itemId) : [...clickedItems, itemId]})
+        //this.setState({clickedItems: clickedItems.includes(item.id) ? clickedItems.filter(i => i != itemId) : [...clickedItems, itemId]})
+        this.setState({clickedItems: setClickedItems(this.state.clickedItems.includes(item.id)? clickedItems.filter(i => i != itemId) : [...getClickedItems(), itemId])});
         this.state.clickedItems.includes(itemId) ? this.state.score-=1 : this.state.score+=1;
         console.log("SCORE: ", this.state.score);
+        //console.log("CLICKED ITEMS PG1: ", this.state.clickedItems);
     }
 
     handleSave() {
@@ -67,6 +69,7 @@ class ChecklistFBStaffC extends Component {
                     id={checklistItem.id}
                     item={checklistItem.item}
                     handleCheck={() => this.handleCheck(checklistItem.id)}
+                    itemsChecked={this.state.clickedItems}
                     /> : null)}
 
                     <Header headerTitle="Storage of Food in Refrigerator/ Warmer"/>
@@ -76,6 +79,7 @@ class ChecklistFBStaffC extends Component {
                     id={checklistItem.id}
                     item={checklistItem.item}
                     handleCheck={() => this.handleCheck(checklistItem.id)}
+                    itemsChecked={this.state.clickedItems}
                     /> : null)}
                 </tbody>
             </table>
