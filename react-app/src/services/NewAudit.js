@@ -13,7 +13,12 @@ export const audits = [
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 96,
-    noncomplainces: [{ name: "professionalism_02" }, { name: "staff_hygiene_02" }, { name: "environment_cleanliness_02" }, { name: "environment_cleanliness_05" }],
+    noncomplainces: [
+      { name: "professionalism_02", resolved: false },
+      { name: "staff_hygiene_02", resolved: false },
+      { name: "environment_cleanliness_02", resolved: false },
+      { name: "environment_cleanliness_05", resolved: false },
+    ],
     noofnoncompliances: 4,
   },
 
@@ -24,7 +29,11 @@ export const audits = [
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 96,
-    noncomplainces:[{ name: "professionalism_02" }, { name: "staff_hygiene_02" }, { name: "environment_cleanliness_02" }],
+    noncomplainces: [
+      { name: "professionalism_02", resolved: false },
+      { name: "staff_hygiene_02", resolved: false },
+      { name: "environment_cleanliness_02", resolved: false },
+    ],
     noofnoncompliances: 3,
   },
   {
@@ -34,7 +43,11 @@ export const audits = [
     type: { _id: "2", name: "Non Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 96,
-    noncomplainces:[{ name: "professionalism_02" }, { name: "staff_hygiene_02" }, { name: "environment_cleanliness_02" }],
+    noncomplainces: [
+      { name: "professionalism_02", resolved: false },
+      { name: "staff_hygiene_02", resolved: false },
+      { name: "environment_cleanliness_02", resolved: false },
+    ],
     noofnoncompliances: 3,
   },
   {
@@ -44,7 +57,11 @@ export const audits = [
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 96,
-    noncomplainces:[{ name: "professionalism_02" }, { name: "staff_hygiene_02" }, { name: "environment_cleanliness_02" }],
+    noncomplainces: [
+      { name: "professionalism_02", resolved: false },
+      { name: "staff_hygiene_02", resolved: true},
+      { name: "environment_cleanliness_02", resolved: false },
+    ],
     noofnoncompliances: 3,
   },
   {
@@ -54,7 +71,11 @@ export const audits = [
     type: { _id: "2", name: "Non Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 96,
-    noncomplainces:[{ name: "professionalism_02" }, { name: "staff_hygiene_02" }, { name: "environment_cleanliness_02" }],
+    noncomplainces: [
+      { name: "professionalism_02", resolved: false },
+      { name: "staff_hygiene_02", resolved: true },
+      { name: "environment_cleanliness_02", resolved: false },
+    ],
     noofnoncompliances: 3,
   },
   {
@@ -64,7 +85,7 @@ export const audits = [
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 100,
-    noncomplainces:[],
+    noncomplainces: [],
     noofnoncompliances: 0,
   },
   {
@@ -74,7 +95,11 @@ export const audits = [
     type: { _id: "2", name: "Non Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 98,
-    noncomplainces:[{ name: "professionalism_02" }, { name: "staff_hygiene_02" }, { name: "environment_cleanliness_02" }],
+    noncomplainces: [
+      { name: "professionalism_02", resolved: false },
+      { name: "staff_hygiene_02", resolved: false },
+      { name: "environment_cleanliness_02", resolved: false },
+    ],
     noofnoncompliances: 3,
   },
   {
@@ -84,7 +109,7 @@ export const audits = [
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 100,
-    noncomplainces:[],
+    noncomplainces: [],
     noofnoncompliances: 0,
   },
   {
@@ -94,7 +119,10 @@ export const audits = [
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 100,
-    noncomplainces:[{ name: "professionalism_02" }, { name: "staff_hygiene_02" }],
+    noncomplainces: [
+      { name: "professionalism_02", resolved: false },
+      { name: "staff_hygiene_02", resolved: false },
+    ],
     noofnoncompliances: 2,
   },
 ];
