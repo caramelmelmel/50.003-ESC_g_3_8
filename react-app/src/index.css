@@ -255,7 +255,30 @@ span {
   color: #333;
 }
 
-/* .form-control {
-  width: 70vh !important;
-} */
+.camera{
+  width: 80%;
+  height: 100%;
+  border: 1px solid black;
+}
 
+
+.demo-image-preview {
+  position: relative;
+  text-align: center;
+}
+
+.demo-image-preview > img {
+  width: 80%;
+}
+
+@media(max-width:80%){
+  .demo-image-preview > img {
+    width: 100%;
+  }
+}
+
+/* fullscreen enable by props */
+.demo-image-preview-fullscreen > img {
+  width: 80%;
+  height: 100%;
+}
