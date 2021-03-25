@@ -9,7 +9,7 @@ export function setClickedItems(array) {
     return clickedItems;
 }
 
-export function calculateScore(array) {
+export function calculateScore(array, toReturn) {
     let A = 0;
     let B = 0;
     let C = 0;
@@ -34,12 +34,51 @@ export function calculateScore(array) {
         }
     }
 
-    totalScore = (A / 13 * 0.1) + (B / 18 * 0.2) + (C / 37 * 0.35) + (D / 12 * 0.15) + (E / 18 * 0.2);
+    // The following functions return a normalised value of the categories:
+    function calculateA(A){
+        let AScore = A / 13;
+        return AScore.toFixed(2);
+    }
+
+    function calculateB(B){
+        let BScore = B / 18;
+        return BScore.toFixed(2);
+    }
+
+    function calculateC(C){
+        let CScore = C / 37;
+        return CScore.toFixed(2);
+    }
+
+    function calculateD(D){
+        let DScore = D / 12;
+        return DScore.toFixed(2);
+    }
+
+    function calculateE(E){
+        let EScore = E / 18;
+        return EScore.toFixed(2);
+    }
+
+    totalScore = ((A / 13 * 0.1) + (B / 18 * 0.2) + (C / 37 * 0.35) + (D / 12 * 0.15) + (E / 18 * 0.2))*100;
+    //totalScore = calculateA(A) + calculateB(B) + calculateC(C) + calculateD(D) + calculateE(E);
     
     console.log("TOTAL SCORE: ", totalScore);
     
-
-    return totalScore ;
+    if (toReturn == "totalScore"){
+        return totalScore.toFixed(0);
+    } else if (toReturn == "A"){
+        return calculateA(A)*100;
+    } else if (toReturn == "B"){
+        return calculateB(B)*100;
+    } else if (toReturn == "C"){
+        return calculateC(C)*100;
+    } else if (toReturn == "D"){
+        return calculateD(D)*100;
+    } else if (toReturn == "E"){
+        return calculateE(E)*100;
+    } else 
+    return totalScore.toFixed(0);
     
 
 }

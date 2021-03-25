@@ -16,6 +16,18 @@ class ChartInstitutes extends Component {
         xaxis: {
           categories: ['KKH','CGH','SGH','SKH','NCCS','OCH'],
         },
+        theme: {
+          palette: 'palette1' // upto palette10
+        },
+        fill: {
+          colors: [function({ value }) {
+            if(value < 95) {
+                return '#F22C49'
+            } else {
+                return '#F06D1A'
+            }
+          }]
+        },
       },
       series: [
         {
