@@ -20,9 +20,9 @@ import { Sidebar } from "./components/Sidebar";
 import TextFieldStaff from "./components/TextFieldStaff";
 import AddNCStaff from "./views/AddNCStaff";
 import ChecklistNonFBStaff from "./components/ChecklistNonFBStaff";
-
 import LoginStaff from "./components/LoginStaff";
 import LoginTenant from "./components/LoginTenant";
+import SubmitChecklistStaff from "./checklists/SubmitChecklistStaff";
 
 
 class App extends Component {
@@ -51,6 +51,7 @@ class App extends Component {
             <Route path="/checklist-fb-staff-food-hygiene" component={ChecklistFBStaffC} />
             <Route path="/checklist-fb-food-and-beverages" component={ChecklistFBStaffD} />
             <Route path="/checklist-fb-safety-and-health" component={ChecklistFBStaffE} />
+            <Route path="/submit-checklist-staff" component={SubmitChecklistStaff} />
             <Route path="/sidebar" component={Sidebar} />
             <Route path="/textfield-staff" component={TextFieldStaff} />
             <Route path="/add-nc-staff" component={AddNCStaff} />

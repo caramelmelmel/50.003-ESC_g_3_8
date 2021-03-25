@@ -38,7 +38,7 @@ class ChecklistFBStaffE extends Component {
     }
 
     handlePassScore() {
-        calculateScore(getClickedItems());
+        calculateScore(getClickedItems(), "totalScore");
     }
 
     render() { 
@@ -92,7 +92,7 @@ class ChecklistFBStaffE extends Component {
                     /> : null)}
                 </tbody>
             </table>
-                        <Link to={{pathname: "/"}} onClick={this.handlePassScore}>
+                        <Link to={{pathname: "/submit-checklist-staff"}} onClick={this.handlePassScore}>
                             <button 
                             type="button" 
                             className="btn btn-primary btn-lg checklist-header-style" 
