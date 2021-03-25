@@ -26,9 +26,7 @@ class AddNCStaff extends Component {
     };
     this.onTakePhoto = this.onTakePhoto.bind(this);
 
-    this.handleSave = this.handleSave.bind(this);
-
-    //this.textInput = React.createRef();
+    
   }
 
   /*
@@ -46,11 +44,14 @@ class AddNCStaff extends Component {
     router: PropTypes.object,
   };
 
-  componentWillUnmount() {
+  /*componentWillUnmount() {
     // fix Warning: Can't perform a React state update on an unmounted component
     this.setState = (state, callback) => {
       return;
     };
+  }*/
+  handleChange() {
+    
   }
 
   onTakePhoto(dataUri) {
@@ -59,7 +60,6 @@ class AddNCStaff extends Component {
     this.setState({ dataUri });
   }
 
-  handleChange() {}
 
   handleSave(event, result) {
     console.log("Saving...");
@@ -78,6 +78,7 @@ class AddNCStaff extends Component {
 
     const { itemsChecked } = this.props;
     //console.log("CLICKED ITEMS PASSED: ", this.props.location.state.clickedItems);
+
 
     return (
       <React.Fragment>
@@ -124,7 +125,7 @@ class AddNCStaff extends Component {
                     val={this.state.val}
                     ref={this.textInput}
                     type="text"
-                    onChange={(val) => this.setState({ val })}
+                    onChange={this.handleChange}
                   />
                 </Col>
               </Row>
