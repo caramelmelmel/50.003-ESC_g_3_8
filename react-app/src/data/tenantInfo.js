@@ -1,14 +1,8 @@
 const tenantInfo = {
         institutions: [
-            "CGH", 
-            "KKH", 
-            "SGH",
-            "SKH",
-            "NCCS", 
-            "NHCS", 
-            "BVH",
-            "OCH",
-            "Academia",
+            "Singapore General Hospital", 
+            "Changi General Hospital", 
+            "KK Hospital",
         ],
         tenants: [
             "Kopitiam",

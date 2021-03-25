@@ -6,15 +6,18 @@ class LoginStaff extends Component {
         name: "",
         email: "",
         password: "",
-        isClicked: false,
-        error: "Fill in all fields!",
      }
 
     handleSubmit = () => {
         console.log(this.state.name);
         console.log(this.state.email);
         console.log(this.state.password);
-        this.setState({isClicked: true});
+
+        // app.get("/testing", (req, res) => {
+        //     res.send(this.state.name);
+        //     res.send(this.state.email);
+        //     res.send(this.state.password);
+        // });
     }
 
     render() { 
@@ -46,19 +49,6 @@ class LoginStaff extends Component {
             border: "2px solid black",
             width: "100%",
         }
-        const errorStyle = {
-            float: "left",
-            marginTop: marginVertSpace + 10,
-            marginLeft: "5%",
-            width: "30%",
-            padding: 4,
-            borderRadius: 3,
-            backgroundColor: "#d21f3c",
-            color: "white",
-            textAlign: "center",
-            fontSize: 12,
-            fontWeight: "bold"
-        }
         const submitStyle = {
             float: "right",
             marginTop: marginVertSpace + 10,
@@ -86,8 +76,8 @@ class LoginStaff extends Component {
                     type="name" 
                     placeholder="Name" 
                     style={fillStyle}
-                    value={this.state.name} 
-                    onChange={e => {this.setState({ name: e.target.value })}}/>
+                    value={this.state.name}
+                    onChange={e => this.setState({ name: e.target.value })} />
                 </Form.Group>
 
                 {/* EMAIL */}
@@ -118,16 +108,8 @@ class LoginStaff extends Component {
                     value={this.state.password}
                     onChange={e => this.setState({ password: e.target.value })} />
                 </Form.Group>
-
-                {/* ERROR MESSAGE */}
-                {(this.state.name == "" || this.state.email == "" || this.state.password == "") && this.state.isClicked == true ? 
-                <div
-                style={errorStyle}>
-                    {this.state.error}
-                </div> : <div></div>
-                }
                 
-                {/* LOGIN */}
+                {/* SUBMIT */}
                 <button 
                 type="button"
                 style={submitStyle}
