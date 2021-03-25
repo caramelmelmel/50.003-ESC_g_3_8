@@ -26,7 +26,7 @@ class AddNCStaff extends Component {
     };
     this.onTakePhoto = this.onTakePhoto.bind(this);
 
-    //this.handleSave = this.handleSave.bind(this);
+    this.handleSave = this.handleSave.bind(this);
 
     //this.textInput = React.createRef();
   }
