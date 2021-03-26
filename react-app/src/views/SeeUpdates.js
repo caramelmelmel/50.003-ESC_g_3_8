@@ -5,67 +5,59 @@ import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
 import { Container, Row, Col } from "react-bootstrap";
 import * as VscIcons from "react-icons/vsc";
-import { audits, getAudits } from "../services/NewAudit";
-import { useLocation } from "react-router-dom";
+import { audits } from "../services/NewAudit";
+import {useLocation} from "react-router-dom";
 
-class SeeUpdates extends Component {
+
+export default class SeeUpdates extends Component {
+  
+  
+  /*
   state = {
-    audits: getAudits(),
-    resolved: false,
-    };
+    nonComId: this.props.nonComId,
+    itemId:this.props.itemId,
+  }
+  state = {
+    nonComId: this.props.nonComId,
+  }
+  here() {
+    this.props.location.state.noncompliance.map(item => (
+      <Link to={{
+          pathname: `/see-updates/${this.props.location.state.itemId}/${item.name}`,
+            }}>
+      </Link>
+    ));
+    console.log("test");
 
-  //what i pass
-  ///audit_del: each audit id: noncomplianceid, resolved=false
-  //resolved=true
+  }*/
+  
+  ///need to find a way to render {this.props.location.state.noncompliance.name}
+  //now sometimes is undefined, crash when click navbar
+  
+  /*
+  constructor(props) {
+    super(props);
+    this.props = props;
+    console.log(this.props);
+  }
+*/
 
   handleSolved = () => {
+    console.log("reached");
+    //console.log(this.props.location.state);
     
-    this.setState({ resolved: true });
-    //console.log(this.state.resolved);
-
-    const auditno = this.props.location.state.itemId;
-    //console.log(auditno);
-    const nonCom = this.props.location.state.nonComId;
-    //console.log(nonCom);
-
-
-    let module = audits.find((audit) => audit.auditid === auditno);
-    //change JSON file 
-    //change the resolved == true
-    let list = module.noncomplainces;
-    let each = list.find((nc) => nc.name === nonCom);
-    console.log(each.resolved);
-    //set each.resolved == true in json
-
-   
-    //reduce the integer variable
-    module.noofnoncompliances = module.noofnoncompliances - 1;
-    console.log(module.noofnoncompliances);
-
-    
-
-    
-  }
-
-
-
-  //render image and comments from json file 
+  };
+  
   render() {
-    
-    console.log(this.state.resolved);
-    
+
     return (
+      
       <div>
-        <h1
-          className="header-style"
-          style={{
+        <h1 className="header-style" style={{
             position: "absolute",
             left: 20,
-            top: 80,
-          }}
-        >
-          Resolving audit
-        </h1>
+          top: 80,
+        }}>Resolving audit</h1>
 
         <NavLink
           to="/audits-staff"
@@ -78,51 +70,27 @@ class SeeUpdates extends Component {
           <AiIcons.AiOutlineClose size="30" />
         </NavLink>
 
-        <div
-          style={{
+        <h2 style={{
             position: "absolute",
             left: 20,
-            top: 250,
-          }}
-        >
-          {/*<input
-            type="file"
-            name="myImage"
-            accept="image/x-png,image/gif,image/jpeg"
-            capture="camera"
-          ></input>
-
-          {JSON[key].image}
-          {JSON[key].comments}
-          <img src={JSON[key].portfolioImage} key={key} />*/}
+            top: 250, }}>Photo here testing</h2>
           
-        </div>
+          
 
         <Form>
           <Row style={{ paddingTop: 300 }}>
             <Col>
               <Form.Control
                 as="textarea"
-                placeholder="Additional comments to send to tenants"
+                placeholder="Additional comments"
                 rows={2}
-                style={{
-                  marginLeft: "5%",
-                  marginRight: "0%",
-                  float: "left",
-                  width: "80%",
-                }}
+                style={{ marginLeft: "5%", marginRight: "0%", float: "left", width: "80%"}}
               />
-              {/* </Col>
+            {/* </Col>
             <Col> */}
               <Button
                 variant="dark"
-                style={{
-                  marginLeft: "0%",
-                  marginRight: "5%",
-                  float: "right",
-                  width: "10%",
-                  height: 40,
-                }}
+                style={{ marginLeft: "0%", marginRight: "5%", float: "right", width: "10%"}}
               >
                 <IoIcons.IoIosSend />
               </Button>
@@ -142,6 +110,8 @@ class SeeUpdates extends Component {
               justifyContent: "center",
             }}
           >
+          
+          
             {/*
             <Button variant="light" >
               <VscIcons.VscDebugReverseContinue
@@ -150,18 +120,13 @@ class SeeUpdates extends Component {
               />
             </Button>
             */}
+          
 
-            <Button
-              className="sendButton"
-              variant="primary"
-              size="lg"
-              onClick={this.handleSolved}
-            >
-           
+            <Button className="sendButton" variant="primary" size="lg" onClick={this.handleSolved} >
               Solved
             </Button>
             
-
+            
             {/*
             <Button variant="light">
               <VscIcons.VscDebugContinue
@@ -170,11 +135,15 @@ class SeeUpdates extends Component {
               />
             </Button>
             */}
+
           </Row>
         </Container>
       </div>
+      
     );
   }
 }
 
-export default SeeUpdates;
+
+//from 1 - noofnoncompliances/>
+//on solved button press, remove the non compliance from audits in database backend
