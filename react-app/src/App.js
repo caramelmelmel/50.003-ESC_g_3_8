@@ -23,7 +23,7 @@ import ChecklistNonFBStaff from "./components/ChecklistNonFBStaff";
 import LoginStaff from "./components/LoginStaff";
 import LoginTenant from "./components/LoginTenant";
 import SubmitChecklistStaff from "./checklists/SubmitChecklistStaff";
-
+import RegisterStaff from "./components/RegisterStaff";
 
 class App extends Component {
   
@@ -58,7 +58,7 @@ class App extends Component {
 
             <Route path="/login-staff" component={LoginStaff} />
             <Route path="/login-tenant" component={LoginTenant} />
-
+            <Route path="/register-staff" component={RegisterStaff} />
             <Route path="/" exact component={DashboardStaff} />
           </Switch>
         </div>

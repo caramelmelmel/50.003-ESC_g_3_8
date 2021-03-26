@@ -7,7 +7,6 @@ import { Container, Row, Col } from "react-bootstrap";
 import * as VscIcons from "react-icons/vsc";
 import { audits, getAudits } from "../services/NewAudit";
 import { useLocation } from "react-router-dom";
-import "../index.css";
 
 class SeeUpdates extends Component {
   state = {
@@ -47,7 +46,7 @@ class SeeUpdates extends Component {
 
     
   }
-  
+
 
 
   //render image and comments from json file 
@@ -82,14 +81,10 @@ class SeeUpdates extends Component {
         <div
           style={{
             position: "absolute",
-            marginLeft: "5%",
-            top: 140,
+            left: 20,
+            top: 250,
           }}
         >
-          <div className="camera">
-            
-
-          </div>
           {/*<input
             type="file"
             name="myImage"
@@ -104,7 +99,7 @@ class SeeUpdates extends Component {
         </div>
 
         <Form>
-          <Row style={{ paddingTop: 400 }}>
+          <Row style={{ paddingTop: 300 }}>
             <Col>
               <Form.Control
                 as="textarea"
@@ -138,7 +133,7 @@ class SeeUpdates extends Component {
         <Container
           style={{
             position: "absolute",
-            marginTop:"5%",
+            bottom: 0,
           }}
         >
           <Row
