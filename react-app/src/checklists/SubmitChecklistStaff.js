@@ -47,7 +47,7 @@ class SubmitChecklistStaff extends Component {
                 <table className="table">
                     <thead>
                         <tr className="checklist-header-style">
-                            <th xs={1}></th>
+                            <th xs={1}>#</th>
                             <th xs={4}>Category</th>
                             <th xs={7}>Item</th>
                         </tr>
@@ -55,7 +55,7 @@ class SubmitChecklistStaff extends Component {
                     <tbody>
                     {this.state.nonclickedItems.map(id =>
                     <tr key={id}>
-                        <td className="checklist-body-style">01</td>
+                        <td className="checklist-body-style">00</td>
                         <td className="checklist-body-style">{getChecklistItem(id).category}</td>
                         <td className="checklist-body-style">{getChecklistItem(id).item}</td>
                     </tr>)}
