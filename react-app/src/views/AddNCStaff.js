@@ -12,16 +12,20 @@ import Camera from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 
 class AddNCStaff extends Component {
-  constructor(props, context) {
-    super(props, context);
+
+  auditData;
+  
+  constructor(props) {
+    super(props);
     this.state = {
-      val: "",
+      val: '',
       dataUri: null,
       checklistItem: getChecklistItem(props.location.state.itemId),
       itemName: props.itemName,
       clickedItems: props.clickedItems,
     };
     this.onTakePhoto = this.onTakePhoto.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
     
   }
@@ -32,14 +36,54 @@ class AddNCStaff extends Component {
   };
 
 
-  componentWillUnmount() {
-    // fix Warning: Can't perform a React state update on an unmounted component
-    this.setState = (state, callback) => {
-      return;
-    };
+  // fix Warning: Can't perform a React state update on an unmounted component
+  componentDidMount(dataUri) {
+    this._isMounted = true;
+
+    if (this._isMounted) {
+          this.setState({
+            dataUri: dataUri
+          });
+        }
   }
 
-  handleChange() {
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
+
+  componentDidMount() {
+    this.auditData = JSON.parse(localStorage.getItem('audit'));
+    if (localStorage.getItem('audit')) {
+      this.setState({
+          val: this.auditData.val,
+      })
+  
+    } else {
+      this.setState({
+          val: '',
+      })
+  
+      /*
+      if(localStorage.getItem('data')==null){
+        localStorage.setItem('data', '[])
+      }
+
+
+      */
+    }
+  }
+  
+  componentWillUpdate(nextProps, nextState) {
+    localStorage.setItem('audit', JSON.stringify(nextState));
+  }     
+
+
+
+  //for additional comments
+  handleChange(e) {
+    this.setState({ val: e.target.value });
+    //console.log(e.target.value);
+    console.log(this.state.checklistItem.item);
     
   }
 
@@ -50,7 +94,11 @@ class AddNCStaff extends Component {
   }
 
 
-  handleSave(event, result) {
+  handleSave(e) {
+    e.preventDefault();
+    this.setState({
+      val: '',
+    })
     console.log("Saving...");
     //alert("Text field value is: " + this.state.va);
   }
@@ -66,6 +114,7 @@ class AddNCStaff extends Component {
   }
 
   render() {
+    
     //console.log("NC recieved itemId: ", this.props.location.state);
     //console.log("Checklist Item: ", this.state.checklistItem);
     //console.log("Props: ", this.props);
@@ -100,23 +149,20 @@ class AddNCStaff extends Component {
             </Row>
             <Row>
               <Col xs={10} className="mt-5">
-              <Form.Control
-                as="textarea"
-                placeholder="Additional comments"
-                rows={2}
-                style={{ marginLeft: "5%", marginRight: "0%", float: "left", width: "80%"}}
-                val={this.state.val}
-                ref={this.textInput}
+              <input 
                 type="text"
+                placeholder="Additional comments"
+                style={{ marginLeft: "0%", marginRight: "0%", float: "left", width: "100%", height: 30}}
+                value={this.state.val}
                 onChange={this.handleChange}
               />
               </Col>
             </Row>
-              <Link to={{pathname: `/`, state: {itemId: this.state.checklistItem.id, val: this.state.val,}}} >
+              <Link to={{pathname: `/`, state: {itemId: this.state.checklistItem.id, value: this.state.val,}}} >
                 <button 
                 className="btn btn-lg btn-warning checklist-sideheader-style mt-5"
                 style={{float: 'right'}} 
-                onClick={this.context.router.history.goBack}>Submit</button> {/* Now it's same as cancel, need to change this */}
+                onClick={this.context.router.history.goBack}>Save</button> {/* Now it's same as cancel, need to change this */}
               </Link>
                 <button 
                   className="btn btn-lg btn-danger checklist-sideheader-style mt-5"
