@@ -159,7 +159,7 @@ class LoginStaff extends Component {
             <Form>
 
                 {/* INSTITUTION */}
-                <div style={headerStyle}>Institution</div>
+                {/* <div style={headerStyle}>Institution</div>
 
                 <Dropdown
                 style={buttonStyle}>
@@ -178,7 +178,20 @@ class LoginStaff extends Component {
                                 { option }
                             </Dropdown.Item>))}
                     </Dropdown.Menu>
-                </Dropdown>
+                </Dropdown> */}
+
+                {/* NAME */}
+                <Form.Group 
+                controlId="formInstitution"
+                style={headerStyle}>
+                    <Form.Label>Institution</Form.Label>
+                    <Form.Control 
+                    type="name" 
+                    placeholder="Name" 
+                    style={fillStyle}
+                    value={this.state.institution} 
+                    onChange={e => {this.setState({ institution: e.target.value })}}/>
+                </Form.Group>
 
                 {/* NAME */}
                 <Form.Group 
