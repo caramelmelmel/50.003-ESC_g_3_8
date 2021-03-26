@@ -44,12 +44,13 @@ class AddNCStaff extends Component {
     router: PropTypes.object,
   };
 
-  /*componentWillUnmount() {
+  componentWillUnmount() {
     // fix Warning: Can't perform a React state update on an unmounted component
     this.setState = (state, callback) => {
       return;
     };
-  }*/
+  }
+
   handleChange() {
     
   }
@@ -57,7 +58,7 @@ class AddNCStaff extends Component {
   onTakePhoto(dataUri) {
     // Do stuff with the dataUri photo...
     console.log("takePhoto");
-    this.setState({ dataUri });
+    this.setState({ dataUri: dataUri });
   }
 
 
