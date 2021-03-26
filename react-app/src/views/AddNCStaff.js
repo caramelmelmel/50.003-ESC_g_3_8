@@ -5,14 +5,26 @@ import { getAllChecklistItems, getChecklistItem } from './../services/checklistF
 import { Link } from "react-router-dom";
 import PropTypes from 'prop-types';
 
+import Webcam from "react-webcam";
+import ImagePreview from "../components/ImagePreview";
 
+import Camera from "react-html5-camera-photo";
+import "react-html5-camera-photo/build/css/index.css";
 
 class AddNCStaff extends Component {
-  state = {
-    checklistItem: getChecklistItem(this.props.location.state.itemId),
-    itemName: this.props.itemName,
-    clickedItems: this.props.clickedItems
-  };
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      val: "",
+      dataUri: null,
+      checklistItem: getChecklistItem(props.location.state.itemId),
+      itemName: props.itemName,
+      clickedItems: props.clickedItems,
+    };
+    this.onTakePhoto = this.onTakePhoto.bind(this);
+
+    
+  }
 
   // TO ROUTE BACK TO PREVIOUS PAGE IF CANCELLED IS BEING CALLED
   static contextTypes = {
@@ -54,9 +66,9 @@ class AddNCStaff extends Component {
   }
 
   render() {
-    console.log("NC recieved itemId: ", this.props.location.state);
-    console.log("Checklist Item: ", this.state.checklistItem);
-    console.log("Props: ", this.props);
+    //console.log("NC recieved itemId: ", this.props.location.state);
+    //console.log("Checklist Item: ", this.state.checklistItem);
+    //console.log("Props: ", this.props);
     const { itemsChecked } = this.props;
     //console.log("CLICKED ITEMS PASSED: ", this.props.location.state.clickedItems);
 
@@ -76,10 +88,15 @@ class AddNCStaff extends Component {
             </Row>
             <Row>
               <Col xs={10} className="mt-5">
-                <button className="btn btn-block btn-lg btn-outline-dark checklist-sideheader-style" 
-                onClick={this.handleUploadImage}
-                style={{ marginLeft: "5%", marginRight: "0%", float: "left", width: "80%"}}>Upload Image</button>
+                <div className="camera">
+                  {this.state.dataUri ? (
+                    <ImagePreview dataUri={this.state.dataUri} />
+                  ) : (
+                    <Camera onTakePhoto={this.onTakePhoto} />
+                  )}
+                </div>
               </Col>
+              
             </Row>
             <Row>
               <Col xs={10} className="mt-5">
@@ -88,10 +105,14 @@ class AddNCStaff extends Component {
                 placeholder="Additional comments"
                 rows={2}
                 style={{ marginLeft: "5%", marginRight: "0%", float: "left", width: "80%"}}
+                val={this.state.val}
+                ref={this.textInput}
+                type="text"
+                onChange={this.handleChange}
               />
               </Col>
             </Row>
-              <Link to={{pathname: `/`, state: {itemId: this.state.checklistItem.id}}} >
+              <Link to={{pathname: `/`, state: {itemId: this.state.checklistItem.id, val: this.state.val,}}} >
                 <button 
                 className="btn btn-lg btn-warning checklist-sideheader-style mt-5"
                 style={{float: 'right'}} 
@@ -111,3 +132,12 @@ class AddNCStaff extends Component {
 }
 
 export default AddNCStaff;
+/*
+<Col xs={10} className="mt-5">
+                <button className="btn btn-block btn-lg btn-outline-dark checklist-sideheader-style" 
+                onClick={this.handleUploadImage}
+                style={{ marginLeft: "5%", marginRight: "0%", float: "left", width: "80%"}}>Upload Image</button>
+              </Col>
+
+
+*/
