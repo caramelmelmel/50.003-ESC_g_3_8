@@ -20,7 +20,7 @@ class LoginStaff extends Component {
         info: getAllTenantInfo(),
         selectedInstitution: "Select Institution",
      }
-    
+     
     handleSubmit = () => {
         console.log(this.state.institution);
         console.log(this.state.name);

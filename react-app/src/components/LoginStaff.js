@@ -16,7 +16,7 @@ class LoginStaff extends Component {
         console.log(this.state.password);
         this.setState({isClicked: true});
     }
-
+    
     render() { 
         const marginVertSpace = 5;
         const titleStyle = {

@@ -42,7 +42,7 @@ it('(EXPECTS FAIL) - no "@singhealth.com.sg"', () => {
   const email = 'example@singhealth.com'; 
   expect(email).toMatch(pattern);
 });
- 
+
 // (EXPECTS FAIL) - spaces not allowed
 it('(EXPECTS FAIL) - spaces not allowed', () => {
   const email = 'my name@singhealth.com.sg'; 
