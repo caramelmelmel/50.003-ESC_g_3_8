@@ -19,14 +19,34 @@ class AddNCStaff extends Component {
     router: PropTypes.object, 
   };
 
+
+  componentWillUnmount() {
+    // fix Warning: Can't perform a React state update on an unmounted component
+    this.setState = (state, callback) => {
+      return;
+    };
+  }
+
+  handleChange() {
+    
+  }
+
+  onTakePhoto(dataUri) {
+    // Do stuff with the dataUri photo...
+    console.log("takePhoto");
+    this.setState({ dataUri: dataUri });
+  }
+
+
+  handleSave(event, result) {
+    console.log("Saving...");
+    //alert("Text field value is: " + this.state.va);
+
   handleUploadImage() {
     console.log("Upload Image Button Clicked");
   }
 
-  handleSave(){
-    console.log("Saving...")
-    
-  }
+
 
   handleCancel(){
     console.log("Cancelling...")
