@@ -7,6 +7,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import * as VscIcons from "react-icons/vsc";
 import { audits, getAudits } from "../services/NewAudit";
 import { useLocation } from "react-router-dom";
+import '../index.css';
 
 class SeeUpdates extends Component {
   state = {
@@ -81,10 +82,13 @@ class SeeUpdates extends Component {
         <div
           style={{
             position: "absolute",
-            left: 20,
-            top: 250,
+            marginLeft: "5%",
+            top: 130
+            
           }}
+          
         >
+          
           {/*<input
             type="file"
             name="myImage"
@@ -99,7 +103,7 @@ class SeeUpdates extends Component {
         </div>
 
         <Form>
-          <Row style={{ paddingTop: 300 }}>
+          <Row style={{ paddingTop: 400 }}>
             <Col>
               <Form.Control
                 as="textarea"
@@ -133,7 +137,7 @@ class SeeUpdates extends Component {
         <Container
           style={{
             position: "absolute",
-            bottom: 0,
+            marginTop:"5%",
           }}
         >
           <Row
