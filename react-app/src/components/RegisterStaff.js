@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
 import { Dropdown } from 'react-bootstrap';
 import { getAllTenantInfo } from './../data/tenantInfo';
+import sha256 from 'crypto-js/sha256'
+//crypto for the pasword registration
+const {createHash} = require('crypto');
+console.log('imported crypto');
+const hash = createHash('sha256');
 
 // must have "@singhealth.com.sg" and be a word infront
 var regexEmail = /^\w{0,}@singhealth\.com\.sg$/;
@@ -39,6 +44,7 @@ class LoginStaff extends Component {
             staff_email: this.state.email,
             staff_password: this.state.password,
         }
+        console.log(objString);
 
         var JSONdata = JSON.parse(objString);
 
@@ -59,6 +65,10 @@ class LoginStaff extends Component {
             this.setState({isInvalid: false});
             if (this.state.institution != "" && this.state.name != "" && this.state.email != "" && this.state.password != "") {
                 // send data to db
+                //crypting the password 
+                const staff_pwd = Base64.stringify(sha256(this.state.password));
+                JSONdata[staff_password] = staff_password;
+                console.log(JSONdata);
                 this.createStaff(JSONdata);
             }
         }
