@@ -3,6 +3,7 @@ import { Form } from 'react-bootstrap';
 import { Dropdown } from 'react-bootstrap';
 import { getAllTenantInfo } from './../data/tenantInfo';
 import sha256 from 'crypto-js/sha256'
+import Base64 from 'crypto-js/enc-base64';
 //crypto for the pasword registration
 const {createHash} = require('crypto');
 console.log('imported crypto');
@@ -38,15 +39,16 @@ class LoginStaff extends Component {
         // console.log(regexEmail.test(this.state.email));
         // console.log(regexPassword.test(this.state.password));
 
-        var objString = {
-            "staff_institution": this.state.institution,
-            "staff_name": this.state.name,
-            "staff_email": this.state.email,
-            "staff_password": this.state.password
-        }
+        var objString = `{
+            "staff_institution": "${this.state.institution}",
+            "staff_name": "${this.state.name}",
+            "staff_email": "${this.state.email}",
+            "staff_password": "${this.state.password}"
+        }`;
+      
         console.log(objString);
-
         var JSONdata = JSON.parse(objString);
+        console.log(JSONdata);
 
         var isEmail = regexEmail.test(this.state.email);
         var isPassword = regexPassword.test(this.state.password);
@@ -66,10 +68,11 @@ class LoginStaff extends Component {
             if (this.state.institution != "" && this.state.name != "" && this.state.email != "" && this.state.password != "") {
                 // send data to db
                 //crypting the password 
-                const staff_pwd = Base64.stringify(sha256(this.state.password));
+                const staff_password = Base64.stringify(sha256(this.state.password));
+                console.log(staff_password);
                 JSONdata[staff_password] = staff_password;
                 console.log(JSONdata);
-                this.createStaff(JSONdata);
+                // this.createStaff(JSONdata);
             }
         }
     }
