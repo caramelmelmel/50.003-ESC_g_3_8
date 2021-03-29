@@ -45,6 +45,7 @@ class LoginStaff extends Component {
             "staff_email": "${this.state.email}",
             "staff_password": "${this.state.password}"
         }`;
+      
         console.log(objString);
         var JSONdata = JSON.parse(objString);
         console.log(JSONdata);
