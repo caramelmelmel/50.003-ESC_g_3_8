@@ -695,3 +695,11 @@ export function getChecklistItem(id) {
     return checklistFB.find(m => m.id == id);
 }
 
+export function getAllChecklistId() {
+    let allIds = [];
+    var i;
+    for (i = 0; i < getAllChecklistItems().length; i++) {
+        allIds.push(checklistFB[i].id);
+    } 
+    return allIds;
+}

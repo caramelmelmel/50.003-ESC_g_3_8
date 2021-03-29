@@ -2,7 +2,21 @@ import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
 
 class LoginStaff extends Component {
-    state = {  }
+    state = {
+        name: "",
+        email: "",
+        password: "",
+        isClicked: false,
+        error: "Fill in all fields!",
+     }
+
+    handleSubmit = () => {
+        console.log(this.state.name);
+        console.log(this.state.email);
+        console.log(this.state.password);
+        this.setState({isClicked: true});
+    }
+    
     render() { 
         const marginVertSpace = 5;
         const titleStyle = {
@@ -16,10 +30,9 @@ class LoginStaff extends Component {
             color: "#f06d1a",
         }
         const headerStyle = {
+            margin: "auto",
             marginTop: marginVertSpace,
             marginBottom: marginVertSpace,
-            marginLeft: "auto",
-            marginRight: "auto",
             fontSize: 12,
             fontWeight: "bold",
             width: "90%",
@@ -32,6 +45,19 @@ class LoginStaff extends Component {
             borderRadius: 3,
             border: "2px solid black",
             width: "100%",
+        }
+        const errorStyle = {
+            float: "left",
+            marginTop: marginVertSpace + 10,
+            marginLeft: "5%",
+            width: "30%",
+            padding: 4,
+            borderRadius: 3,
+            backgroundColor: "#d21f3c",
+            color: "white",
+            textAlign: "center",
+            fontSize: 12,
+            fontWeight: "bold"
         }
         const submitStyle = {
             float: "right",
@@ -56,7 +82,12 @@ class LoginStaff extends Component {
                 controlId="formName"
                 style={headerStyle}>
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="name" placeholder="Name"style={fillStyle} />
+                    <Form.Control 
+                    type="name" 
+                    placeholder="Name" 
+                    style={fillStyle}
+                    value={this.state.name} 
+                    onChange={e => {this.setState({ name: e.target.value })}}/>
                 </Form.Group>
 
                 {/* EMAIL */}
@@ -64,7 +95,12 @@ class LoginStaff extends Component {
                 controlId="formBasicEmail"
                 style={headerStyle}>
                     <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" placeholder="Email" style={fillStyle} />
+                    <Form.Control 
+                    type="email" 
+                    placeholder="Email" 
+                    style={fillStyle}
+                    value={this.state.email}
+                    onChange={e => this.setState({ email: e.target.value })}/>
                     {/* <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
                     </Form.Text> */}
@@ -75,14 +111,27 @@ class LoginStaff extends Component {
                 controlId="formBasicPassword"
                 style={headerStyle}>
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" style={fillStyle} />
+                    <Form.Control 
+                    type="password" 
+                    placeholder="Password" 
+                    style={fillStyle}
+                    value={this.state.password}
+                    onChange={e => this.setState({ password: e.target.value })} />
                 </Form.Group>
+
+                {/* ERROR MESSAGE */}
+                {(this.state.name == "" || this.state.email == "" || this.state.password == "") && this.state.isClicked == true ? 
+                <div
+                style={errorStyle}>
+                    {this.state.error}
+                </div> : <div></div>
+                }
                 
-                {/* SUBMIT */}
+                {/* LOGIN */}
                 <button 
                 type="button"
-                style={submitStyle}>
-                {/* onClick={this.handleCreateAudit}> */}
+                style={submitStyle}
+                onClick={this.handleSubmit}>
                     Login
                 </button>
             </Form>

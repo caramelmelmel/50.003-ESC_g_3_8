@@ -4,15 +4,18 @@ import { Container, Row, Col } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import AddNCButton from "../components/AddNCButton";
 import { getAllChecklistItems, getChecklistItem } from './../services/checklistFB';
+import Category from './Category';
+import Header from './Header';
+import { getClickedItems, setClickedItems } from './../services/clickedItems';
 
 
 
 class ChecklistFBStaffC extends Component {
   state = {
     checklistFB: getAllChecklistItems(),
-    totalscore: this.props.location.state.totalscore,
-    score: 0,
-    clickedItems: []
+    //totalscore: this.props.location.state.totalscore,
+    //score: getClickedItems().length,
+    clickedItems: getClickedItems()
   };
 
     handleNext() {
@@ -20,23 +23,24 @@ class ChecklistFBStaffC extends Component {
     }
 
     handleCheck = (itemId) => {
-        console.log("TOTAL SCORE: ", this.state.totalscore);
         console.log("CHECKLIST ITEM: ", getChecklistItem(itemId));
         const item = getChecklistItem(itemId);
         const clickedItems = this.state.clickedItems;
-        this.setState({clickedItems: clickedItems.includes(item.id) ? clickedItems.filter(i => i != itemId) : [...clickedItems, itemId]})
-        this.state.clickedItems.includes(itemId) ? this.state.score-=1 : this.state.score+=1;
-        console.log("SCORE: ", this.state.score);
+        //this.setState({clickedItems: clickedItems.includes(item.id) ? clickedItems.filter(i => i != itemId) : [...clickedItems, itemId]})
+        this.setState({clickedItems: setClickedItems(this.state.clickedItems.includes(item.id)? clickedItems.filter(i => i != itemId) : [...getClickedItems(), itemId])});
+       // this.state.clickedItems.includes(itemId) ? this.state.score-=1 : this.state.score+=1;
+        //console.log("SCORE: ", this.state.score);
+        //console.log("CLICKED ITEMS PG1: ", this.state.clickedItems);
     }
 
     handleSave() {
         console.log("Saving...")
     }
 
-    handlePassScore() {
-        console.log("TOTAL SCORE IN A, B and C: ", this.state.totalscore + this.state.score / 37 * 0.35);
+    /*handlePassScore() {
+        console.log("TOTAL SCORE IN A, B and C: ", this.state.totalscore + (this.state.score / 37) * 0.35);
 
-    }
+    }*/
 
     render() { 
         return <React.Fragment>
@@ -58,42 +62,33 @@ class ChecklistFBStaffC extends Component {
                         </tr>
                     </thead>
                 <tbody>
-                    <tr>
-                        <th className="checklist-sideheader-style">Storage and Preparation of Food</th>
-                        <th/>
-                        <th/>
-                    </tr>
-                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "storage_prep_food" ?                
-                    <tr key={checklistItem.id}>
-                        <td className="checklist-body-style">{checklistItem.item}</td>
-                        <td><input type="checkbox" aria-label="Checkbox for following text input" onClick={() => this.handleCheck(checklistItem.id)}/></td>
-                        <td>
-                            <AddNCButton key={checklistItem.id} itemId={checklistItem.id}/>
-                        </td>
-                    </tr> : null)}
-                    <tr>
-                        <th className="checklist-sideheader-style">Storage of Food in Refrigerator/ Warmer</th>
-                        <th/>
-                        <th/>
-                    </tr>
-                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "storage_refrigerator_warmer" ?                
-                    <tr key={checklistItem.id}>
-                        <td className="checklist-body-style">{checklistItem.item}</td>
-                        <td><input type="checkbox" aria-label="Checkbox for following text input" onClick={() => this.handleCheck(checklistItem.id)}/></td>
-                        <td>
-                            <AddNCButton key={checklistItem.id} itemId={checklistItem.id}/>
-                        </td>
-                    </tr> : null)}
+                    <Header headerTitle="Storage and Preparation of Food"/>
+                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "storage_prep_food" ? 
+                    <Category 
+                    key={checklistItem.id}
+                    id={checklistItem.id}
+                    item={checklistItem.item}
+                    handleCheck={() => this.handleCheck(checklistItem.id)}
+                    itemsChecked={this.state.clickedItems}
+                    /> : null)}
 
+                    <Header headerTitle="Storage of Food in Refrigerator/ Warmer"/>
+                    {this.state.checklistFB.map(checklistItem => checklistItem.category == "storage_refrigerator_warmer" ? 
+                    <Category 
+                    key={checklistItem.id}
+                    id={checklistItem.id}
+                    item={checklistItem.item}
+                    handleCheck={() => this.handleCheck(checklistItem.id)}
+                    itemsChecked={this.state.clickedItems}
+                    /> : null)}
                 </tbody>
             </table>
-                        <Link to={{pathname: "/checklist-fb-food-and-beverages", state: {totalscore: this.state.totalscore + this.state.score / 37 * 0.35}}} onClick={() => this.handlePassScore()}>
+                        <Link to={{pathname: "/checklist-fb-food-and-beverages"}}>
                             <button 
                             type="button" 
                             className="btn btn-primary btn-lg checklist-header-style" 
                             style={{float: 'right'}} 
-                            onClick={this.handleNext}
-                            score={this.state.score}>Next</button>
+                            onClick={this.handleNext}>Next</button>
                         </Link>
                         <button 
                             type="button" 
