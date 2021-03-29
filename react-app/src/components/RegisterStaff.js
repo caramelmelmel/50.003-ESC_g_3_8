@@ -39,10 +39,10 @@ class LoginStaff extends Component {
         // console.log(regexPassword.test(this.state.password));
 
         var objString = {
-            staff_institution: this.state.institution,
-            staff_name: this.state.name,
-            staff_email: this.state.email,
-            staff_password: this.state.password,
+            "staff_institution": this.state.institution,
+            "staff_name": this.state.name,
+            "staff_email": this.state.email,
+            "staff_password": this.state.password
         }
         console.log(objString);
 
