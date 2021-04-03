@@ -108,7 +108,7 @@ class OngoingTables extends Component {
             <tbody>
               {filtered2.map((audit) => (
                 <tr key={audit.id}>
-                  <td>{audit.tenantname}</td>
+                  <td>{audit.store_name}</td>
                   <td>{audit.auditdate}</td>
                   <td>
 

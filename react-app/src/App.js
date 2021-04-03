@@ -19,6 +19,7 @@ import Navbar from "./components/Navbar";
 import { Sidebar } from "./components/Sidebar";
 import TextFieldStaff from "./components/TextFieldStaff";
 import AddNCStaff from "./views/AddNCStaff";
+import TenantProfile from "./views/TenantProfile";
 import ChecklistNonFBStaff from "./components/ChecklistNonFBStaff";
 import LoginStaff from "./components/LoginStaff";
 import LoginTenant from "./components/LoginTenant";
@@ -60,6 +61,8 @@ class App extends Component {
             <Route path="/login-tenant" component={LoginTenant} />
             <Route path="/register-staff" component={RegisterStaff} />
             <Route path="/" exact component={DashboardStaff} />
+
+            <Route path="/tenant-profile" component={TenantProfile} />
           </Switch>
         </div>
       </BrowserRouter>
