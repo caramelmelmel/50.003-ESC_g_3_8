@@ -7,9 +7,10 @@ import SeeUpdates from "../components/SeeUpdatesButton";
 //noofnoncomplainces = length of noncompliances array
 export const audits = [
   {
+    Tenant_id: "1",
     auditid: "1",
     institution: { _id: "1", name: "CGH" },
-    tenantname: "Subway",
+    store_name: "Subway",
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 96,
@@ -23,9 +24,10 @@ export const audits = [
   },
 
   {
+    Tenant_id: "2",
     auditid: "2",
     institution: { _id: "1", name: "CGH" },
-    tenantname: "Kopitiam",
+    store_name: "Kopitiam",
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 96,
@@ -37,9 +39,10 @@ export const audits = [
     noofnoncompliances: 3,
   },
   {
+    Tenant_id: "3",
     auditid: "3",
     institution: { _id: "2", name: "SGH" },
-    tenantname: "Presents",
+    store_name: "Presents",
     type: { _id: "2", name: "Non Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 96,
@@ -51,9 +54,10 @@ export const audits = [
     noofnoncompliances: 3,
   },
   {
+    Tenant_id: "4",
     auditid: "4",
     institution: { _id: "6", name: "OCH" },
-    tenantname: "ToastBox",
+    store_name: "ToastBox",
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 96,
@@ -65,12 +69,13 @@ export const audits = [
     noofnoncompliances: 3,
   },
   {
+    Tenant_id: "5",
     auditid: "5",
     institution: { _id: "1", name: "CGH" },
-    tenantname: "Popular",
+    store_name: "Popular",
     type: { _id: "2", name: "Non Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
-    performancescore: 96,
+    performancescore: 95,
     noncomplainces: [
       { name: "professionalism_02", resolved: false },
       { name: "staff_hygiene_02", resolved: true },
@@ -79,9 +84,10 @@ export const audits = [
     noofnoncompliances: 3,
   },
   {
+    Tenant_id: "6",
     auditid: "6",
     institution: { _id: "1", name: "CGH" },
-    tenantname: "MrBean",
+    store_name: "MrBean",
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 100,
@@ -89,9 +95,10 @@ export const audits = [
     noofnoncompliances: 0,
   },
   {
+    Tenant_id: "7",
     auditid: "7",
     institution: { _id: "6", name: "OCH" },
-    tenantname: "Flowers",
+    store_name: "Flowers",
     type: { _id: "2", name: "Non Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 98,
@@ -103,9 +110,10 @@ export const audits = [
     noofnoncompliances: 3,
   },
   {
+    Tenant_id: "8",
     auditid: "8",
     institution: { _id: "4", name: "SKH" },
-    tenantname: "Chicken",
+    store_name: "Chicken",
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 100,
@@ -113,9 +121,10 @@ export const audits = [
     noofnoncompliances: 0,
   },
   {
+    Tenant_id: "9",
     auditid: "9",
     institution: { _id: "4", name: "SKH" },
-    tenantname: "Fairprice",
+    store_name: "Fairprice",
     type: { _id: "1", name: "Food & Beverage Tenant" },
     auditdate: "2018-01-03T19:04:28.809Z",
     performancescore: 100,
