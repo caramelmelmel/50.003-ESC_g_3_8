@@ -1,19 +1,25 @@
 const tenantInfo = {
-        institutions: [
-            "Singapore General Hospital", 
-            "Changi General Hospital", 
-            "KK Hospital",
-        ],
-        tenants: [
-            "Kopitiam",
-            "FairPrice",
-            "Starbucks",
-        ],
-        categories: [
-            "F&B",
-            "Non-F&B"
-        ]
-    }
+    institutions: [
+        "CGH", 
+        "KKH", 
+        "SGH",
+        "SKH",
+        "NCCS", 
+        "NHCS", 
+        "BVH",
+        "OCH",
+        "Academia",
+    ],
+    tenants: [
+        "Kopitiam",
+        "FairPrice",
+        "Starbucks",
+    ],
+    categories: [
+        "F&B",
+        "Non-F&B"
+    ]
+}
 
 export function getAllTenantInfo(){
     return tenantInfo;
