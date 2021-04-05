@@ -21,10 +21,16 @@ import TextFieldStaff from "./components/TextFieldStaff";
 import AddNCStaff from "./views/AddNCStaff";
 import TenantProfile from "./views/TenantProfile";
 import ChecklistNonFBStaff from "./components/ChecklistNonFBStaff";
-import LoginStaff from "./components/LoginStaff";
-import LoginTenant from "./components/LoginTenant";
 import SubmitChecklistStaff from "./checklists/SubmitChecklistStaff";
+
 import RegisterStaff from "./components/RegisterStaff";
+import LoginStaff from "./components/LoginStaff";
+import StaffSuccess from "./components/StaffSuccess";
+
+import RegisterTenantFirst from "./components/RegisterTenantFirst";
+import RegisterTenantSecond from "./components/RegisterTenantSecond";
+import LoginTenant from "./components/LoginTenant";
+import TenantSuccess from "./components/TenantSuccess";
 
 class App extends Component {
   
@@ -57,9 +63,14 @@ class App extends Component {
             <Route path="/textfield-staff" component={TextFieldStaff} />
             <Route path="/add-nc-staff" component={AddNCStaff} />
 
-            <Route path="/login-staff" component={LoginStaff} />
+            <Route path="/register-first-tenant" component={RegisterTenantFirst} />
+            <Route path="/register-second-tenant" component={RegisterTenantSecond} />
+            <Route path="/success-tenant" component={TenantSuccess} />
             <Route path="/login-tenant" component={LoginTenant} />
+
             <Route path="/register-staff" component={RegisterStaff} />
+            <Route path="/success-staff" component={StaffSuccess} />
+            <Route path="/login-staff" component={LoginStaff} />
             <Route path="/" exact component={DashboardStaff} />
 
             <Route path="/tenant-profile" component={TenantProfile} />
