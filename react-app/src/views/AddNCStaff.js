@@ -77,8 +77,6 @@ class AddNCStaff extends Component {
     this.setState({ dataUri: dataUri });
   };
 
-<<<<<<< HEAD
-
   handleSave(e) {
     e.preventDefault();
     this.setState({
@@ -94,11 +92,10 @@ class AddNCStaff extends Component {
 
 
 
-  handleCancel(){
-=======
+  handleCancel(){}
+
   handleDeleteImage() {
     this.setState({ dataUri: null });
->>>>>>> 932ccf7975dfdae32647f37cd07aa72915ef71e8
     console.log("Cancelling...");
   }
 
