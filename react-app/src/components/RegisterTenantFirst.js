@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
 import { Dropdown } from 'react-bootstrap';
-import { getAllTenantInfo } from './../data/tenantInfo';
-import sha256 from 'crypto-js/sha256'
-import Base64 from 'crypto-js/enc-base64';
-
-//crypto for the pasword registration
-const {createHash} = require('crypto');
-const hash = createHash('sha256');
+import { getAllTenantInfo } from '../data/tenantInfo';
 
 // must have "@singhealth.com.sg" and be a word infront
 var regexEmail = /^\w{0,}@singhealth\.com\.sg$/;
-// one uppercase + lowercase + num + symb, min 8 char
-var regexPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
-class RegisterStaff extends Component {
+class RegisterTenantFirst extends Component {
     state = {
         institution: "",
+        tenant: "",
+        category: "",
+        description: "",
         name: "",
         email: "",
         password: "",
@@ -25,13 +20,15 @@ class RegisterStaff extends Component {
         error: "Fill in all fields!",
         info: getAllTenantInfo(),
         selectedInstitution: "Select Institution",
+        selectedTenant: "Select Tenant",
+        selectedCategory: "Select Category",
      }
      
     handleSubmit = () => {
         console.log(this.state.institution);
         console.log(this.state.name);
+        console.log(this.state.category);
         console.log(this.state.email);
-        console.log(this.state.password);
         // console.log(this.state.error);
         // console.log(this.state.isClicked);
         this.setState({isClicked: true});
@@ -40,57 +37,43 @@ class RegisterStaff extends Component {
         // console.log(regexPassword.test(this.state.password));
 
         var objString = `{
-            "staff_institution": "${this.state.institution}",
-            "staff_name": "${this.state.name}",
-            "staff_email": "${this.state.email}",
-            "staff_password": "${this.state.password}"
+            "tenant_name": "${this.state.name}",
+            "tenant_category": "${this.state.category}",
+            "tenant_email": "${this.state.email}"
         }`;
-      
+
         var JSONdata = JSON.parse(objString);
 
         var isEmail = regexEmail.test(this.state.email);
-        var isPassword = regexPassword.test(this.state.password);
 
-        if (isEmail === false && isPassword === false) {
-            this.setState({error: "Invalid email and password given."});
-            this.setState({isInvalid: true});
-        } else if (isPassword === false) {
-            this.setState({error: "Invalid password given."});
-            this.setState({isInvalid: true});
-        } else if (isEmail === false) {
+        if (isEmail === false) {
             this.setState({error: "Invalid email given."});
             this.setState({isInvalid: true});
         } else {
             this.setState({error: "Fill in all fields!"});
             this.setState({isInvalid: false});
-            if (this.state.institution != "" && this.state.name != "" && this.state.email != "" && this.state.password != "") {
-                //crypting the password 
-                const staff_password = Base64.stringify(sha256(this.state.password));
-                console.log(staff_password);
-                JSONdata[staff_password] = staff_password;
-                console.log(JSONdata);
-                // this.createStaff(JSONdata);
-
+            if (this.state.institution != "" && this.state.tenant != "" && this.state.category != "" && this.state.email != "") {
                 // send data to db
 
-                this.props.history.push("/success-staff");
+                this.props.history.push("/register-second-tenant");
 
+                // pass json to next page
             }
         }
     }
 
-    // synchronous call to create staff
-    createStaff(data) {
+    // synchronous call to create tenant
+    createTenant(data) {
         try {
             // not sure about host here
-            fetch("http://localhost:5000/staffreg", {
+            fetch("http://localhost:5000/tenant", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
               },
             body: data,
             })
-            console.log("Staff created");
+            console.log("Tenant created");
         } catch (err) {
             console.log(err.message);
         }
@@ -99,6 +82,16 @@ class RegisterStaff extends Component {
     handleInstitutionChange(value) {
         console.log(value.option);
         this.setState({institution: value.option});
+    }
+
+    handleTenantChange(value) {
+        console.log(value.option);
+        this.setState({tenant: value.option});
+    }
+
+    handleCategoryChange(value) {
+        console.log(value.option);
+        this.setState({category: value.option});
     }
 
     render() { 
@@ -174,7 +167,7 @@ class RegisterStaff extends Component {
             border: "0px solid white",
         }
         return <React.Fragment>
-            <div style={titleStyle}>Staff Registration</div>
+            <div style={titleStyle}>Tenant Registration</div>
 
             <Form>
 
@@ -200,24 +193,68 @@ class RegisterStaff extends Component {
                     </Dropdown.Menu>
                 </Dropdown>
 
-                {/* NAME */}
+                {/* TENANT */}
+                <div style={headerStyle}>Tenant</div>
+
+                <Dropdown
+                style={buttonStyle}>
+
+                    <Dropdown.Toggle 
+                    variant=""
+                    style={toggleStyle}>
+                        {this.state.tenant == "" ? this.state.selectedTenant : this.state.tenant}
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu
+                    style={{width: "100%", margin: "auto"}}>
+                        {this.state.info.tenants.map(option => 
+                            (<Dropdown.Item
+                            onSelect={() => this.handleTenantChange({option})}>
+                                { option }
+                            </Dropdown.Item>))}
+                    </Dropdown.Menu>
+                </Dropdown>
+
+                {/* CATEGORY */}
+                <div style={headerStyle}>Category</div>
+
+                <Dropdown
+                style={buttonStyle}>
+
+                    <Dropdown.Toggle 
+                    variant=""
+                    style={toggleStyle}>
+                        {this.state.category == "" ? this.state.selectedCategory : this.state.category}
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu
+                    style={{width: "100%", margin: "auto"}}>
+                        {this.state.info.categories.map(option => 
+                            (<Dropdown.Item
+                            onSelect={() => this.handleCategoryChange({option})}>
+                                { option }
+                            </Dropdown.Item>))}
+                    </Dropdown.Menu>
+                </Dropdown>
+
+                {/* DESCRIPTION */}
                 <Form.Group 
-                controlId="formName"
+                controlId="formDescription"
                 style={headerStyle}>
-                    <Form.Label>Name</Form.Label>
+                    <Form.Label>Description</Form.Label>
                     <Form.Control 
-                    type="name" 
-                    placeholder="Name" 
+                    type="description" 
+                    placeholder="Description" 
                     style={fillStyle}
-                    value={this.state.name} 
-                    onChange={e => {this.setState({ name: e.target.value })}}/>
+                    value={this.state.description} 
+                    onChange={e => {this.setState({ description: e.target.value })}}/>
                 </Form.Group>
 
                 {/* EMAIL */}
                 <Form.Group 
                 controlId="formBasicEmail"
                 style={headerStyle}>
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label>Registered Email</Form.Label>
                     <Form.Control 
                     type="email" 
                     placeholder="Email" 
@@ -229,8 +266,37 @@ class RegisterStaff extends Component {
                     </Form.Text> */}
                 </Form.Group>
 
+                {/* NAME */}
+                {/* <Form.Group 
+                controlId="formName"
+                style={headerStyle}>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control 
+                    type="name" 
+                    placeholder="Name" 
+                    style={fillStyle}
+                    value={this.state.name} 
+                    onChange={e => {this.setState({ name: e.target.value })}}/>
+                </Form.Group> */}
+
+                {/* EMAIL */}
+                {/* <Form.Group 
+                controlId="formBasicEmail"
+                style={headerStyle}>
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control 
+                    type="email" 
+                    placeholder="Email" 
+                    style={fillStyle}
+                    value={this.state.email}
+                    onChange={e => this.setState({ email: e.target.value })}/>
+                    {/* <Form.Text className="text-muted">
+                    We'll never share your email with anyone else.
+                    </Form.Text>
+                </Form.Group> */}
+
                 {/* PASSWORD */}
-                <Form.Group 
+                {/* <Form.Group 
                 controlId="formBasicPassword"
                 style={headerStyle}>
                     <Form.Label>Password</Form.Label>
@@ -240,10 +306,10 @@ class RegisterStaff extends Component {
                     style={fillStyle}
                     value={this.state.password}
                     onChange={e => this.setState({ password: e.target.value })} />
-                </Form.Group>
+                </Form.Group> */}
 
                 {/* ERROR MESSAGE */}
-                {((this.state.institution == "" || this.state.name == "" || this.state.email == "" || this.state.password == "") && this.state.isClicked == true) || this.state.isInvalid == true ? 
+                {((this.state.institution == "" || this.state.tenant == "" || this.state.category == "" || this.state.email == "") && this.state.isClicked == true) || this.state.isInvalid == true ? 
                 <div
                 style={errorStyle}>
                     {this.state.error}
@@ -262,4 +328,4 @@ class RegisterStaff extends Component {
     }
 }
  
-export default RegisterStaff;
+export default RegisterTenantFirst;

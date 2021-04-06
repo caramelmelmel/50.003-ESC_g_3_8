@@ -7,66 +7,74 @@ import Base64 from 'crypto-js/enc-base64';
 const {createHash} = require('crypto');
 const hash = createHash('sha256');
 
-// set to tenant email requirements!!
-var regexEmail = /^\w{0,}@singhealth\.com\.sg$/;
 // one uppercase + lowercase + num + symb, min 8 char
 var regexPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
-class LoginStaff extends Component {
+class RegisterTenantSecond extends Component {
     state = {
-        name: "",
-        email: "",
+        code: "",
         password: "",
         isClicked: false,
         isInvalid: false,
         error: "Fill in all fields!",
      }
-
-    handleLogin = () => {
-        console.log(this.state.name);
-        console.log(this.state.email);
+     
+    handleSubmit = () => {
+        console.log(this.state.code);
         console.log(this.state.password);
         this.setState({isClicked: true});
 
         var objString = `{
+            "staff_institution": "${this.state.institution}",
             "staff_name": "${this.state.name}",
             "staff_email": "${this.state.email}",
             "staff_password": "${this.state.password}"
         }`;
-      
+
         var JSONdata = JSON.parse(objString);
 
-        var isEmail = regexEmail.test(this.state.email);
         var isPassword = regexPassword.test(this.state.password);
 
-        if (isEmail === false && isPassword === false) {
-            this.setState({error: "Invalid email and password given."});
-            this.setState({isInvalid: true});
-        } else if (isPassword === false) {
+        if (isPassword === false) {
             this.setState({error: "Invalid password given."});
-            this.setState({isInvalid: true});
-        } else if (isEmail === false) {
-            this.setState({error: "Invalid email given."});
             this.setState({isInvalid: true});
         } else {
             this.setState({error: "Fill in all fields!"});
             this.setState({isInvalid: false});
-            if (this.state.name != "" && this.state.email != "" && this.state.password != "") {
+            if (this.state.code != "" && this.state.password != "") {
                 //crypting the password 
                 const staff_password = Base64.stringify(sha256(this.state.password));
                 console.log(staff_password);
                 JSONdata[staff_password] = staff_password;
                 console.log(JSONdata);
+                // this.createStaff(JSONdata);
 
-                // check data with db
-
-                // go to staff home page
-                // this.props.history.push("/register-staff");
+                // send data to db
+                
+                // if code and passwowrd is correct then go to success
+                this.props.history.push("/success-tenant");
 
             }
         }
     }
-    
+
+    // synchronous call to create tenant
+    createTenant(data) {
+        try {
+            // not sure about host here
+            fetch("http://localhost:5000/tenantreg", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+              },
+            body: data,
+            })
+            console.log("Tenant created");
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+
     render() { 
         const marginVertSpace = 5;
         const titleStyle = {
@@ -96,6 +104,23 @@ class LoginStaff extends Component {
             border: "2px solid black",
             width: "100%",
         }
+        const buttonStyle = {
+            margin: "auto",
+            marginTop: marginVertSpace,
+            textAlign: "left",
+            borderRadius: 3,
+            border: "0.1px solid black",
+            width: "90%",
+        }
+        const toggleStyle = {
+            margin: "auto",
+            textAlign: "left",
+            textColor: "black",
+            borderRadius: 3,
+            border: "0.1px solid black",
+            width: "100%",
+            color: "black",
+        }
         const errorStyle = {
             float: "left",
             marginTop: marginVertSpace + 10,
@@ -123,37 +148,21 @@ class LoginStaff extends Component {
             border: "0px solid white",
         }
         return <React.Fragment>
-            <div style={titleStyle}>Staff Login</div>
+            <div style={titleStyle}>Staff Registration</div>
 
             <Form>
 
-                {/* NAME */}
+                {/* CODE */}
                 <Form.Group 
-                controlId="formName"
+                controlId="formCode"
                 style={headerStyle}>
-                    <Form.Label>Name</Form.Label>
+                    <Form.Label>Enter the verification code sent to your email.</Form.Label>
                     <Form.Control 
-                    type="name" 
-                    placeholder="Name" 
+                    type="code" 
+                    placeholder="Code" 
                     style={fillStyle}
-                    value={this.state.name} 
-                    onChange={e => {this.setState({ name: e.target.value })}}/>
-                </Form.Group>
-
-                {/* EMAIL */}
-                <Form.Group 
-                controlId="formBasicEmail"
-                style={headerStyle}>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control 
-                    type="email" 
-                    placeholder="Email" 
-                    style={fillStyle}
-                    value={this.state.email}
-                    onChange={e => this.setState({ email: e.target.value })}/>
-                    {/* <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                    </Form.Text> */}
+                    value={this.state.code} 
+                    onChange={e => {this.setState({ code: e.target.value })}}/>
                 </Form.Group>
 
                 {/* PASSWORD */}
@@ -170,23 +179,23 @@ class LoginStaff extends Component {
                 </Form.Group>
 
                 {/* ERROR MESSAGE */}
-                {((this.state.name == "" || this.state.email == "" || this.state.password == "") && this.state.isClicked == true) || this.state.isInvalid == true ? 
+                {((this.state.code == "" || this.state.password == "") && this.state.isClicked == true) || this.state.isInvalid == true ? 
                 <div
                 style={errorStyle}>
                     {this.state.error}
                 </div> : <div></div>
                 }
                 
-                {/* LOGIN */}
+                {/* REGISTER */}
                 <button 
                 type="button"
                 style={submitStyle}
-                onClick={this.handleLogin}>
-                    Login
+                onClick={this.handleSubmit}>
+                    Register
                 </button>
             </Form>
         </React.Fragment>
     }
 }
  
-export default LoginStaff;
+export default RegisterTenantSecond;
