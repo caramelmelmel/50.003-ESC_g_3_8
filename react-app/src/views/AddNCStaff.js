@@ -48,16 +48,6 @@ class AddNCStaff extends Component {
   }
 
   componentWillUnmount() {
-<<<<<<< HEAD
-    // fix Warning: Can't perform a React state update on an unmounted component
-    this.setState = (state, callback) => {
-      return;
-    };
-  };
-
-  handleChange() {
-  };
-=======
     this._isMounted = false;
   }
 
@@ -96,7 +86,6 @@ class AddNCStaff extends Component {
     console.log(this.state.checklistItem.item);
     
   }
->>>>>>> e1ce5c068f4d67862c5420a7ffbbb3de86c51ade
 
   onTakePhoto(dataUri) {
     // Do stuff with the dataUri photo...

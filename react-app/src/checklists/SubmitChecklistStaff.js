@@ -27,8 +27,8 @@ class SubmitChecklistStaff extends Component {
 
     getNonCompliances() {
         const difference = getAllChecklistId().filter(x => !getClickedItems().includes(x));
-        console.log("CLICKED ITEMS: ", getClickedItems());
-        console.log("DIFFERENCE: ", difference);
+        //console.log("CLICKED ITEMS: ", getClickedItems());
+        //console.log("DIFFERENCE: ", difference);
         return difference;
     }
 
