@@ -7,7 +7,7 @@ import { getAudits } from "../services/NewAudit";
 import { Link } from "react-router-dom";
 
 
-class CGHTenant extends Component {
+class KKHTenant extends Component {
   constructor(props){
       super(props);
       this.state = {
@@ -19,54 +19,41 @@ class CGHTenant extends Component {
   }
   
 
-  /*componentDidMount() {
-    this.setState({ tenants: getTenants() });
-  }
-  */
-  
+ 
 
   render() {
     const { tenants, audits, pastaudits } = this.state;
  
       
-    //tenants with institution CGH
-    const CGHtenants = tenants.filter((m) => m.institution.name === this.props.institutechosen.activeTab);
+    //tenants with institution KKH
+    const KKHtenants = tenants.filter((m) => m.institution.name === this.props.institutechosen.activeTab);
     
-    //console.log(CGHtenants);
+
     const storename = []
     const currentaudit = []
     const pastaudit = []
-    for (var i = 0; i < CGHtenants.length; i++) {
+    for (var i = 0; i < KKHtenants.length; i++) {
         pastaudit.push("null");
+        currentaudit.push("null");
+        storename.push(KKHtenants[i]);
+        
         for (var j = 0; j < audits.length; j++) {
-            //console.log(CGHtenants[i].Tenant_id);
-            if (CGHtenants[i].Tenant_id == audits[j].Tenant_id) {
-                //console.log(CGHtenants[i].Tenant_id);
-                storename.push(CGHtenants[i]);
-                //currentaudit[performance].push([audits[j].performancescore, audits[j].noofnoncompliances]);
-                currentaudit.push(audits[j].performancescore);
-                
+
+            if (KKHtenants[i].Tenant_id == audits[j].Tenant_id) {
+                currentaudit[i] = audits[j].performancescore; 
             }
         }
         
         for (var z = 0; z < pastaudits.length; z++) {
-            if (CGHtenants[i].Tenant_id === pastaudits[z].Tenant_id) {
+            if (KKHtenants[i].Tenant_id === pastaudits[z].Tenant_id) {
                 pastaudit[i] = pastaudits[z].audit_end_date;
-                //console.log(CGHtenants[i].Tenant_id.indexOf(pastaudits[z].Tenant_id) > -1);
-                //console.log(CGHtenants[i].Tenant_id.includes(pastaudits[z].Tenant_id));
-            }
-            
+            } 
         }
             
            
         
     }
       
-   
-    /*console.log(currentaudit);
-    console.log(pastaudit);
-    console.log(storename);
-    */
     
     //implement date functionality
       
@@ -79,7 +66,7 @@ class CGHTenant extends Component {
                         pathname: `/tenant-profile/CGH/${item.Tenant_id}`,
                         state: {
                             Tenant_id: item.Tenant_id,
-                            CGHtenants: CGHtenants
+                            Anytenants: KKHtenants
                         },
                     }}>
                         <td>{item.store_name}</td>
@@ -93,14 +80,6 @@ class CGHTenant extends Component {
         return (
             <tr key={item.Tenant_id }>
                 <td>{item}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            
                 
             </tr>
         )
@@ -111,10 +90,7 @@ class CGHTenant extends Component {
         return (
             <tr key={item.Tenant_id } >
                 <td>{item}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+
             </tr>
         )
     });
@@ -149,43 +125,4 @@ class CGHTenant extends Component {
   }
 }
 
-export default CGHTenant;
-//tenant details should be a link to profile page
-
-//institution: { _id: "1", name: "CGH" },
-//add into empty array, all tennats with this.props.institutechosen.activeTab == tenants.institution.name
-//render the tenants.store_name
-//pass the tenants.Tenants_id as link and to other columns
-
-
-//create an array to map
-
-//current audit
-//look under Audit_in_progress.Tenant_ID == tenant.Tenant_id
-//Audit_in_progress.Audit_ID
-//audit.noofnoncompliances
-//audit.performancescore(+graph)
-
-//past audit
-//look under past_audits.Tenant_ID == tenant.Tenant_id
-//pastaudits.Audit_ID
-//pastaudits.date_recorded > 2 weeks of current date: button to create new audit
-
-
-/*
-{allTenants.map((tenant) => (
-            <tr
-              key={tenant.Tenant_id}
-            >
-              <Link
-                to={{
-                  pathname: `/tenant-profile/CGH/${tenant.Tenant_id}`,
-                  state: {
-                    Tenant_id: tenant.Tenant_id,
-                  },
-                }}
-              >
-                <td>{tenant.representative_name}</td>
-
-
-*/
+export default KKHTenant;

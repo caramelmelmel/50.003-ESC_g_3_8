@@ -10,7 +10,8 @@ class PerformanceScoreAcrossYearChart extends Component {
     this.state = {
       options: {
         chart: {
-          height: 350,
+          width: "100%",
+          height: "100%",
           type: "line",
           zoom: {
             enabled: false,

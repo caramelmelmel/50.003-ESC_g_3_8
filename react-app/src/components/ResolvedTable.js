@@ -38,7 +38,7 @@ class ResolvedTables extends Component {
                         <tbody>
                         {resolvedAudits.map((audit) => (
                             <tr key={audit.auditid}>
-                            <td>{audit.tenantname}</td>
+                            <td>{audit.store_name}</td>
                             <td>{audit.auditdate}</td>
                             <td>finishedauditdate</td>
                             <td>{audit.performancescore}</td>

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./bootstrap-4.3.1-dist/css/bootstrap.min.css";
 
 import "./App.css";
+import HomePage from "./views/HomePage";
 import DashboardStaff from "./views/DashboardStaff";
 import AuditsStaff from "./views/AuditsStaff";
 import TenantStaff from "./views/TenantStaff";
@@ -25,6 +26,7 @@ import LoginStaff from "./components/LoginStaff";
 import LoginTenant from "./components/LoginTenant";
 import SubmitChecklistStaff from "./checklists/SubmitChecklistStaff";
 import RegisterStaff from "./components/RegisterStaff";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
   
@@ -60,7 +62,7 @@ class App extends Component {
             <Route path="/login-staff" component={LoginStaff} />
             <Route path="/login-tenant" component={LoginTenant} />
             <Route path="/register-staff" component={RegisterStaff} />
-            <Route path="/" exact component={DashboardStaff} />
+            <Route path="/" exact component={HomePage} />
 
             <Route path="/tenant-profile" component={TenantProfile} />
           </Switch>

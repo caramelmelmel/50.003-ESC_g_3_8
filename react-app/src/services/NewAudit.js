@@ -23,7 +23,7 @@ export const audits = [
     noofnoncompliances: 4,
   },
 
-  {
+  /*{
     Tenant_id: "2",
     auditid: "2",
     institution: { _id: "1", name: "CGH" },
@@ -37,7 +37,7 @@ export const audits = [
       { name: "environment_cleanliness_02", resolved: false },
     ],
     noofnoncompliances: 3,
-  },
+  },*/
   {
     Tenant_id: "3",
     auditid: "3",

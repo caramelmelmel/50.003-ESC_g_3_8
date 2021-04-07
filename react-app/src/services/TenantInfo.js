@@ -44,7 +44,7 @@ export const tenants = [
         store_name:"ToastBox",
         category_ID: { _id: "1", name: "Food & Beverage Tenant" },
         location: "#02-20",
-        institution: { _id: "6", name: "OCH" },
+        institution: { _id: "3", name: "KKH" },
         description:"input from tenant interface",
     },
     {
@@ -71,7 +71,7 @@ export function getTenant(id) {
 
 
 
-//once all non compliances have resolved variable == true, move to another table 
+//get the pastaudits with audit_end_date latest 
 export const pastaudits = [
     {
         Audit_id: "10",
@@ -91,7 +91,15 @@ export const pastaudits = [
 
     {
         Audit_id: "11",
-        audit_end_date: "21",
+        audit_end_date: "24",
+        Tenant_id: "5",
+        institution: { _id: "1", name: "CGH" },
+    
+    },
+
+    {
+        Audit_id: "12",
+        audit_end_date: "25",
         Tenant_id: "5",
         institution: { _id: "1", name: "CGH" },
     
