@@ -41,10 +41,10 @@ class AddNCStaff extends Component {
 
   componentDidMount() {
     this.auditData = JSON.parse(
-      localStorage.getItem("audit" + this.state.checklistItem.item)
+      localStorage.getItem("nc" + this.state.checklistItem.id)
     );
 
-    if (localStorage.getItem("audit" + this.state.checklistItem.item)) {
+    if (localStorage.getItem("nc" + this.state.checklistItem.id)) {
       this.setState({
         val: this.auditData.val,
         dataUri: this.auditData.dataUri,
@@ -55,13 +55,33 @@ class AddNCStaff extends Component {
         dataUri: null,
       });
     }
+
+    /*for (var a in localStorage) {
+      //localStorage.clear();
+      //if (localStorage[a])
+      console.log(localStorage);
+      //console.log(a, ' = ', localStorage[a]);
+      
+
+    }*/
+    //var key = localStorage.key(a);
+    //var value = localStorage.getItem(key);
+    //console.log(value);
   }
 
   componentWillUpdate(nextProps, nextState) {
-    localStorage.setItem(
-      "audit" + this.state.checklistItem.item,
-      JSON.stringify(nextState)
-    );
+    //console.log(nextState);
+    //ensures local storage do not store null non compliances
+    //meaning if got text, but no pic, still wont pass over
+    //but if no text and have pic, will pass over
+    if (nextState.dataUri == null) {
+      localStorage.removeItem("nc" + this.state.checklistItem.id);
+    } else {
+      localStorage.setItem(
+        "nc" + this.state.checklistItem.id,
+        JSON.stringify(nextState)
+      );
+    }
   }
 
   //for additional comments
@@ -73,7 +93,7 @@ class AddNCStaff extends Component {
   onTakePhoto(dataUri) {
     // Do stuff with the dataUri photo...
     console.log("takePhoto");
-    //console.log(dataUri);
+    console.log(dataUri);
     this.setState({ dataUri: dataUri });
   };
 
@@ -99,12 +119,22 @@ class AddNCStaff extends Component {
     console.log("Cancelling...");
   }
 
+  //this function should be on last page of checklist
+  //send all localstorage items to database //"val"="", dataUri=null=> localStorage.removeItem("audit" + this.state.checklistItem.id);
+  //clear localstorage of that audit
+  handleSave() {
+    console.log("this is working");
+  }
+
   render() {
     //console.log("NC recieved itemId: ", this.props.location.state);
     //console.log("Checklist Item: ", this.state.checklistItem);
     //console.log("Props: ", this.props);
     const { itemsChecked } = this.props;
     //console.log("CLICKED ITEMS PASSED: ", this.props.location.state.clickedItems);
+
+    //localStorage.clear();
+    //console.log(localStorage);
 
     return (
       <React.Fragment>
@@ -198,11 +228,12 @@ export default AddNCStaff;
                 style={{ marginLeft: "5%", marginRight: "0%", float: "left", width: "80%"}}>Upload Image</button>
               </Col>
 
-              <button 
-                  className="btn btn-lg btn-danger checklist-sideheader-style mt-5"
-                  style={{float: 'right'}} 
-                  onClick={this.context.router.history.goBack}
-                  >Save</button>
-
+              
+<button 
+    className="btn btn-lg btn-danger checklist-sideheader-style mt-5"
+    style={{float: 'right', marginRight: "18%",}} 
+    onClick={this.handleSave}
+>Save
+</button>
 
 */
