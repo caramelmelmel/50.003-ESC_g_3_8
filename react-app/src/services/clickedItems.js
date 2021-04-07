@@ -19,7 +19,7 @@ export function calculateScore(array, toReturn) {
     let totalScore = 0;
 
     for (i=0; i < array.length; i++) {
-        console.log(array[i].substring(0,14));
+        //console.log(array[i].substring(0,14));
 
         if (array[i].substring(0, 15) == "professionalism" || array[i].substring(0, 13) == "staff_hygiene") {
             A += 1;

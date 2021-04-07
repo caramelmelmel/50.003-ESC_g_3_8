@@ -4,9 +4,9 @@ import { Dropdown } from 'react-bootstrap';
 import { getAllTenantInfo } from './../data/tenantInfo';
 import sha256 from 'crypto-js/sha256'
 import Base64 from 'crypto-js/enc-base64';
+
 //crypto for the pasword registration
 const {createHash} = require('crypto');
-console.log('imported crypto');
 const hash = createHash('sha256');
 
 // must have "@singhealth.com.sg" and be a word infront
@@ -14,7 +14,7 @@ var regexEmail = /^\w{0,}@singhealth\.com\.sg$/;
 // one uppercase + lowercase + num + symb, min 8 char
 var regexPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
-class LoginStaff extends Component {
+class RegisterStaff extends Component {
     state = {
         institution: "",
         name: "",
@@ -46,9 +46,7 @@ class LoginStaff extends Component {
             "staff_password": "${this.state.password}"
         }`;
       
-        console.log(objString);
         var JSONdata = JSON.parse(objString);
-        console.log(JSONdata);
 
         var isEmail = regexEmail.test(this.state.email);
         var isPassword = regexPassword.test(this.state.password);
@@ -66,13 +64,17 @@ class LoginStaff extends Component {
             this.setState({error: "Fill in all fields!"});
             this.setState({isInvalid: false});
             if (this.state.institution != "" && this.state.name != "" && this.state.email != "" && this.state.password != "") {
-                // send data to db
                 //crypting the password 
                 const staff_password = Base64.stringify(sha256(this.state.password));
                 console.log(staff_password);
                 JSONdata[staff_password] = staff_password;
                 console.log(JSONdata);
                 // this.createStaff(JSONdata);
+
+                // send data to db
+
+                this.props.history.push("/success-staff");
+
             }
         }
     }
@@ -92,6 +94,11 @@ class LoginStaff extends Component {
         } catch (err) {
             console.log(err.message);
         }
+    }
+
+    handleInstitutionChange(value) {
+        console.log(value.option);
+        this.setState({institution: value.option});
     }
 
     render() { 
@@ -172,7 +179,7 @@ class LoginStaff extends Component {
             <Form>
 
                 {/* INSTITUTION */}
-                {/* <div style={headerStyle}>Institution</div>
+                <div style={headerStyle}>Institution</div>
 
                 <Dropdown
                 style={buttonStyle}>
@@ -180,7 +187,7 @@ class LoginStaff extends Component {
                     <Dropdown.Toggle 
                     variant=""
                     style={toggleStyle}>
-                        {this.state.selectedInstitution}
+                        {this.state.institution == "" ? this.state.selectedInstitution : this.state.institution}
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu
@@ -191,20 +198,7 @@ class LoginStaff extends Component {
                                 { option }
                             </Dropdown.Item>))}
                     </Dropdown.Menu>
-                </Dropdown> */}
-
-                {/* NAME */}
-                <Form.Group 
-                controlId="formInstitution"
-                style={headerStyle}>
-                    <Form.Label>Institution</Form.Label>
-                    <Form.Control 
-                    type="name" 
-                    placeholder="Name" 
-                    style={fillStyle}
-                    value={this.state.institution} 
-                    onChange={e => {this.setState({ institution: e.target.value })}}/>
-                </Form.Group>
+                </Dropdown>
 
                 {/* NAME */}
                 <Form.Group 
@@ -268,4 +262,4 @@ class LoginStaff extends Component {
     }
 }
  
-export default LoginStaff;
+export default RegisterStaff;

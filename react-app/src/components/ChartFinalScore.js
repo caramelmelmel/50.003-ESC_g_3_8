@@ -15,7 +15,7 @@ class ChartFinalScore extends Component {
           id: "basic-bar",
         },
         xaxis: {
-          categories: ['Professionalism & Staff Hygiene','Housekeeping & General Cleanliness','Food Hygiene','Healthier Choice','Workplace Safety & Health'],
+          categories: ['Professionalism & Staff Hygiene','Housekeeping & Cleanliness','Food Hygiene','Healthier Choice','Workplace Safety & Health'],
           labels: {
             rotate: 0,
             hideOverlappingLabels: false,
@@ -64,7 +64,7 @@ class ChartFinalScore extends Component {
               options={this.state.options}
               series={this.state.series}
               type="bar"
-              width="1200"
+              width="1000"
               height="400"
             />
           </div>

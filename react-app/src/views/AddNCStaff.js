@@ -95,7 +95,24 @@ class AddNCStaff extends Component {
     console.log("takePhoto");
     console.log(dataUri);
     this.setState({ dataUri: dataUri });
+  };
+
+  handleSave(e) {
+    e.preventDefault();
+    this.setState({
+      val: '',
+    })
+    console.log("Saving...");
+    //alert("Text field value is: " + this.state.va);
   }
+
+  handleUploadImage() {
+    console.log("Upload Image Button Clicked");
+  };
+
+
+
+  handleCancel(){}
 
   handleDeleteImage() {
     this.setState({ dataUri: null });
