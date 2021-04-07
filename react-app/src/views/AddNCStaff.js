@@ -15,6 +15,7 @@ import ImagePreview from "../components/ImagePreview";
 
 import Camera from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
+import FormComponent from "../components/FormComponent";
 
 class AddNCStaff extends Component {
   auditData;
@@ -27,10 +28,13 @@ class AddNCStaff extends Component {
       checklistItem: getChecklistItem(props.location.state.itemId),
       itemName: props.itemName,
       clickedItems: props.clickedItems,
+      comments: {},
+      loading: false
     };
     this.onTakePhoto = this.onTakePhoto.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDeleteImage = this.handleDeleteImage.bind(this);
+    this.addComment = this.addComment.bind(this);
   }
   //need to send state of val and dataUri along with list of non compliance to tenants!!
 
@@ -41,10 +45,10 @@ class AddNCStaff extends Component {
 
   componentDidMount() {
     this.auditData = JSON.parse(
-      localStorage.getItem("audit" + this.state.checklistItem.item)
+      localStorage.getItem("nc" + this.state.checklistItem.id)
     );
 
-    if (localStorage.getItem("audit" + this.state.checklistItem.item)) {
+    if (localStorage.getItem("nc" + this.state.checklistItem.id)) {
       this.setState({
         val: this.auditData.val,
         dataUri: this.auditData.dataUri,
@@ -55,13 +59,33 @@ class AddNCStaff extends Component {
         dataUri: null,
       });
     }
+
+    /*for (var a in localStorage) {
+      //localStorage.clear();
+      //if (localStorage[a])
+      console.log(localStorage);
+      //console.log(a, ' = ', localStorage[a]);
+      
+
+    }*/
+    //var key = localStorage.key(a);
+    //var value = localStorage.getItem(key);
+    //console.log(value);
   }
 
   componentWillUpdate(nextProps, nextState) {
-    localStorage.setItem(
-      "audit" + this.state.checklistItem.item,
-      JSON.stringify(nextState)
-    );
+    //console.log(nextState);
+    //ensures local storage do not store null non compliances
+    //meaning if got text, but no pic, still wont pass over
+    //but if no text and have pic, will pass over
+    if (nextState.dataUri == null) {
+      localStorage.removeItem("nc" + this.state.checklistItem.id);
+    } else {
+      localStorage.setItem(
+        "nc" + this.state.checklistItem.id,
+        JSON.stringify(nextState)
+      );
+    }
   }
 
   //for additional comments
@@ -73,13 +97,44 @@ class AddNCStaff extends Component {
   onTakePhoto(dataUri) {
     // Do stuff with the dataUri photo...
     console.log("takePhoto");
-    //console.log(dataUri);
+    console.log(dataUri);
     this.setState({ dataUri: dataUri });
+  };
+
+  handleSave(e) {
+    e.preventDefault();
+    this.setState({
+      val: '',
+    })
+    console.log("Saving...");
+    //alert("Text field value is: " + this.state.va);
   }
+
+  handleUploadImage() {
+    console.log("Upload Image Button Clicked");
+  };
+
+
+
+  handleCancel(){}
 
   handleDeleteImage() {
     this.setState({ dataUri: null });
     console.log("Cancelling...");
+  }
+
+  //this function should be on last page of checklist
+  //send all localstorage items to database //"val"="", dataUri=null=> localStorage.removeItem("audit" + this.state.checklistItem.id);
+  //clear localstorage of that audit
+  handleSave() {
+    console.log("this is working");
+  }
+
+  addComment(comment) {
+    this.setState({
+      loading:false,
+      comments: [comment, ...this.state.comments]
+    })
   }
 
   render() {
@@ -88,6 +143,9 @@ class AddNCStaff extends Component {
     //console.log("Props: ", this.props);
     const { itemsChecked } = this.props;
     //console.log("CLICKED ITEMS PASSED: ", this.props.location.state.clickedItems);
+
+    //localStorage.clear();
+    //console.log(localStorage);
 
     return (
       <React.Fragment>
@@ -146,6 +204,18 @@ class AddNCStaff extends Component {
                   />
                 </Col>
               </Row>
+
+              <div className="row">
+                <div className="col-4  pt-3 border-right">
+                  <h6>Say something about React</h6>
+                    <FormComponent addComment={this.addComment}/>
+                </div>
+                <div className="col-8  pt-3 bg-white">
+                  {/* Comment List Component */}
+                </div>
+              </div>
+
+
               <Link
                 to={{
                   pathname: `/`,
@@ -181,11 +251,12 @@ export default AddNCStaff;
                 style={{ marginLeft: "5%", marginRight: "0%", float: "left", width: "80%"}}>Upload Image</button>
               </Col>
 
-              <button 
-                  className="btn btn-lg btn-danger checklist-sideheader-style mt-5"
-                  style={{float: 'right'}} 
-                  onClick={this.context.router.history.goBack}
-                  >Save</button>
-
+              
+<button 
+    className="btn btn-lg btn-danger checklist-sideheader-style mt-5"
+    style={{float: 'right', marginRight: "18%",}} 
+    onClick={this.handleSave}
+>Save
+</button>
 
 */

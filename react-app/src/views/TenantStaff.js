@@ -1,6 +1,16 @@
 import React, { Component } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import CGHTenant from "../components/CGHTenant";
+import CGHTenant from "../tenants/CGHTenant";
+import KKHTenant from "../tenants/KKHTenant";
+import SGHTenant from "../tenants/SGHTenant";
+import SKHTenant from "../tenants/SKHTenant";
+import NCCSTenant from "../tenants/NCCSTenant";
+import NHCSTenant from "../tenants/NHCSTenant";
+import BVHTenant from "../tenants/BVHTenant";
+import OCHTenant from "../tenants/OCHTenant";
+import AcademiaTenant from "../tenants/AcademiaTenant";
+
+
 
 class TenantStaff extends Component {
     constructor(props) {
@@ -26,21 +36,50 @@ class TenantStaff extends Component {
     
       <div
         className="tenantstaff"
-        style={{ position: "absolute", left: 20, right: 20 }}
+        style={{ position: "absolute", left: 10 }}
       >
         <Tabs >
           <TabList id="controlled-tab-example">
-            <Tab onClick={() =>this.handleSelect("CGH")} style={{ minWidth: "20%" }}>CGH</Tab>
-            <Tab onClick={() =>this.handleSelect("SGH")} style={{ minWidth: "16%" }}>SGH</Tab>
-            <Tab onClick={() =>this.handleSelect("KKH")} style={{ minWidth: "16%" }}>KKH</Tab>
-            <Tab onClick={() =>this.handleSelect("SKH")} style={{ minWidth: "16%" }}>SKH</Tab>
-            <Tab onClick={() =>this.handleSelect("NCCS")} style={{ minWidth: "16%" }}>NCCS</Tab>
-            <Tab onClick={() =>this.handleSelect("OCH")} style={{ minWidth: "16%" }}>OCH</Tab>
+            <Tab onClick={() =>this.handleSelect("CGH")} style={{ minWidth: "5%" }}>CGH</Tab>
+            <Tab onClick={() =>this.handleSelect("KKH")} style={{ minWidth: "5%" }}>KKH</Tab>
+            <Tab onClick={() =>this.handleSelect("SGH")} style={{ minWidth: "5%" }}>SGH</Tab>
+            <Tab onClick={() =>this.handleSelect("SKH")} style={{ minWidth: "5%" }}>SKH</Tab>
+            <Tab onClick={() =>this.handleSelect("NCCS")} style={{ minWidth: "5%" }}>NCCS</Tab>
+            <Tab onClick={() =>this.handleSelect("NHCS")} style={{ minWidth: "5%" }}>NHCS</Tab>
+            <Tab onClick={() =>this.handleSelect("BVH")} style={{ minWidth: "5%" }}>BVH</Tab>
+            <Tab onClick={() =>this.handleSelect("OCH")} style={{ minWidth: "5%" }}>OCH</Tab>
+            <Tab onClick={() =>this.handleSelect("Academia")} style={{ minWidth: "5%" }}>Academia</Tab>
           </TabList>
 
           <TabPanel>
-            <CGHTenant institutechosen={this.state}/>
+            <CGHTenant key={this.state} institutechosen={this.state}/>
           </TabPanel>
+          <TabPanel>
+            <KKHTenant key={this.state} institutechosen={this.state}/>
+          </TabPanel>
+          <TabPanel>
+            <SGHTenant key={this.state} institutechosen={this.state}/>
+          </TabPanel>
+          <TabPanel>
+            <SKHTenant key={this.state} institutechosen={this.state}/>
+          </TabPanel>
+          <TabPanel>
+            <NCCSTenant key={this.state} institutechosen={this.state}/>
+          </TabPanel>
+          <TabPanel>
+            <NHCSTenant key={this.state} institutechosen={this.state}/>
+          </TabPanel>
+          <TabPanel>
+            <BVHTenant key={this.state} institutechosen={this.state}/>
+          </TabPanel>
+          <TabPanel>
+            <OCHTenant key={this.state} institutechosen={this.state}/>
+          </TabPanel>
+          <TabPanel>
+            <AcademiaTenant key={this.state} institutechosen={this.state}/>
+          </TabPanel>
+         
+          
 
 
         </Tabs>

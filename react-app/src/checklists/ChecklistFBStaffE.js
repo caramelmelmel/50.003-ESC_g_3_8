@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import AddNCButton from "../components/AddNCButton";
 import { getAllChecklistItems, getChecklistItem } from './../services/checklistFB';
 import Category from './Category';
 import Header from './Header';

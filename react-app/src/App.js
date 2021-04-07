@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./bootstrap-4.3.1-dist/css/bootstrap.min.css";
 
 import "./App.css";
+import HomePage from "./views/HomePage";
 import DashboardStaff from "./views/DashboardStaff";
 import AuditsStaff from "./views/AuditsStaff";
 import TenantStaff from "./views/TenantStaff";
@@ -24,6 +25,9 @@ import ChecklistNonFBStaff from "./components/ChecklistNonFBStaff";
 import SubmitChecklistStaff from "./checklists/SubmitChecklistStaff";
 
 import RegisterStaff from "./components/RegisterStaff";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import LoginStaff from "./components/LoginStaff";
 import StaffSuccess from "./components/StaffSuccess";
 
@@ -31,6 +35,7 @@ import RegisterTenantFirst from "./components/RegisterTenantFirst";
 import RegisterTenantSecond from "./components/RegisterTenantSecond";
 import LoginTenant from "./components/LoginTenant";
 import TenantSuccess from "./components/TenantSuccess";
+
 
 class App extends Component {
   
@@ -69,9 +74,13 @@ class App extends Component {
             <Route path="/login-tenant" component={LoginTenant} />
 
             <Route path="/register-staff" component={RegisterStaff} />
+
+            <Route path="/" exact component={HomePage} />
+
             <Route path="/success-staff" component={StaffSuccess} />
             <Route path="/login-staff" component={LoginStaff} />
-            <Route path="/" exact component={DashboardStaff} />
+            
+
 
             <Route path="/tenant-profile" component={TenantProfile} />
           </Switch>

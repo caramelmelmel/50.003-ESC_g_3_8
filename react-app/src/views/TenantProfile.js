@@ -12,7 +12,7 @@ class TenantProfile extends Component {
         super(props);
         this.state = {
             Tenant_id: this.props.location.state.Tenant_id,
-            CGHtenants: this.props.location.state.CGHtenants
+            Anytenants: this.props.location.state.Anytenants
 
         }
     }
@@ -20,10 +20,9 @@ class TenantProfile extends Component {
 
     render() {
 
-
-        const CGHtenants = this.state.CGHtenants;
-        const indivtenant = CGHtenants.find((tenant) => tenant.Tenant_id === this.state.Tenant_id);
-        console.log(indivtenant);
+        const Anytenants = this.state.Anytenants;
+        const indivtenant = Anytenants.find((tenant) => tenant.Tenant_id === this.state.Tenant_id);
+        //console.log(indivtenant);
         //console.log(this.props);
         console.log(this.state);
         return (
