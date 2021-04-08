@@ -4,12 +4,16 @@ import ChartInstitutes from "../components/ChartInstitutes";
 import Chart from "react-apexcharts";
 import { getAllNoncompliance, getLength } from '../services/noncomplianceList';
 import { getChecklistItem } from '../services/checklistFB';
+import FormComponent from "../components/FormComponent";
+import CommentList from './../components/CommentList';
 
 
 class NonComplianceTenant extends Component {
     state = {
         noncompliance: getAllNoncompliance(),
-        length: getLength()
+        length: getLength(),
+        loading: false,
+        comments: [{name:"arissa", index:"01", comment:"Where do I start with Jodi?"}, {name:"jodi", index:"02", comment:"I've know Arissa for over a year"}]
     }
 
     handleSave() {
@@ -30,11 +34,22 @@ class NonComplianceTenant extends Component {
                                     <h5>{getChecklistItem(nc.nc_id).item}</h5>
                                 </Accordion.Toggle>
                                 <Accordion.Collapse eventKey={nc.id}>
-                                    <Card.Body className="checklist-body-style">
+                                    <Card.Body className="checklist-body-style" style={{padding: 15}}>
                                         Hello! Find all images and comments here
+                                            <div className="row">
+                                                <div className="col-4  pt-3 border-right">
+                                                    <FormComponent addComment={this.addComment}/>
+                                                </div>
+                                            <div className="col-8  pt-3 bg-white">
+                                            <CommentList 
+                                            comments={this.state.comments}
+                                            loading={this.state.loading}/>
+                                            </div>
+                                        </div>
                                         <button className="btn btn-warning header-style"
-                                        style={{ float: "right" }}
+                                        style={{ float: "right", margin: 15 }}
                                         onClick={this.handleSave}>Save</button>
+                                        
                                     </Card.Body>
                                 </Accordion.Collapse>
                             </Card>
