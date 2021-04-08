@@ -121,7 +121,6 @@ class AddNCStaff extends Component {
     //alert("Text field value is: " + this.state.va);
   }
 
-<<<<<<< Updated upstream
   handleUploadImage() {
     console.log("Upload Image Button Clicked");
   };
@@ -129,7 +128,7 @@ class AddNCStaff extends Component {
 
 
   handleCancel(){}
-=======
+
   /*this.toDataUrl(dataUri, function (myBase64) {
       console.log((myBase64)); // myBase64 is the base64 string
     });
@@ -175,7 +174,7 @@ class AddNCStaff extends Component {
       bgColor: "#f06d1a",
     });
   }
->>>>>>> Stashed changes
+
 
   handleDeleteImage() {
     this.setState({ dataUri: null });
