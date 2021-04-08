@@ -35,6 +35,7 @@ import RegisterTenantFirst from "./components/RegisterTenantFirst";
 import RegisterTenantSecond from "./components/RegisterTenantSecond";
 import LoginTenant from "./components/LoginTenant";
 import TenantSuccess from "./components/TenantSuccess";
+import NonComplianceTenant from "./views/NonComplianceTenant";
 
 
 class App extends Component {
@@ -67,18 +68,16 @@ class App extends Component {
             <Route path="/sidebar" component={Sidebar} />
             <Route path="/textfield-staff" component={TextFieldStaff} />
             <Route path="/add-nc-staff" component={AddNCStaff} />
-
             <Route path="/register-first-tenant" component={RegisterTenantFirst} />
             <Route path="/register-second-tenant" component={RegisterTenantSecond} />
             <Route path="/success-tenant" component={TenantSuccess} />
             <Route path="/login-tenant" component={LoginTenant} />
-
             <Route path="/register-staff" component={RegisterStaff} />
-
-            <Route path="/" exact component={HomePage} />
-
             <Route path="/success-staff" component={StaffSuccess} />
             <Route path="/login-staff" component={LoginStaff} />
+            <Route path="/non-compliances-tenant" component={NonComplianceTenant} />
+            <Route path="/" exact component={HomePage} />
+
             
 
 

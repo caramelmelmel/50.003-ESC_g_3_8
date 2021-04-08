@@ -45,7 +45,7 @@ class FormComponent extends Component {
 
     // persist the comments on server
     let { comment } = this.state;
-    fetch("http://localhost:3000", { method: "post", body: JSON.stringify(comment)})
+    fetch("http://localhost:5000", { method: "POST", body: JSON.stringify(comment)})
     .then(res => res.json)
     .then(res => {
       if (res.error) {

@@ -40,6 +40,12 @@ export const Sidebar = [
         icon: <IoIcons.IoMdPeople />,
         cName: 'nav-text'
     },
+    {
+        title: 'Non-Compliances',
+        path: '/non-compliances-tenant',
+        icon: <IoIcons.IoIosChatboxes />,
+        cName: 'nav-text'
+    }
 
 
 
