@@ -15,6 +15,7 @@ import ImagePreview from "../components/ImagePreview";
 
 import Camera from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
+import FormComponent from "../components/FormComponent";
 
 class AddNCStaff extends Component {
   auditData;
@@ -30,12 +31,18 @@ class AddNCStaff extends Component {
       checklistItem: getChecklistItem(props.location.state.itemId),
       itemName: props.itemName,
       clickedItems: props.clickedItems,
+      comments: {},
+      loading: false
     };
     this.onTakePhoto = this.onTakePhoto.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDeleteImage = this.handleDeleteImage.bind(this);
+
     this.handleFileInput = this.handleFileInput.bind(this);
     this.boxClick = this.boxClick.bind(this);
+
+    this.addComment = this.addComment.bind(this);
+
   }
   //need to send state of val and dataUri along with list of non compliance to tenants!!
 
@@ -194,6 +201,13 @@ class AddNCStaff extends Component {
     console.log("this is working");
   }
 
+  addComment(comment) {
+    this.setState({
+      loading:false,
+      comments: [comment, ...this.state.comments]
+    })
+  }
+
   render() {
     //console.log("NC recieved itemId: ", this.props.location.state);
     //console.log("Checklist Item: ", this.state.checklistItem);
@@ -284,6 +298,18 @@ class AddNCStaff extends Component {
                   />
                 </Col>
               </Row>
+
+              <div className="row">
+                <div className="col-4  pt-3 border-right">
+                  <h6>Say something about React</h6>
+                    <FormComponent addComment={this.addComment}/>
+                </div>
+                <div className="col-8  pt-3 bg-white">
+                  {/* Comment List Component */}
+                </div>
+              </div>
+
+
               <Link
                 to={{
                   pathname: `/`,

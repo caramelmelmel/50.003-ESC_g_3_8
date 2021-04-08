@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
 import { Dropdown } from 'react-bootstrap';
 import { getAllTenantInfo } from '../data/tenantInfo';
+import sha256 from 'crypto-js/sha256'
+import Base64 from 'crypto-js/enc-base64';
 
 // must have "@singhealth.com.sg" and be a word infront
 var regexEmail = /^\w{0,}@singhealth\.com\.sg$/;
+// one uppercase + lowercase + num + symb, min 8 char
+var regexPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+// dd/mm/yyyy format
+var regexDate = /^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](20)\d\d$/;
 
 class RegisterTenantFirst extends Component {
     state = {
@@ -15,6 +21,7 @@ class RegisterTenantFirst extends Component {
         name: "",
         email: "",
         password: "",
+        expiry: "",
         isClicked: false,
         isInvalid: false,
         error: "Fill in all fields!",
@@ -25,39 +32,59 @@ class RegisterTenantFirst extends Component {
      }
      
     handleSubmit = () => {
-        console.log(this.state.institution);
-        console.log(this.state.name);
-        console.log(this.state.category);
         console.log(this.state.email);
-        // console.log(this.state.error);
-        // console.log(this.state.isClicked);
+        console.log(this.state.name);
+        console.log(this.state.description);
+        console.log(this.state.expiry);
+        console.log(this.state.password);
+        console.log(this.state.tenant);
+        console.log(this.state.category);
+        console.log(this.state.institution);
+
         this.setState({isClicked: true});
 
-        // console.log(regexEmail.test(this.state.email));
-        // console.log(regexPassword.test(this.state.password));
-
         var objString = `{
+            "email": "${this.state.email}",
             "tenant_name": "${this.state.name}",
-            "tenant_category": "${this.state.category}",
-            "tenant_email": "${this.state.email}"
+            "store_des": "${this.state.description}",
+            "expiry_date": "${this.state.expiry}",
+            "password": "${this.state.password}",
+            "store_name": "${this.state.tenant} ${this.state.institution}",
+            "category": "${this.state.category}",
+            "inst_name": "${this.state.institution}"
         }`;
 
         var JSONdata = JSON.parse(objString);
 
+        console.log(objString);
+
         var isEmail = regexEmail.test(this.state.email);
+        var isPassword = regexPassword.test(this.state.password);
+        var isDate = regexDate.test(this.state.expiry);
 
         if (isEmail === false) {
             this.setState({error: "Invalid email given."});
             this.setState({isInvalid: true});
-        } else {
+        } else if (isPassword === false) {
+            this.setState({error: "Invalid password given."});
+            this.setState({isInvalid: true});
+        } else if (isDate === false) {
+            this.setState({error: "Invalid expiry date given."});
+            this.setState({isInvalid: true});
+        } else if (isEmail === true && isPassword === true && isDate === true) {
             this.setState({error: "Fill in all fields!"});
             this.setState({isInvalid: false});
-            if (this.state.institution != "" && this.state.tenant != "" && this.state.category != "" && this.state.email != "") {
+            if (this.state.institution != "" && this.state.tenant != "" && this.state.category != "" && this.state.email != "" && this.state.description != "" && this.state.name != "" && this.state.expiry != "") {
+
+                const tenant_password = Base64.stringify(sha256(this.state.password));
+                console.log(tenant_password);
+                JSONdata["password"] = tenant_password;
+                console.log(JSONdata);
+
                 // send data to db
+                this.createTenant(JSONdata);
 
-                this.props.history.push("/register-second-tenant");
-
-                // pass json to next page
+                this.props.history.push("/success-tenant");
             }
         }
     }
@@ -65,7 +92,7 @@ class RegisterTenantFirst extends Component {
     // synchronous call to create tenant
     createTenant(data) {
         try {
-            // not sure about host here
+            // change localhost to server name
             fetch("http://localhost:5000/tenant", {
             method: "POST",
             headers: {
@@ -237,6 +264,19 @@ class RegisterTenantFirst extends Component {
                     </Dropdown.Menu>
                 </Dropdown>
 
+                {/* NAME */}
+                <Form.Group 
+                controlId="formName"
+                style={headerStyle}>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control 
+                    type="name" 
+                    placeholder="Name" 
+                    style={fillStyle}
+                    value={this.state.name} 
+                    onChange={e => {this.setState({ name: e.target.value })}}/>
+                </Form.Group>
+
                 {/* DESCRIPTION */}
                 <Form.Group 
                 controlId="formDescription"
@@ -264,6 +304,32 @@ class RegisterTenantFirst extends Component {
                     {/* <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
                     </Form.Text> */}
+                </Form.Group>
+
+                {/* PASSWORD */}
+                <Form.Group 
+                controlId="formBasicPassword"
+                style={headerStyle}>
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control 
+                    type="password" 
+                    placeholder="Password" 
+                    style={fillStyle}
+                    value={this.state.password}
+                    onChange={e => this.setState({ password: e.target.value })} />
+                </Form.Group>
+
+                {/* TENANT EXPIRY */}
+                <Form.Group 
+                controlId="formBasicExpiry"
+                style={headerStyle}>
+                    <Form.Label>Tenant Expiry</Form.Label>
+                    <Form.Control 
+                    type="expiry" 
+                    placeholder="dd/mm/yyyy" 
+                    style={fillStyle}
+                    value={this.state.expiry}
+                    onChange={e => this.setState({ expiry: e.target.value })}/>
                 </Form.Group>
 
                 {/* NAME */}
