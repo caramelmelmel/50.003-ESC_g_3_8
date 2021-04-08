@@ -67,7 +67,7 @@ class RegisterStaff extends Component {
                 //crypting the password 
                 const staff_password = Base64.stringify(sha256(this.state.password));
                 console.log(staff_password);
-                JSONdata[staff_password] = staff_password;
+                JSONdata["staff_password"] = staff_password;
                 console.log(JSONdata);
                 // this.createStaff(JSONdata);
 
