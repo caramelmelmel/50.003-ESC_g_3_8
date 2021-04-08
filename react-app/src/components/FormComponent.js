@@ -52,7 +52,7 @@ class FormComponent extends Component {
         this.setState({ loading: false, error: res.error})
       } else {
         // add time return from api and push comment to parent state
-        comment.time = res.time;
+        //comment.time = res.time;
         this.props.addComment(comment);
 
         // clear the message box

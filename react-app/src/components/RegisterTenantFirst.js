@@ -4,6 +4,7 @@ import { Dropdown } from 'react-bootstrap';
 import { getAllTenantInfo } from '../data/tenantInfo';
 import sha256 from 'crypto-js/sha256'
 import Base64 from 'crypto-js/enc-base64';
+import axios from 'axios';
 
 // must have "@singhealth.com.sg" and be a word infront
 var regexEmail = /^\w{0,}@singhealth\.com\.sg$/;
@@ -90,20 +91,25 @@ class RegisterTenantFirst extends Component {
     }
 
     // synchronous call to create tenant
-    createTenant(data) {
+    async createTenant(data) {
         try {
             // change localhost to server name
-            fetch("http://localhost:5000/tenant", {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json',
-              },
-            body: data,
-            })
-            console.log("Tenant created");
+            // response = await fetch("https://shaghao.herokuapp.com/singhealth/tenant/signup", {
+            // mode: 'no-cors',
+            // method: "POST",
+            // headers: {
+            //     'Content-Type': 'application/json',
+            //   },
+            // body: data,
+            // })
+            // console.log("Tenant created");
+            const response = await axios.get("https://shaghao.herokuapp.com/singhealth/tenant/signup");
+            console.log(response);
         } catch (err) {
             console.log(err.message);
         }
+
+        
     }
 
     handleInstitutionChange(value) {

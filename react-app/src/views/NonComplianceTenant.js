@@ -18,6 +18,7 @@ class NonComplianceTenant extends Component {
 
     handleSave() {
         console.log("Saving...");
+        // Send a POST request
     }
     render() { 
         console.log("Non-compliances: ", this.state.noncompliance);

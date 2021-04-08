@@ -1,5 +1,7 @@
 import React from "react";
 import avatar from "../images/avatar.png";
+import avatar2 from "../images/avatar2.png";
+
 
 export default function Comment(props) {
   const { name, comment, time } = props.comments;
@@ -11,7 +13,7 @@ export default function Comment(props) {
         width="48"
         height="48"
         alt={name}
-        src={avatar}
+        src={ name=="arissa"? avatar : avatar2}
       />
 
       <div className="media-body p-2 shadow-sm rounded bg-light border">

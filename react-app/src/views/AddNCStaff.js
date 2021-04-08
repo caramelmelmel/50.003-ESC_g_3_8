@@ -299,16 +299,6 @@ class AddNCStaff extends Component {
                 </Col>
               </Row>
 
-              <div className="row">
-                <div className="col-4  pt-3 border-right">
-                  <h6>Say something about React</h6>
-                    <FormComponent addComment={this.addComment}/>
-                </div>
-                <div className="col-8  pt-3 bg-white">
-                  {/* Comment List Component */}
-                </div>
-              </div>
-
 
               <Link
                 to={{
