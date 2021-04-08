@@ -110,24 +110,22 @@ class AddNCStaff extends Component {
     const b64 = dataUri.replace(/^data:image.+;base64,/, "");
     //console.log(b64); //this is a valid base 64 string
     this.setState({ dataUri: dataUri });
-  };
+  }
 
   handleSave(e) {
     e.preventDefault();
     this.setState({
-      val: '',
-    })
+      val: "",
+    });
     console.log("Saving...");
     //alert("Text field value is: " + this.state.va);
   }
 
   handleUploadImage() {
     console.log("Upload Image Button Clicked");
-  };
+  }
 
-
-
-  handleCancel(){}
+  handleCancel() {}
 
   /*this.toDataUrl(dataUri, function (myBase64) {
       console.log((myBase64)); // myBase64 is the base64 string
@@ -174,7 +172,6 @@ class AddNCStaff extends Component {
       bgColor: "#f06d1a",
     });
   }
-
 
   handleDeleteImage() {
     this.setState({ dataUri: null });
