@@ -148,7 +148,7 @@ class RegisterTenantSecond extends Component {
             border: "0px solid white",
         }
         return <React.Fragment>
-            <div style={titleStyle}>Staff Registration</div>
+            <div style={titleStyle}>Tenant Registration</div>
 
             <Form>
 
