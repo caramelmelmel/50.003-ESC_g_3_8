@@ -13,7 +13,7 @@ class NonComplianceTenant extends Component {
         noncompliance: getAllNoncompliance(),
         length: getLength(),
         loading: false,
-        comments: [{name:"arissa", index:"01", comment:"Where do I start with Jodi?"}, {name:"jodi", index:"02", comment:"I've know Arissa for over a year"}]
+        comments: [{name:"Staff01", index:"01", comment:"Example statement 01"}, {name:"Staff02", index:"02", comment:"Example statement 02"}]
     }
 
     handleSave() {

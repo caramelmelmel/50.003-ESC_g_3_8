@@ -3,13 +3,13 @@ const noncomplianceList = [
      id: "01",
      tenant_id: "Kopitiam",
      image: ["Image1", "Image2"],
-     nc_id: "general_safety_04"   
+     nc_id: "professionalism_01"   
     },
     {
         id: "02",
         tenant_id: "Kopitiam",
         image: ["Image1", "Image2"],
-        nc_id: "storage_refrigerator_warmer_09"   
+        nc_id: "staff_hygiene_01"   
     }
 ]
 
