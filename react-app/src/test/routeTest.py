@@ -23,6 +23,7 @@ routes = [
     "/register-staff",
     "/success-staff",
     "/login-staff",
+    "/home-log-reg",
     "/"
 ]
 
