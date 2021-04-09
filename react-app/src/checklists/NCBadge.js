@@ -4,7 +4,7 @@ class NCBadge extends Component {
     render() { 
         let classes = "badge rounded-pill bg-danger"
         let value = 1
-        if (!this.props.item.noncompliance) value = null
+        if (!this.props.item.resolved) value = null
         return (
             <span className="badge rounded-pill bg-danger">{value}</span>);
     }
