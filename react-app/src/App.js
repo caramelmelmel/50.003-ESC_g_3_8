@@ -35,6 +35,7 @@ import RegisterTenantFirst from "./components/RegisterTenantFirst";
 import RegisterTenantSecond from "./components/RegisterTenantSecond";
 import LoginTenant from "./components/LoginTenant";
 import TenantSuccess from "./components/TenantSuccess";
+import Home from "./components/HomePage";
 
 
 class App extends Component {
@@ -79,6 +80,7 @@ class App extends Component {
 
             <Route path="/success-staff" component={StaffSuccess} />
             <Route path="/login-staff" component={LoginStaff} />
+            <Route path="/home-log-reg" component={Home} />
             
 
 
