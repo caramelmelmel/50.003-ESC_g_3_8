@@ -1,21 +1,27 @@
 import React, { Component } from 'react';
+import { setActor } from "./../services/actorUpdate";
+
 class HomePage extends Component {
     state = {
      }
      
     handleTenantLogin = () => {
+        setActor("tenant");
         this.props.history.push("/login-tenant");
     }
 
     handleTenantRegister = () => {
+        setActor("tenant");
         this.props.history.push("/register-first-tenant");
     }
 
     handleStaffLogin = () => {
+        setActor("staff");
         this.props.history.push("/login-staff");
     }
 
     handleStaffRegister = () => {
+        setActor("staff");
         this.props.history.push("/register-staff");
     }
 
@@ -31,16 +37,19 @@ class HomePage extends Component {
             fontWeight: "bold",
             width: "60%",
             color: "#f06d1a",
+            fontFamily: "Sofia Pro",
         }
         const headerStyle = {
             margin: 0,
             padding: 0,
             marginTop: "5%",
             textAlign: "center",
-            fontSize: 16,
+            fontSize: 18,
             fontWeight: "bold",
             width: "100%",
             color: "#f06d1a",
+            fontFamily: "Sofia Pro",
+
         }
         const loginStyle = {
             marginTop: "40px",
@@ -52,8 +61,10 @@ class HomePage extends Component {
             backgroundColor: "#f06d1a",
             color: "white",
             fontSize: 12,
-            fontWeight: "bold",
+            fontWeight: "medium",
             border: "0px solid white",
+            fontFamily: "Sofia Pro",
+
         }
         const registerStyle = {
             marginTop: "10px",
@@ -63,31 +74,35 @@ class HomePage extends Component {
             width: "60%",
             padding: 10,
             borderRadius: 3,
-            backgroundColor: "#f06d1a",
-            color: "white",
+            backgroundColor: "#FFFFFF",
+            color: "#f06d1a",
             fontSize: 12,
-            fontWeight: "bold",
-            border: "0px solid white",
+            fontWeight: "medium",
+            borderColor: "#f06d1a",
+            fontFamily: "Sofia Pro",
+
         }
         const leftContainer = {
             float: "left", 
             width: "30%",
             height: "30%",
             marginTop: "8%",
-            backgroundColor: "green",
             marginLeft: "20%",
             borderRadius: "8px 0px 0px 8px",
-            backgroundColor: "#d1dfff",
+            backgroundColor: "#ffffff",
+            borderColor: "#f06d1a",
        }
         const rightContainer = {
             float: "right", 
             width: "30%",
             height: "30%",
             marginTop: "8%",
-            backgroundColor: "red",
             marginRight: "20%",
             borderRadius: "0px 8px 8px 0px",
-            backgroundColor: "#81e09e",
+            borderColor: "#f06d1a",
+            backgroundColor: "#ffffff",
+            border: "2px"
+
         }
         return <React.Fragment>
             <div style={titleStyle}>Welcome to Singhealth's Audit System!</div>

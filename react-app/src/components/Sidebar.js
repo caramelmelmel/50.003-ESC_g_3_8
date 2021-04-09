@@ -14,37 +14,43 @@ export const Sidebar = [
         title: 'Home',
         path: '/',
         icon: <AiIcons.AiFillHome />,
-        cName: 'nav-text'
+        cName: 'nav-text',
+        actor: 'both'
     },
     {
         title: 'Dashboard',
         path: '/dashboard-staff',
         icon: <BsIcons.BsGraphUp />,
-        cName: 'nav-text'
+        cName: 'nav-text',
+        actor: 'both'
     },
     {
         title: 'Reports',
         path: '/reports-staff',
         icon: <IoIcons.IoIosPaper />,
-        cName: 'nav-text'
+        cName: 'nav-text',
+        actor: 'both'
     },
     {
         title: 'Audits',
         path: '/audits-staff',
         icon: <IoIcons.IoIosClipboard />,
-        cName: 'nav-text'
+        cName: 'nav-text',
+        actor: 'staff'
     },
     {
         title: 'Tenants',
         path: '/tenant-staff',
         icon: <IoIcons.IoMdPeople />,
-        cName: 'nav-text'
+        cName: 'nav-text',
+        actor: 'staff'
     },
     {
         title: 'Non-Compliances',
         path: '/non-compliances-tenant',
         icon: <IoIcons.IoIosChatboxes />,
-        cName: 'nav-text'
+        cName: 'nav-text',
+        actor: 'tenant'
     }
 
 
@@ -53,4 +59,5 @@ export const Sidebar = [
 ]
 
 //Messages use FaIcons.FaEnvelopeOpenText
+
 export default Sidebar;

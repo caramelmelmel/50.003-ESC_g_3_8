@@ -7,11 +7,14 @@ import "../index.css";
 import { Sidebar } from "./Sidebar";
 import { IconContext } from "react-icons";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getActor } from './../services/actorUpdate';
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
+
+  const actor = getActor();
 
   return (
     <>
@@ -35,6 +38,27 @@ function Navbar() {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
+            {Sidebar.map((item, index) => { if (item.actor == "both" || item.actor == actor) {
+              return (
+                <li key={index} className={item.cName}>
+                  <Link to={item.path}>
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </Link>
+                </li>
+              );
+            }}
+            )};
+          </ul>
+        </nav>
+      </IconContext.Provider>
+    </>
+  );
+}
+
+export default Navbar;
+
+/*
             {Sidebar.map((item, index) => {
               return (
                 <li key={index} className={item.cName}>
@@ -45,11 +69,28 @@ function Navbar() {
                 </li>
               );
             })}
-          </ul>
-        </nav>
-      </IconContext.Provider>
-    </>
-  );
-}
+            */
 
-export default Navbar;
+/*
+            {Sidebar.map((item, index) => { if (item.actor == "both" || item.actor == "staff") {
+              return (
+                <li key={index} className={item.cName}>
+                  <Link to={item.path}>
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </Link>
+                </li>
+              );
+            } else if (item.actor == "both" || item.actor == "tenant") {
+              return (
+                <li key={index} className={item.cName}>
+                  <Link to={item.path}>
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </Link>
+                </li>
+              );
+            }
+
+            })}
+*/

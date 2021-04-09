@@ -40,17 +40,27 @@ import NonComplianceTenant from "./views/NonComplianceTenant";
 import ChecklistNonFBStaffA from './checklists/ChecklistNonFBStaffA';
 import ChecklistNonFBStaffB from './checklists/ChecklistNonFBStaffB';
 import ChecklistNonFBStaffC from './checklists/ChecklistNonFBStaffC';
+import { getLogin } from './services/loginCheck';
 
 
 class App extends Component {
+  state = {
+    login: getLogin()
+  }
   
+  /*componentDidMount() {
+    this.setState( {login: getLogin() });
+  }*/
 
   render() {
     return (
       <BrowserRouter>
         <div className="content">
-           
+
           <Navbar />
+          {/*{this.state.login ? <Navbar /> : null}*/}
+
+           
           
       
           <Switch>
