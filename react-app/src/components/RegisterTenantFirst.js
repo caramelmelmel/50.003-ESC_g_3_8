@@ -271,10 +271,10 @@ class RegisterTenantFirst extends Component {
                 </Dropdown>
 
                 {/* NAME */}
+                <div style={headerStyle}>Name</div>
                 <Form.Group 
                 controlId="formName"
                 style={headerStyle}>
-                    <Form.Label>Name</Form.Label>
                     <Form.Control 
                     type="name" 
                     placeholder="Name" 
@@ -284,10 +284,10 @@ class RegisterTenantFirst extends Component {
                 </Form.Group>
 
                 {/* DESCRIPTION */}
+                <div style={headerStyle}>Description</div>
                 <Form.Group 
                 controlId="formDescription"
                 style={headerStyle}>
-                    <Form.Label>Description</Form.Label>
                     <Form.Control 
                     type="description" 
                     placeholder="Description" 
@@ -297,10 +297,10 @@ class RegisterTenantFirst extends Component {
                 </Form.Group>
 
                 {/* EMAIL */}
+                <div style={headerStyle}>Registered Email</div>
                 <Form.Group 
                 controlId="formBasicEmail"
                 style={headerStyle}>
-                    <Form.Label>Registered Email</Form.Label>
                     <Form.Control 
                     type="email" 
                     placeholder="Email" 
@@ -313,10 +313,10 @@ class RegisterTenantFirst extends Component {
                 </Form.Group>
 
                 {/* PASSWORD */}
+                <div style={headerStyle}>Password</div>
                 <Form.Group 
                 controlId="formBasicPassword"
                 style={headerStyle}>
-                    <Form.Label>Password</Form.Label>
                     <Form.Control 
                     type="password" 
                     placeholder="Password" 
@@ -326,10 +326,10 @@ class RegisterTenantFirst extends Component {
                 </Form.Group>
 
                 {/* TENANT EXPIRY */}
+                <div style={headerStyle}>Tenant Expiry</div>
                 <Form.Group 
                 controlId="formBasicExpiry"
                 style={headerStyle}>
-                    <Form.Label>Tenant Expiry</Form.Label>
                     <Form.Control 
                     type="expiry" 
                     placeholder="dd/mm/yyyy" 
