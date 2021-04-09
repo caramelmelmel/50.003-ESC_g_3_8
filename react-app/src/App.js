@@ -35,6 +35,7 @@ import RegisterTenantFirst from "./components/RegisterTenantFirst";
 import RegisterTenantSecond from "./components/RegisterTenantSecond";
 import LoginTenant from "./components/LoginTenant";
 import TenantSuccess from "./components/TenantSuccess";
+import Home from "./components/HomePage";
 import NonComplianceTenant from "./views/NonComplianceTenant";
 import ChecklistNonFBStaffA from './checklists/ChecklistNonFBStaffA';
 import ChecklistNonFBStaffB from './checklists/ChecklistNonFBStaffB';
@@ -81,9 +82,9 @@ class App extends Component {
             <Route path="/register-staff" component={RegisterStaff} />
             <Route path="/success-staff" component={StaffSuccess} />
             <Route path="/login-staff" component={LoginStaff} />
+            <Route path="/home-log-reg" component={Home} />
             <Route path="/non-compliances-tenant" component={NonComplianceTenant} />
             <Route path="/" exact component={HomePage} />
-
             
 
 
