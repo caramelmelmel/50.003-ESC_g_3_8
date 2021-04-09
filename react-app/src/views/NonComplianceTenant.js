@@ -13,7 +13,7 @@ class NonComplianceTenant extends Component {
         noncompliance: getAllNoncompliance(),
         length: getLength(),
         loading: false,
-        comments: [{name:"Staff01", index:"01", comment:"Example statement 01"}, {name:"Staff02", index:"02", comment:"Example statement 02"}]
+        comments: [{name:"Staff01", id:"01", comment:"Example statement 01"}, {name:"Staff02", id:"02", comment:"Example statement 02"}]
     }
 
     handleSave() {
@@ -22,6 +22,7 @@ class NonComplianceTenant extends Component {
     }
     render() { 
         console.log("Non-compliances: ", this.state.noncompliance);
+        console.log("Comments: ", this.state.comments);
         return (
             <React.Fragment>
                 <div className="container">
