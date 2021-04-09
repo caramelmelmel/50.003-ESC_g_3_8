@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Comment from './Comment';
 
 export default function CommentList(props) {
+  const { comment, index, id } = props.comments;
   console.log("PROPS: ", props);
   return (
     <div className="commentList">
@@ -15,7 +16,12 @@ export default function CommentList(props) {
           Be the first to comment </div>) : null
       }
 
-      {props.comments.map((comment, index) => ( <Comment key={index} comments={comment} /> ))}
+      {props.comments.map((comment, index) => (<Comment key={index} comments={comment} />))}
     </div>
+
+    
   )
 }
+
+//
+//       {id == "01" ? <Comment key={index} comments={name="Staff01", comment="Example statement 01"} /> : <Comment key={index} comments={name="Staff02",comment="Example statement 02"}/>}

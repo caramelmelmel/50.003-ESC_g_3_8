@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
 import sha256 from 'crypto-js/sha256'
 import Base64 from 'crypto-js/enc-base64';
+import { setLogin } from '../services/loginCheck';
 
 //crypto for the pasword registration
 const {createHash} = require('crypto');
@@ -59,9 +60,9 @@ class LoginStaff extends Component {
                 console.log(JSONdata);
 
                 // check data with db
-
+                setLogin();
                 // go to staff home page
-                // this.props.history.push("/register-staff");
+                this.props.history.push("/");
 
             }
         }

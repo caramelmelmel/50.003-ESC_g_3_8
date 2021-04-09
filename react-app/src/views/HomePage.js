@@ -7,13 +7,14 @@ import "react-bootstrap-carousel/dist/react-bootstrap-carousel.css";
 import "../index.css";
 import Image1 from '../images/slider1.jpeg';
 import Image2 from '../images/slider2.jpeg';
+import { Link } from 'react-router-dom';
 
 class HomePage extends Component {
     render() { 
         return (
             <div class="header-style">
                 
-                <h1 className="header-home">Welcome to Singhealth App</h1>
+                <h1 className="header-home" style={{margin: 70}}>Welcome to Singhealth App </h1>
                 
                 
                 <div style={{
@@ -51,15 +52,16 @@ class HomePage extends Component {
                 </div>
 
 
-
-                <Button variant="light" style={{
-                    position: "absolute",
-                    right: 20,
-                    top:20
-                    
-                }}>
-                    <AiIcons.AiOutlineLogout size="20"/> Logout
-                </Button>
+                <Link to={{pathname: "/home-log-reg"}}>
+                    <Button variant="light" style={{
+                        position: "absolute",
+                        right: 20,
+                        top:20
+                        
+                    }}>
+                        <AiIcons.AiOutlineLogin size="20"/> Login
+                    </Button>
+                </Link>
 
             </div>
         
