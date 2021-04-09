@@ -16,11 +16,30 @@ class OngoingTables extends Component {
     audits: [], //initialise to empty array to allow time to get from server and ensure not undefined
     type: [],
     institute: [],
+    isLoaded: false,
   };
 
   componentDidMount() {
     const type = [{ name: "All" }, ...getTypes()];
     const institute = [{ name: "All" }, ...getInstitutes()];
+
+    /*
+    fetch('https://shaghao.herokuapp.com/singhealth/')
+            .then(res => res.json())
+            .then(json => {
+                this.setState({
+                    audits: json,
+                    isLoaded: true, 
+                    type, 
+                    institute,
+                })
+            }).catch((err) => {
+                console.log(err);
+            });
+
+
+    */
+    
     this.setState({ audits: getAudits(), type, institute });
   }
 
@@ -36,8 +55,13 @@ class OngoingTables extends Component {
 
   
   render() {
+   
     const { length: auditscount } = this.state.audits;
-    const { selectedType, audits: allAudits, selectedInstitution } = this.state;
+    const { isLoaded, selectedType, audits: allAudits, selectedInstitution } = this.state;
+
+    /*if (!isLoaded)
+      return <div>Loading...</div>;
+*/
 
     if (auditscount == 0)
       return <p>There are no ongoing audits in the database.</p>;

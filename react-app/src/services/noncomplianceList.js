@@ -3,7 +3,8 @@ const noncomplianceList = [
      id: "01",
      tenant_id: "Kopitiam",
      image: ["Image1", "Image2"],
-     nc_id: "professionalism_01"   
+     nc_id: "professionalism_01"  
+
     },
     {
         id: "02",

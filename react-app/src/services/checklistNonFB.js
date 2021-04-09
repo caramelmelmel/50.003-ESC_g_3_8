@@ -124,14 +124,9 @@ const checklistNonFB = [
         item: "Waste is properly managed and disposed; Waste bins are not over-filled; Waste Management: Proper disposal of general waste",
         checked: false,
         resolved: false
+
     },
-    {
-        id: "nfb_environment_cleanliness_12",
-        category: "environment_cleanliness",
-        item: "Waste is properly managed and disposed; Waste bins are not over-filled; Waste Management: Proper disposal of general waste",
-        checked: false,
-        resolved: false
-    },
+
     {
         id: "nfb_general_safety_01",
         category: "general_safety",
@@ -243,6 +238,7 @@ const checklistNonFB = [
         item: "Electrical panels / DBs are covered",
         checked: false,
         resolved: false
+
     },
 
 
