@@ -199,10 +199,10 @@ class LoginTenant extends Component {
                 </Form.Group> */}
 
                 {/* EMAIL */}
+                <div style={headerStyle}>Email</div>
                 <Form.Group 
                 controlId="formBasicEmail"
                 style={headerStyle}>
-                    <Form.Label>Email</Form.Label>
                     <Form.Control 
                     type="email" 
                     placeholder="Email" 
@@ -215,10 +215,10 @@ class LoginTenant extends Component {
                 </Form.Group>
 
                 {/* PASSWORD */}
+                <div style={headerStyle}>Password</div>
                 <Form.Group 
                 controlId="formBasicPassword"
                 style={headerStyle}>
-                    <Form.Label>Password</Form.Label>
                     <Form.Control 
                     type="password" 
                     placeholder="Password" 
