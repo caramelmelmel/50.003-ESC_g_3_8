@@ -319,4 +319,11 @@ label > input[type=file] {
 
 }
 
+.phototenant {
+  margin-left: 5%;
+  height: 30%;
+  width: 50%; 
+  left: 30px;
+}
+
 

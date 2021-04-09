@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import Comment from './Comment';
 
+
 class FormComponent extends Component {
   constructor(props) {
     super(props);
       this.state = { 
       loading: false,
       error: "",
+      noncom: null,
 
       comment: {
         name: "",
@@ -30,8 +32,10 @@ class FormComponent extends Component {
       }
     });
   };
+ 
 
-
+ 
+  
   onSubmit(e) {
     e.preventDefault();
 
@@ -79,8 +83,9 @@ class FormComponent extends Component {
   };
 
   render() { 
-    return ( 
+    return (
       <React.Fragment>
+        
         <form method="post" onSubmit={this.onSubmit}>
           <div className="form-group">
             <input
@@ -105,6 +110,7 @@ class FormComponent extends Component {
           </div>
 
           {this.renderError()}
+          
 
           <div className="form-group">
             <button disabled={this.state.loading} className="btn btn-warning">

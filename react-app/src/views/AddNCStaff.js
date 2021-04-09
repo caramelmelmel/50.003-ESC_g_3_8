@@ -309,15 +309,17 @@ class AddNCStaff extends Component {
                 >
                   Back
                 </button>{" "}
-                {/* Now it's same as cancel, need to change this */}
-                <button
+              </Link>
+
+              {/* Now it's same as cancel, need to change this */}
+              <button
                   className="btn btn-lg btn-danger checklist-sideheader-style mt-5"
                   style={{ float: "right", marginRight: "18%" }}
                   onClick={this.handleSave}
                 >
                   Save
-                </button>
-              </Link>
+              </button>
+              
             </Col>
           </Row>
         </Container>
