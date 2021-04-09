@@ -5,12 +5,6 @@ const noncomplianceList = [
      image: ["Image1", "Image2"],
      nc_id: "professionalism_01"  
 
-    },
-    {
-        id: "02",
-        tenant_id: "Kopitiam",
-        image: ["Image1", "Image2"],
-        nc_id: "staff_hygiene_01"   
     }
 ]
 

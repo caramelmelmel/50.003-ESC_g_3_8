@@ -68,7 +68,7 @@ class FormComponent extends Component {
     })
       .catch(err => {
         this.setState({
-          error: "Something went wrong while submitting",
+          error: "Posting...",
           loading: false
         });
     });
@@ -79,7 +79,7 @@ class FormComponent extends Component {
   }
 
   renderError() {
-    return this.state.error ? (<div className="alert alert-danger">{this.state.error}</div>) : null;
+    return this.state.error ? (<div className="alert alert-success">{this.state.error}</div>) : null;
   };
 
   render() { 

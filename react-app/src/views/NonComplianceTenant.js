@@ -16,12 +16,7 @@ class NonComplianceTenant extends Component {
     loading: false,
     storedArray: [],
     comments: [
-      { name: "arissa", index: "01", comment: "Where do I start with Jodi?" },
-      {
-        name: "jodi",
-        index: "02",
-        comment: "I've know Arissa for over a year",
-      },
+      { name: "Staff 01", index:"01", comment:"Example statement" }
     ],
   };
 
