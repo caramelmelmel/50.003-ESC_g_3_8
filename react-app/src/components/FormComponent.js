@@ -45,14 +45,14 @@ class FormComponent extends Component {
 
     // persist the comments on server
     let { comment } = this.state;
-    fetch("http://localhost:3000", { method: "post", body: JSON.stringify(comment)})
+    fetch("https://shaghao.herokuapp.com/", { method: "POST", body: JSON.stringify(comment)})
     .then(res => res.json)
     .then(res => {
       if (res.error) {
         this.setState({ loading: false, error: res.error})
       } else {
         // add time return from api and push comment to parent state
-        comment.time = res.time;
+        //comment.time = res.time;
         this.props.addComment(comment);
 
         // clear the message box
@@ -98,7 +98,7 @@ class FormComponent extends Component {
               onChange={this.handleFieldChange}
               value={this.state.comment.message}
               className="form-control"
-              placeholder="Your Comment"
+              placeholder="Add Additional Comments Here"
               name="message"
               rows="5"
               />
