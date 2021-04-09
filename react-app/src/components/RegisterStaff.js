@@ -191,6 +191,7 @@ class RegisterStaff extends Component {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu
+                    className="instDropDown"
                     style={{width: "100%", margin: "auto"}}>
                         {this.state.info.institutions.map(option => 
                             (<Dropdown.Item
