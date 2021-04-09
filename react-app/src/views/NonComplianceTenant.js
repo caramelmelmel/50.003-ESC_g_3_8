@@ -32,7 +32,7 @@ class NonComplianceTenant extends Component {
     //console.log(noncom);
   }
 
-    */
+  */
   handleSave() {
     console.log("Saving...");
   }

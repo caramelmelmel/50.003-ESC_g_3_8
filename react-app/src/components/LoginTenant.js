@@ -4,6 +4,7 @@ import { Dropdown } from 'react-bootstrap';
 import { getAllTenantInfo } from '../data/tenantInfo';
 import sha256 from 'crypto-js/sha256'
 import Base64 from 'crypto-js/enc-base64';
+import { setLogin } from '../services/loginCheck';
 
 //crypto for the pasword registration
 const {createHash} = require('crypto');
@@ -68,6 +69,8 @@ class LoginTenant extends Component {
                 console.log(JSONdata);
 
                 // check data with db
+                setLogin();
+                this.props.history.push("/");
 
                 // go to tenant home page
                 // this.props.history.push("/register-staff");
@@ -196,10 +199,10 @@ class LoginTenant extends Component {
                 </Form.Group> */}
 
                 {/* EMAIL */}
+                <div style={headerStyle}>Email</div>
                 <Form.Group 
                 controlId="formBasicEmail"
                 style={headerStyle}>
-                    <Form.Label>Email</Form.Label>
                     <Form.Control 
                     type="email" 
                     placeholder="Email" 
@@ -212,10 +215,10 @@ class LoginTenant extends Component {
                 </Form.Group>
 
                 {/* PASSWORD */}
+                <div style={headerStyle}>Password</div>
                 <Form.Group 
                 controlId="formBasicPassword"
                 style={headerStyle}>
-                    <Form.Label>Password</Form.Label>
                     <Form.Control 
                     type="password" 
                     placeholder="Password" 

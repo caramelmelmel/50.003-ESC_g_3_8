@@ -35,18 +35,32 @@ import RegisterTenantFirst from "./components/RegisterTenantFirst";
 import RegisterTenantSecond from "./components/RegisterTenantSecond";
 import LoginTenant from "./components/LoginTenant";
 import TenantSuccess from "./components/TenantSuccess";
+import Home from "./components/HomePage";
 import NonComplianceTenant from "./views/NonComplianceTenant";
+import ChecklistNonFBStaffA from './checklists/ChecklistNonFBStaffA';
+import ChecklistNonFBStaffB from './checklists/ChecklistNonFBStaffB';
+import ChecklistNonFBStaffC from './checklists/ChecklistNonFBStaffC';
+import { getLogin } from './services/loginCheck';
 
 
 class App extends Component {
+  state = {
+    login: getLogin()
+  }
   
+  /*componentDidMount() {
+    this.setState( {login: getLogin() });
+  }*/
 
   render() {
     return (
       <BrowserRouter>
         <div className="content">
-           
+
           <Navbar />
+          {/*{this.state.login ? <Navbar /> : null}*/}
+
+           
           
       
           <Switch>
@@ -64,6 +78,9 @@ class App extends Component {
             <Route path="/checklist-fb-staff-food-hygiene" component={ChecklistFBStaffC} />
             <Route path="/checklist-fb-food-and-beverages" component={ChecklistFBStaffD} />
             <Route path="/checklist-fb-safety-and-health" component={ChecklistFBStaffE} />
+            <Route path="/checklist-non-fb-staff-professionalism-and-staff-hygiene" component={ChecklistNonFBStaffA} />
+            <Route path="/checklist-non-fb-staff-housekeeping-and-cleanliness" component={ChecklistNonFBStaffB} />
+            <Route path="/checklist-non-fb-staff-food-hygiene" component={ChecklistNonFBStaffC} />
             <Route path="/submit-checklist-staff" component={SubmitChecklistStaff} />
             <Route path="/sidebar" component={Sidebar} />
             <Route path="/textfield-staff" component={TextFieldStaff} />
@@ -75,9 +92,9 @@ class App extends Component {
             <Route path="/register-staff" component={RegisterStaff} />
             <Route path="/success-staff" component={StaffSuccess} />
             <Route path="/login-staff" component={LoginStaff} />
+            <Route path="/home-log-reg" component={Home} />
             <Route path="/non-compliances-tenant" component={NonComplianceTenant} />
             <Route path="/" exact component={HomePage} />
-
             
 
 

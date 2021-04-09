@@ -191,6 +191,7 @@ class RegisterStaff extends Component {
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu
+                    className="instDropDown"
                     style={{width: "100%", margin: "auto"}}>
                         {this.state.info.institutions.map(option => 
                             (<Dropdown.Item
@@ -201,10 +202,10 @@ class RegisterStaff extends Component {
                 </Dropdown>
 
                 {/* NAME */}
+                <div style={headerStyle}>Name</div>
                 <Form.Group 
                 controlId="formName"
                 style={headerStyle}>
-                    <Form.Label>Name</Form.Label>
                     <Form.Control 
                     type="name" 
                     placeholder="Name" 
@@ -214,10 +215,10 @@ class RegisterStaff extends Component {
                 </Form.Group>
 
                 {/* EMAIL */}
+                <div style={headerStyle}>Email</div>
                 <Form.Group 
                 controlId="formBasicEmail"
                 style={headerStyle}>
-                    <Form.Label>Email</Form.Label>
                     <Form.Control 
                     type="email" 
                     placeholder="Email" 
@@ -230,10 +231,10 @@ class RegisterStaff extends Component {
                 </Form.Group>
 
                 {/* PASSWORD */}
+                <div style={headerStyle}>Password</div>
                 <Form.Group 
                 controlId="formBasicPassword"
                 style={headerStyle}>
-                    <Form.Label>Password</Form.Label>
                     <Form.Control 
                     type="password" 
                     placeholder="Password" 

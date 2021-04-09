@@ -82,3 +82,59 @@ export function calculateScore(array, toReturn) {
     
 
 }
+
+
+export function calculateScoreNonfb(array, toReturn) {
+    let A = 0;
+    let B = 0;
+    let C = 0;
+    let i = 0;
+    let totalScore = 0;
+
+    for (i=0; i < array.length; i++) {
+        //console.log(array[i].substring(0,14));
+
+        if (array[i].substring(0, 15) == "professionalism" || array[i].substring(0, 13) == "staff_hygiene") {
+            A += 1;
+        } else if (array[i].substring(0, 23) == "environment_cleanliness") {
+            B += 1; 
+        } else if (array[i].substring(0, 14) == "general_safety" || array[i].substring(0, 4) == "fire" || array[i].substring(0,10) == "electrical") {
+            C += 1; 
+        }
+    }
+
+    // The following functions return a normalised value of the categories:
+    function calculateA(A){
+        let AScore = A / 6;
+        return AScore.toFixed(2);
+    }
+
+    function calculateB(B){
+        let BScore = B / 12;
+        return BScore.toFixed(2);
+    }
+
+    function calculateC(C){
+        let CScore = C / 16;
+        return CScore.toFixed(2);
+    }
+
+
+    totalScore = ((A / 6 * 0.2) + (B / 12 * 0.4) + (C / 16 * 0.4));
+    //totalScore = calculateA(A) + calculateB(B) + calculateC(C) + calculateD(D) + calculateE(E);
+    
+    console.log("TOTAL SCORE: ", totalScore);
+    
+    if (toReturn == "totalScore"){
+        return totalScore.toFixed(0);
+    } else if (toReturn == "A"){
+        return calculateA(A)*100;
+    } else if (toReturn == "B"){
+        return calculateB(B)*100;
+    } else if (toReturn == "C"){
+        return calculateC(C)*100;
+    } else 
+    return totalScore.toFixed(0);
+    
+
+}

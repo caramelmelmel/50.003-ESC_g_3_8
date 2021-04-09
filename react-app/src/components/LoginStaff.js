@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
 import sha256 from 'crypto-js/sha256'
 import Base64 from 'crypto-js/enc-base64';
+import { setLogin } from '../services/loginCheck';
 
 //crypto for the pasword registration
 const {createHash} = require('crypto');
@@ -59,9 +60,9 @@ class LoginStaff extends Component {
                 console.log(JSONdata);
 
                 // check data with db
-
+                setLogin();
                 // go to staff home page
-                // this.props.history.push("/register-staff");
+                this.props.history.push("/");
 
             }
         }
@@ -128,10 +129,10 @@ class LoginStaff extends Component {
             <Form>
 
                 {/* NAME */}
+                <div style={headerStyle}>Name</div>
                 <Form.Group 
                 controlId="formName"
                 style={headerStyle}>
-                    <Form.Label>Name</Form.Label>
                     <Form.Control 
                     type="name" 
                     placeholder="Name" 
@@ -141,10 +142,10 @@ class LoginStaff extends Component {
                 </Form.Group>
 
                 {/* EMAIL */}
+                <div style={headerStyle}>Email</div>
                 <Form.Group 
                 controlId="formBasicEmail"
                 style={headerStyle}>
-                    <Form.Label>Email</Form.Label>
                     <Form.Control 
                     type="email" 
                     placeholder="Email" 
@@ -157,10 +158,10 @@ class LoginStaff extends Component {
                 </Form.Group>
 
                 {/* PASSWORD */}
+                <div style={headerStyle}>Password</div>
                 <Form.Group 
                 controlId="formBasicPassword"
                 style={headerStyle}>
-                    <Form.Label>Password</Form.Label>
                     <Form.Control 
                     type="password" 
                     placeholder="Password" 
