@@ -3,6 +3,26 @@ import Comment from './Comment';
 import avatar from "../images/avatar.png";
 import avatar2 from "../images/avatar2.png";
 
+/*
+export default function CommentList(props) {
+  const { comment, index, id } = props.comments;
+  console.log("PROPS: ", props);
+  return (
+    <div className="commentList">
+            <h5 className="text-muted mb-4">
+        <span className="badge badge-success">{props.comments.length}</span>{" "}
+        Comment{props.comments.length > 0 ? "s" : ""}
+      </h5>
+
+      {props.comments.length === 0 && !this.props.loading ? (
+        <div className="alert text-center alert-info">
+          Be the first to comment </div>) : null
+      }
+
+
+      {props.comments.map((comment, index) => (<Comment key={index} comments={comment} />))}
+    </div>
+*/
 
 export default class CommentList extends Component {
   //const { comment, index, id } = props.comments;
@@ -12,6 +32,7 @@ export default class CommentList extends Component {
     //console.log(this.props.item)
     //console.log(this.props.item.value.length-1>0)
     
+
 
     
     return (

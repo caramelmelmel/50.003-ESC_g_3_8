@@ -8,17 +8,20 @@ import "../index.css";
 import Image1 from "../images/slider1.png";
 import Image2 from "../images/slider2.jpg";
 import Image3 from "../images/slider3.jpg";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 
 class HomePage extends Component {
   render() {
     return (
-      <div className="header-style" style={{
+
+      {/*<div className="header-style" style={{
         position: "absolute",
         left: 0,
         top: 110,
         width: "100%",
-      }}>
+      }}>*/}
+
         <h1 className="header-home">Welcome to Singhealth App</h1>
 
         <div
@@ -67,7 +70,7 @@ class HomePage extends Component {
           </Carousel>
         </div>
 
-        
+
         <Link to={{pathname:"/home-log-reg"}}>
         <Button
           variant="light"

@@ -12,6 +12,17 @@ import { getAllChecklistItems } from "../services/checklistFB";
 //import {getAllChecklistItems} from "../services/checklistNonFB";
 
 class NonComplianceTenant extends Component {
+
+  state = {
+    noncompliance: getAllNoncompliance(),
+    length: getLength(),
+    loading: false,
+    storedArray: [],
+    comments: [
+      { name: "Staff 01", index:"01", comment:"Example statement" }
+    ],
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -31,6 +42,7 @@ class NonComplianceTenant extends Component {
     };
     this.checkSame = this.checkSame.bind(this);
   }
+
 
   //if type=="FB"
   //else type=="Non_FB"
