@@ -28,3 +28,18 @@ export function getAllNC() {
     } 
     return allNC;
 }
+
+/*
+noncomplainces:[
+{ncprofessionalism_02: comments: [
+“Example statement”,
+[“data:image/jpeg;base64/9j/4, “data:image/jpeg;base64,/9j/4”]
+“staff”,
+{“resolved”: false}] },
+{ncprofessionalism_01: comments: [
+“Hello”,
+[“data:image/jpeg;base64,/9j/4”]
+“staff”,
+{“resolved”: false}] },
+]
+*/

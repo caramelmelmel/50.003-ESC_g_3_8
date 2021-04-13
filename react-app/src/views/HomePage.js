@@ -10,10 +10,18 @@ import Image2 from "../images/slider2.jpg";
 import Image3 from "../images/slider3.jpg";
 import { Link } from 'react-router-dom';
 
+
 class HomePage extends Component {
   render() {
     return (
-      <div className="header-style">
+
+      {/*<div className="header-style" style={{
+        position: "absolute",
+        left: 0,
+        top: 110,
+        width: "100%",
+      }}>*/}
+
         <h1 className="header-home">Welcome to Singhealth App</h1>
 
         <div
@@ -26,7 +34,7 @@ class HomePage extends Component {
         >
           <Carousel>
             <Carousel.Item>
-              <img src={Image1} />
+              <img width={"100%"} src={Image1} />
               <Carousel.Caption>
                 <h1>SingHealth E-services</h1>
                 <p>Register for today's clinic visit!!</p>
@@ -34,7 +42,7 @@ class HomePage extends Component {
             </Carousel.Item>
 
             <Carousel.Item>
-              <img src={Image2} />
+              <img width={"100%"} src={Image2} />
               <Carousel.Caption>
                 <h1>SingHealth Duke-NUS Disease Centres</h1>
                 <p>
@@ -47,7 +55,7 @@ class HomePage extends Component {
             </Carousel.Item>
 
             <Carousel.Item>
-              <img src={Image3} />
+              <img width={"100%"} src={Image3} />
               <Carousel.Caption>
                 <h1>Regional Health System</h1>
                 <p>
@@ -58,21 +66,24 @@ class HomePage extends Component {
                 </p>
               </Carousel.Caption>
             </Carousel.Item>
+
           </Carousel>
         </div>
+
 
         <Link to={{pathname:"/home-log-reg"}}>
         <Button
           variant="light"
           style={{
             position: "absolute",
-            right: 20,
-            top: 20,
+            left:"10%",
+            width:"80%"
           }}
         >
           <AiIcons.AiOutlineLogin size="20" /> Login
         </Button>
         </Link>
+
       </div>
     );
   }
@@ -80,9 +91,6 @@ class HomePage extends Component {
 
 export default HomePage;
 /*
-<p style={{position: "absolute", left: 20, top: 130}}>
-                    App
-                </p>
-
+top: -10,
 
 */
