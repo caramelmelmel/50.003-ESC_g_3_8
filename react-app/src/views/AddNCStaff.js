@@ -29,10 +29,10 @@ class AddNCStaff extends Component {
       dataUri: null,
       bgColor: " #f2f9fc",
       checklistItem: getChecklistItem(props.location.state.itemId),
-      itemName: props.itemName,
-      clickedItems: props.clickedItems,
+      //itemName: props.itemName,
+      //clickedItems: props.clickedItems,
       comments: {},
-      loading: false,
+      //loading: false,
     };
     this.onTakePhoto = this.onTakePhoto.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -40,6 +40,7 @@ class AddNCStaff extends Component {
     this.handleFileInput = this.handleFileInput.bind(this);
     this.handleFileDelete = this.handleFileDelete.bind(this);
     this.addComment = this.addComment.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   }
   //need to send state of val and dataUri along with list of non compliance to tenants!!
 
@@ -50,13 +51,13 @@ class AddNCStaff extends Component {
 
   //componentDidMount is only called once
   componentDidMount() {
-  
+    this._isMounted = true;
     this.auditData = JSON.parse(
-      localStorage.getItem("nc" + this.state.checklistItem.id)
+      localStorage.getItem(this.state.checklistItem.id)
     );
 
     
-    if (localStorage.getItem("nc" + this.state.checklistItem.id) ) {
+    if (localStorage.getItem(this.state.checklistItem.id) ) {
       this.setState({
         val: this.auditData.val,
         dataUri: this.auditData.dataUri,
@@ -71,7 +72,7 @@ class AddNCStaff extends Component {
         bgColor: "#f2f9fc",
       });
     }
-    this._isMounted = true;
+    
     
 
     /*for (var a in localStorage) {
@@ -80,15 +81,22 @@ class AddNCStaff extends Component {
       console.log(localStorage);
       //console.log(a, ' = ', localStorage[a]);
       
+    handleRunClick = () => {
+    
+    }
 
     }*/
     //var key = localStorage.key(a);
     //var value = localStorage.getItem(key);
     //console.log(value);
   }
- 
+
+  
+
   componentWillUnmount() {
     this._isMounted = false;
+    clearInterval(this.auditData);
+    //this.auditData.remove();
   }
 
 
@@ -99,11 +107,12 @@ class AddNCStaff extends Component {
     //but if no text and have pic, will pass over
     //console.log(nextState);
     //console.log(localStorage);
+    //localStorage.removeItem(auditid + this.state.checklistItem.id);
     if (nextState.dataUri == null && nextState.selected == null) {
-      localStorage.removeItem("nc" + this.state.checklistItem.id);
+      localStorage.removeItem(this.state.checklistItem.id);
     } else {
       localStorage.setItem(
-        "nc" + this.state.checklistItem.id,
+        this.state.checklistItem.id,
         JSON.stringify(nextState)
       );
     }
@@ -115,8 +124,8 @@ class AddNCStaff extends Component {
 
   onTakePhoto(dataUri) {
     console.log("takePhoto");
-    //console.log(dataUri);
-    const b64 = dataUri.replace(/^data:image.+;base64,/, "");
+    console.log(dataUri);
+    //const b64 = dataUri.replace(/^data:image.+;base64,/, "");
     //console.log(b64); //this is a valid base 64 string
     this.setState({ dataUri: dataUri });
   }
@@ -170,7 +179,7 @@ class AddNCStaff extends Component {
 
   addComment(comment) {
     this.setState({
-      loading: false,
+      //loading: false,
       comments: [comment, ...this.state.comments],
     });
   }
@@ -186,8 +195,13 @@ class AddNCStaff extends Component {
 
     //localStorage.clear();
     console.log(localStorage);
+    /*/for (var i = 0; i < localStorage.length - 1; i++) {
+      ///console.log(localStorage.getItem(localStorage.key(i)))
+    }*/
+    //console.log(localStorage.getItem(localStorage.key(1))) //test bug at index 1
 
     return (
+      
       <React.Fragment>
         <Container fluid>
           <Row>
@@ -251,7 +265,6 @@ class AddNCStaff extends Component {
                   {this.state.selected != null ?
                     <button
                       style={{
-                      
                         float: "right",
                         width: "10%",
                         height: 30,
@@ -259,7 +272,7 @@ class AddNCStaff extends Component {
                       }}
                       onClick={this.handleFileDelete}
                     >
-                      <AiIcons.AiOutlineClose size="20" />
+                      <AiIcons.AiOutlineClose size="15" />
                     </button> : null}
                   </div>
 
