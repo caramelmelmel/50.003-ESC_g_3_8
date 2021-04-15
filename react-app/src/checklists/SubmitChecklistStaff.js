@@ -212,6 +212,7 @@ class SubmitChecklistStaff extends Component {
     }
 
 
+
     render() {
        
         console.log(this.state.noncom);
@@ -251,10 +252,8 @@ class SubmitChecklistStaff extends Component {
                             <tr key={id}>
                                 <td className="checklist-body-style">{this.getCategory(id)}</td>
                                 <td className="checklist-body-style">{this.getItem(id)}</td>
-=======
-                                <td className="checklist-body-style">{getChecklistItem(id).category}</td>
-                                <td className="checklist-body-style">{getChecklistItem(id).item}</td>
-                                {this.showImageComments(getChecklistItem(id).id)}
+                                <td className="checklist-body-style">{this.showImageComments(id)}</td>
+
                             </tr>)}
                             </tbody>
                         </table>

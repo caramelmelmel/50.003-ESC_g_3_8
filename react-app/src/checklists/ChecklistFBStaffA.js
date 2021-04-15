@@ -12,7 +12,6 @@ import { getClickedItems, setClickedItems } from './../services/clickedItems';
 class ChecklistFBStaffA extends Component {
   state = {
     checklistFB: getAllChecklistItems(),
-    //score: getClickedItems().length,
     clickedItems: getClickedItems()
   };
 
@@ -24,11 +23,7 @@ class ChecklistFBStaffA extends Component {
         console.log("CHECKLIST ITEM: ", getChecklistItem(itemId));
         const item = getChecklistItem(itemId);
         const clickedItems = this.state.clickedItems;
-        //this.setState({clickedItems: clickedItems.includes(item.id) ? clickedItems.filter(i => i != itemId) : [...clickedItems, itemId]})
         this.setState({clickedItems: setClickedItems(this.state.clickedItems.includes(item.id)? clickedItems.filter(i => i != itemId) : [...getClickedItems(), itemId])});
-        //this.state.clickedItems.includes(itemId) ? this.state.score-=1 : this.state.score+=1;
-        //console.log("SCORE: ", this.state.score);
-        //console.log("CLICKED ITEMS PG1: ", this.state.clickedItems);
     }
 
     handleSave() {

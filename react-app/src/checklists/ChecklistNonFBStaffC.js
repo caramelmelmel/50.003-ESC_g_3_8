@@ -14,7 +14,7 @@ class ChecklistNonFBStaffC extends Component {
     //totalscore: this.props.location.state.totalscore,
     //score: getClickedItems().length,
     //clickedItems: getClickedItems()
-    clickedItems: [],
+    clickedItems: getClickedNfbItems()
   };
 
     handleNext() {

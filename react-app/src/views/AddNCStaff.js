@@ -16,6 +16,7 @@ import ImagePreview from "../components/ImagePreview";
 import Camera from "react-html5-camera-photo";
 import "react-html5-camera-photo/build/css/index.css";
 import FormComponent from "../components/FormComponent";
+import { getNfbChecklistItem } from "../services/checklistNonFB";
 
 class AddNCStaff extends Component {
   auditData;
@@ -28,7 +29,7 @@ class AddNCStaff extends Component {
       selected: null,
       dataUri: null,
       bgColor: " #f2f9fc",
-      checklistItem: getChecklistItem(props.location.state.itemId),
+      checklistItem: (getChecklistItem(props.location.state.itemId) == null? getNfbChecklistItem(props.location.state.itemId) : getChecklistItem(props.location.state.itemId)),
       //itemName: props.itemName,
       //clickedItems: props.clickedItems,
       comments: {},

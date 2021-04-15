@@ -12,7 +12,7 @@ import { getClickedNfbItems, setClickedNfbItems } from './../services/clickedIte
 class ChecklistNonFBStaffA extends Component {
   state = {
     checklistFB: getAllNfbChecklistItems(),
-    clickedItems: []
+    clickedItems: getClickedNfbItems()
 
   };
 
