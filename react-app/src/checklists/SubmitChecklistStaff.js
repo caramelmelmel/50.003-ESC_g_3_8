@@ -34,20 +34,43 @@ class SubmitChecklistStaff extends Component {
 
         //console.log(localStorage);
         var noncompliances = [];
-        var comments = [];
+        var comments = {};
         
         for (var i = 0; i < localStorage.length; i++) {
             var eachentry = {};
             var imagelist = [];
-            var resolvedvariable = {};
-            //console.log(localStorage.key(i));
-        
+           
             if (localStorage.key(i) === "key" || localStorage.getItem(localStorage.key(i)) === "value") {
-                //bug in localStorage
-                //console.log("bad");
-                comments.push([null]);
+                comments.message = null;
+                comments.image = null;
+                comments.actor = null;
                 continue;
             }
+            if (localStorage.key(i) == "staff_email") { //from LoginStaff.js
+                //const staff_email = localStorage.getItem("staff_email");
+                continue;
+            }
+            if (localStorage.key(i) == "tenant_name") {
+                //localStorage.getItem("tenant_name")
+                continue;
+            }
+            if (localStorage.key(i) == "institution_name") {
+               // localStorage.getItem("institution_name")
+               continue;
+            }
+            if (localStorage.key(i) == "category") {
+                //localStorage.getItem("category")
+                continue;
+            }
+            if (localStorage.key(i) == "date_recorded") {
+                //localStorage.getItem("date_recorded")
+                continue;
+            }
+            if (localStorage.key(i) == "audit_score") {
+                //console.log(localStorage.getItem("audit_score"));
+                continue; 
+            }
+        
             else {
                 eachentry.key = localStorage.key(i);
                 const text = JSON.parse(localStorage.getItem(localStorage.key(i))).val;
@@ -67,20 +90,18 @@ class SubmitChecklistStaff extends Component {
                 }*/
                 imagelist.push(imagefile, imagecam);
                 //console.log(imagelist);
-                resolvedvariable.key = "resolved";
-                resolvedvariable.value = false;
+                eachentry.resolved=false;
                 //convert json to array
-                //comments:[ [text, imagelist, staff/tenant, resolved ],  ]
-                comments.push([text, imagelist, "staff", resolvedvariable]);
-            }
+                //comments:[ {"message": text, "image":imagelist, "email":staff/tenant"} ]
+                comments.message = text
+                comments.image = imagelist
+                comments.email = "staff"
+                eachentry.value = comments;
+                noncompliances.push(eachentry)
+                
+            }  
             
-            eachentry.value = [comments[i]];
-            //console.log(eachentry);
-            //noncompliances[i]=eachentry; if noncompliance={}
-            noncompliances.push(eachentry)
         }
-        //console.log(comments);
-        //console.log(eachentry);
         console.log(noncompliances);
         this.setState({noncom: noncompliances})
 
@@ -100,6 +121,30 @@ class SubmitChecklistStaff extends Component {
 
 
         */
+    MakedeJson() {
+        var jsonobj = {};
+        jsonobj.staff_email = localStorage.getItem("staff_email");
+        jsonobj.institution_name = localStorage.getItem("institution_name");
+        jsonobj.category = localStorage.getItem("category");
+        jsonobj.date_recorded=localStorage.getItem("date_recorded")
+        jsonobj.audit_score = localStorage.getItem("audit_score");
+        //jsonobj.tenant_email = localStorage.getItem("tenant_email");
+       
+        jsonobj.noncompliance = this.state.noncom;
+        console.log(localStorage);
+        console.log(jsonobj);
+        return jsonobj
+        
+    }
+
+    queryTenantEmail() {
+     //need to get tenant email from database
+    //query //localStorage.getItem("tenant_name") 
+    //store in localstorage 
+    //localStorage.setItem("tenant_email", tenantemail);
+        
+    }
+   
         
     componentWillUnmount() {
         this._isMounted = false;
@@ -150,14 +195,18 @@ class SubmitChecklistStaff extends Component {
 
     submit() {
         console.log("Submit");
+
         //implement email functionality
+
+        if (this.state.noncom != []) {
+            this.MakedeJson();
+        }
         //localStorage.clear();
        
-        if (this.state.noncom != []) {
+        /*if (this.state.noncom != []) {
             console.log(JSON.stringify({ "noncompliances": this.state.noncom }));
             //console.log(JSON.parse(JSON.stringify({ "noncompliances": this.state.noncom }))); //rendering on tenants side
-        }
-        
+        }*/
     }
 
 
@@ -178,9 +227,7 @@ class SubmitChecklistStaff extends Component {
                         
                     }
                    
-                }
-            
-                
+                } 
             }*/
 
             for (var i = 0; i < localStorage.length; i++) {

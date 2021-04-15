@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 
 
 class HomePage extends Component {
+  //delete 
   render() {
     return (
       <div className="header-style" style={{
@@ -20,6 +21,7 @@ class HomePage extends Component {
         top: 110,
         width: "100%",
       }}>
+        
 
         <h1 className="header-home">Welcome to Singhealth App</h1>
 
