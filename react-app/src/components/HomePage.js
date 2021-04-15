@@ -12,7 +12,7 @@ class HomePage extends Component {
 
     handleTenantRegister = () => {
         setActor("tenant");
-        this.props.history.push("/register-first-tenant");
+        this.props.history.push("/register-tenant");
     }
 
     handleStaffLogin = () => {
