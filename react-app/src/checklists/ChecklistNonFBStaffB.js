@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import { getAllChecklistItems, getChecklistItem } from './../services/checklistNonFB';
+import { getAllNfbChecklistItems, getNfbChecklistItem } from './../services/checklistNonFB';
 import Category from './Category';
 import Header from './Header';
-import { getClickedItems, setClickedItems } from './../services/clickedItems';
+import { getClickedNfbItems, setClickedNfbItems } from './../services/clickedItems';
 
 
 
 class ChecklistNonFBStaffB extends Component {
   state = {
-    checklistFB: getAllChecklistItems(),
+    checklistFB: getAllNfbChecklistItems(),
     //totalscore: this.props.location.state.totalscore,
     //score: getClickedItems().length,
     //clickedItems: getClickedItems()
@@ -22,11 +22,11 @@ class ChecklistNonFBStaffB extends Component {
     }
 
     handleCheck = (itemId) => {
-        console.log("CHECKLIST ITEM: ", getChecklistItem(itemId));
-        const item = getChecklistItem(itemId);
+        console.log("CHECKLIST ITEM: ", getNfbChecklistItem(itemId));
+        const item = getNfbChecklistItem(itemId);
         const clickedItems = this.state.clickedItems;
         //this.setState({clickedItems: clickedItems.includes(item.id) ? clickedItems.filter(i => i != itemId) : [...clickedItems, itemId]})
-        this.setState({clickedItems: setClickedItems(this.state.clickedItems.includes(item.id)? clickedItems.filter(i => i != itemId) : [...getClickedItems(), itemId])});
+        this.setState({clickedItems: setClickedNfbItems(this.state.clickedItems.includes(item.id)? clickedItems.filter(i => i != itemId) : [...getClickedNfbItems(), itemId])});
         //this.state.clickedItems.includes(itemId) ? this.state.score-=1 : this.state.score+=1;
         //console.log("SCORE: ", this.state.score);
         //console.log("CLICKED ITEMS PG1: ", this.state.clickedItems);

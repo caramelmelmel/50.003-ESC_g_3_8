@@ -62,8 +62,9 @@ class LoginStaff extends Component {
                 setLogin();
 
                 this.verifyStaff(JSONdata);
+              
                 // go to staff home page
-                // this.props.history.push("/");
+                this.props.history.push("/dashboard");
 
             }
         }

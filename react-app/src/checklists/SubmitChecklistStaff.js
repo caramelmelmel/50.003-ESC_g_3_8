@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { getAllChecklistItems, getChecklistItem, getAllChecklistId } from './../services/checklistFB';
-import { getClickedItems, setClickedItems, calculateScore } from './../services/clickedItems';
+import { getClickedItems, setClickedItems, calculateScore, getClickedNfbItems, calculateScoreNonfb } from './../services/clickedItems';
 import ChartFinalScore from './../components/ChartFinalScore';
 import { Container, Row, Col } from "react-bootstrap";
 import ReactToPrint from "react-to-print";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import ReactDOMServer from "react-dom/server";
+import { getAllNfbChecklistItems, getNfbAllChecklistId, getNfbChecklistItem } from './../services/checklistNonFB';
 
 
 
@@ -20,12 +21,53 @@ class SubmitChecklistStaff extends Component {
             checklistFB: getAllChecklistItems(),
             clickedItems: getClickedItems(),
             nonclickedItems: this.getNonCompliances(),
+            noncom:null,
         
         };
     }
 
     componentDidMount() {
         this._isMounted = true;
+
+        //console.log(localStorage);
+        var noncompliances = [];
+        var comments = [];
+        
+        for (var i = 0; i < localStorage.length; i++) {
+            var eachentry = {};
+            var imagelist = [];
+            var resolvedvariable = {};
+            //console.log(localStorage.key(i));
+        
+            if (localStorage.key(i) === "key" || localStorage.getItem(localStorage.key(i)) === "value") {
+                //bug in localStorage
+                //console.log("bad");
+                comments.push([null]);
+                continue;
+            }
+            else {
+                eachentry.key = localStorage.key(i);
+                const text = JSON.parse(localStorage.getItem(localStorage.key(i))).val;
+                imagelist.push(JSON.parse(localStorage.getItem(localStorage.key(i))).selected, JSON.parse(localStorage.getItem(localStorage.key(i))).dataUri);
+                //console.log(imagelist);
+                resolvedvariable.key = "resolved";
+                resolvedvariable.value = false;
+                //convert json to array
+                //comments:[ [text, imagelist, staff/tenant, resolved ],  ]
+                comments.push([text, imagelist, "staff", resolvedvariable]);
+            }
+            
+            eachentry.value = [comments[i]];
+            //console.log(eachentry);
+            //noncompliances[i]=eachentry; if noncompliance={}
+            noncompliances.push(eachentry)
+        }
+        //console.log(comments);
+        //console.log(eachentry);
+        console.log(noncompliances);
+        this.setState({noncom: noncompliances})
+
+        
     }
 
         /*
@@ -49,7 +91,14 @@ class SubmitChecklistStaff extends Component {
 
     formatScore() {
         let color = '#F06D1A';
-        const score = calculateScore(getClickedItems(), "totalScore");
+        let category = this.props.location.state.category;
+        var score = 0;
+        if (category == "fb") {
+            score = calculateScore(getClickedItems(), "totalScore");
+        } else if (category = 'nonfb') {
+            score = calculateScoreNonfb(getClickedNfbItems, "totalScore");
+        }
+
         if (score < 95) {
             color = '#F22C49';
         } else {
@@ -59,7 +108,14 @@ class SubmitChecklistStaff extends Component {
     }
 
     getNonCompliances() {
-        const difference = getAllChecklistId().filter(x => !getClickedItems().includes(x));
+        console.log("CATEGORY: ", this.props.location.state.category);
+        let category = this.props.location.state.category;
+        let difference = [""];
+        if (category == "fb") {
+            difference = getAllChecklistId().filter(x => !getClickedItems().includes(x));
+        } else if (category == "nonfb") {
+            difference = getNfbAllChecklistId().filter(x => !getClickedNfbItems().includes(x));
+        }
         //console.log("CLICKED ITEMS: ", getClickedItems());
         //console.log("DIFFERENCE: ", difference);
         return difference;
@@ -84,59 +140,82 @@ class SubmitChecklistStaff extends Component {
         localStorage.clear();
     }
 
-    sendNonComplianceArray() {
-        console.log(localStorage);
-        var noncompliances = [];
-        var comments = [];
-        
-        for (var i = 0; i < localStorage.length; i++) {
-            var eachentry = {};
-            var imagelist = [];
-            var resolvedvariable = {};
-            //console.log(localStorage.key(i));
-           
-            if (localStorage.key(i) === "key" || localStorage.getItem(localStorage.key(i)) === "value") {
-                //bug in localStorage
-                console.log("bad");
-                comments.push([null]);
-                continue;
 
-            }
-            else {
-                eachentry.key = localStorage.key(i);
-                const text = JSON.parse(localStorage.getItem(localStorage.key(i))).val;
-                imagelist.push(JSON.parse(localStorage.getItem(localStorage.key(i))).selected, JSON.parse(localStorage.getItem(localStorage.key(i))).dataUri);
-                //console.log(imagelist);
-                resolvedvariable.key = "resolved";
-                resolvedvariable.value = false;
-                //convert json to array
-                //comments:[ [text, imagelist, staff/tenant, resolved ],  ]
-                comments.push([text, imagelist, "staff", resolvedvariable]);
+     //if getChecklistItem(id).id == i.key, show i.value[0][0], i.value[0][1][0] if not null
+    
+    
+
+    showImageComments(a) {
+
+       
+        /*
+
+        console.log(noncompliances.map((i) => console.log(i.key)));
+        console.log(noncompliances.map((i) => console.log(i.value[0][0])));//comments
+        console.log(noncompliances.map((i) => console.log(i.value[0][1])));//imagelist
+
+        this.sendNonComplianceArray(
+
+        const stores = storename
+        .map(item => {
+            return (
+                <tr key={item.Tenant_id }>
+                   
+                        <td>{item.store_name}</td>
+                    </Link>
+                </tr>
+            )
+        });
+        
+        */
+       
+        if (this.state.noncom != null) {
+            //this.state.noncom.map((x, i) => {
+            for (var i = 0; i < this.state.noncom.length; i++) {
+                if (a == this.state.noncom[i].key) {
+                    //console.log(x.value[0][0]);
+                // x.value[0][1][0], x.value[0][1][1]);
+                    return (
+                    <tr key={i}>
+                        <td>{this.state.noncom[i].value[0][0]}</td>
+                    </tr>);
+                }
+                
             }
             
-            eachentry.value = [comments[i]];
-            console.log(eachentry);
-            //noncompliances[i]=eachentry; if noncompliance={}
-            noncompliances.push(eachentry)
+                  
         }
-        //console.log(comments);
-        //console.log(eachentry);
-        console.log(noncompliances);
-        //console.log(Object.values(noncompliances));  // Array ['hello', 25, Array ['apple', 'mango']]
-        //console.log(Object.keys(noncompliances));
-        //noncompliances.key = "noncompliance";
-        //noncompliances.value = eachentry;
-        //{ncprofessionalism_02:  comments: [[Example, data:image/jpeg;base64,/9j/4, staff], resolved: false ],
-    //     ncprofessionalism_01: }
+    
 
     }
     //add noncompliances to json to pass over
     //localStorage.clear();
 
+    getCategory(id) {
+        console.log("CATEGORY: ", this.props.location.state.category);
+        let category = this.props.location.state.category;
+        if (category == "fb") {
+            return getChecklistItem(id).category;
+        } else if (category == "nonfb") {
+            return getNfbChecklistItem(id).category;
+        }
+    }
+
+    getItem(id) {
+        console.log("CATEGORY: ", this.props.location.state.category);
+        let category = this.props.location.state.category;
+        if (category == "fb") {
+            return getChecklistItem(id).item;
+        } else if (category == "nonfb") {
+            return getNfbChecklistItem(id).item;
+        }
+    }
+
 
     render() {
-        { this.sendNonComplianceArray() }
-        console.log("NONCLICKED ITEMS: ", this.state.nonclickedItems);
+       
+        console.log(this.state.noncom);
+        //console.log("NONCLICKED ITEMS: ", this.state.nonclickedItems);
         return (
             <div className="container">
 
@@ -151,10 +230,10 @@ class SubmitChecklistStaff extends Component {
                     onClick={this.printPDF}>Download PDF</button>
                 <div className="container" id="audit">
                     <h1 className="header-style" >Audit: <h1 className="header-style" style={{display : 'inline-block', color: "#f06d1a"}}>Tenant Name, Date</h1></h1>
-                    <h1 className="header-style" style={{display : 'inline-block'}}>Total Audit Score: <h1 className="header-style" style={{display : 'inline-block', color: this.formatScore()}}>{calculateScore(getClickedItems(), "totalScore")}</h1></h1>
+                    <h1 className="header-style" style={{display : 'inline-block'}}>Total Audit Score: <h1 className="header-style" style={{display : 'inline-block', color: this.formatScore()}}>{this.props.location.state.category == "fb" ? calculateScore(getClickedItems(), "totalScore") : calculateScoreNonfb(getClickedNfbItems(), "totalScore")}</h1></h1>
                     <h2 className="header-style">Breakdown of Scores (%)</h2>
                 <div id="chart1">
-                    <ChartFinalScore/>
+                    <ChartFinalScore category={this.props.location.state.category}/>
                 </div>
                 <h2 className="header-style">List of Non-Compliances</h2>
                 <Container fluid>
@@ -164,13 +243,18 @@ class SubmitChecklistStaff extends Component {
                                 <tr className="checklist-header-style">
                                     <th xs={4}>Category</th>
                                     <th xs={7}>Item</th>
+                                    <th xs={4}>Image and Comments</th>
                                 </tr>
                             </thead>
                             <tbody>
                             {this.state.nonclickedItems.map(id =>
                             <tr key={id}>
+                                <td className="checklist-body-style">{this.getCategory(id)}</td>
+                                <td className="checklist-body-style">{this.getItem(id)}</td>
+=======
                                 <td className="checklist-body-style">{getChecklistItem(id).category}</td>
                                 <td className="checklist-body-style">{getChecklistItem(id).item}</td>
+                                {this.showImageComments(getChecklistItem(id).id)}
                             </tr>)}
                             </tbody>
                         </table>

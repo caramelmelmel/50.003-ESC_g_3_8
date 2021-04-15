@@ -10,13 +10,7 @@ import '../index.css'
 
 
 export const Sidebar = [
-    {
-        title: 'Home',
-        path: '/',
-        icon: <AiIcons.AiFillHome />,
-        cName: 'nav-text',
-        actor: 'both'
-    },
+
     {
         title: 'Dashboard',
         path: '/dashboard-staff',
@@ -51,7 +45,14 @@ export const Sidebar = [
         icon: <IoIcons.IoIosChatboxes />,
         cName: 'nav-text',
         actor: 'tenant'
-    }
+    },
+    {
+        title: 'Logout',
+        path: '/',
+        icon: <AiIcons.AiOutlineLogout />,
+        cName: 'nav-text',
+        actor: 'both'
+    },
 
 
 
