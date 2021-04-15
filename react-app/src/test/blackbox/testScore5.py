@@ -25,38 +25,38 @@ time.sleep(1)
 # first page
 i = random.choice(first_num)
 print(i)
-driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
 time.sleep(2)
-driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/a/button").click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/a/button").click()
 time.sleep(1)
 
 # second page
 i = random.choice(second_num)
 print(i)
-driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
 time.sleep(2)
-driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/a/button").click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/a/button").click()
 time.sleep(1)
 
 # third page
 i = random.choice(third_num)
 print(i)
-driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
 time.sleep(2)
-driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/a/button").click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/a/button").click()
 time.sleep(1)
 
 # fourth page
 i = random.choice(fourth_num)
 print(i)
-driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
 time.sleep(2)
-driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/a/button").click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/a/button").click()
 time.sleep(1)
 
 # fifth page
 i = random.choice(fifth_num)
 print(i)
-driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
 time.sleep(2)
-driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/a/button").click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/a/button").click()

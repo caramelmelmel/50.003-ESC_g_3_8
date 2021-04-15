@@ -4,7 +4,7 @@ import time
 driver = webdriver.Chrome()
 
 routes = [
-    "/dashboard-staff",
+    "/dashboard",
     "/audits-staff",
     "/tenant-staff",
     "/see-updates",
@@ -15,9 +15,8 @@ routes = [
     "/checklist-fb-staff-food-hygiene",
     "/checklist-fb-food-and-beverages",
     "/checklist-fb-safety-and-health",
-    "/submit-checklist-staff",
     "/textfield-staff",
-    "/register-first-tenant",
+    "/register-tenant",
     "/success-tenant",
     "/login-tenant",
     "/register-staff",
