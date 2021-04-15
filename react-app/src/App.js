@@ -21,7 +21,6 @@ import { Sidebar } from "./components/Sidebar";
 import TextFieldStaff from "./components/TextFieldStaff";
 import AddNCStaff from "./views/AddNCStaff";
 import TenantProfile from "./views/TenantProfile";
-import ChecklistNonFBStaff from "./components/ChecklistNonFBStaff";
 import SubmitChecklistStaff from "./checklists/SubmitChecklistStaff";
 
 import RegisterStaff from "./components/RegisterStaff";
@@ -60,9 +59,10 @@ class App extends Component {
     return (
       
       <BrowserRouter>
+      
         <div className="content">
 
-          
+
       
           <Switch>
             <Route path="/" exact component={HomePage} />
@@ -77,16 +77,15 @@ class App extends Component {
             
             <div>
               <Navbar />
-        
+
               {/* Route is a wrapper around the component. It contains history, location and match (info about URL) */}
-              <Route path="/dashboard-staff" component={DashboardStaff} />
+              <Route path="/dashboard" component={DashboardStaff} />
               <Route path="/audits-staff" component={AuditsStaff} />
               <Route path="/tenant-staff" component={TenantStaff} />
               <Route path="/reports-staff" component={ReportsStaff} />
               <Route path="/see-updates" component={SeeUpdates} />
               <Route path="/resolved-audits" component={ResolvedAudits} />
               <Route path="/ongoing-audits" component={OngoingAudits} />
-              <Route path="/checklist-non-fb-staff" component={ChecklistNonFBStaff} />
               <Route path="/checklist-fb-staff-professionalism-and-staff-hygiene" component={ChecklistFBStaffA} />
               <Route path="/checklist-fb-staff-housekeeping-and-cleanliness" component={ChecklistFBStaffB} />
               <Route path="/checklist-fb-staff-food-hygiene" component={ChecklistFBStaffC} />

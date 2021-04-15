@@ -244,18 +244,18 @@ const checklistNonFB = [
 
 ]
 
-export function getAllChecklistItems(){
+export function getAllNfbChecklistItems(){
     return checklistNonFB;
 }
 
-export function getChecklistItem(id) {
+export function getNfbChecklistItem(id) {
     return checklistNonFB.find(m => m.id == id);
 }
 
-export function getAllChecklistId() {
+export function getNfbAllChecklistId() {
     let allIds = [];
     var i;
-    for (i = 0; i < getAllChecklistItems().length; i++) {
+    for (i = 0; i < getAllNfbChecklistItems().length; i++) {
         allIds.push(checklistNonFB[i].id);
     } 
     return allIds;

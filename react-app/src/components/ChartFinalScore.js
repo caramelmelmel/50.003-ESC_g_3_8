@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
-import { calculateScore, getClickedItems } from './../services/clickedItems';
+import { calculateScore, calculateScoreNonfb, getClickedItems, getClickedNfbItems } from './../services/clickedItems';
 
 
 class ChartFinalScore extends Component {
@@ -15,7 +15,7 @@ class ChartFinalScore extends Component {
           id: "basic-bar",
         },
         xaxis: {
-          categories: ['Professionalism & Staff Hygiene','Housekeeping & Cleanliness','Food Hygiene','Healthier Choice','Workplace Safety & Health'],
+          categories: (this.props.category == "fb" ? ['Professionalism & Staff Hygiene','Housekeeping & Cleanliness','Food Hygiene','Healthier Choice','Workplace Safety & Health'] : ['Professionalism & Staff Hygiene','Housekeeping & Cleanliness','Food Hygiene']),
           labels: {
             rotate: 0,
             hideOverlappingLabels: false,
@@ -49,13 +49,15 @@ class ChartFinalScore extends Component {
       series: [
         {
           name: "Performance Score",
-          data: [calculateScore(getClickedItems(), "A"), calculateScore(getClickedItems(), "B"), calculateScore(getClickedItems(), "C"), calculateScore(getClickedItems(), "D"), calculateScore(getClickedItems(), "E")],
+          data: (this.props.category == "fb" ? [calculateScore(getClickedItems(), "A"), calculateScore(getClickedItems(), "B"), calculateScore(getClickedItems(), "C"), calculateScore(getClickedItems(), "D"), calculateScore(getClickedItems(), "E")] : [calculateScoreNonfb(getClickedNfbItems(), "A"), calculateScoreNonfb(getClickedNfbItems(), "B"), calculateScoreNonfb(getClickedNfbItems(), "C")]),
         },
       ],
     };
   }
 
+
   render() {
+    //this.checkCategory(this.props.category);
     return (
       <div className="app">
         <div className="row">

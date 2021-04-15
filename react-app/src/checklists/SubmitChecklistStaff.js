@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import { getAllChecklistItems, getChecklistItem, getAllChecklistId } from './../services/checklistFB';
-import { getClickedItems, setClickedItems, calculateScore } from './../services/clickedItems';
+import { getClickedItems, setClickedItems, calculateScore, getClickedNfbItems, calculateScoreNonfb } from './../services/clickedItems';
 import ChartFinalScore from './../components/ChartFinalScore';
 import { Container, Row, Col } from "react-bootstrap";
 import ReactToPrint from "react-to-print";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import ReactDOMServer from "react-dom/server";
-import Datepicker from "./../components/Datepicker";
 
+import Datepicker from "./../components/Datepicker";
+import { getAllNfbChecklistItems, getNfbAllChecklistId, getNfbChecklistItem } from './../services/checklistNonFB';
+import { emailjs, init } from "emailjs-com";
 
 
 class SubmitChecklistStaff extends Component {
@@ -106,7 +108,14 @@ class SubmitChecklistStaff extends Component {
 
     formatScore() {
         let color = '#F06D1A';
-        const score = calculateScore(getClickedItems(), "totalScore");
+        let category = this.props.location.state.category;
+        var score = 0;
+        if (category == "fb") {
+            score = calculateScore(getClickedItems(), "totalScore");
+        } else if (category = 'nonfb') {
+            score = calculateScoreNonfb(getClickedNfbItems, "totalScore");
+        }
+
         if (score < 95) {
             color = '#F22C49';
         } else {
@@ -116,9 +125,13 @@ class SubmitChecklistStaff extends Component {
     }
 
     getNonCompliances() {
-        const difference = getAllChecklistId().filter(x => !getClickedItems().includes(x));
-        //console.log("CLICKED ITEMS: ", getClickedItems());
-        //console.log("DIFFERENCE: ", difference);
+        let category = this.props.location.state.category;
+        let difference = [""];
+        if (category == "fb") {
+            difference = getAllChecklistId().filter(x => !getClickedItems().includes(x));
+        } else if (category == "nonfb") {
+            difference = getNfbAllChecklistId().filter(x => !getClickedNfbItems().includes(x));
+        }
         return difference;
     }
 
@@ -189,11 +202,51 @@ class SubmitChecklistStaff extends Component {
     //add noncompliances to json to pass over
     //localStorage.clear();
 
+    getCategory(id) {
+        let category = this.props.location.state.category;
+        if (category == "fb") {
+            return getChecklistItem(id).category;
+        } else if (category == "nonfb") {
+            return getNfbChecklistItem(id).category;
+        }
+    }
+
+    getItem(id) {
+        let category = this.props.location.state.category;
+        if (category == "fb") {
+            return getChecklistItem(id).item;
+        } else if (category == "nonfb") {
+            return getNfbChecklistItem(id).item;
+        }
+    }
+
+
+/*
+    sendFeedback () {
+        var templateParams = {
+            tenant_email: 'arissa140100@yahoo.com.sg',
+            tenant_name: 'Bob',
+            sender_email: 'arissa140100@gmail.com',
+            message: 'TESINTDFSFAJ '
+        };
+
+        var service_id = "service_13zd6ah";
+        var template_id = "template_1j21nnd"
+
+        window.emailjs.send(
+          service_id, template_id, templateParams
+          ).then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+         }, function(error) {
+            console.log('FAILED...', error);
+         });
+    }
+        
+*/
+
+
     render() {
-       
-        console.log(this.state.noncom);
-        //console.log("NONCLICKED ITEMS: ", this.state.nonclickedItems);
-        return (
+               return (
             <div className="container">
 
                 <button 
@@ -211,11 +264,11 @@ class SubmitChecklistStaff extends Component {
                 </div>
 
                 <div className="container" id="audit">
-                    <h1 className="header-style" >Audit: <h1 className="header-style" style={{display : 'inline-block', color: "#f06d1a"}}>Tenant Name, Date</h1></h1>
-                    <h1 className="header-style" style={{display : 'inline-block'}}>Total Audit Score: <h1 className="header-style" style={{display : 'inline-block', color: this.formatScore()}}>{calculateScore(getClickedItems(), "totalScore")}</h1></h1>
+                    <h1 className="header-style" >Audit: <h1 className="header-style" style={{display : 'inline-block', color: "#f06d1a"}}>{this.props.location.state.tenant}</h1></h1>
+                    <h1 className="header-style" style={{display : 'inline-block'}}>Total Audit Score: <h1 className="header-style" style={{display : 'inline-block', color: this.formatScore()}}>{this.props.location.state.category == "fb" ? calculateScore(getClickedItems(), "totalScore") : calculateScoreNonfb(getClickedNfbItems(), "totalScore")}</h1></h1>
                     <h2 className="header-style">Breakdown of Scores (%)</h2>
                 <div id="chart1">
-                    <ChartFinalScore/>
+                    <ChartFinalScore category={this.props.location.state.category}/>
                 </div>
                 <h2 className="header-style">List of Non-Compliances</h2>
                 <Container fluid>
@@ -231,10 +284,16 @@ class SubmitChecklistStaff extends Component {
                             <tbody>
                             {this.state.nonclickedItems.map(id =>
                             <tr key={id}>
-                                <td className="checklist-body-style">{getChecklistItem(id).category}</td>
-                                <td className="checklist-body-style">{getChecklistItem(id).item}</td>
-                                {this.showImageComments(getChecklistItem(id).id)}
+
+                              
+                                {/*this.showImageComments(getChecklistItem(id).id)*/}
                                 
+
+                                <td className="checklist-body-style">{this.getCategory(id)}</td>
+                                <td className="checklist-body-style">{this.getItem(id)}</td>
+                                <td className="checklist-body-style">{this.showImageComments(id)}</td>
+
+
                             </tr>)}
                             </tbody>
                         </table>

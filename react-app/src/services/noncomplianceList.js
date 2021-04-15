@@ -5,7 +5,21 @@ const noncomplianceList = [
      image: ["Image1", "Image2"],
      nc_id: "professionalism_01"  
 
-    }
+    },
+    {
+        id: "02",
+        tenant_id: "Kopitiam",
+        image: ["Image1", "Image2"],
+        nc_id: "professionalism_02"  
+   
+       },
+       {
+        id: "01",
+        tenant_id: "Kopitiam",
+        image: ["Image1", "Image2"],
+        nc_id: "professionalism_03"  
+   
+       }
 ]
 
 export function getAllNoncompliance(){

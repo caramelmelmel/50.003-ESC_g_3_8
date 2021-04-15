@@ -14,7 +14,6 @@ import { Link } from 'react-router-dom';
 class HomePage extends Component {
   render() {
     return (
-
       <div className="header-style" style={{
         position: "absolute",
         left: 0,
@@ -68,7 +67,7 @@ class HomePage extends Component {
             </Carousel.Item>
 
           </Carousel>
-        </div>
+          </div>
 
 
         <Link to={{pathname:"/home-log-reg"}}>

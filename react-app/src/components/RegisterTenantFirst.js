@@ -52,7 +52,7 @@ class RegisterTenantFirst extends Component {
             "password": "${this.state.password}",
             "store_name": "${this.state.tenant} ${this.state.institution}",
             "category": "${this.state.category}",
-            "inst_name": "${this.state.institution}"
+            "institution_name": "${this.state.institution}"
         }`;
 
         var JSONdata = JSON.parse(objString);
@@ -85,32 +85,52 @@ class RegisterTenantFirst extends Component {
                 // send data to db
                 this.createTenant(JSONdata);
 
-                this.props.history.push("/success-tenant");
+                // this.props.history.push("/success-tenant");
             }
         }
     }
 
-    // synchronous call to create tenant
-    async createTenant(data) {
-        try {
-            // change localhost to server name
-            // response = await fetch("https://shaghao.herokuapp.com/singhealth/tenant/signup", {
-            // mode: 'no-cors',
-            // method: "POST",
-            // headers: {
-            //     'Content-Type': 'application/json',
-            //   },
-            // body: data,
-            // })
-            // console.log("Tenant created");
-            const response = await axios.get("https://shaghao.herokuapp.com/singhealth/tenant/signup");
-            console.log(response);
-        } catch (err) {
-            console.log(err.message);
-        }
-
-        
+    // https://shaghao.herokuapp.com/singhealth/tenant/signup
+    createTenant(data) {
+        fetch("http://localhost:3000/register-first-tenant/tenant/signup", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+              },
+            body: data,
+        }).then(response => {
+            console.log(response.status)
+            if (!response.status.ok) {
+                console.log("Tenant registration failed!")
+                // route back to register staff page
+                // this.props.history.push("/register-tenant");
+            } else {
+                console.log("Tenant created!");
+                // route to tenant success page
+                // this.props.history.push("/success-tenant");
+            }
+        })
     }
+
+    // // synchronous call to create tenant
+    // async createTenant(data) {
+    //     try {
+    //         // change localhost to server name
+    //         // response = await fetch("https://shaghao.herokuapp.com/singhealth/tenant/signup", {
+    //         // mode: 'no-cors',
+    //         // method: "POST",
+    //         // headers: {
+    //         //     'Content-Type': 'application/json',
+    //         //   },
+    //         // body: data,
+    //         // })
+    //         // console.log("Tenant created");
+    //         const response = await axios.get("https://shaghao.herokuapp.com/singhealth/tenant/signup");
+    //         console.log(response);
+    //     } catch (err) {
+    //         console.log(err.message);
+    //     }
+    // }
 
     handleInstitutionChange(value) {
         console.log(value.option);
