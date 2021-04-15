@@ -8,8 +8,7 @@ import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import ReactDOMServer from "react-dom/server";
 import { getAllNfbChecklistItems, getNfbAllChecklistId, getNfbChecklistItem } from './../services/checklistNonFB';
-
-
+import { emailjs, init } from "emailjs-com";
 
 
 class SubmitChecklistStaff extends Component {
@@ -108,7 +107,6 @@ class SubmitChecklistStaff extends Component {
     }
 
     getNonCompliances() {
-        console.log("CATEGORY: ", this.props.location.state.category);
         let category = this.props.location.state.category;
         let difference = [""];
         if (category == "fb") {
@@ -116,8 +114,6 @@ class SubmitChecklistStaff extends Component {
         } else if (category == "nonfb") {
             difference = getNfbAllChecklistId().filter(x => !getClickedNfbItems().includes(x));
         }
-        //console.log("CLICKED ITEMS: ", getClickedItems());
-        //console.log("DIFFERENCE: ", difference);
         return difference;
     }
 
@@ -192,7 +188,6 @@ class SubmitChecklistStaff extends Component {
     //localStorage.clear();
 
     getCategory(id) {
-        console.log("CATEGORY: ", this.props.location.state.category);
         let category = this.props.location.state.category;
         if (category == "fb") {
             return getChecklistItem(id).category;
@@ -202,7 +197,6 @@ class SubmitChecklistStaff extends Component {
     }
 
     getItem(id) {
-        console.log("CATEGORY: ", this.props.location.state.category);
         let category = this.props.location.state.category;
         if (category == "fb") {
             return getChecklistItem(id).item;
@@ -212,12 +206,32 @@ class SubmitChecklistStaff extends Component {
     }
 
 
+/*
+    sendFeedback () {
+        var templateParams = {
+            tenant_email: 'arissa140100@yahoo.com.sg',
+            tenant_name: 'Bob',
+            sender_email: 'arissa140100@gmail.com',
+            message: 'TESINTDFSFAJ '
+        };
+
+        var service_id = "service_13zd6ah";
+        var template_id = "template_1j21nnd"
+
+        window.emailjs.send(
+          service_id, template_id, templateParams
+          ).then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+         }, function(error) {
+            console.log('FAILED...', error);
+         });
+    }
+        
+*/
+
 
     render() {
-       
-        console.log(this.state.noncom);
-        //console.log("NONCLICKED ITEMS: ", this.state.nonclickedItems);
-        return (
+               return (
             <div className="container">
 
                 <button 
@@ -230,7 +244,7 @@ class SubmitChecklistStaff extends Component {
                     style={{ float: "right" }}
                     onClick={this.printPDF}>Download PDF</button>
                 <div className="container" id="audit">
-                    <h1 className="header-style" >Audit: <h1 className="header-style" style={{display : 'inline-block', color: "#f06d1a"}}>Tenant Name, Date</h1></h1>
+                    <h1 className="header-style" >Audit: <h1 className="header-style" style={{display : 'inline-block', color: "#f06d1a"}}>{this.props.location.state.tenant}</h1></h1>
                     <h1 className="header-style" style={{display : 'inline-block'}}>Total Audit Score: <h1 className="header-style" style={{display : 'inline-block', color: this.formatScore()}}>{this.props.location.state.category == "fb" ? calculateScore(getClickedItems(), "totalScore") : calculateScoreNonfb(getClickedNfbItems(), "totalScore")}</h1></h1>
                     <h2 className="header-style">Breakdown of Scores (%)</h2>
                 <div id="chart1">

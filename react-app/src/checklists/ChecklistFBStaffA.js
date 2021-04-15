@@ -86,7 +86,7 @@ class ChecklistFBStaffA extends Component {
                     /> : null)}
                 </tbody>
             </table>
-                        <Link to={{pathname: "/checklist-fb-staff-housekeeping-and-cleanliness"}}>
+                        <Link to={{pathname: "/checklist-fb-staff-housekeeping-and-cleanliness", state: {tenant:  this.props.location.state.tenant}}}>
                             <button 
                             type="button" 
                             className="btn btn-primary btn-lg checklist-header-style" 
