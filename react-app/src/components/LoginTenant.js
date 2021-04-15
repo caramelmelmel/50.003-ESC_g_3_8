@@ -39,9 +39,8 @@ class LoginTenant extends Component {
         this.setState({isClicked: true});
 
         var objString = `{
-            "tenant_name": "${this.state.tenant}",
-            "tenant_email": "${this.state.email}",
-            "tenant_password": "${this.state.password}"
+            "email": "${this.state.email}",
+            "password": "${this.state.password}"
         }`;
       
         var JSONdata = JSON.parse(objString);
@@ -63,13 +62,16 @@ class LoginTenant extends Component {
             this.setState({isInvalid: false});
             if (this.state.institution != "" && this.state.name != "" && this.state.email != "" && this.state.password != "") {
                 //crypting the password 
-                const staff_password = Base64.stringify(sha256(this.state.password));
-                console.log(staff_password);
-                JSONdata[staff_password] = staff_password;
+                const tenant_password = Base64.stringify(sha256(this.state.password));
+                console.log(tenant_password);
+                JSONdata["password"] = tenant_password;
                 console.log(JSONdata);
 
                 // check data with db
                 setLogin();
+
+                this.verifyTenant(JSONdata);
+
                 this.props.history.push("/");
 
                 // go to tenant home page
@@ -77,6 +79,31 @@ class LoginTenant extends Component {
 
             }
         }
+    }
+
+    verifyTenant(data) {
+        fetch("https://shaghao.herokuapp.com/singhealth/tenant/login", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                // 'x-auth-token':
+                // console.log(response.headers)
+              },
+            body: data,
+        }).then(response => {
+            console.log(response.status)
+            if (!response.status.ok) {
+                console.log("Tenant login failed!")
+                // route back to login tenant page
+                // this.props.history.push("/login-tenant");
+            } else {
+                console.log("Tenant logged in!");
+                // put token in local storage
+                console.log(response.headers);
+                // route to tenant home page
+                // this.props.history.push("/success-tenant");
+            }
+        })
     }
 
     render() { 

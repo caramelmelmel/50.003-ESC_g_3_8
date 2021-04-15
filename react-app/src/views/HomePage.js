@@ -14,13 +14,7 @@ import { Link } from 'react-router-dom';
 class HomePage extends Component {
   render() {
     return (
-
-      {/*<div className="header-style" style={{
-        position: "absolute",
-        left: 0,
-        top: 110,
-        width: "100%",
-      }}>*/}
+      <div className="hedaer-style" style={{position: "absolute", left: 0, top: 110, width: "100%"}}>
 
         <h1 className="header-home">Welcome to Singhealth App</h1>
 
