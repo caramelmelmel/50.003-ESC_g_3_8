@@ -100,6 +100,8 @@ class RegisterTenantFirst extends Component {
             body: data,
         }).then(response => {
             console.log(response.status)
+            // remove this when backend integration is done
+            this.props.history.push("/success-tenant");
             if (!response.status.ok) {
                 console.log("Tenant registration failed!")
                 // route back to register staff page

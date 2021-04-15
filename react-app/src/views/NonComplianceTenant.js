@@ -4,6 +4,7 @@ import ChartInstitutes from "../components/ChartInstitutes";
 import Chart from "react-apexcharts";
 import { getAllNoncompliance, getLength } from "../services/noncomplianceList";
 import { getChecklistItem } from "../services/checklistFB";
+import { getNfbChecklistItem } from "../services/checklistNonFB";
 import FormComponent from "../components/FormComponent";
 import CommentList from "./../components/CommentList";
 import AddNCStaff from "../views/AddNCStaff";
@@ -14,10 +15,10 @@ class NonComplianceTenant extends Component {
     noncompliance: getAllNoncompliance(),
     length: getLength(),
     loading: false,
-    storedArray: [],
-    comments: [
+    storedArray: []
+    /*comments: [
       { name: "Staff 01", index:"01", comment:"Example statement" }
-    ],
+    ],*/
   };
 
   /*
@@ -30,6 +31,16 @@ class NonComplianceTenant extends Component {
   handleSave() {
     console.log("Saving...");
   }
+
+  getItem(id) {
+    console.log("ITEM ID:", id);
+    console.log(getChecklistItem(id).item);
+      if (getChecklistItem(id).item != null) {
+          return getChecklistItem(id).item;
+      } else if (getNfbChecklistItem(id).item != null) {
+          return getNfbChecklistItem(id).item;
+      }
+    }
 
   RenderfromLS() {
     //console.log(storedArray.checklistItem.id); // if == nc.nc_id => show image and comments from here
@@ -101,7 +112,7 @@ class NonComplianceTenant extends Component {
                         style={{ height: 50, padding: 15 }}
 
                       >
-                        <h5>{getChecklistItem(nc.nc_id).item}</h5>
+                        <h5>{this.getItem(nc.nc_id)}</h5>
                       </Accordion.Toggle>
                       <Accordion.Collapse eventKey={nc.id}>
                         <Card.Body
@@ -111,7 +122,7 @@ class NonComplianceTenant extends Component {
                           Hello! Find all images and comments here
                           <div className="row">
                             <div className="col-4  pt-3 border-right">
-                              <FormComponent addComment={this.addComment} />
+                              <FormComponent addComment={this.addComment} key={nc.id} nc_id={nc.nc_id}/>
                             </div>
 
                             <img
@@ -123,8 +134,7 @@ class NonComplianceTenant extends Component {
 
                             <div className="col-8  pt-3 bg-white">
                               <CommentList
-                                message={this.state.storedArray.val}
-                                comments={this.state.comments}
+                                comments = {nc.comments}
                                 loading={this.state.loading}
                               />
                             </div>

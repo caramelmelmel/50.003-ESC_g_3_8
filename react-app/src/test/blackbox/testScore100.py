@@ -22,41 +22,42 @@ driver = webdriver.Chrome()
 driver.get("http://localhost:3000/checklist-fb-staff-professionalism-and-staff-hygiene")
 time.sleep(1)
 
+
 for i in first_num:
     print(i)
-    driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
+    driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
 
 time.sleep(2)
-driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/a/button").click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/a/button").click()
 time.sleep(1)
 
 for i in second_num:
     print(i)
-    driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
+    driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
 
 time.sleep(2)
-driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/a/button").click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/a/button").click()
 time.sleep(1)
 
 for i in third_num:
     print(i)
-    driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
+    driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
 
 time.sleep(2)
-driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/a/button").click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/a/button").click()
 time.sleep(1)
 
 for i in fourth_num:
     print(i)
-    driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
+    driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
 
 time.sleep(2)
-driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/a/button").click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/a/button").click()
 time.sleep(1)
 
 for i in fifth_num:
     print(i)
-    driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
+    driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]/input".format(i)).click()
 
 time.sleep(2)
-driver.find_element_by_xpath("/html/body/div/div/div[2]/div/div[2]/a/button").click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[2]/div/div[2]/a/button").click()
