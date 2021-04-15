@@ -5,13 +5,13 @@ class Calender extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            date : "2021-04-23T01:06"
+            date : "2021-04-23"
         };
     }
 
     render() {
         return (
-            <input type="datetime-local" ref={(date) => {this.dateRef = date;}} value={this.state.date} onChange={this._onDateChange.bind(this)}/>
+            <input type="date" ref={(date) => {this.dateRef = date;}} value={this.state.date} onChange={this._onDateChange.bind(this)}/>
         );
     }
 
@@ -20,6 +20,11 @@ class Calender extends Component {
         state['date'] = e.target.value;
         // Or (you can use below method to access component in another method)
         state['date'] = this.dateRef.value;
+        //{date: "2021-04-01T13:00"}
+        //console.log(this.dateRef.value.substr(0,10));
+        //console.log(this.dateRef.value);
+        localStorage.setItem("date_recorded", this.dateRef.value);
+        //console.log(localStorage.getItem("date_recorded"));
         this.setState(state);
     }
 
