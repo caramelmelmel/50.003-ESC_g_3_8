@@ -3,22 +3,25 @@ const noncomplianceList = [
      id: "01",
      tenant_id: "Kopitiam",
      image: ["Image1", "Image2"],
-     nc_id: "professionalism_01"  
-
+     nc_id: "professionalism_01",
+     resolved: false,
+     comments: [{message: "This is a test 01 ", images: ["data:image/png;base64", "data.image/jpeg;base64,/9j/4"], email: "staff1@singhealth.com.sg"}, {message: "This is a second test", images: ["data:image/png;base64", "data.image/jpeg;base64,/9j/4"], email: "staff1@singhealth.com.sg"} ]
     },
     {
         id: "02",
         tenant_id: "Kopitiam",
         image: ["Image1", "Image2"],
-        nc_id: "professionalism_02"  
-   
+        nc_id: "professionalism_02",  
+        resolved: false,
+        comments: [{message: "This is a test 02", images: ["data:image/png;base64", "data.image/jpeg;base64,/9j/4"], email: "staff2@singhealth.com.sg"}]
        },
        {
         id: "01",
         tenant_id: "Kopitiam",
         image: ["Image1", "Image2"],
-        nc_id: "professionalism_03"  
-   
+        nc_id: "professionalism_03", 
+        resolved: false,
+        comments: [{message: "This is a test 03", images: ["data:image/png;base64", "data.image/jpeg;base64,/9j/4"], email: "staff3@singhealth.com.sg"}]
        }
 ]
 
@@ -41,6 +44,15 @@ export function getAllNC() {
         allNC.push(noncomplianceList[i].id);
     } 
     return allNC;
+}
+
+export function addComment(nc_id, comment) {
+    let i = 0;
+    for (i; i<noncomplianceList.length; i++) {
+        if (nc_id == noncomplianceList[i].nc_id){
+            noncomplianceList[i].comments.push(comment);
+        }
+    }
 }
 
 /*
