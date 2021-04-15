@@ -62,7 +62,7 @@ class LoginStaff extends Component {
                 // check data with db
                 setLogin();
                 // go to staff home page
-                this.props.history.push("/");
+                this.props.history.push("/dashboard");
 
             }
         }

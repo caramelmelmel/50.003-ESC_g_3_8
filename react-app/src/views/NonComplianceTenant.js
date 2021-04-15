@@ -62,7 +62,7 @@ class NonComplianceTenant extends Component {
             [
               "Example statement",
               ["data:image/png;base64,", "data:image/jpeg;base64,/9j/4"],
-              "staff",
+              "staff"
             ],
             { resolved: false },
             ["helot", ["data:image/png;base64,"], "tenant"],
@@ -73,6 +73,14 @@ class NonComplianceTenant extends Component {
           key: "professionalism_01",
           value: [
             ["Hello", ["data: image/jpeg; base64,/9j/4"], "staff"],
+            { resolved: false },
+          ],
+        },
+
+        {
+          key: "fire_01",
+          value: [
+            ["Help Fire", ["data: image/jpeg; base64,/9j/4"], "staff"],
             { resolved: false },
           ],
         },
@@ -88,7 +96,7 @@ class NonComplianceTenant extends Component {
   //can remove this method
   toggle(b) {
     for (var i = 0; i < this.state.noncompliances.length; i++) {
-      console.log(this.state.noncompliances[i]);
+      console.log("NONCOMPLIANCE: ", this.state.noncompliances[i]);
     }
   }
   /*
@@ -222,7 +230,7 @@ class NonComplianceTenant extends Component {
                       <h5>{this.checkSame(value)}</h5>
                     </Accordion.Toggle>
 
-                    <Accordion.Collapse key={index} eventKey={index}>
+                    <Accordion.Collapse eventKey={index}>
                       <Card.Body
                         className="checklist-body-style"
                         style={{ padding: 15, height: 500 }}
@@ -244,6 +252,7 @@ class NonComplianceTenant extends Component {
                           <div className="col-6  pt-3 bg-white">
                             {this.Helps(value).map((index) => (
                               <CommentList
+                                key={index}
                                 comments={value.value[0][0]}
                                 loading={this.state.loading}
                                 item={value}

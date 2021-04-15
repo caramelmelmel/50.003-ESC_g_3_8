@@ -1,12 +1,23 @@
 let clickedItems = []
 
+let clickedNfbItems = []
+
 export function getClickedItems(){
     return clickedItems;
+}
+
+export function getClickedNfbItems(){
+    return clickedNfbItems;
 }
 
 export function setClickedItems(array) {
     clickedItems = array;
     return clickedItems;
+}
+
+export function setClickedNfbItems(array) {
+    clickedNfbItems = array;
+    return clickedNfbItems;
 }
 
 export function calculateScore(array, toReturn) {
@@ -92,13 +103,13 @@ export function calculateScoreNonfb(array, toReturn) {
     let totalScore = 0;
 
     for (i=0; i < array.length; i++) {
-        //console.log(array[i].substring(0,14));
+        //console.log(array[i].substring(0,19));
 
-        if (array[i].substring(0, 15) == "professionalism" || array[i].substring(0, 13) == "staff_hygiene") {
+        if (array[i].substring(0, 19) == "nfb_professionalism" || array[i].substring(0, 17) == "nfb_staff_hygiene") {
             A += 1;
-        } else if (array[i].substring(0, 23) == "environment_cleanliness") {
+        } else if (array[i].substring(0, 27) == "nfb_environment_cleanliness") {
             B += 1; 
-        } else if (array[i].substring(0, 14) == "general_safety" || array[i].substring(0, 4) == "fire" || array[i].substring(0,10) == "electrical") {
+        } else if (array[i].substring(0, 18) == "nfb_general_safety" || array[i].substring(0, 8) == "nfb_fire" || array[i].substring(0,14) == "nfb_electrical") {
             C += 1; 
         }
     }
@@ -120,10 +131,10 @@ export function calculateScoreNonfb(array, toReturn) {
     }
 
 
-    totalScore = ((A / 6 * 0.2) + (B / 12 * 0.4) + (C / 16 * 0.4));
+    totalScore = ((A / 6 * 0.2) + (B / 12 * 0.4) + (C / 16 * 0.4))*100;
     //totalScore = calculateA(A) + calculateB(B) + calculateC(C) + calculateD(D) + calculateE(E);
     
-    console.log("TOTAL SCORE: ", totalScore);
+    console.log("TOTAL SCORE NonFB: ", totalScore);
     
     if (toReturn == "totalScore"){
         return totalScore.toFixed(0);

@@ -70,7 +70,7 @@ class LoginTenant extends Component {
 
                 // check data with db
                 setLogin();
-                this.props.history.push("/");
+                this.props.history.push("/dashboard");
 
                 // go to tenant home page
                 // this.props.history.push("/register-staff");
