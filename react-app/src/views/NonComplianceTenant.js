@@ -225,7 +225,7 @@ class NonComplianceTenant extends Component {
                     <Accordion.Collapse key={index} eventKey={index}>
                       <Card.Body
                         className="checklist-body-style"
-                        style={{ padding: 15, height: 500 }}
+                        style={{ padding: 15, height: 300 }}
                       >
                         Hello! Find all images and comments from staff here
                         <div className="row">

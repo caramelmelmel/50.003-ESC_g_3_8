@@ -7,7 +7,7 @@ import ReactToPrint from "react-to-print";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import ReactDOMServer from "react-dom/server";
-
+import Datepicker from "./../components/Datepicker";
 
 
 
@@ -20,9 +20,11 @@ class SubmitChecklistStaff extends Component {
             checklistFB: getAllChecklistItems(),
             clickedItems: getClickedItems(),
             nonclickedItems: this.getNonCompliances(),
-            noncom:null,
+            noncom:[],
         
         };
+        this.printPDF = this.printPDF.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     componentDidMount() {
@@ -47,7 +49,21 @@ class SubmitChecklistStaff extends Component {
             else {
                 eachentry.key = localStorage.key(i);
                 const text = JSON.parse(localStorage.getItem(localStorage.key(i))).val;
-                imagelist.push(JSON.parse(localStorage.getItem(localStorage.key(i))).selected, JSON.parse(localStorage.getItem(localStorage.key(i))).dataUri);
+
+                const imagefile = JSON.parse(localStorage.getItem(localStorage.key(i))).selected;
+                const imagecam = JSON.parse(localStorage.getItem(localStorage.key(i))).dataUri;
+                
+                /*if (imagefile != null) {
+                    const newimagefile = imagefile.replace(/^data:image.+;base64,/, "");
+                    imagelist.push(newimagefile);
+                }
+              
+                if (imagecam != null) {
+                    const newimagecam = imagecam.replace(/^data:image.+;base64,/, "");
+                    console.log(newimagecam); //this is a valid base 64 string
+                    imagelist.push(newimagecam);
+                }*/
+                imagelist.push(imagefile, imagecam);
                 //console.log(imagelist);
                 resolvedvariable.key = "resolved";
                 resolvedvariable.value = false;
@@ -122,56 +138,53 @@ class SubmitChecklistStaff extends Component {
     submit() {
         console.log("Submit");
         //implement email functionality
-        localStorage.clear();
+        //localStorage.clear();
+       
+        if (this.state.noncom != []) {
+            console.log(JSON.stringify({ "noncompliances": this.state.noncom }));
+            //console.log(JSON.parse(JSON.stringify({ "noncompliances": this.state.noncom }))); //rendering on tenants side
+        }
+        
     }
 
 
-     //if getChecklistItem(id).id == i.key, show i.value[0][0], i.value[0][1][0] if not null
-    
-    
-
     showImageComments(a) {
-
-       
-        /*
-
-        console.log(noncompliances.map((i) => console.log(i.key)));
-        console.log(noncompliances.map((i) => console.log(i.value[0][0])));//comments
-        console.log(noncompliances.map((i) => console.log(i.value[0][1])));//imagelist
-
-        this.sendNonComplianceArray(
-
-        const stores = storename
-        .map(item => {
-            return (
-                <tr key={item.Tenant_id }>
-                   
-                        <td>{item.store_name}</td>
-                    </Link>
-                </tr>
-            )
-        });
-        
-        */
        
         if (this.state.noncom != null) {
+            
+            /*
             //this.state.noncom.map((x, i) => {
             for (var i = 0; i < this.state.noncom.length; i++) {
-                if (a == this.state.noncom[i].key) {
-                    //console.log(x.value[0][0]);
-                // x.value[0][1][0], x.value[0][1][1]);
-                    return (
-                    <tr key={i}>
-                        <td>{this.state.noncom[i].value[0][0]}</td>
-                    </tr>);
+                if (a === this.state.noncom[i].key) {
+                    if (this.state.noncom[i].value[0][1] !== []) {   
+                        return (
+                            <tr key={i}>
+                                <td>{this.state.noncom[i].value[0][1]}</td>
+                                <img alt="" top={10} height={110} src={JSON.parse(localStorage.getItem(localStorage.key(i))).dataUri}/>
+                            </tr>);
+                        
+                    }
+                   
                 }
+            
                 
+            }*/
+
+            for (var i = 0; i < localStorage.length; i++) {
+                if (a === localStorage.key(i)) {
+                    return (
+                        <tr key={i}>
+                            <td className="checklist-body-style">{JSON.parse(localStorage.getItem(localStorage.key(i))).val}</td>
+                            <img className="checklist-body-style" alt="" height={130} src={JSON.parse(localStorage.getItem(localStorage.key(i))).dataUri}/>
+                        </tr>);
+                }
             }
             
                   
         }
     
 
+    //23 may 2021 
     }
     //add noncompliances to json to pass over
     //localStorage.clear();
@@ -192,6 +205,11 @@ class SubmitChecklistStaff extends Component {
                     className="btn btn-lg btn-outline-warning header-style mx-3" 
                     style={{ float: "right" }}
                     onClick={this.printPDF}>Download PDF</button>
+                
+                <div className="btndatpicker" style={{ height: 50 }}>
+                    <Datepicker />
+                </div>
+
                 <div className="container" id="audit">
                     <h1 className="header-style" >Audit: <h1 className="header-style" style={{display : 'inline-block', color: "#f06d1a"}}>Tenant Name, Date</h1></h1>
                     <h1 className="header-style" style={{display : 'inline-block'}}>Total Audit Score: <h1 className="header-style" style={{display : 'inline-block', color: this.formatScore()}}>{calculateScore(getClickedItems(), "totalScore")}</h1></h1>
@@ -206,7 +224,7 @@ class SubmitChecklistStaff extends Component {
                             <thead>
                                 <tr className="checklist-header-style">
                                     <th xs={4}>Category</th>
-                                    <th xs={7}>Item</th>
+                                    <th xs={4}>Item</th>
                                     <th xs={4}>Image and Comments</th>
                                 </tr>
                             </thead>
@@ -216,6 +234,7 @@ class SubmitChecklistStaff extends Component {
                                 <td className="checklist-body-style">{getChecklistItem(id).category}</td>
                                 <td className="checklist-body-style">{getChecklistItem(id).item}</td>
                                 {this.showImageComments(getChecklistItem(id).id)}
+                                
                             </tr>)}
                             </tbody>
                         </table>

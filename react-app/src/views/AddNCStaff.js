@@ -19,7 +19,7 @@ import FormComponent from "../components/FormComponent";
 
 class AddNCStaff extends Component {
   auditData;
-  _isMounted = false;
+  //_isMounted = false;
 
   constructor(props) {
     super(props);
@@ -51,10 +51,10 @@ class AddNCStaff extends Component {
 
   //componentDidMount is only called once
   componentDidMount() {
-    this._isMounted = true;
-    this.auditData = JSON.parse(
-      localStorage.getItem(this.state.checklistItem.id)
-    );
+    //this._isMounted = true;
+    this.auditData = 
+      JSON.parse(
+        localStorage.getItem(this.state.checklistItem.id));
 
     
     if (localStorage.getItem(this.state.checklistItem.id) ) {
@@ -94,17 +94,18 @@ class AddNCStaff extends Component {
   
 
   componentWillUnmount() {
-    this._isMounted = false;
-    clearInterval(this.auditData);
+    clearTimeout(this.auditData);
+    //this._isMounted = false;
+
     //this.auditData.remove();
   }
 
 
   componentWillUpdate(nextProps, nextState) {
-    //console.log(nextState);
     //ensures local storage do not store null non compliances
     //meaning if got text, but no pic, still wont pass over
     //but if no text and have pic, will pass over
+
     //console.log(nextState);
     //console.log(localStorage);
     //localStorage.removeItem(auditid + this.state.checklistItem.id);
@@ -125,16 +126,11 @@ class AddNCStaff extends Component {
   onTakePhoto(dataUri) {
     console.log("takePhoto");
     console.log(dataUri);
-    //const b64 = dataUri.replace(/^data:image.+;base64,/, "");
-    //console.log(b64); //this is a valid base 64 string
     this.setState({ dataUri: dataUri });
   }
 
   handleSave(e) {
     e.preventDefault();
-    /*this.setState({
-      val: "",
-    });*/
     console.log("Saving...");
     //alert("Text field value is: " + this.state.va);
   }
@@ -195,11 +191,11 @@ class AddNCStaff extends Component {
 
     //localStorage.clear();
     console.log(localStorage);
+    
     /*/for (var i = 0; i < localStorage.length - 1; i++) {
       ///console.log(localStorage.getItem(localStorage.key(i)))
     }*/
     //console.log(localStorage.getItem(localStorage.key(1))) //test bug at index 1
-
     return (
       
       <React.Fragment>
