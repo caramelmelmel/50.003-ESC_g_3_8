@@ -30,9 +30,8 @@ class LoginStaff extends Component {
         this.setState({isClicked: true});
 
         var objString = `{
-            "staff_name": "${this.state.name}",
-            "staff_email": "${this.state.email}",
-            "staff_password": "${this.state.password}"
+            "email": "${this.state.email}",
+            "password": "${this.state.password}"
         }`;
       
         var JSONdata = JSON.parse(objString);
@@ -56,17 +55,68 @@ class LoginStaff extends Component {
                 //crypting the password 
                 const staff_password = Base64.stringify(sha256(this.state.password));
                 console.log(staff_password);
-                JSONdata[staff_password] = staff_password;
+                JSONdata["password"] = staff_password;
                 console.log(JSONdata);
 
                 // check data with db
                 setLogin();
+
+                this.verifyStaff(JSONdata);
+              
                 // go to staff home page
                 this.props.history.push("/dashboard");
 
             }
         }
     }
+
+    verifyStaff(data) {
+        fetch("https://shaghao.herokuapp.com/singhealth/staff/login", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+                // 'x-auth-token':
+                // console.log(response.headers)
+              },
+            body: data,
+        }).then(response => {
+            console.log(response.status)
+            if (!response.status.ok) {
+                console.log("Staff login failed!")
+                // route back to login staff page
+                // this.props.history.push("/login-staff");
+            } else {
+                console.log("Staff logged in!");
+                // put token in local storage
+                console.log(response.headers);
+                // route to staff home page
+                // this.props.history.push("/success-staff");
+            }
+        })
+    }
+
+    // synchronous call to verify staff
+    // verifyStaff(data) {
+    //     try {
+    //         // not sure about host here
+    //         fetch("https://shaghao.herokuapp.com/singhealth/staff/login", {
+    //         method: "POST",
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             // 'x-auth-token':
+    //             // console.log(response.headers)
+    //           },
+    //         body: data,
+    //         })
+    //         // if verified, store token in local storage 
+    //         // else redirect to login page
+    //         console.log("Staff verified");
+    //     } catch (err) {
+    //         console.log(err.message);
+    //     }
+    // }
+
+    
     
     render() { 
         const marginVertSpace = 5;
