@@ -101,6 +101,7 @@ class NonComplianceTenant extends Component {
                     </span>
                   </h1>
                 </h1>
+
                 {getAllNoncompliance().map((nc) => (
                   <Accordion defaultActiveKey="0" key={nc.id}>
                     <Card>
@@ -109,6 +110,7 @@ class NonComplianceTenant extends Component {
                         eventKey={nc.id}
                         className="header-style"
                         style={{ height: 50, padding: 15 }}
+
                       >
                         <h5>{this.getItem(nc.nc_id)}</h5>
                       </Accordion.Toggle>
