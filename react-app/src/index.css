@@ -64,6 +64,13 @@ code {
   z-index: 1;
 }
 
+.btndatpicker{
+  justify-content: start;
+  align-items: center;
+  width: 250px;
+  height: 300;
+}
+
 .nav-menu.active {
   left: 0;
   transition: 350ms;

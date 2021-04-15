@@ -133,9 +133,7 @@ export function calculateScoreNonfb(array, toReturn) {
 
     totalScore = ((A / 6 * 0.2) + (B / 12 * 0.4) + (C / 16 * 0.4))*100;
     //totalScore = calculateA(A) + calculateB(B) + calculateC(C) + calculateD(D) + calculateE(E);
-    
-    console.log("TOTAL SCORE NonFB: ", totalScore);
-    
+        
     if (toReturn == "totalScore"){
         return totalScore.toFixed(0);
     } else if (toReturn == "A"){

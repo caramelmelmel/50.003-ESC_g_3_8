@@ -11,10 +11,7 @@ import { getClickedNfbItems, setClickedNfbItems } from './../services/clickedIte
 class ChecklistNonFBStaffB extends Component {
   state = {
     checklistFB: getAllNfbChecklistItems(),
-    //totalscore: this.props.location.state.totalscore,
-    //score: getClickedItems().length,
-    //clickedItems: getClickedItems()
-    clickedItems: []
+    clickedItems: getClickedNfbItems()
   };
 
     handleNext() {
@@ -25,11 +22,7 @@ class ChecklistNonFBStaffB extends Component {
         console.log("CHECKLIST ITEM: ", getNfbChecklistItem(itemId));
         const item = getNfbChecklistItem(itemId);
         const clickedItems = this.state.clickedItems;
-        //this.setState({clickedItems: clickedItems.includes(item.id) ? clickedItems.filter(i => i != itemId) : [...clickedItems, itemId]})
         this.setState({clickedItems: setClickedNfbItems(this.state.clickedItems.includes(item.id)? clickedItems.filter(i => i != itemId) : [...getClickedNfbItems(), itemId])});
-        //this.state.clickedItems.includes(itemId) ? this.state.score-=1 : this.state.score+=1;
-        //console.log("SCORE: ", this.state.score);
-        //console.log("CLICKED ITEMS PG1: ", this.state.clickedItems);
     }
 
     handleSave() {
@@ -72,7 +65,7 @@ class ChecklistNonFBStaffB extends Component {
 
                 </tbody>
             </table>
-                        <Link to={{pathname: "/checklist-non-fb-staff-food-hygiene"}}>
+                        <Link to={{pathname: "/checklist-non-fb-staff-food-hygiene", state: {tenant:  this.props.location.state.tenant}}}>
                             <button 
                             type="button" 
                             className="btn btn-primary btn-lg checklist-header-style" 

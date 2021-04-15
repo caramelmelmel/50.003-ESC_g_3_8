@@ -12,7 +12,7 @@ import { getClickedNfbItems, setClickedNfbItems } from './../services/clickedIte
 class ChecklistNonFBStaffA extends Component {
   state = {
     checklistFB: getAllNfbChecklistItems(),
-    clickedItems: []
+    clickedItems: getClickedNfbItems()
 
   };
 
@@ -86,7 +86,7 @@ class ChecklistNonFBStaffA extends Component {
                     /> : null)}
                 </tbody>
             </table>
-                        <Link to={{pathname: "/checklist-non-fb-staff-housekeeping-and-cleanliness"}}>
+                        <Link to={{pathname: "/checklist-non-fb-staff-housekeeping-and-cleanliness", state: {tenant:  this.props.location.state.tenant}}}>
                             <button 
                             type="button" 
                             className="btn btn-primary btn-lg checklist-header-style" 

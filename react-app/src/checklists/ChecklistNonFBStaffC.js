@@ -14,7 +14,7 @@ class ChecklistNonFBStaffC extends Component {
     //totalscore: this.props.location.state.totalscore,
     //score: getClickedItems().length,
     //clickedItems: getClickedItems()
-    clickedItems: [],
+    clickedItems: getClickedNfbItems()
   };
 
     handleNext() {
@@ -92,7 +92,7 @@ class ChecklistNonFBStaffC extends Component {
                     /> : null)}
                 </tbody>
             </table>
-                        <Link to={{pathname: "/submit-checklist-staff",  state: {category: "nonfb"}}} onClick={this.handlePassScore}>
+                        <Link to={{pathname: "/submit-checklist-staff",  state: {category: "nonfb", tenant:  this.props.location.state.tenant}}} onClick={this.handlePassScore}>
                             <button 
                             type="button" 
                             className="btn btn-primary btn-lg checklist-header-style" 
