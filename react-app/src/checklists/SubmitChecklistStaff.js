@@ -12,11 +12,40 @@ import ReactDOMServer from "react-dom/server";
 
 
 class SubmitChecklistStaff extends Component {
-    state = {
-        checklistFB: getAllChecklistItems(),
-        clickedItems: getClickedItems(),
-        nonclickedItems: this.getNonCompliances()
-      };
+    _isMounted = false;
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+            checklistFB: getAllChecklistItems(),
+            clickedItems: getClickedItems(),
+            nonclickedItems: this.getNonCompliances(),
+        
+        };
+    }
+
+    componentDidMount() {
+        this._isMounted = true;
+    }
+
+        /*
+        ajaxVar
+      .get('https://domain')
+      .then(result => {
+        if (this._isMounted) {
+          this.setState({
+            news: result.data.hits,
+          });
+        }
+      });
+
+
+        */
+        
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+    
 
     formatScore() {
         let color = '#F06D1A';
@@ -51,10 +80,62 @@ class SubmitChecklistStaff extends Component {
 
     submit() {
         console.log("Submit");
+        //implement email functionality
+        localStorage.clear();
     }
 
+    sendNonComplianceArray() {
+        console.log(localStorage);
+        var noncompliances = [];
+        var comments = [];
+        
+        for (var i = 0; i < localStorage.length; i++) {
+            var eachentry = {};
+            var imagelist = [];
+            var resolvedvariable = {};
+            //console.log(localStorage.key(i));
+           
+            if (localStorage.key(i) === "key" || localStorage.getItem(localStorage.key(i)) === "value") {
+                //bug in localStorage
+                console.log("bad");
+                comments.push([null]);
+                continue;
 
-    render() { 
+            }
+            else {
+                eachentry.key = localStorage.key(i);
+                const text = JSON.parse(localStorage.getItem(localStorage.key(i))).val;
+                imagelist.push(JSON.parse(localStorage.getItem(localStorage.key(i))).selected, JSON.parse(localStorage.getItem(localStorage.key(i))).dataUri);
+                //console.log(imagelist);
+                resolvedvariable.key = "resolved";
+                resolvedvariable.value = false;
+                //convert json to array
+                //comments:[ [text, imagelist, staff/tenant, resolved ],  ]
+                comments.push([text, imagelist, "staff", resolvedvariable]);
+            }
+            
+            eachentry.value = [comments[i]];
+            console.log(eachentry);
+            //noncompliances[i]=eachentry; if noncompliance={}
+            noncompliances.push(eachentry)
+        }
+        //console.log(comments);
+        //console.log(eachentry);
+        console.log(noncompliances);
+        //console.log(Object.values(noncompliances));  // Array ['hello', 25, Array ['apple', 'mango']]
+        //console.log(Object.keys(noncompliances));
+        //noncompliances.key = "noncompliance";
+        //noncompliances.value = eachentry;
+        //{ncprofessionalism_02:  comments: [[Example, data:image/jpeg;base64,/9j/4, staff], resolved: false ],
+    //     ncprofessionalism_01: }
+
+    }
+    //add noncompliances to json to pass over
+    //localStorage.clear();
+
+
+    render() {
+        { this.sendNonComplianceArray() }
         console.log("NONCLICKED ITEMS: ", this.state.nonclickedItems);
         return (
             <div className="container">

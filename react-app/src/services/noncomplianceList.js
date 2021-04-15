@@ -3,13 +3,8 @@ const noncomplianceList = [
      id: "01",
      tenant_id: "Kopitiam",
      image: ["Image1", "Image2"],
-     nc_id: "professionalism_01"   
-    },
-    {
-        id: "02",
-        tenant_id: "Kopitiam",
-        image: ["Image1", "Image2"],
-        nc_id: "staff_hygiene_01"   
+     nc_id: "professionalism_01"  
+
     }
 ]
 
@@ -33,3 +28,18 @@ export function getAllNC() {
     } 
     return allNC;
 }
+
+/*
+noncomplainces:[
+{ncprofessionalism_02: comments: [
+“Example statement”,
+[“data:image/jpeg;base64/9j/4, “data:image/jpeg;base64,/9j/4”]
+“staff”,
+{“resolved”: false}] },
+{ncprofessionalism_01: comments: [
+“Hello”,
+[“data:image/jpeg;base64,/9j/4”]
+“staff”,
+{“resolved”: false}] },
+]
+*/

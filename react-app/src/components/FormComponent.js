@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Comment from './Comment';
+import * as AiIcons from "react-icons/ai";
+import "../index.css";
+import { Container, Row, Col } from "react-bootstrap";
 
 class FormComponent extends Component {
   constructor(props) {
@@ -7,16 +10,24 @@ class FormComponent extends Component {
       this.state = { 
       loading: false,
       error: "",
+      message: "",
+      selected:null,
+      bgColor: " #f2f9fc",
+  
 
       comment: {
         name: "",
-        message: ""
+        
       }
    };
+   //tenantaddon = [this.state.message, [this.state.selected], "tenant"]
    
    // bind context to methods 
    this.handleFieldChange = this.handleFieldChange.bind(this);
    this.onSubmit = this.onSubmit.bind(this);
+   this.handleFileInput = this.handleFileInput.bind(this);
+   this.handleFileDelete = this.handleFileDelete.bind(this);
+  
   }
 
   handleFieldChange = event => {
@@ -30,8 +41,10 @@ class FormComponent extends Component {
       }
     });
   };
+ 
 
-
+ 
+  
   onSubmit(e) {
     e.preventDefault();
 
@@ -40,6 +53,7 @@ class FormComponent extends Component {
       return;
     }
 
+   
     // loading status and clear error
     this.setState({ error: "", loading: true });
 
@@ -55,45 +69,103 @@ class FormComponent extends Component {
         //comment.time = res.time;
         this.props.addComment(comment);
 
-        // clear the message box
+        // clear the message box and photo
         this.setState({
           loading: false,
-          comment: { ...comment, message: ""}
+          comment: { ...comment, message: "" },
+          selected: null,
+          bgColor: " #f2f9fc",
+          
         });
       }
     })
       .catch(err => {
         this.setState({
-          error: "Something went wrong while submitting",
+          error: "Posting...",
           loading: false
         });
     });
   }
 
   isFormValid() {
-    return (this.state.comment.name !== "" && this.state.comment.message !== "");
+    return (this.state.selected !== null && this.state.comment.message !== "");
   }
 
   renderError() {
-    return this.state.error ? (<div className="alert alert-danger">{this.state.error}</div>) : null;
+    return this.state.error ? (<div className="alert alert-success">{this.state.error}</div>) : null;
   };
 
-  render() { 
-    return ( 
-      <React.Fragment>
-        <form method="post" onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <input
-              onChange={this.handleFieldChange}
-              value={this.state.comment.name}
-              className="form-control"
-              placeholder="Your Name"
-              name="name"
-              type="text"
-              />
-          </div>
+  handleFileInput(e) {
+    e.stopPropagation();
+    e.preventDefault();
+    //console.log(e.target.files);
+    const file = e.target.files[0];
+    this.getBase64(file).then((base64) => {
+      this.setState({ selected: base64, bgColor: "#f06d1a"});
+    });
+    
+  }
 
+  handleFileDelete() {
+    //console.log(this.state.selected);
+    this.setState({ selected: null, bgColor: " #f2f9fc", error:""});
+    console.log("Deleted");   
+  
+  }
+
+  getBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+  }
+
+   
+  /*
+    (2) [{…}, {…}]
+        0:
+        key: "professionalism_01"
+        value: [Array(4)]
+        __proto__: Object
+        1:
+        key: "professionalism_02"
+        value: [Array(4)]
+
+
+    */
+    
+  updateArray() {
+    
+
+    if (this.state.comment.message !== "" && this.state.selected !== null) {
+      const questions = [this.state.comment.message, [this.state.selected],"tenant"];
+      console.log(this.props.item.value.push(questions));
+      console.log(this.props.item.value);
+      
+    }
+    
+
+   
+    /*
+    this.setState({
+        test: questions
+    });*/
+    
+  }
+
+
+  render() {
+    return (
+      <React.Fragment>
+        {console.log(this.props.item)}
+        {this.updateArray}
+        
+        <form style={{position:"absolute", left:15, top: 260}} method="post" onSubmit={this.onSubmit}>
           <div className="form-group">
+
+            
             <textarea
               onChange={this.handleFieldChange}
               value={this.state.comment.message}
@@ -101,15 +173,54 @@ class FormComponent extends Component {
               placeholder="Add Additional Comments Here"
               name="message"
               rows="5"
+              style={{position:"absolute", top:50, width:315 }}
               />
-          </div>
+          
 
-          {this.renderError()}
+            {this.renderError()}
+          
+          
+            <Container>
+            <Row>
+            <label
+              style={{
+                float:"left",
+                width: 270,
+                height: 30,
+                bottom:0,
+                backgroundColor: this.state.bgColor,
+                
+              }}
+            >
+              <input
+                accept="image/*"
+                type="file"
+                onChange={this.handleFileInput}
+                />
+                Select File
+                
+            </label>
 
-          <div className="form-group">
-            <button disabled={this.state.loading} className="btn btn-warning">
-              Comment
+            <div>
+            {this.state.selected !== null ?
+              <button
+                style={{
+                  float: "right",
+                  width:45,
+                  height: 30,
+
+                }}
+                onClick={this.handleFileDelete}>
+                <AiIcons.AiOutlineClose size="15" />
+              </button> : null}
+            </div>
+            </Row>
+            </Container>
+
+            <button onClick={this.onSubmit} disabled={this.state.loading} className="btn btn-warning" style={{position:"absolute", left:0 ,width:315, top:158}}>
+              Submit
             </button>
+
           </div>
         </form>
       </React.Fragment>
@@ -118,3 +229,17 @@ class FormComponent extends Component {
 }
  
 export default FormComponent;
+
+/*
+<input
+onChange={this.handleFieldChange}
+value={this.state.comment.name}
+className="form-control"
+placeholder="Your Name"
+name="name"
+type="text"
+/>
+
+
+
+*/

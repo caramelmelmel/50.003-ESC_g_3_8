@@ -284,7 +284,7 @@ span {
 
 .carousel {
   width: 80%;
-  height: 500px;
+  height: 330px;
   margin: auto;
   z-index: 0;
 }
@@ -312,8 +312,17 @@ label {
 }
 
 label > input[type=file] {
+  width: 0%;
+  height: 0%;
   display: none;
+
 
 }
 
+.phototenant {
+  margin-left: 5%;
+  height: 30%;
+  width: 50%; 
+  left: 30px;
+}
 

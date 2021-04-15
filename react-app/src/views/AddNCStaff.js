@@ -25,24 +25,22 @@ class AddNCStaff extends Component {
     super(props);
     this.state = {
       val: "",
-      selected: [],
+      selected: null,
       dataUri: null,
-      bgColor: "",
+      bgColor: " #f2f9fc",
       checklistItem: getChecklistItem(props.location.state.itemId),
-      itemName: props.itemName,
-      clickedItems: props.clickedItems,
+      //itemName: props.itemName,
+      //clickedItems: props.clickedItems,
       comments: {},
-      loading: false
+      //loading: false,
     };
     this.onTakePhoto = this.onTakePhoto.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDeleteImage = this.handleDeleteImage.bind(this);
-
     this.handleFileInput = this.handleFileInput.bind(this);
-    this.boxClick = this.boxClick.bind(this);
-
+    this.handleFileDelete = this.handleFileDelete.bind(this);
     this.addComment = this.addComment.bind(this);
-
+    this.handleSave = this.handleSave.bind(this);
   }
   //need to send state of val and dataUri along with list of non compliance to tenants!!
 
@@ -51,29 +49,31 @@ class AddNCStaff extends Component {
     router: PropTypes.object,
   };
 
+  //componentDidMount is only called once
   componentDidMount() {
     this._isMounted = true;
     this.auditData = JSON.parse(
-      localStorage.getItem("nc" + this.state.checklistItem.id)
+      localStorage.getItem(this.state.checklistItem.id)
     );
 
-    if (this._isMounted) {
-      if (localStorage.getItem("nc" + this.state.checklistItem.id)) {
-        this.setState({
-          val: this.auditData.val,
-          dataUri: this.auditData.dataUri,
-          selected: this.auditData.selected,
-          bgColor: this.auditData.bgColor,
-        });
-      } else {
-        this.setState({
-          val: "",
-          dataUri: null,
-          selected: [],
-          bgColor: "",
-        });
-      }
+    
+    if (localStorage.getItem(this.state.checklistItem.id) ) {
+      this.setState({
+        val: this.auditData.val,
+        dataUri: this.auditData.dataUri,
+        selected: this.auditData.selected,
+        bgColor: this.auditData.bgColor,
+      });
+    }else {
+      this.setState({
+        val: "",
+        dataUri: null,
+        selected: null,
+        bgColor: "#f2f9fc",
+      });
     }
+    
+    
 
     /*for (var a in localStorage) {
       //localStorage.clear();
@@ -81,27 +81,38 @@ class AddNCStaff extends Component {
       console.log(localStorage);
       //console.log(a, ' = ', localStorage[a]);
       
+    handleRunClick = () => {
+    
+    }
 
     }*/
     //var key = localStorage.key(a);
     //var value = localStorage.getItem(key);
     //console.log(value);
   }
+
+  
+
   componentWillUnmount() {
     this._isMounted = false;
+    clearInterval(this.auditData);
+    //this.auditData.remove();
   }
+
 
   componentWillUpdate(nextProps, nextState) {
     //console.log(nextState);
     //ensures local storage do not store null non compliances
     //meaning if got text, but no pic, still wont pass over
     //but if no text and have pic, will pass over
-    console.log(nextState);
-    if (nextState.dataUri == null && nextState.selected == []) {
-      localStorage.removeItem("nc" + this.state.checklistItem.id);
+    //console.log(nextState);
+    //console.log(localStorage);
+    //localStorage.removeItem(auditid + this.state.checklistItem.id);
+    if (nextState.dataUri == null && nextState.selected == null) {
+      localStorage.removeItem(this.state.checklistItem.id);
     } else {
       localStorage.setItem(
-        "nc" + this.state.checklistItem.id,
+        this.state.checklistItem.id,
         JSON.stringify(nextState)
       );
     }
@@ -113,46 +124,21 @@ class AddNCStaff extends Component {
 
   onTakePhoto(dataUri) {
     console.log("takePhoto");
-    //console.log(dataUri);
-    const b64 = dataUri.replace(/^data:image.+;base64,/, "");
+    console.log(dataUri);
+    //const b64 = dataUri.replace(/^data:image.+;base64,/, "");
     //console.log(b64); //this is a valid base 64 string
     this.setState({ dataUri: dataUri });
   }
 
   handleSave(e) {
     e.preventDefault();
-    this.setState({
+    /*this.setState({
       val: "",
-    });
+    });*/
     console.log("Saving...");
     //alert("Text field value is: " + this.state.va);
   }
 
-  handleUploadImage() {
-    console.log("Upload Image Button Clicked");
-  }
-
-  handleCancel() {}
-
-  /*this.toDataUrl(dataUri, function (myBase64) {
-      console.log((myBase64)); // myBase64 is the base64 string
-    });
-     
-      console.log(dataUri.responseType);
-    this.toDataURL(dataUri, function(dataUrl) {
-      console.log('RESULT:', dataUrl)
-    })
-     
-     console.log("takePhoto");
-    
-    let dataUriBase64 = "";
-    this.getBase64(dataUri, (result) => {
-      dataUriBase64 = result;
-    });
-    //console.log(dataUri);
-    console.log(dataUriBase64);
-    this.setState({ dataUri: dataUriBase64 });
-  }  */
 
   handleFileInput(e) {
     e.stopPropagation();
@@ -160,24 +146,14 @@ class AddNCStaff extends Component {
     //console.log(e.target.files);
     const file = e.target.files[0];
     this.getBase64(file).then((base64) => {
-      this.setState({ selected: base64 });
-      //{ selected: this.state.selected.concat(base64) })
-      //this.setState({ selected: base64 });
-      //console.log(this.state.selected);
-      //console.log("file stored",base64);
+      this.setState({ selected: base64, bgColor: "#f06d1a" });
     });
-
-    /*
-    var form = new FormData();
-    form.append('file', this.state.file);
-    YourAjaxLib.doUpload('/yourEndpoint/',form).then(result=> console.log(result));
-    */
   }
 
-  boxClick() {
-    this.setState({
-      bgColor: "#f06d1a",
-    });
+
+  handleFileDelete() {
+    this.setState({ selected: null, bgColor: " #f2f9fc" });
+    console.log("helps");
   }
 
   handleDeleteImage() {
@@ -203,9 +179,9 @@ class AddNCStaff extends Component {
 
   addComment(comment) {
     this.setState({
-      loading:false,
-      comments: [comment, ...this.state.comments]
-    })
+      //loading: false,
+      comments: [comment, ...this.state.comments],
+    });
   }
 
   render() {
@@ -213,13 +189,19 @@ class AddNCStaff extends Component {
     //console.log("Checklist Item: ", this.state.checklistItem);
     //console.log("Props: ", this.props);
     const { itemsChecked } = this.props;
+    
 
     //console.log("CLICKED ITEMS PASSED: ", this.props.location.state.clickedItems);
 
     //localStorage.clear();
-    //console.log(localStorage);
+    console.log(localStorage);
+    /*/for (var i = 0; i < localStorage.length - 1; i++) {
+      ///console.log(localStorage.getItem(localStorage.key(i)))
+    }*/
+    //console.log(localStorage.getItem(localStorage.key(1))) //test bug at index 1
 
     return (
+      
       <React.Fragment>
         <Container fluid>
           <Row>
@@ -263,23 +245,36 @@ class AddNCStaff extends Component {
                 <Col xs={10} className="mt-5">
                   <label
                     style={{
-                      marginLeft: "0%",
-                      marginRight: "0%",
+                      
                       float: "left",
-                      width: "100%",
+                      width: "90%",
                       height: 30,
                       top: 60,
                       backgroundColor: this.state.bgColor,
                     }}
-                    onClick={this.boxClick}
                   >
                     <input
                       accept="image/*"
                       type="file"
-                      onChange={this.handleFileInput}
+                      onChange={this.handleFileInput} 
                     />
                     Select File
                   </label>
+
+                  <div>
+                  {this.state.selected != null ?
+                    <button
+                      style={{
+                        float: "right",
+                        width: "10%",
+                        height: 30,
+                        top: 60,
+                      }}
+                      onClick={this.handleFileDelete}
+                    >
+                      <AiIcons.AiOutlineClose size="15" />
+                    </button> : null}
+                  </div>
 
                   <input
                     type="text"
@@ -299,6 +294,15 @@ class AddNCStaff extends Component {
                 </Col>
               </Row>
 
+              {/*<div className="row">
+                <div className="col-4  pt-3 border-right">
+                  <h6>Say something about React</h6>
+                  <FormComponent addComment={this.addComment} />
+                </div>
+                <div className="col-8  pt-3 bg-white">
+                  Comment List Component 
+                </div>
+              </div>*/}
 
               <Link
                 to={{
@@ -318,15 +322,17 @@ class AddNCStaff extends Component {
                 >
                   Back
                 </button>{" "}
-                {/* Now it's same as cancel, need to change this */}
-                <button
+              </Link>
+
+              {/* Now it's same as cancel, need to change this */}
+              <button
                   className="btn btn-lg btn-danger checklist-sideheader-style mt-5"
                   style={{ float: "right", marginRight: "18%" }}
                   onClick={this.handleSave}
                 >
                   Save
-                </button>
-              </Link>
+              </button>
+
             </Col>
           </Row>
         </Container>
