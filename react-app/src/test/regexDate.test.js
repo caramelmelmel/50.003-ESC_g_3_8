@@ -30,7 +30,7 @@ it('(FAIL) - uses .', () => {
   });
 
 // (EXPECTS FAIL) - year before 2020
-it('(FAIL) - year before 2000', () => {
+it('(FAIL) - year before 2020', () => {
     const date = '01/01/2019'; 
     expect(date).toMatch(pattern);
   });

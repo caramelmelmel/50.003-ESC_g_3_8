@@ -40,10 +40,10 @@ class RegisterStaff extends Component {
         // console.log(regexPassword.test(this.state.password));
 
         var objString = `{
-            "staff_institution": "${this.state.institution}",
+            "email": "${this.state.email}",
+            "password": "${this.state.password}",
             "staff_name": "${this.state.name}",
-            "staff_email": "${this.state.email}",
-            "staff_password": "${this.state.password}"
+            "institution_name": "${this.state.institution}"
         }`;
       
         var JSONdata = JSON.parse(objString);
@@ -67,9 +67,9 @@ class RegisterStaff extends Component {
                 //crypting the password 
                 const staff_password = Base64.stringify(sha256(this.state.password));
                 console.log(staff_password);
-                JSONdata["staff_password"] = staff_password;
+                JSONdata["password"] = staff_password;
                 console.log(JSONdata);
-                // this.createStaff(JSONdata);
+                this.createStaff(JSONdata);
 
                 // send data to db
 
@@ -79,22 +79,44 @@ class RegisterStaff extends Component {
         }
     }
 
-    // synchronous call to create staff
     createStaff(data) {
-        try {
-            // not sure about host here
-            fetch("http://localhost:5000/staffreg", {
+        fetch("https://shaghao.herokuapp.com/singhealth/staff/signup", {
             method: "POST",
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
               },
             body: data,
-            })
-            console.log("Staff created");
-        } catch (err) {
-            console.log(err.message);
-        }
+        }).then(response => {
+            console.log(response.status)
+            if (!response.status.ok) {
+                console.log("Staff registration failed!")
+                // console.log(response.headers);
+                // route back to register staff page
+                // this.props.history.push("/register-tenant");
+            } else {
+                console.log("Staff created!");
+                // route to tenant success page
+                // this.props.history.push("/success-tenant");
+            }
+        })
     }
+
+    // // synchronous call to create staff
+    // createStaff(data) {
+    //     try {
+    //         // not sure about host here
+    //         fetch("https://shaghao.herokuapp.com/singhealth/staff/signup", {
+    //         method: "POST",
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //           },
+    //         body: data,
+    //         })
+    //         console.log("Staff created");
+    //     } catch (err) {
+    //         console.log(err.message);
+    //     }
+    // }
 
     handleInstitutionChange(value) {
         console.log(value.option);
