@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import Comment from './Comment';
 import * as AiIcons from "react-icons/ai";
 import "../index.css";
-import { Container, Row, Col } from "react-bootstrap";
-import { addComment, getNC } from '../services/noncomplianceList';
+import { Container, Row } from "react-bootstrap";
+import { addComment } from '../services/noncomplianceList';
 import { getAllNoncompliance } from './../services/noncomplianceList';
 
 class FormComponent extends Component {
@@ -27,8 +26,7 @@ class FormComponent extends Component {
    this.handleFieldChange = this.handleFieldChange.bind(this);
    this.onSubmit = this.onSubmit.bind(this);
    this.handleFileInput = this.handleFileInput.bind(this);
-   this.handleFileDelete = this.handleFileDelete.bind(this);
-  
+   this.handleFileDelete = this.handleFileDelete.bind(this);  
   }
 
   handleFieldChange = event => {
@@ -54,10 +52,12 @@ class FormComponent extends Component {
     var comment = {message: this.state.comment.message, images: this.state.comment.images, email: this.state.comment.email};
     console.log("COMMENT ENTERED: ", comment);
     addComment(this.props.nc_id, comment);
-
+    
     console.log("ALL NC: ", getAllNoncompliance());
-    console.log("TRY MY LUCK");
-
+    console.log("PROPS: ", this.props);
+    this.props.updateList("YES");
+    this.state.comment.message = "";
+    //this.props.updateList("yes");
 
     /*if (!this.isFormValid()) {
       this.setState({ error: "All fields are required!"});
@@ -103,6 +103,8 @@ class FormComponent extends Component {
 
 
   }
+
+
 
   isFormValid() {
     return (this.state.selected !== null && this.state.comment.message !== "");

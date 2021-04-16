@@ -16,7 +16,7 @@ const noncomplianceList = [
         comments: [{message: "This is a test 02", images: ["data:image/png;base64", "data.image/jpeg;base64,/9j/4"], email: "staff2@singhealth.com.sg"}]
        },
        {
-        id: "01",
+        id: "03",
         tenant_id: "Kopitiam",
         image: ["Image1", "Image2"],
         nc_id: "professionalism_03", 
