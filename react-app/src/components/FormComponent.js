@@ -3,6 +3,8 @@ import Comment from './Comment';
 import * as AiIcons from "react-icons/ai";
 import "../index.css";
 import { Container, Row, Col } from "react-bootstrap";
+import { addComment, getNC } from '../services/noncomplianceList';
+import { getAllNoncompliance } from './../services/noncomplianceList';
 
 class FormComponent extends Component {
   constructor(props) {
@@ -10,18 +12,17 @@ class FormComponent extends Component {
       this.state = { 
       loading: false,
       error: "",
-      message: "",
       selected:null,
       bgColor: " #f2f9fc",
   
 
       comment: {
-        name: "",
-        
+        email: "tenant01@gmail.com",
+        message: "",
+        images: []
       }
    };
    //tenantaddon = [this.state.message, [this.state.selected], "tenant"]
-   
    // bind context to methods 
    this.handleFieldChange = this.handleFieldChange.bind(this);
    this.onSubmit = this.onSubmit.bind(this);
@@ -31,6 +32,7 @@ class FormComponent extends Component {
   }
 
   handleFieldChange = event => {
+    console.log("COMMENT FORM STATE: ", this.state);
     const { value, name } = event.target;
 
     this.setState({
@@ -40,6 +42,7 @@ class FormComponent extends Component {
         [name]: value
       }
     });
+    console.log("COMMENT MESSAGE: ", this.state.comment.message);
   };
  
 
@@ -48,15 +51,26 @@ class FormComponent extends Component {
   onSubmit(e) {
     e.preventDefault();
 
-    if (!this.isFormValid()) {
+    var comment = {message: this.state.comment.message, images: this.state.comment.images, email: this.state.comment.email};
+    console.log("COMMENT ENTERED: ", comment);
+    addComment(this.props.nc_id, comment);
+
+    console.log("ALL NC: ", getAllNoncompliance());
+    console.log("TRY MY LUCK");
+
+
+    /*if (!this.isFormValid()) {
       this.setState({ error: "All fields are required!"});
       return;
-    }
+    }*/
+
+    
 
    
     // loading status and clear error
-    this.setState({ error: "", loading: true });
+    //this.setState({ error: "", loading: true });
 
+    /*
     // persist the comments on server
     let { comment } = this.state;
     fetch("https://shaghao.herokuapp.com/", { method: "POST", body: JSON.stringify(comment)})
@@ -84,7 +98,10 @@ class FormComponent extends Component {
           error: "Posting...",
           loading: false
         });
-    });
+    });*/
+
+
+
   }
 
   isFormValid() {

@@ -38,12 +38,12 @@ function AuditStaff() {
             <Tab>Ongoing Audits</Tab>
             <Tab>ResolvedAudits</Tab>
             <Link to="/textfield-staff">
-              <Button variant="outline-dark" style={{ position: "absolute", left: 390 }}>
+              <Button variant="outline-dark" style={{ position: "absolute", width:325, left: 230 }}>
                 <AiIcons.AiOutlineFolderAdd size="17" style={{ marginRight: "5" }} />Create New Audit
               </Button>
             </Link>
-            <Button variant="outline-dark" style={{ position: "absolute", left: 230 }}>
-              <VscIcons.VscDebugContinue size="17" style={{ marginRight: "5" }}/>Continue Existing Audit</Button>
+          {/*<Button variant="outline-dark" style={{ position: "absolute", left: 230 }}>
+              <VscIcons.VscDebugContinue size="17" style={{ marginRight: "5" }}/>Continue Existing Audit</Button>*/}
           </TabList>
           
         

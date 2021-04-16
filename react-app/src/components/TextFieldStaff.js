@@ -17,7 +17,10 @@ class TextFieldStaff extends Component {
     };
 
     handleInstitutionChange(value) {
-        console.log(value.option);
+        console.log(value.option); //institution
+        localStorage.setItem("institution_name", value.option);
+        //console.log(localStorage.getItem("institution_name"));
+
         if (this.state.checkTenant === true && this.state.checkCategory === true) {
             this.setState({checkAll: true});
         } else {
@@ -28,7 +31,10 @@ class TextFieldStaff extends Component {
     }
 
     handleTenantChange(value) {
-        console.log(value.option);
+        console.log(value.option); //tenant name
+        localStorage.setItem("tenant_name", value.option);
+        ///console.log(localStorage.getItem("tenant_name"));
+        
         if (this.state.checkCategory === true && this.state.checkInstitution === true) {
             this.setState({checkAll: true});
         } else {
@@ -39,7 +45,10 @@ class TextFieldStaff extends Component {
     }
 
     handleCategoryChange(value) {
-        console.log(value.option);
+        console.log(value.option); //category
+        localStorage.setItem("category", value.option);
+        //console.log(localStorage.getItem("category"));
+
         if (this.state.checkTenant === true && this.state.checkInstitution === true) {
             this.setState({checkAll: true});
         } else {

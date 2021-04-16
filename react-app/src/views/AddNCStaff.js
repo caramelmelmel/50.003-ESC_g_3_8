@@ -193,10 +193,6 @@ class AddNCStaff extends Component {
     //localStorage.clear();
     console.log(localStorage);
     
-    /*/for (var i = 0; i < localStorage.length - 1; i++) {
-      ///console.log(localStorage.getItem(localStorage.key(i)))
-    }*/
-    //console.log(localStorage.getItem(localStorage.key(1))) //test bug at index 1
     return (
       
       <React.Fragment>

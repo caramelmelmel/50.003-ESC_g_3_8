@@ -75,6 +75,8 @@ export function calculateScore(array, toReturn) {
     //totalScore = calculateA(A) + calculateB(B) + calculateC(C) + calculateD(D) + calculateE(E);
     
     console.log("TOTAL SCORE: ", totalScore);
+    localStorage.setItem("audit_score", totalScore);
+    //console.log(localStorage.getItem("audit_score"));
     
     if (toReturn == "totalScore"){
         return totalScore.toFixed(0);

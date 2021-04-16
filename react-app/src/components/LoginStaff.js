@@ -62,7 +62,13 @@ class LoginStaff extends Component {
                 setLogin();
 
                 this.verifyStaff(JSONdata);
-              
+                
+
+                //save staff email to local storage
+                localStorage.setItem("staff_email", this.state.email);
+                console.log(localStorage.getItem("staff_email"));
+                console.log(localStorage);
+
                 // go to staff home page
                 this.props.history.push("/dashboard");
 
@@ -118,7 +124,8 @@ class LoginStaff extends Component {
 
     
     
-    render() { 
+    render() {
+        console.log(this.state.email); ///pass staff email through 
         const marginVertSpace = 5;
         const titleStyle = {
             marginTop: marginVertSpace,
