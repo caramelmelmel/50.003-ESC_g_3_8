@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/singhealth_esc/static/css/main.8981ff9b.chunk.css",
+    "main.js": "/singhealth_esc/static/js/main.4993892f.chunk.js",
+    "main.js.map": "/singhealth_esc/static/js/main.4993892f.chunk.js.map",
+    "runtime-main.js": "/singhealth_esc/static/js/runtime-main.324b4790.js",
+    "runtime-main.js.map": "/singhealth_esc/static/js/runtime-main.324b4790.js.map",
+    "static/js/2.966124cc.chunk.js": "/singhealth_esc/static/js/2.966124cc.chunk.js",
+    "static/js/2.966124cc.chunk.js.map": "/singhealth_esc/static/js/2.966124cc.chunk.js.map",
+    "static/css/3.a4f508ed.chunk.css": "/singhealth_esc/static/css/3.a4f508ed.chunk.css",
+    "static/js/3.bdf72e6d.chunk.js": "/singhealth_esc/static/js/3.bdf72e6d.chunk.js",
+    "static/js/3.bdf72e6d.chunk.js.map": "/singhealth_esc/static/js/3.bdf72e6d.chunk.js.map",
+    "static/js/4.3731d758.chunk.js": "/singhealth_esc/static/js/4.3731d758.chunk.js",
+    "static/js/4.3731d758.chunk.js.map": "/singhealth_esc/static/js/4.3731d758.chunk.js.map",
+    "static/js/5.e525f4d6.chunk.js": "/singhealth_esc/static/js/5.e525f4d6.chunk.js",
+    "static/js/5.e525f4d6.chunk.js.map": "/singhealth_esc/static/js/5.e525f4d6.chunk.js.map",
+    "index.html": "/singhealth_esc/index.html",
+    "static/css/3.a4f508ed.chunk.css.map": "/singhealth_esc/static/css/3.a4f508ed.chunk.css.map",
+    "static/css/main.8981ff9b.chunk.css.map": "/singhealth_esc/static/css/main.8981ff9b.chunk.css.map",
+    "static/js/2.966124cc.chunk.js.LICENSE.txt": "/singhealth_esc/static/js/2.966124cc.chunk.js.LICENSE.txt",
+    "static/js/3.bdf72e6d.chunk.js.LICENSE.txt": "/singhealth_esc/static/js/3.bdf72e6d.chunk.js.LICENSE.txt",
+    "static/js/4.3731d758.chunk.js.LICENSE.txt": "/singhealth_esc/static/js/4.3731d758.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/singhealth_esc/static/media/Sofia-Pro-Semibold.20448924.otf",
+    "static/media/react-bootstrap-carousel.css": "/singhealth_esc/static/media/react-bootstrap-carousel.f4133112.ttf",
+    "static/media/slider1.5697d0e1.png": "/singhealth_esc/static/media/slider1.5697d0e1.png",
+    "static/media/slider2.5b9a78e1.jpg": "/singhealth_esc/static/media/slider2.5b9a78e1.jpg",
+    "static/media/slider3.561e7229.jpg": "/singhealth_esc/static/media/slider3.561e7229.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.324b4790.js",
+    "static/css/3.a4f508ed.chunk.css",
+    "static/js/3.bdf72e6d.chunk.js",
+    "static/css/main.8981ff9b.chunk.css",
+    "static/js/main.4993892f.chunk.js"
+  ]
+}
