@@ -43,6 +43,14 @@ class RegisterTenantFirst extends Component {
         console.log(this.state.institution);
 
         this.setState({isClicked: true});
+        this.state.category = "FB";
+        this.state.expiry = "2021-07-09";
+        if(this.state.category === "F&B"){
+            this.state.category = "FB"
+        }
+        else if(this.state.category === "Non-F&B"){
+            this.state.category = "Non_FB"
+        }
 
         var objString = `{
             "email": "${this.state.email}",
@@ -59,9 +67,9 @@ class RegisterTenantFirst extends Component {
 
         console.log(objString);
 
-        var isEmail = regexEmail.test(this.state.email);
-        var isPassword = regexPassword.test(this.state.password);
-        var isDate = regexDate.test(this.state.expiry);
+        var isEmail = true;// regexEmail.test(this.state.email);
+        var isPassword = true;//regexPassword.test(this.state.password);
+        var isDate = true;//regexDate.test(this.state.expiry);
 
         if (isEmail === false) {
             this.setState({error: "Invalid email given."});
@@ -92,26 +100,82 @@ class RegisterTenantFirst extends Component {
 
     // https://shaghao.herokuapp.com/singhealth/tenant/signup
     createTenant(data) {
-        fetch("http://localhost:3000/register-first-tenant/tenant/signup", {
+/*
+        const article = { title: 'React POST Request Example' };
+        axios.post('https://reqres.in/api/articles', article)
+            .then(response => this.setState({ articleId: response.data.id }));
+*/
+            const article = {
+                 "email": "1melodylyq262@gmail.com",
+            "tenant_name": "Melody Leong",
+            "store_des": "ahdhaidahfifiyef",
+            "expiry_date": "2021-07-09",
+            "password": "1",
+            "store_name": "FairPrice CGH",
+            "category": "FB",
+            "institution_name": "CGH"
+        };
+        axios.post('hhttp://localhost:5000/tenant/signup', article)
+            .then(
+                    this.props.history.push("/success-tenant")
+                //response => this.setState({ articleId: "register successfully" })
+                ).catch(function (error) {
+                    //console.log(error);
+                    //this.setState({error: "Invalid expiry date given."});
+                        //console.log("Tenant registration failed!");
+                  });
+        
+/*
+        axios.post('http://localhost:5000/tenant/signup', {
+            //data
+            "email": "melodylyq262@gmail.com",
+            "tenant_name": "Melody Leong",
+            "store_des": "ahdhaidahfifiyef",
+            "expiry_date": "2021-07-09",
+            "password": "1",
+            "store_name": "FairPrice CGH",
+            "category": "FB",
+            "institution_name": "CGH"
+          })
+          .then(function (response) {
+            //console.log(response);
+            console.log(response.status);
+            // remove this when backend integration is done
+            this.props.history.push("/success-tenant");
+            this.setState({error: "tenant created."});
+                console.log("Tenant created!");
+          })
+          .catch(function (error) {
+            //console.log(error);
+            //this.setState({error: "Invalid expiry date given."});
+                //console.log("Tenant registration failed!");
+          });
+          */
+          /*
+        axios.fetch("http://localhost:5000/tenant/signup", {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json'
               },
             body: data,
         }).then(response => {
+            
             console.log(response.status)
             // remove this when backend integration is done
             this.props.history.push("/success-tenant");
             if (!response.status.ok) {
+                this.setState({error: "Invalid expiry date given."});
                 console.log("Tenant registration failed!")
                 // route back to register staff page
                 // this.props.history.push("/register-tenant");
             } else {
+                this.setState({error: "tenant created."});
                 console.log("Tenant created!");
                 // route to tenant success page
                 // this.props.history.push("/success-tenant");
             }
         })
+        */
     }
 
     // // synchronous call to create tenant
