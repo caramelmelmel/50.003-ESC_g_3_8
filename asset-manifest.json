@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/react-app/static/css/main.ad8220ac.chunk.css",
+    "main.js": "/react-app/static/js/main.43a1a83b.chunk.js",
+    "main.js.map": "/react-app/static/js/main.43a1a83b.chunk.js.map",
+    "runtime-main.js": "/react-app/static/js/runtime-main.3416334d.js",
+    "runtime-main.js.map": "/react-app/static/js/runtime-main.3416334d.js.map",
+    "static/js/2.aee2b9ff.chunk.js": "/react-app/static/js/2.aee2b9ff.chunk.js",
+    "static/js/2.aee2b9ff.chunk.js.map": "/react-app/static/js/2.aee2b9ff.chunk.js.map",
+    "static/css/3.257423bb.chunk.css": "/react-app/static/css/3.257423bb.chunk.css",
+    "static/js/3.834c2506.chunk.js": "/react-app/static/js/3.834c2506.chunk.js",
+    "static/js/3.834c2506.chunk.js.map": "/react-app/static/js/3.834c2506.chunk.js.map",
+    "static/js/4.17a3a3c7.chunk.js": "/react-app/static/js/4.17a3a3c7.chunk.js",
+    "static/js/4.17a3a3c7.chunk.js.map": "/react-app/static/js/4.17a3a3c7.chunk.js.map",
+    "static/js/5.2c1e5011.chunk.js": "/react-app/static/js/5.2c1e5011.chunk.js",
+    "static/js/5.2c1e5011.chunk.js.map": "/react-app/static/js/5.2c1e5011.chunk.js.map",
+    "index.html": "/react-app/index.html",
+    "static/css/3.257423bb.chunk.css.map": "/react-app/static/css/3.257423bb.chunk.css.map",
+    "static/css/main.ad8220ac.chunk.css.map": "/react-app/static/css/main.ad8220ac.chunk.css.map",
+    "static/js/2.aee2b9ff.chunk.js.LICENSE.txt": "/react-app/static/js/2.aee2b9ff.chunk.js.LICENSE.txt",
+    "static/js/3.834c2506.chunk.js.LICENSE.txt": "/react-app/static/js/3.834c2506.chunk.js.LICENSE.txt",
+    "static/js/4.17a3a3c7.chunk.js.LICENSE.txt": "/react-app/static/js/4.17a3a3c7.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/react-app/static/media/Sofia-Pro-Semibold.20448924.otf",
+    "static/media/react-bootstrap-carousel.css": "/react-app/static/media/react-bootstrap-carousel.f4133112.ttf",
+    "static/media/slider1.5697d0e1.png": "/react-app/static/media/slider1.5697d0e1.png",
+    "static/media/slider2.5b9a78e1.jpg": "/react-app/static/media/slider2.5b9a78e1.jpg",
+    "static/media/slider3.561e7229.jpg": "/react-app/static/media/slider3.561e7229.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3416334d.js",
+    "static/css/3.257423bb.chunk.css",
+    "static/js/3.834c2506.chunk.js",
+    "static/css/main.ad8220ac.chunk.css",
+    "static/js/main.43a1a83b.chunk.js"
+  ]
+}
