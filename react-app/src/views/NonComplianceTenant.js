@@ -21,6 +21,11 @@ class NonComplianceTenant extends Component {
     ],*/
   };
 
+  constructor(props) {
+    super(props);
+    this.updateList = this.updateList.bind(this);
+  } 
+
   /*
       componentDidMount() {
     const noncom = this.props.noncom;
@@ -56,7 +61,7 @@ class NonComplianceTenant extends Component {
           localStorage.getItem("nc" + this.state.noncompliance[i].nc_id)
         );
         console.log(storedArray);
-        this.setState({ storedArray: storedArray });
+        //this.setState({ storedArray: storedArray });
 
         /*if (storedArray.dataUri !== null) {
                     //console.log(storedArray.dataUri);
@@ -70,6 +75,23 @@ class NonComplianceTenant extends Component {
                     console.log(storedArray.val);
                 }*/
       }
+    }
+  }
+
+  /*componentDidUpdate() {
+    console.log("COMPONENT DID UPDATE IS RUNNING");
+    if (this.state.noncompliance != getAllNoncompliance()) {
+      this.setState({noncompliance: getAllNoncompliance()});
+    }
+  }*/
+
+  updateList(comment) {
+    console.log("UPDATING LIST WITH COMMENT", comment);
+    console.log("NONCOMPLIANCE: ", this.state.noncompliance);
+    if (comment == "YES") {
+      //console.log("CURRENT NC: ", this.state.noncompliance);
+      console.log("UPDATED NC: ", getAllNoncompliance());
+      this.setState({noncompliance: getAllNoncompliance()});
     }
   }
 
@@ -122,7 +144,7 @@ class NonComplianceTenant extends Component {
                           Hello! Find all images and comments here
                           <div className="row">
                             <div className="col-4  pt-3 border-right">
-                              <FormComponent addComment={this.addComment} key={nc.id} nc_id={nc.nc_id}/>
+                              <FormComponent addComment={this.addComment} key={nc.id} nc_id={nc.nc_id} updateList={this.updateList}/>
                             </div>
 
                             <img
