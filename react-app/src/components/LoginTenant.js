@@ -60,7 +60,7 @@ class LoginTenant extends Component {
         } else {
             this.setState({error: "Fill in all fields!"});
             this.setState({isInvalid: false});
-            if (this.state.institution != "" && this.state.name != "" && this.state.email != "" && this.state.password != "") {
+            if (this.state.tenant != "" && this.state.email != "" && this.state.password != "") {
                 //crypting the password 
                 const tenant_password = Base64.stringify(sha256(this.state.password));
                 console.log(tenant_password);
@@ -71,9 +71,11 @@ class LoginTenant extends Component {
                 setLogin();
 
                 this.verifyTenant(JSONdata);
-                // go to tenant home page
+
                 this.props.history.push("/dashboard");
 
+                // go to tenant home page
+                // this.props.history.push("/register-staff");
 
             }
         }

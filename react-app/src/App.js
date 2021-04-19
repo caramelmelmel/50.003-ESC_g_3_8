@@ -30,8 +30,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import LoginStaff from "./components/LoginStaff";
 import StaffSuccess from "./components/StaffSuccess";
 
-import RegisterTenantFirst from "./components/RegisterTenantFirst";
-import RegisterTenantSecond from "./components/RegisterTenantSecond";
+import RegisterTenant from "./components/RegisterTenant";
 import LoginTenant from "./components/LoginTenant";
 import TenantSuccess from "./components/TenantSuccess";
 import Home from "./components/HomePage";
@@ -67,8 +66,7 @@ class App extends Component {
           <Switch>
             <Route path="/" exact component={HomePage} />
             <Route path="/home-log-reg" component={Home} />
-            <Route path="/register-first-tenant" component={RegisterTenantFirst} />
-            <Route path="/register-second-tenant" component={RegisterTenantSecond} />
+            <Route path="/register-tenant" component={RegisterTenant} />
             <Route path="/success-tenant" component={TenantSuccess} />
             <Route path="/login-tenant" component={LoginTenant} />
             <Route path="/register-staff" component={RegisterStaff} />

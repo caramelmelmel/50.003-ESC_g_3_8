@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Comment from './Comment';
 
 export default function CommentList(props) {
-  const { comment, index, id } = props.comments;
+  //const { comment, index, id } = props.comments;
   console.log("PROPS: ", props);
   return (
     <div className="commentList">
@@ -17,7 +17,7 @@ export default function CommentList(props) {
       }
 
 
-      {props.comments.map((comment, index) => (<Comment key={index} comments={comment} />))}
+      {props.comments.map((comment) => (<Comment key={comment.message} message={comment.message} images={comment.images} email={comment.email}/>))}
     </div>
 
     
