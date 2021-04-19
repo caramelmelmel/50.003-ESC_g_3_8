@@ -9,7 +9,7 @@ import SeeUpdates from "../views/SeeUpdates";
 class SeeUpdatesButton extends Component {
   state = {
     itemId: this.props.itemId,
-    audits: getAudits(),
+    audits:getAudits(),
   };
 
   handleSeeUpdates = (itemId) => {
@@ -19,21 +19,26 @@ class SeeUpdatesButton extends Component {
 
 
   render() {
+    //console.log(this.props.itemId);
+  
+    
     //audits that show have resolved == false
 
-    const module = audits.find((audit) => audit.auditid === this.props.itemId );
+    const module = this.state.audits.find((audit) => audit.Tenant_email === this.props.itemId );
     //console.log(module.noncomplainces);
 
-    const noncompliance = []
+    const noncompliance = [];
    
+    //console.log(module);
 
-    for (var i = 0; i < module.noncomplainces.length; i++) {
+    for (var i = 0; i < module.noncompliances.length; i++) {
       //console.log(module.noncomplainces[i].resolved);
-      if (module.noncomplainces[i].resolved == false) {
-        noncompliance.push(module.noncomplainces[i]);
+      
+      if (module.noncompliances[i].resolved == false) {
+        noncompliance.push(module.noncompliances[i]);
       }
     }
-    //console.log(noncompliance)
+    console.log(noncompliance)
           
 
 
@@ -43,10 +48,12 @@ class SeeUpdatesButton extends Component {
         
         <Link
           to={{
-            pathname: `/see-updates/${this.state.itemId}/${item.name}`,
+            pathname: `/see-updates/${this.state.itemId}/${item.key}`,
             state: {
               itemId: this.state.itemId,
-              nonComId: item.name,
+              nonComId: item.key,
+              Res: item.resolved,
+              comments: item.comments,
             },
             
     

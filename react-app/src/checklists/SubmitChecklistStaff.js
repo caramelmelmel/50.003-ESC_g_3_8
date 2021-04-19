@@ -11,6 +11,7 @@ import ReactDOMServer from "react-dom/server";
 import Datepicker from "./../components/Datepicker";
 import { getAllNfbChecklistItems, getNfbAllChecklistId, getNfbChecklistItem } from './../services/checklistNonFB';
 import { emailjs, init } from "emailjs-com";
+import axios from "axios";
 
 
 class SubmitChecklistStaff extends Component {
@@ -22,7 +23,8 @@ class SubmitChecklistStaff extends Component {
             checklistFB: getAllChecklistItems(),
             clickedItems: getClickedItems(),
             nonclickedItems: this.getNonCompliances(),
-            noncom:[],
+            noncom: [],
+            tenant_email:"",
         
         };
         this.printPDF = this.printPDF.bind(this);
@@ -105,22 +107,33 @@ class SubmitChecklistStaff extends Component {
         console.log(noncompliances);
         this.setState({noncom: noncompliances})
 
-        
+        /*getData = () => {
+            axios.get(
+               "/get-data",
+               {
+                   params: {searchTerm: localStorage.getItem("tenant_name")}
+               }
+           ).then(function(response){
+                this.setState({
+                    result: response.data
+                })
+            });
+        }; */
+
+        //change the endpoint
+        //localStorage.key(i) == "tenant_name" 
+        //localStorage.getItem("tenant_name") => use as props
+        axios.get('https://domain')
+        .then(result => {
+            if (this._isMounted) {
+    
+                const tenant_email = result.data;
+                this.setState({ tenant_email: tenant_email });
+            }})
+
     }
 
-        /*
-        ajaxVar
-      .get('https://domain')
-      .then(result => {
-        if (this._isMounted) {
-          this.setState({
-            news: result.data.hits,
-          });
-        }
-      });
-
-
-        */
+        
     MakedeJson() {
         var jsonobj = {};
         jsonobj.staff_email = localStorage.getItem("staff_email");
@@ -128,22 +141,14 @@ class SubmitChecklistStaff extends Component {
         jsonobj.category = localStorage.getItem("category");
         jsonobj.date_recorded=localStorage.getItem("date_recorded")
         jsonobj.audit_score = localStorage.getItem("audit_score");
-        //jsonobj.tenant_email = localStorage.getItem("tenant_email");
-       
+        jsonobj.tenant_email = this.state.tenant_email;
         jsonobj.noncompliance = this.state.noncom;
-        console.log(localStorage);
+        //console.log(localStorage);
         console.log(jsonobj);
         return jsonobj
         
     }
 
-    queryTenantEmail() {
-     //need to get tenant email from database
-    //query //localStorage.getItem("tenant_name") 
-    //store in localstorage 
-    //localStorage.setItem("tenant_email", tenantemail);
-        
-    }
    
         
     componentWillUnmount() {
@@ -196,17 +201,30 @@ class SubmitChecklistStaff extends Component {
     submit() {
         console.log("Submit");
 
-        //implement email functionality
+        //this.MakedeJson();
 
-        if (this.state.noncom != []) {
-            this.MakedeJson();
+        //implement email functionality
+        if (this.state.noncom != [] && this.state.tenant_email!="") {
+            const jsonobj = this.MakedeJson();
+            console.log(jsonobj);
+
+            axios.post(`https://`, { jsonobj })
+            .then(res => {
+              console.log(res);
+              console.log(res.data);
+            })
         }
+
         //localStorage.clear();
        
         /*if (this.state.noncom != []) {
             console.log(JSON.stringify({ "noncompliances": this.state.noncom }));
             //console.log(JSON.parse(JSON.stringify({ "noncompliances": this.state.noncom }))); //rendering on tenants side
         }*/
+
+
+
+
     }
 
 
@@ -235,7 +253,8 @@ class SubmitChecklistStaff extends Component {
                     return (
                         <tr key={i}>
                             <td className="checklist-body-style">{JSON.parse(localStorage.getItem(localStorage.key(i))).val}</td>
-                            <img className="checklist-body-style" alt="" height={130} src={JSON.parse(localStorage.getItem(localStorage.key(i))).dataUri}/>
+                            <img className="checklist-body-style" alt="" height={130} src={JSON.parse(localStorage.getItem(localStorage.key(i))).dataUri} />
+                            <img className="checklist-body-style" alt="" height={130} src={JSON.parse(localStorage.getItem(localStorage.key(i))).selected}/>
                         </tr>);
                 }
             }

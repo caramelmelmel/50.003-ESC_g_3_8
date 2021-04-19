@@ -12,7 +12,7 @@ import '../index.css';
 class SeeUpdates extends Component {
   state = {
     audits: getAudits(),
-    resolved: false,
+    resolved: this.props.Res,
     };
 
   //what i pass
@@ -30,8 +30,9 @@ class SeeUpdates extends Component {
     //console.log(nonCom);
 
 
+
     let module = audits.find((audit) => audit.auditid === auditno);
-    //change JSON file 
+    
     //change the resolved == true
     let list = module.noncomplainces;
     let each = list.find((nc) => nc.name === nonCom);
@@ -39,10 +40,6 @@ class SeeUpdates extends Component {
     //set each.resolved == true in json
 
    
-    //reduce the integer variable
-    module.noofnoncompliances = module.noofnoncompliances - 1;
-    console.log(module.noofnoncompliances);
-
     
 
     
@@ -53,8 +50,9 @@ class SeeUpdates extends Component {
   //render image and comments from json file 
   render() {
     
-    console.log(this.state.resolved);
-    
+    //console.log(this.state.resolved);
+    console.log(this.state);
+    console.log(this.props);
     return (
       <div>
         <h1
