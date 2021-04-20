@@ -10,6 +10,7 @@ import * as FiIcons from "react-icons/fi";
 import * as FcIcons from "react-icons/fc";
 import { Button } from "react-bootstrap";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import { VscDebugBreakpointLog } from "react-icons/vsc";
 
 class OngoingTables extends Component {
   state = {
@@ -66,88 +67,114 @@ class OngoingTables extends Component {
     if (auditscount == 0)
       return <p>There are no ongoing audits in the database.</p>;
 
-    const ongoingAudits = allAudits.filter((m) => m.noofnoncompliances > 0);
+    const ongoingAudits = allAudits.filter((m) => m.noncompliances.length > 0);
+    //allAudits.filter((m) => console.log(m.noncompliances.length));
 
-    const filtered =
-      selectedType && selectedType._id
-        ? ongoingAudits.filter((m) => m.type._id === selectedType._id)
-        : ongoingAudits;
-    //console.log(ongoingAudits);
+    const ongoingAudits2 = [];
+    for (var i = 0; i < ongoingAudits.length; i++) {
+      console.log(ongoingAudits[i]);
+      //check if all resolved is true
+      const tryresolved =[];
+      for (var x = 0; x < ongoingAudits[i].noncompliances.length; x++) {
+        tryresolved.push(ongoingAudits[i].noncompliances[x].resolved);
+        
+      }
+      console.log(tryresolved);
+      if (tryresolved.includes(false) === true) {
+        ongoingAudits2.push(ongoingAudits[i]);
+      }
+      else {
+        
+      }
+      
+    }
+    console.log(ongoingAudits2);
+    //post ongoinAudit2 to server
+    
 
-    const filtered2 =
-      selectedInstitution && selectedInstitution._id
-        ? filtered.filter((m) => m.institution._id === selectedInstitution._id)
-        : filtered;
-    //console.log(this.state.audits);
 
-    return (
-      <div>
-        <div className="ongoingtable">
-          <div class="sentence">
-            {" "}
-            There are currently {filtered2.length} ongoing audits
-          </div>
+      const filtered =
+        selectedType && selectedType._id
+          ? ongoingAudits2.filter((m) => m.type._id === selectedType._id)
+          : ongoingAudits2;
+      //console.log(ongoingAudits);
 
-          <div class="dropdowntype">
-            <Dropdown>
-              <Dropdown.Toggle variant="warning" id="dropdown-type">
-                <FiIcons.FiFilter size="10" style={{ marginRight: "5" }} />
-                Filter Tenants
-              </Dropdown.Toggle>
+      const filtered2 =
+        selectedInstitution && selectedInstitution._id
+          ? filtered.filter((m) => m.institution._id === selectedInstitution._id)
+          : filtered;
+      //console.log(this.state.audits);
 
-              <Dropdown.Menu>
-                <Dropdown.Divider />
-                <Dropdown.Header>By Type</Dropdown.Header>
-                <ListGroup
-                  key={this.state.type._id}
-                  items={this.state.type}
-                  selectedItem={this.state.selectedType} //apply active class to selectedItem
-                  onItemSelect={this.handleTypeSelect}
-                />
-                <Dropdown.Divider />
-
-                <Dropdown.Header>By Institute</Dropdown.Header>
-                <ListGroup
-                  key={this.state.institute._id}
-                  items={this.state.institute}
-                  selectedItem={this.state.selectedInstitution}
-                  onItemSelect={this.handleInstituteSelect}
-                />
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
-        </div>
-
+      return (
         <div>
-          <ReactBootStrap.Table>
-            <thead>
-              <tr>
-                <th>Tenants with Updates</th>
-                <th>Audit Date</th>
-                <th>See Updates from Tenants</th>
-                <th>Performance Score</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {filtered2.map((audit) => (
-                <tr key={audit.id}>
-                  <td>{audit.store_name}</td>
-                  <td>{audit.auditdate}</td>
-                  <td>
+          <div className="ongoingtable">
+            <div class="sentence">
+              {" "}
+              There are currently {filtered2.length} ongoing audits
+            </div>
 
-                    <SeeUpdatesButton key={audit.auditid} itemId={audit.auditid}/>
-                    
-                  </td>
-                  <td>{audit.performancescore}</td>
+            <div class="dropdowntype">
+              <Dropdown>
+                <Dropdown.Toggle variant="warning" id="dropdown-type">
+                  <FiIcons.FiFilter size="10" style={{ marginRight: "5" }} />
+                  Filter Tenants
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Divider />
+                  <Dropdown.Header>By Type</Dropdown.Header>
+                  <ListGroup
+                    key={this.state.type._id}
+                    items={this.state.type}
+                    selectedItem={this.state.selectedType} //apply active class to selectedItem
+                    onItemSelect={this.handleTypeSelect}
+                  />
+                  <Dropdown.Divider />
+
+                  <Dropdown.Header>By Institute</Dropdown.Header>
+                  <ListGroup
+                    key={this.state.institute._id}
+                    items={this.state.institute}
+                    selectedItem={this.state.selectedInstitution}
+                    onItemSelect={this.handleInstituteSelect}
+                  />
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+          </div>
+
+          <div>
+            <ReactBootStrap.Table>
+              <thead>
+                <tr>
+                  <th>Tenants with Updates</th>
+                  <th>Audit Date</th>
+                  <th>See Updates from Tenants</th>
+                  <th>Performance Score</th>
+                  <th></th>
                 </tr>
-              ))}
-            </tbody>
-          </ReactBootStrap.Table>
+              </thead>
+              <tbody>
+                {filtered2.map((audit) => (
+                  <tr key={audit.Tenant_email}>
+                    <td>{audit.store_name}</td>
+                    <td>{audit.date_recorded}</td>
+                    <td>
+
+                      <SeeUpdatesButton key={audit.Tenant_email} itemId={audit.Tenant_email} />
+                    
+                    </td>
+                    <td>{audit.audit_score}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </ReactBootStrap.Table>
+          </div>
         </div>
-      </div>
-    );
+      )
+    }
   }
-}
+
 
 export default OngoingTables;
+//audit.noncompliances

@@ -10,39 +10,47 @@ import { useLocation } from "react-router-dom";
 import '../index.css';
 
 class SeeUpdates extends Component {
-  state = {
-    audits: getAudits(),
-    resolved: false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      itemId: this.props.location.state.itemId,
+      //audits: getAudits(),
+      nonComId: this.props.location.state.nonComId,
+      //resolved: this.props.location.state.Res,
+      stufftochange: this.props.location.state.stufftochange,
+      
     };
+    this.handleSolved = this.handleSolved.bind(this);
+  }
+  
 
-  //what i pass
-  ///audit_del: each audit id: noncomplianceid, resolved=false
-  //resolved=true
+  handleSolved() {
+    /*
 
-  handleSolved = () => {
+    console.log(this.props);
+    console.log(this.props.location.state.stufftochange);
+    //console.log(this.state);
+    for (var i = 0; i < this.props.location.state.stufftochange; i++) {
+      console.log(this.props.location.state.stufftochange[i]);
+      if (this.props.location.state.stufftochange[i].key == this.props.location.state.nonComId) {
+        this.props.location.state.stufftochange[i].resolved = true;
+        newnoncom.push(this.props.location.state.stufftochange[i]);
+        
+      }
+      else {
+        newnoncom.push(this.props.location.state.stufftochange[i]);
+      }
+      console.log(this.state.stufftochange[i]);
+    }
+
+    console.log(newnoncom);  */  //this.setState({ stufftochange: this.state.stufftochange });
+    this.setState({ stufftochange: { ...this.state.stufftochange, resolved: true } });
+    //find this itemId as tenant_email on database, use this key and push to database
+    //js.getJSONObject.tenant_email == itemId
+    //.getJSONObject.noncompliances[i].key==nonComId
+    //noncompliances[i].put("resolved", "true");
     
-    this.setState({ resolved: true });
-    //console.log(this.state.resolved);
-
-    const auditno = this.props.location.state.itemId;
-    //console.log(auditno);
-    const nonCom = this.props.location.state.nonComId;
-    //console.log(nonCom);
-
-
-    let module = audits.find((audit) => audit.auditid === auditno);
-    //change JSON file 
-    //change the resolved == true
-    let list = module.noncomplainces;
-    let each = list.find((nc) => nc.name === nonCom);
-    console.log(each.resolved);
-    //set each.resolved == true in json
-
    
-    //reduce the integer variable
-    module.noofnoncompliances = module.noofnoncompliances - 1;
-    console.log(module.noofnoncompliances);
-
     
 
     
@@ -52,9 +60,11 @@ class SeeUpdates extends Component {
 
   //render image and comments from json file 
   render() {
+    console.log(this.state);
     
-    console.log(this.state.resolved);
-    
+    //console.log(this.state.resolved);
+    //console.log(this.state);
+    //console.log(this.props); //this.props.entirething.resolved == true
     return (
       <div>
         <h1
@@ -116,8 +126,7 @@ class SeeUpdates extends Component {
                   width: "80%",
                 }}
               />
-              {/* </Col>
-            <Col> */}
+              
               <Button
                 variant="dark"
                 style={{
