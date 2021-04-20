@@ -33,7 +33,7 @@ it('(EXPECTS FAIL) - space in password', () => {
 
 // (EXPECTS FAIL) - upper and lower case but no symbol
 it('(EXPECTS FAIL) - upper and lower case but no symbol', () => {
-  const password = '"Password'; 
+  const password = 'Password'; 
   expect(password).toMatch(pattern);
 });
  
