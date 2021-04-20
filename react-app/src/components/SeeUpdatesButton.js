@@ -13,6 +13,7 @@ class SeeUpdatesButton extends Component {
   };
 
   handleSeeUpdates = (itemId) => {
+    //itemId is tenant email
     console.log("ITEM CLICKED HAS ID OF:", this.state.itemId);
   };
   
@@ -38,11 +39,13 @@ class SeeUpdatesButton extends Component {
         noncompliance.push(module.noncompliances[i]);
       }
     }
-    console.log(noncompliance)
+    //console.log(noncompliance)
           
 
-
+  
+  
     return (
+      
       noncompliance.map(item => (
       
         
@@ -52,8 +55,8 @@ class SeeUpdatesButton extends Component {
             state: {
               itemId: this.state.itemId,
               nonComId: item.key,
-              Res: item.resolved,
-              comments: item.comments,
+              stufftochange: item,
+
             },
             
     
