@@ -3,136 +3,143 @@ import React, { Component, useState } from "react";
 import { Link } from "react-router-dom";
 import SeeUpdates from "../components/SeeUpdatesButton";
 
-//this should be the output from checklist
-//noofnoncomplainces = length of noncompliances array
+
+//noofnoncomplainces = length of noncompliances list
+
+//render in ongoin table
+//on press solved, change resolved variable to true
+// once all resolved = true, create finished_date 
+
+//post audit to resolvedauditstable
+
+
+
 export const audits = [
   {
-    Tenant_id: "1",
+    Tenant_email: "1",
     auditid: "1",
     institution: { _id: "1", name: "CGH" },
     store_name: "Subway",
     type: { _id: "1", name: "Food & Beverage Tenant" },
-    auditdate: "2018-01-03T19:04:28.809Z",
-    performancescore: 96,
-    noncomplainces: [
-      { name: "professionalism_02", resolved: false },
-      { name: "staff_hygiene_02", resolved: false },
-      { name: "environment_cleanliness_02", resolved: false },
-      { name: "environment_cleanliness_05", resolved: false },
+    date_recorded: "2018-01-03T19:04:28.809Z",
+    audit_score: 96,
+    noncompliances: [
+      { key: "professionalism_02", resolved: false, value:{message: "hello", image:"bleh", actor:"staff"} },
+      { key: "staff_hygiene_02", resolved: false },
+      { key: "environment_cleanliness_02", resolved: false },
     ],
-    noofnoncompliances: 4,
+
   },
 
+  // noncomplianceslength => when noncompliances[i].resolved==true=> -1
   /*{
-    Tenant_id: "2",
-    auditid: "2",
-    institution: { _id: "1", name: "CGH" },
+    Tenant_email: "2",
+    staff_email: "2",
+    institution_name: "KKH",
     store_name: "Kopitiam",
-    type: { _id: "1", name: "Food & Beverage Tenant" },
-    auditdate: "2018-01-03T19:04:28.809Z",
-    performancescore: 96,
-    noncomplainces: [
-      { name: "professionalism_02", resolved: false },
-      { name: "staff_hygiene_02", resolved: false },
-      { name: "environment_cleanliness_02", resolved: false },
+    category:"F&B",
+    date_recorded: "2018-01-03T19:04:28.809Z",
+    audit_score: 96,
+    noncompliances: [
+      { key: "professionalism_02", resolved: false, value:{message: , image:, actor:"staff"} },
+      { key: "staff_hygiene_02", resolved: false },
+      { key: "environment_cleanliness_02", resolved: false },
     ],
     noofnoncompliances: 3,
   },*/
   {
-    Tenant_id: "3",
+    Tenant_email: "3",
     auditid: "3",
     institution: { _id: "2", name: "SGH" },
     store_name: "Presents",
     type: { _id: "2", name: "Non Food & Beverage Tenant" },
-    auditdate: "2018-01-03T19:04:28.809Z",
-    performancescore: 96,
-    noncomplainces: [
-      { name: "professionalism_02", resolved: false },
-      { name: "staff_hygiene_02", resolved: false },
-      { name: "environment_cleanliness_02", resolved: false },
+    date_recorded: "2018-01-03T19:04:28.809Z",
+    audit_score: 96,
+    noncompliances: [
+     {key: "professionalism_02", resolved: false },
+     {key: "staff_hygiene_02", resolved: false },
+     {key: "environment_cleanliness_02", resolved: false },
     ],
-    noofnoncompliances: 3,
+    
   },
   {
-    Tenant_id: "4",
+    Tenant_email: "4",
     auditid: "4",
     institution: { _id: "6", name: "OCH" },
     store_name: "ToastBox",
     type: { _id: "1", name: "Food & Beverage Tenant" },
-    auditdate: "2018-01-03T19:04:28.809Z",
-    performancescore: 96,
-    noncomplainces: [
-      { name: "professionalism_02", resolved: false },
-      { name: "staff_hygiene_02", resolved: true},
-      { name: "environment_cleanliness_02", resolved: false },
+    date_recorded: "2018-01-03T19:04:28.809Z",
+    audit_score: 96,
+    noncompliances: [
+     {key: "professionalism_02", resolved: false },
+     {key: "staff_hygiene_02", resolved: true},
+     {key: "environment_cleanliness_02", resolved: false },
     ],
-    noofnoncompliances: 3,
+   
   },
   {
-    Tenant_id: "5",
+    Tenant_email: "5",
     auditid: "5",
     institution: { _id: "1", name: "CGH" },
     store_name: "Popular",
     type: { _id: "2", name: "Non Food & Beverage Tenant" },
-    auditdate: "2018-01-03T19:04:28.809Z",
-    performancescore: 95,
-    noncomplainces: [
-      { name: "professionalism_02", resolved: false },
-      { name: "staff_hygiene_02", resolved: true },
-      { name: "environment_cleanliness_02", resolved: false },
+    date_recorded: "2018-01-03T19:04:28.809Z",
+    audit_score: 95,
+    noncompliances: [
+     {key: "professionalism_02", resolved: true },
+     {key: "staff_hygiene_02", resolved: true },
+     {key: "environment_cleanliness_02", resolved: true },
     ],
-    noofnoncompliances: 3,
+    
   },
   {
-    Tenant_id: "6",
+    Tenant_email: "6",
     auditid: "6",
     institution: { _id: "1", name: "CGH" },
     store_name: "MrBean",
     type: { _id: "1", name: "Food & Beverage Tenant" },
-    auditdate: "2018-01-03T19:04:28.809Z",
-    performancescore: 100,
-    noncomplainces: [],
-    noofnoncompliances: 0,
+    date_recorded: "2018-01-03T19:04:28.809Z",
+    audit_score: 100,
+    noncompliances: [],
+   
   },
   {
-    Tenant_id: "7",
+    Tenant_email: "7",
     auditid: "7",
     institution: { _id: "6", name: "OCH" },
     store_name: "Flowers",
     type: { _id: "2", name: "Non Food & Beverage Tenant" },
-    auditdate: "2018-01-03T19:04:28.809Z",
-    performancescore: 98,
-    noncomplainces: [
-      { name: "professionalism_02", resolved: false },
-      { name: "staff_hygiene_02", resolved: false },
-      { name: "environment_cleanliness_02", resolved: false },
+    date_recorded: "2018-01-03T19:04:28.809Z",
+    audit_score: 98,
+    noncompliances: [
+     {key: "professionalism_02", resolved: false },
+     {key: "staff_hygiene_02", resolved: false },
+     {key: "environment_cleanliness_02", resolved: false },
     ],
-    noofnoncompliances: 3,
+
   },
   {
-    Tenant_id: "8",
+    Tenant_email: "8",
     auditid: "8",
     institution: { _id: "4", name: "SKH" },
     store_name: "Chicken",
     type: { _id: "1", name: "Food & Beverage Tenant" },
-    auditdate: "2018-01-03T19:04:28.809Z",
-    performancescore: 100,
-    noncomplainces: [],
-    noofnoncompliances: 0,
+    date_recorded: "2018-01-03T19:04:28.809Z",
+    audit_score: 100,
+    noncompliances: [],
   },
   {
-    Tenant_id: "9",
+    Tenant_email: "9",
     auditid: "9",
     institution: { _id: "4", name: "SKH" },
     store_name: "Fairprice",
     type: { _id: "1", name: "Food & Beverage Tenant" },
-    auditdate: "2018-01-03T19:04:28.809Z",
-    performancescore: 100,
-    noncomplainces: [
-      { name: "professionalism_02", resolved: false },
-      { name: "staff_hygiene_02", resolved: false },
+    date_recorded: "2018-01-03T19:04:28.809Z",
+    audit_score: 100,
+    noncompliances: [
+     {key: "professionalism_02", resolved: false },
+     {key: "staff_hygiene_02", resolved: false },
     ],
-    noofnoncompliances: 2,
   },
 ];
 
@@ -141,11 +148,11 @@ export const RenderAudit = (audit, index) => {
   return (
     <tr key={index}>
       <td>{audit.tenantname}</td>
-      <td>{audit.auditdate}</td>
+      <td>{audit.date_recorded}</td>
       <td>
         <SeeUpdates key={audit.auditid} itemId={audit.auditid} />
       </td>
-      <td>{audit.performancescore}</td>
+      <td>{audit.audit_score}</td>
     </tr>
   );
 };
