@@ -6,12 +6,14 @@ import sha256 from 'crypto-js/sha256'
 import Base64 from 'crypto-js/enc-base64';
 import axios from 'axios';
 
-// must have "@singhealth.com.sg" and be a word infront
-var regexEmail = /^\w{0,}@singhealth\.com\.sg$/;
+// must have "@(gmail/yahoo) (.com/.com.sg)" and be a word infront
+var regexEmail = /^\w{0,}@(gmail|yahoo)\.com(\.sg)?$/;
 // one uppercase + lowercase + num + symb, min 8 char
 var regexPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 // dd/mm/yyyy format
-var regexDate = /^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](20)\d\d$/;
+// var regexDate = /^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](20)\d\d$/;
+// yyyy-mm-dd format
+var regexDate = /^(20)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/;
 
 class RegisterTenantFirst extends Component {
     state = {

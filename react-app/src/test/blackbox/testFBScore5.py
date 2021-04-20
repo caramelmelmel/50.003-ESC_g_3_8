@@ -19,8 +19,24 @@ print("Expected total score: " + str(score))
 
 # Test performance score if ALL item from each checklist are selected. (100%)
 driver = webdriver.Chrome()
-driver.get("http://localhost:3000/checklist-fb-staff-professionalism-and-staff-hygiene")
-time.sleep(1)
+driver.get("http://localhost:3000/textfield-staff")
+time.sleep(1)    
+
+# Select institution
+driver.find_element_by_xpath("/html/body/div/div/div/div[4]/button").click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[4]/div/a[1]").click()
+time.sleep(1)    
+# Select tenant
+driver.find_element_by_xpath("/html/body/div/div/div/div[6]/button").click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[6]/div/a[9]").click()
+time.sleep(1)    
+# Select category
+driver.find_element_by_xpath("/html/body/div/div/div/div[8]/button").click()
+driver.find_element_by_xpath("/html/body/div/div/div/div[8]/div/a[1]").click()
+time.sleep(1)    
+# Select create audit
+driver.find_element_by_xpath("/html/body/div/div/div/div[10]/button").click()
+time.sleep(1)   
 
 # first page
 i = random.choice(first_num)
