@@ -1,27 +1,24 @@
-const noncomplianceList = [
+var noncomplianceList = [
     {
      id: "01",
      tenant_id: "Kopitiam",
-     image: ["Image1", "Image2"],
      nc_id: "professionalism_01",
      resolved: false,
-     comments: [{message: "This is a test 01 ", images: ["data:image/png;base64", "data.image/jpeg;base64,/9j/4"], email: "staff1@singhealth.com.sg"}, {message: "This is a second test", images: ["data:image/png;base64", "data.image/jpeg;base64,/9j/4"], email: "staff1@singhealth.com.sg"} ]
+     comments: [{message: "This is a test 01 ", image: "https://i.pinimg.com/236x/8c/dd/78/8cdd7805970b2a8ea3285b28bde395e6.jpg", email: "staff1@singhealth.com.sg"}, {message: "This is a second test", image: "https://64.media.tumblr.com/9ce9554ccb9239efc738f5d92c3631e5/tumblr_nm5q43icJv1ryd7qso1_1280.jpg", email: "staff1@singhealth.com.sg"} ]
     },
     {
         id: "02",
         tenant_id: "Kopitiam",
-        image: ["Image1", "Image2"],
         nc_id: "professionalism_02",  
         resolved: false,
-        comments: [{message: "This is a test 02", images: ["data:image/png;base64", "data.image/jpeg;base64,/9j/4"], email: "staff2@singhealth.com.sg"}]
+        comments: [{message: "This is a test 02", image: "https://64.media.tumblr.com/9ce9554ccb9239efc738f5d92c3631e5/tumblr_nm5q43icJv1ryd7qso1_1280.jpg", email: "staff2@singhealth.com.sg"}]
        },
        {
         id: "03",
         tenant_id: "Kopitiam",
-        image: ["Image1", "Image2"],
         nc_id: "professionalism_03", 
         resolved: false,
-        comments: [{message: "This is a test 03", images: ["data:image/png;base64", "data.image/jpeg;base64,/9j/4"], email: "staff3@singhealth.com.sg"}]
+        comments: [{message: "This is a test 03", image: "data.image/jpeg;base64,/9j/4", email: "staff3@singhealth.com.sg"}]
        }
 ]
 
@@ -53,6 +50,10 @@ export function addComment(nc_id, comment) {
             noncomplianceList[i].comments.push(comment);
         }
     }
+}
+
+export function setAllNoncompliance(all) {
+    noncomplianceList = all;
 }
 
 /*

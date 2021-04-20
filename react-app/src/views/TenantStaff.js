@@ -38,7 +38,7 @@ class TenantStaff extends Component {
         className="tenantstaff"
         style={{ position: "absolute", left: 10 }}
       >
-        <Tabs >
+        <Tabs style={{fontFamily: "Sofia Pro"}}>
           <TabList id="controlled-tab-example">
             <Tab onClick={() =>this.handleSelect("CGH")} style={{ minWidth: "5%" }}>CGH</Tab>
             <Tab onClick={() =>this.handleSelect("KKH")} style={{ minWidth: "5%" }}>KKH</Tab>

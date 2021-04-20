@@ -13,9 +13,10 @@ class ChartFinalScore extends Component {
       options: {
         chart: {
           id: "basic-bar",
+          fontFamily: "Sofia Pro",
         },
         xaxis: {
-          categories: (this.props.category == "fb" ? ['Professionalism & Staff Hygiene','Housekeeping & Cleanliness','Food Hygiene','Healthier Choice','Workplace Safety & Health'] : ['Professionalism & Staff Hygiene','Housekeeping & Cleanliness','Food Hygiene']),
+          categories: (this.props.category == "fb" ? ['Professionalism & Staff Hygiene','Housekeeping & Cleanliness','Food Hygiene','Healthier Choice','Workplace Safety & Health'] : ['Professionalism & Staff Hygiene','Housekeeping & Cleanliness','Workplace Safety & Health']),
           labels: {
             rotate: 0,
             hideOverlappingLabels: false,

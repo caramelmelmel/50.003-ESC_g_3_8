@@ -25,20 +25,21 @@ function AuditStaff() {
     //button shld lead to diff see updates in diff audit id
 
     //can only filter by type OR institude currently
+    <React.Fragment>
 
     <div
       className="auditsstaff"
-      class="row"
+      className="row"
       style={{ position: "absolute", left: 30 }}
     >
       
       <Tabs onSelect={(index) => console.log(index)}>
         
           <TabList>
-            <Tab>Ongoing Audits</Tab>
-            <Tab>ResolvedAudits</Tab>
+            <Tab style={{fontFamily: "Sofia Pro"}}>Ongoing Audits</Tab>
+            <Tab style={{fontFamily: "Sofia Pro"}}>ResolvedAudits</Tab>
             <Link to="/textfield-staff">
-              <Button variant="outline-dark" style={{ position: "absolute", width:325, left: 230 }}>
+              <Button variant="outline-dark" style={{ position: "absolute", width:325, left: 230, fontFamily: "Sofia Pro" }}>
                 <AiIcons.AiOutlineFolderAdd size="17" style={{ marginRight: "5" }} />Create New Audit
               </Button>
             </Link>
@@ -48,16 +49,17 @@ function AuditStaff() {
           
         
 
-        <TabPanel>
+        <TabPanel style={{fontFamily: "Sofia Pro"}}>
           <OngoingAudits />
         </TabPanel>
-        <TabPanel>
+        <TabPanel style={{fontFamily: "Sofia Pro"}}>
           <ResolvedAudits />
         </TabPanel>
       </Tabs>
       
 
     </div>
+    </React.Fragment>
   );
 }
 
