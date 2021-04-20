@@ -3,5 +3,9 @@
     "axios": "^0.18.1",
     "crypto-js": "^4.0.0",
     "prop-types": "^15.7.2"
+  },
+
+  "headers": {
+    "Access-Control-Allow-Origin": "*"
   }
 }
