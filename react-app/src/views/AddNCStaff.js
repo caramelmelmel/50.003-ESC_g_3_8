@@ -313,7 +313,7 @@ class AddNCStaff extends Component {
               <button
                 className="btn btn-lg btn-danger checklist-sideheader-style mt-5"
                 style={{ float: "right", marginRight: "18%" }}
-                onClick={this.handleSave}
+                onClick={this.context.router.history.goBack}
               >
                 Save
               </button>

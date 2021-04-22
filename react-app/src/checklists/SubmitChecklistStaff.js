@@ -153,11 +153,11 @@ class SubmitChecklistStaff extends Component {
 
   formatScore() {
     let color = "#F06D1A";
-    let category = this.props.location.state.category;
+    let category = localStorage.getItem("category");
     var score = 0;
-    if (category == "fb") {
+    if (category == "F&B") {
       score = calculateScore(getClickedItems(), "totalScore");
-    } else if ((category = "nonfb")) {
+    } else if (category = "Non-F&B") {
       score = calculateScoreNonfb(getClickedNfbItems, "totalScore");
     }
 
@@ -202,7 +202,15 @@ class SubmitChecklistStaff extends Component {
 
     if (this.state.noncom != []) {
       const jsonobj = this.MakedeJson();
-      this.sendData(jsonobj);
+
+      (async () => {
+        try {
+         await this.sendData(jsonobj);
+        } catch(e) {
+         console.log('Error happend while connecting to the DB: ', e.message)
+        }
+      })();
+    
 
       console.log(jsonobj);
 

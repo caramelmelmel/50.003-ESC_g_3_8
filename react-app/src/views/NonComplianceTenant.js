@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Accordion, Card, Image } from "react-bootstrap";
+import { Accordion, Card, Image, Carousel } from "react-bootstrap";
 import ChartInstitutes from "../components/ChartInstitutes";
 import Chart from "react-apexcharts";
 import { getAllNoncompliance, getLength, setAllNoncompliance } from "../services/noncomplianceList";
@@ -8,13 +8,14 @@ import { getNfbChecklistItem } from "../services/checklistNonFB";
 import FormComponent from "../components/FormComponent";
 import CommentList from "./../components/CommentList";
 import AddNCStaff from "../views/AddNCStaff";
-import { Carousel } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 import "react-bootstrap-carousel/dist/react-bootstrap-carousel.css";
 import Image1 from "../images/slider1.png";
 import Image2 from "../images/slider2.jpg";
 import Image3 from "../images/slider3.jpg";
 import "../index.css";
+import Datepicker from "./../components/Datepicker";
+
 
 class NonComplianceTenant extends Component {
   state = {
@@ -126,6 +127,7 @@ class NonComplianceTenant extends Component {
         console.log("Got the non-compliances!")
         //setAllNoncompliance(response.data); // might be response.body
         //this.setState({noncompliance: getAllNoncompliance()});
+        console.log(response.data);
       }
     }).catch((error) => {console.log(error)});
 
@@ -137,14 +139,14 @@ class NonComplianceTenant extends Component {
   }
 
   sendNonCompliance(data) {
-    fetch("http://local:8080/tenant/getnoncomp", {
+    fetch("http://local:8080/update", {
       method: "PUT",
       mode: "cors",
       headers: { "jwt_token": localStorage.token, 'Content-Type': 'application/json' },
       body: data,
     }).then(response => {
       if (!response.state.ok) {
-        console.log("Couldn't get any data");
+        console.log("CANNOT POST");
       } else {
         console.log("Got the non-compliances!")
       }
