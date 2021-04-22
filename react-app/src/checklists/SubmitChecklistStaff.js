@@ -90,19 +90,27 @@ class SubmitChecklistStaff extends Component {
         continue;
       }
 
+      if (localStorage.key(i) == "token") {
+        continue;
+      }
       //key
       //resolved
       //comments = [{message:text image:image actor:"staff"}, {}]
       else {
         eachentry.key = localStorage.key(i);
         //console.log(localStorage.getItem(localStorage.key(i)));
-        console.log("I AM i ", i);
-        console.log("LOCAL STORAGE. KEY")
-        console.log("LOCAL STORAGE KEY: ", localStorage.getItem(localStorage.key(i)));
 
-        var text = JSON.parse(localStorage.getItem(localStorage.key(i))).val;
+        const text = JSON.parse(localStorage.getItem(localStorage.key(i))).val;
+
+        //console.log("I AM i ", i);
+        //console.log("LOCAL STORAGE. KEY")
+        //console.log("LOCAL STORAGE KEY: ", localStorage.getItem(localStorage.key(i)));
+ 
+      
+
         comments.message = text
         console.log(text);
+       
 
 
         const imagefile = JSON.parse(localStorage.getItem(localStorage.key(i))).selected;
@@ -143,6 +151,7 @@ class SubmitChecklistStaff extends Component {
 
   MakedeJson() {
     var jsonobj = {};
+    var noncomp = {};
     jsonobj.staff_email = localStorage.getItem("staff_email");
     jsonobj.category = localStorage.getItem("category");
     jsonobj.date = localStorage.getItem("date_recorded");
@@ -150,8 +159,14 @@ class SubmitChecklistStaff extends Component {
     jsonobj.store_name = localStorage.getItem("tenant_name") + " " + localStorage.getItem("institution_name")
     jsonobj.non_compliances = this.state.noncom;
     //console.log(localStorage);
+    //noncomp = { obj : [] }
+    //noncomp.obj = this.state.noncom;
+    //jsonobj.non_compliances = noncomp;
+    
     console.log(jsonobj);
-    return jsonobj;
+    const myObjStr = JSON.stringify(jsonobj);
+    console.log(myObjStr);
+    return myObjStr;
   }
 
   componentWillUnmount() {
@@ -209,26 +224,23 @@ class SubmitChecklistStaff extends Component {
     console.log(localStorage);
 
     if (this.state.noncom != []) {
-      const jsonobj = this.MakedeJson();
+      const pass = this.MakedeJson();
 
-      this.sendData(jsonobj);
+      this.sendData(pass);
         
     
-
-      console.log(jsonobj);
-
     }
   }
 
     
-  async sendData(jsonobj) {
+  async sendData(pass) {
     const response = await fetch("http://localhost:8080/audit/createaudit", {
       method: "POST",
       mode: "cors",
       credentials:'same-origin', 
       headers: { jwt_token: localStorage.token, 'Content-Type':'application/json'}, 
       referrerPolicy: 'no-referrer',
-      body: jsonobj,
+      body: pass,
     
     })
     if (response.status !== 200) {
@@ -236,8 +248,11 @@ class SubmitChecklistStaff extends Component {
       this.props.history.push("/submit-checklist-staff");
       
     }
-    console.log("success");
-    this.props.history.push("/dashboard");
+    else {
+      console.log("success");
+      this.props.history.push("/dashboard");
+    
+    }
     
   }
   
@@ -249,7 +264,7 @@ class SubmitChecklistStaff extends Component {
         
         if (a == this.state.noncom[i].key) {
           //console.log(a);
-          console.log(this.state.noncom[i].comments[0].message)
+          //console.log(this.state.noncom[i].comments[0].message)
           ////console.log(localStorage.getItem(localStorage.key(a)));
           ///{JSON.parse(localStorage.getItem(localStorage.key(i))).val}
           // JSON.parse(localStorage.getItem(localStorage.key(i))).selected
