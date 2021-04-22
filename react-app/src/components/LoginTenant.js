@@ -72,7 +72,7 @@ class LoginTenant extends Component {
 
                 this.verifyTenant(JSONdata);
 
-                this.props.history.push("/dashboard");
+                // this.props.history.push("/dashboard");
 
                 // go to tenant home page
                 // this.props.history.push("/register-staff");
