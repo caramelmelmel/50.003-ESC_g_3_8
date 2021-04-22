@@ -79,26 +79,27 @@ class RegisterStaff extends Component {
         }
     }
 
-    createStaff(data) {
-        fetch("https://shaghao.herokuapp.com/singhealth/staff/signup", {
-            method: "POST",
-            headers: {
+    async createStaff(data) {
+        const response = await fetch("http://localhost:8080/staff/signup",{
+            method:'POST',
+            mode:'cors',
+            credentials:'same-origin',
+            headers:{
                 'Content-Type': 'application/json'
-              },
-            body: data,
-        }).then(response => {
-            console.log(response.status)
-            if (!response.status.ok) {
-                console.log("Staff registration failed!")
-                // console.log(response.headers);
-                // route back to register staff page
-                // this.props.history.push("/register-tenant");
-            } else {
-                console.log("Staff created!");
-                // route to tenant success page
-                // this.props.history.push("/success-tenant");
-            }
+            },
+            referrerPolicy: 'no-referrer',
+            body:JSON.stringify(data)
         })
+        if(response.status != 201){
+            console.log(`${response.status}`)
+            console.log("staff registration failed!")
+            // route back to register staff page
+            // this.props.history.push("/register-tenant");
+            console.log("the code has an error here")
+            this.setState({error: "Registration unsuccessful."});
+            this.setState({isInvalid: true});
+        }
+        return response.json
     }
 
     // // synchronous call to create staff
