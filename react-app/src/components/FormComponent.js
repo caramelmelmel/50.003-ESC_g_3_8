@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import * as AiIcons from "react-icons/ai";
 import "../index.css";
-import { Container, Row } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { addComment } from '../services/noncomplianceList';
 import { getAllNoncompliance } from './../services/noncomplianceList';
+import ImagePreview from "../components/ImagePreview";
+
+import Camera from "react-html5-camera-photo";
+import "react-html5-camera-photo/build/css/index.css";
+
 
 class FormComponent extends Component {
   constructor(props) {
@@ -12,6 +17,7 @@ class FormComponent extends Component {
       loading: false,
       error: "",
       selected:null,
+      dataUri: null,
       bgColor: " #f2f9fc",
   
 
@@ -25,10 +31,12 @@ class FormComponent extends Component {
    };
    //tenantaddon = [this.state.message, [this.state.selected], "tenant"]
    // bind context to methods 
+   this.onTakePhoto = this.onTakePhoto.bind(this);
    this.handleFieldChange = this.handleFieldChange.bind(this);
    this.onSubmit = this.onSubmit.bind(this);
    this.handleFileInput = this.handleFileInput.bind(this);
-   this.handleFileDelete = this.handleFileDelete.bind(this);  
+   this.handleFileDelete = this.handleFileDelete.bind(this);
+   this.handleDeleteImage = this.handleDeleteImage.bind(this); 
   }
 
   handleFieldChange = event => {
@@ -156,18 +164,17 @@ class FormComponent extends Component {
   }
 
    
-  /*
-    (2) [{…}, {…}]
-        0:
-        key: "professionalism_01"
-        value: [Array(4)]
-        __proto__: Object
-        1:
-        key: "professionalism_02"
-        value: [Array(4)]
+  onTakePhoto(dataUri) {
+    console.log("takePhoto");
+    console.log(dataUri);
+    this.setState({ dataUri: dataUri });
+  }
 
+  handleDeleteImage() {
+    this.setState({ dataUri: null });
+    console.log("Cancelling...");
+  }
 
-    */
     
   updateArray() {
     
@@ -213,10 +220,11 @@ class FormComponent extends Component {
           
             <Container>
             <Row>
+              
             <label
               style={{
                 float:"left",
-                width: 230,
+                width: 200,
                 height: 30,
                 bottom:0,
                 backgroundColor: this.state.bgColor,
@@ -246,6 +254,32 @@ class FormComponent extends Component {
               </button> : null}
             </div>
             </Row>
+            
+            </Container>
+
+            <Container style={{height: 50}}>
+              <Row>
+                <Col style={{top:180, left:-15, width: 320}} >
+                <div className="cameratenant">
+                  {this.state.dataUri ? (
+                    <ImagePreview dataUri={this.state.dataUri}  style={{height: 50}}/>
+                  ) : (
+                    <Camera onTakePhoto={this.onTakePhoto}  style={{height: 50}}/>
+                  )}
+                </div>
+
+                  <button
+                    style={{
+                      position: "absolute",
+                      right: 30,
+                      top: 20,
+                    }}
+                    onClick={this.handleDeleteImage}
+                  >
+                    <AiIcons.AiOutlineClose size="30" />
+                  </button>
+              </Col>
+              </Row>
             </Container>
 
             <button onClick={this.onSubmit} disabled={this.state.loading} className="btn btn-warning" style={{position:"absolute", left:0 ,width:"100%", top:158}}>

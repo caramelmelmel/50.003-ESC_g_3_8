@@ -29,10 +29,7 @@ class AddNCStaff extends Component {
       selected: null,
       dataUri: null,
       bgColor: " #f2f9fc",
-      checklistItem:
-        getChecklistItem(props.location.state.itemId) == null
-          ? getNfbChecklistItem(props.location.state.itemId)
-          : getChecklistItem(props.location.state.itemId),
+      checklistItem: (getChecklistItem(props.location.state.itemId) == null? getNfbChecklistItem(props.location.state.itemId) : getChecklistItem(props.location.state.itemId)),
       //itemName: props.itemName,
       //clickedItems: props.clickedItems,
       comments: {},
@@ -56,18 +53,19 @@ class AddNCStaff extends Component {
   //componentDidMount is only called once
   componentDidMount() {
     //this._isMounted = true;
-    this.auditData = JSON.parse(
-      localStorage.getItem(this.state.checklistItem.id)
-    );
+    this.auditData = 
+      JSON.parse(
+        localStorage.getItem(this.state.checklistItem.id));
 
-    if (localStorage.getItem(this.state.checklistItem.id)) {
+    
+    if (localStorage.getItem(this.state.checklistItem.id) ) {
       this.setState({
         val: this.auditData.val,
         dataUri: this.auditData.dataUri,
         selected: this.auditData.selected,
         bgColor: this.auditData.bgColor,
       });
-    } else {
+    }else {
       this.setState({
         val: "",
         dataUri: null,
@@ -75,6 +73,8 @@ class AddNCStaff extends Component {
         bgColor: "#f2f9fc",
       });
     }
+    
+    
 
     /*for (var a in localStorage) {
       //localStorage.clear();
@@ -92,12 +92,15 @@ class AddNCStaff extends Component {
     //console.log(value);
   }
 
+  
+
   componentWillUnmount() {
     clearTimeout(this.auditData);
     //this._isMounted = false;
 
     //this.auditData.remove();
   }
+
 
   componentWillUpdate(nextProps, nextState) {
     //ensures local storage do not store null non compliances
@@ -134,6 +137,7 @@ class AddNCStaff extends Component {
     //alert("Text field value is: " + this.state.va);
   }
 
+
   handleFileInput(e) {
     e.stopPropagation();
     e.preventDefault();
@@ -143,6 +147,7 @@ class AddNCStaff extends Component {
       this.setState({ selected: base64, bgColor: "#f06d1a" });
     });
   }
+
 
   handleFileDelete() {
     this.setState({ selected: null, bgColor: " #f2f9fc" });
@@ -158,7 +163,6 @@ class AddNCStaff extends Component {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => resolve(reader.result);
-      console.log(reader.onload);
       reader.onerror = (error) => reject(error);
       reader.readAsDataURL(file);
     });
@@ -183,10 +187,13 @@ class AddNCStaff extends Component {
     //console.log("Checklist Item: ", this.state.checklistItem);
     //console.log("Props: ", this.props);
     const { itemsChecked } = this.props;
+    
 
     //console.log("CLICKED ITEMS PASSED: ", this.props.location.state.clickedItems);
 
+    
     return (
+      
       <React.Fragment>
         <Container fluid>
           <Row>
@@ -230,6 +237,7 @@ class AddNCStaff extends Component {
                 <Col xs={10} className="mt-5">
                   <label
                     style={{
+                      
                       float: "left",
                       width: "90%",
                       height: 30,
@@ -240,25 +248,24 @@ class AddNCStaff extends Component {
                     <input
                       accept="image/*"
                       type="file"
-                      onChange={this.handleFileInput}
+                      onChange={this.handleFileInput} 
                     />
                     Select File
                   </label>
 
                   <div>
-                    {this.state.selected != null ? (
-                      <button
-                        style={{
-                          float: "right",
-                          width: "10%",
-                          height: 30,
-                          top: 60,
-                        }}
-                        onClick={this.handleFileDelete}
-                      >
-                        <AiIcons.AiOutlineClose size="15" />
-                      </button>
-                    ) : null}
+                  {this.state.selected != null ?
+                    <button
+                      style={{
+                        float: "right",
+                        width: "10%",
+                        height: 30,
+                        top: 60,
+                      }}
+                      onClick={this.handleFileDelete}
+                    >
+                      <AiIcons.AiOutlineClose size="15" />
+                    </button> : null}
                   </div>
 
                   <input
@@ -311,12 +318,13 @@ class AddNCStaff extends Component {
 
               {/* Now it's same as cancel, need to change this */}
               <button
-                className="btn btn-lg btn-danger checklist-sideheader-style mt-5"
-                style={{ float: "right", marginRight: "18%" }}
-                onClick={this.handleSave}
-              >
-                Save
+                  className="btn btn-lg btn-danger checklist-sideheader-style mt-5"
+                  style={{ float: "right", marginRight: "18%" }}
+                  onClick={this.handleSave}
+                >
+                  Save
               </button>
+
             </Col>
           </Row>
         </Container>

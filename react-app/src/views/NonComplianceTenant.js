@@ -221,7 +221,7 @@ class NonComplianceTenant extends Component {
                       <Accordion.Collapse eventKey={nc.id}>
                         <Card.Body
                           className="checklist-body-style"
-                          style={{  height: 530, padding: 15 }}
+                          style={{  height: 2000, padding: 15 }}
                         >
                           Find all images and comments here
                           <div className="row">
@@ -234,7 +234,7 @@ class NonComplianceTenant extends Component {
                               src={this.state.storedArray.dataUri}
                             />
 
-                            <div className="col-4 pt-3 bg-white">
+                            <div className="col-4 pt-3 border-right bg-white">
                               <Carousel style={{ height: 150}}>
                                 {nc.comments.map((comment) => ( 
                                   comment.image != null ? 
