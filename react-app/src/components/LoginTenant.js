@@ -131,7 +131,7 @@ class LoginTenant extends Component {
             this.setState({isInvalid: true});
             this.props.history.push("/login-tenant");
         }*/
-        localStorage.setItem("token", parse);
+        localStorage.setItem("token", parse.jwtToken);
         console.log(`${localStorage.getItem("token")}`)
         console.log('Local storage done panggang lo')
         this.props.history.push("/dashboard");
