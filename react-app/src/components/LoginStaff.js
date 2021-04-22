@@ -65,7 +65,8 @@ class LoginStaff extends Component {
                 
 
                 // //save staff email to local storage
-                // localStorage.setItem("staff_email", this.state.email);
+                localStorage.setItem("staff_email", this.state.email);
+                //localStorage.setItem("staff_email", this.state.email);
                 // console.log(localStorage.getItem("staff_email"));
                 // console.log(localStorage);
 
