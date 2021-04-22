@@ -164,7 +164,14 @@ class OngoingTables extends Component {
                     <td>{audit.date_recorded}</td>
                     <td>
 
-                      <SeeUpdatesButton key={audit.store_name} itemId={audit.store_name} />
+                    
+                      <Button variant="light">
+                        
+                        <FcIcons.FcOpenedFolder size="20" />
+                        
+                      </Button>
+                  
+       
                     
                     </td>
                     <td>{audit.audit_score}</td>
@@ -181,3 +188,4 @@ class OngoingTables extends Component {
 
 export default OngoingTables;
 //audit.noncompliances
+//<SeeUpdatesButton key={audit.store_name} itemId={audit.store_name} />

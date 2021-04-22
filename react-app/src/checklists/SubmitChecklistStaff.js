@@ -153,11 +153,11 @@ class SubmitChecklistStaff extends Component {
 
   formatScore() {
     let color = "#F06D1A";
-    let category = this.props.location.state.category;
+    let category = localStorage.getItem("category");
     var score = 0;
-    if (category == "fb") {
+    if (category == "F&B") {
       score = calculateScore(getClickedItems(), "totalScore");
-    } else if ((category = "nonfb")) {
+    } else if (category = "Non-F&B") {
       score = calculateScoreNonfb(getClickedNfbItems, "totalScore");
     }
 
@@ -202,31 +202,40 @@ class SubmitChecklistStaff extends Component {
 
     if (this.state.noncom != []) {
       const jsonobj = this.MakedeJson();
-      this.sendData(jsonobj);
+
+      (async () => {
+        try {
+         await this.sendData(jsonobj);
+        } catch(e) {
+         console.log('Error happend while connecting to the DB: ', e.message)
+        }
+      })();
+    
 
       console.log(jsonobj);
 
     }
   }
+
     
-  async sendData(jsonobj){
-    fetch("http://localhost:8080/audit/createaudit", {
+  async sendData(jsonobj) {
+    const response = await fetch("http://localhost:8080/audit/createaudit", {
       method: "POST",
       mode: "cors",
-      headers: { jwt_token: localStorage.token },
+      credentials:'same-origin', 
+      headers: { jwt_token: localStorage.token, 'Content-Type':'application/json'}, 
+      referrerPolicy: 'no-referrer',
       body: jsonobj,
-    }).then(response => {
-      console.log(response.status)
-
-      if (!response.status.ok) {
-        console.log("fail to send audit");
-
-      }
-      else {
-        console.log("success");
-        this.props.history.push("/dashboard");
-      }
+    
     })
+    if (response.status !== 200) {
+      console.log("fail to send audit");
+      this.props.history.push("/submit-checklist-staff");
+      
+    }
+    console.log("success");
+    this.props.history.push("/dashboard");
+    
   }
   
 
