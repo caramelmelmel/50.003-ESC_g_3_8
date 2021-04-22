@@ -76,18 +76,21 @@ class LoginStaff extends Component {
         }
     }
 
-    verifyStaff(data) {
-        fetch("https://shaghao.herokuapp.com/singhealth/staff/login", {
+   async verifyStaff(data) {
+        const response = await fetch("http://localhost:8080/staff/login", {
             method: "POST",
+            ode:'cors',
+            credentials:'same-origin',
             headers: {
-                'Content-Type': 'application/json',
-                // 'x-auth-token':
-                // console.log(response.headers)
+                'Content-Type': 'application/json'
               },
-            body: data,
-        }).then(response => {
-            console.log(response.status)
-            if (!response.status.ok) {
+              referrerPolicy: 'no-referrer',
+            body: JSON.stringify(data),
+        })
+
+        const parse = await response.json()
+        console.log(response.status)
+        if (!parse.token) {
                 console.log("Staff login failed!")
                 // route back to login staff page
                 this.props.history.push("/login-staff");
@@ -100,9 +103,131 @@ class LoginStaff extends Component {
                 // console.log(response.headers);
 
                 // route to dashboard
+                localStorage.setItem("token",parse.token)
                 this.props.history.push("/dashboard");
             }
-        })
+        }
+        render() {
+            console.log(this.state.email); ///pass staff email through 
+            const marginVertSpace = 5;
+            const titleStyle = {
+                marginTop: marginVertSpace,
+                marginBottom: marginVertSpace,
+                marginLeft: "auto",
+                marginRight: "auto",
+                fontSize: 16,
+                fontWeight: "bold",
+                width: "90%",
+                color: "#f06d1a",
+            }
+            const headerStyle = {
+                margin: "auto",
+                marginTop: marginVertSpace,
+                marginBottom: marginVertSpace,
+                fontSize: 12,
+                fontWeight: "bold",
+                width: "90%",
+                color: "black",
+            }
+            const fillStyle = {
+                margin: "auto",
+                marginTop: marginVertSpace - 5,
+                textAlign: "left",
+                borderRadius: 3,
+                border: "2px solid black",
+                width: "100%",
+            }
+            const errorStyle = {
+                float: "left",
+                marginTop: marginVertSpace + 10,
+                marginLeft: "5%",
+                width: "30%",
+                padding: 4,
+                borderRadius: 3,
+                backgroundColor: "#d21f3c",
+                color: "white",
+                textAlign: "center",
+                fontSize: 12,
+                fontWeight: "bold"
+            }
+            const submitStyle = {
+                float: "right",
+                marginTop: marginVertSpace + 10,
+                marginRight: "5%", 
+                width: "100px",
+                padding: 4,
+                borderRadius: 3,
+                backgroundColor: "#f06d1a",
+                color: "white",
+                fontSize: 12,
+                fontWeight: "bold",
+                border: "0px solid white",
+            }
+            return <React.Fragment>
+                <div style={titleStyle}>Staff Login</div>
+    
+                <Form>
+    
+                    {/* NAME */}
+                    <div style={headerStyle}>Name</div>
+                    <Form.Group 
+                    controlId="formName"
+                    style={headerStyle}>
+                        <Form.Control 
+                        type="name" 
+                        placeholder="Name" 
+                        style={fillStyle}
+                        value={this.state.name} 
+                        onChange={e => {this.setState({ name: e.target.value })}}/>
+                    </Form.Group>
+    
+                    {/* EMAIL */}
+                    <div style={headerStyle}>Email</div>
+                    <Form.Group 
+                    controlId="formBasicEmail"
+                    style={headerStyle}>
+                        <Form.Control 
+                        type="email" 
+                        placeholder="Email" 
+                        style={fillStyle}
+                        value={this.state.email}
+                        onChange={e => this.setState({ email: e.target.value })}/>
+                        {/* <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                        </Form.Text> */}
+                    </Form.Group>
+    
+                    {/* PASSWORD */}
+                    <div style={headerStyle}>Password</div>
+                    <Form.Group 
+                    controlId="formBasicPassword"
+                    style={headerStyle}>
+                        <Form.Control 
+                        type="password" 
+                        placeholder="Password" 
+                        style={fillStyle}
+                        value={this.state.password}
+                        onChange={e => this.setState({ password: e.target.value })} />
+                    </Form.Group>
+    
+                    {/* ERROR MESSAGE */}
+                    {((this.state.name == "" || this.state.email == "" || this.state.password == "") && this.state.isClicked == true) || this.state.isInvalid == true ? 
+                    <div
+                    style={errorStyle}>
+                        {this.state.error}
+                    </div> : <div></div>
+                    }
+                    
+                    {/* LOGIN */}
+                    <button 
+                    type="button"
+                    style={submitStyle}
+                    onClick={this.handleLogin}>
+                        Login
+                    </button>
+                </Form>
+            </React.Fragment>
+        }
     }
 
     // synchronous call to verify staff
@@ -127,128 +252,5 @@ class LoginStaff extends Component {
     // }
 
     
-    
-    render() {
-        console.log(this.state.email); ///pass staff email through 
-        const marginVertSpace = 5;
-        const titleStyle = {
-            marginTop: marginVertSpace,
-            marginBottom: marginVertSpace,
-            marginLeft: "auto",
-            marginRight: "auto",
-            fontSize: 16,
-            fontWeight: "bold",
-            width: "90%",
-            color: "#f06d1a",
-        }
-        const headerStyle = {
-            margin: "auto",
-            marginTop: marginVertSpace,
-            marginBottom: marginVertSpace,
-            fontSize: 12,
-            fontWeight: "bold",
-            width: "90%",
-            color: "black",
-        }
-        const fillStyle = {
-            margin: "auto",
-            marginTop: marginVertSpace - 5,
-            textAlign: "left",
-            borderRadius: 3,
-            border: "2px solid black",
-            width: "100%",
-        }
-        const errorStyle = {
-            float: "left",
-            marginTop: marginVertSpace + 10,
-            marginLeft: "5%",
-            width: "30%",
-            padding: 4,
-            borderRadius: 3,
-            backgroundColor: "#d21f3c",
-            color: "white",
-            textAlign: "center",
-            fontSize: 12,
-            fontWeight: "bold"
-        }
-        const submitStyle = {
-            float: "right",
-            marginTop: marginVertSpace + 10,
-            marginRight: "5%", 
-            width: "100px",
-            padding: 4,
-            borderRadius: 3,
-            backgroundColor: "#f06d1a",
-            color: "white",
-            fontSize: 12,
-            fontWeight: "bold",
-            border: "0px solid white",
-        }
-        return <React.Fragment>
-            <div style={titleStyle}>Staff Login</div>
-
-            <Form>
-
-                {/* NAME */}
-                <div style={headerStyle}>Name</div>
-                <Form.Group 
-                controlId="formName"
-                style={headerStyle}>
-                    <Form.Control 
-                    type="name" 
-                    placeholder="Name" 
-                    style={fillStyle}
-                    value={this.state.name} 
-                    onChange={e => {this.setState({ name: e.target.value })}}/>
-                </Form.Group>
-
-                {/* EMAIL */}
-                <div style={headerStyle}>Email</div>
-                <Form.Group 
-                controlId="formBasicEmail"
-                style={headerStyle}>
-                    <Form.Control 
-                    type="email" 
-                    placeholder="Email" 
-                    style={fillStyle}
-                    value={this.state.email}
-                    onChange={e => this.setState({ email: e.target.value })}/>
-                    {/* <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                    </Form.Text> */}
-                </Form.Group>
-
-                {/* PASSWORD */}
-                <div style={headerStyle}>Password</div>
-                <Form.Group 
-                controlId="formBasicPassword"
-                style={headerStyle}>
-                    <Form.Control 
-                    type="password" 
-                    placeholder="Password" 
-                    style={fillStyle}
-                    value={this.state.password}
-                    onChange={e => this.setState({ password: e.target.value })} />
-                </Form.Group>
-
-                {/* ERROR MESSAGE */}
-                {((this.state.name == "" || this.state.email == "" || this.state.password == "") && this.state.isClicked == true) || this.state.isInvalid == true ? 
-                <div
-                style={errorStyle}>
-                    {this.state.error}
-                </div> : <div></div>
-                }
-                
-                {/* LOGIN */}
-                <button 
-                type="button"
-                style={submitStyle}
-                onClick={this.handleLogin}>
-                    Login
-                </button>
-            </Form>
-        </React.Fragment>
-    }
-}
  
 export default LoginStaff;

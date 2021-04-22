@@ -25,7 +25,8 @@ class SeeUpdatesButton extends Component {
     
     //audits that show have resolved == false
 
-    const module = this.state.audits.find((audit) => audit.Tenant_email === this.props.itemId );
+    const module = this.state.audits.find((audit) => audit.store_name === this.props.itemId );
+    console.log(module);
     //console.log(module.noncomplainces);
 
     const noncompliance = [];

@@ -116,7 +116,13 @@ class LoginTenant extends Component {
             referrerPolicy: 'no-referrer',
             body:JSON.stringify(data)
         })
-        if(response.status != 200){
+        const parse = await response.json();
+        console.log(`${parse}`)
+        if(!parse.jwtToken){
+            console.log('No token get back to login page rip')
+            this.props.history.push("/login-tenant");
+        }
+        /*if(response.status != 200){
             console.log(`${response.status}`)
             //console.log("Tenant registration failed!")
             // route back to register staff page
@@ -124,22 +130,12 @@ class LoginTenant extends Component {
             this.setState({error: "login unsuccessful."});
             this.setState({isInvalid: true});
             this.props.history.push("/login-tenant");
-        }  else {
-            console.log("Staff logged in!");
-            // save token
-
-            // use template here to store in local storage
-            //save staff email to local storage
-            // localStorage.setItem("staff_email", this.state.email);
-            // console.log(localStorage.getItem("staff_email"));
-            // console.log(localStorage);
-
-
-            // route to dashboard
-            this.props.history.push("/dashboard");
-        }
-        
-        return response.json
+        }*/
+        localStorage.setItem("token", parse.jwtToken);
+        console.log(`${localStorage.getItem("token")}`)
+        console.log('Local storage done panggang lo')
+        this.props.history.push("/dashboard");
+        //log the response here        
     }
 
     render() { 
