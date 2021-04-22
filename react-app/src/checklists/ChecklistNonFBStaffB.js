@@ -65,7 +65,7 @@ class ChecklistNonFBStaffB extends Component {
 
                 </tbody>
             </table>
-                        <Link to={{pathname: "/checklist-non-fb-staff-food-hygiene", state: {tenant:  this.props.location.state.tenant}}}>
+                        <Link to={{pathname: "/checklist-non-fb-staff-food-hygiene"}}>
                             <button 
                             type="button" 
                             className="btn btn-primary btn-lg checklist-header-style" 
