@@ -79,7 +79,7 @@ class LoginStaff extends Component {
    async verifyStaff(data) {
         const response = await fetch("http://localhost:8080/staff/login", {
             method: "POST",
-            ode:'cors',
+            mode:'cors',
             credentials:'same-origin',
             headers: {
                 'Content-Type': 'application/json'
