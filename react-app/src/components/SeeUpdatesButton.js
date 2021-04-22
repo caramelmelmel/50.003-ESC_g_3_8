@@ -24,11 +24,13 @@ class SeeUpdatesButton extends Component {
   
     
     //audits that show have resolved == false
-    const module = this.state.audits.find((audit) => audit.store_name === this.props.itemId );
-    console.log(module);
+
+    const module = this.state.audits.find((audit) => audit.Tenant_email === this.props.itemId );
+    //console.log(module.noncomplainces);
 
     const noncompliance = [];
-
+   
+    //console.log(module);
 
     for (var i = 0; i < module.noncompliances.length; i++) {
       //console.log(module.noncomplainces[i].resolved);
@@ -38,8 +40,6 @@ class SeeUpdatesButton extends Component {
       }
     }
     //console.log(noncompliance)
-
-    
           
 
   

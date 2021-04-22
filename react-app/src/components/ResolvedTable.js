@@ -10,8 +10,6 @@ class ResolvedTables extends Component {
 
     componentDidMount() {
         this.setState({ audits: getAudits() });
-
-        //get ongoingaudits all de audits
     }
     render() {
         const { length: auditscount } = this.state.audits;
@@ -53,10 +51,9 @@ class ResolvedTables extends Component {
             }
             console.log(resolvedAudits);
             //push resolvedAudits to the resolved audits table 
-            //remove resolvedAudits from ongoing audits tablle
         }
        
-      //get pastaudits
+      
     
 
 
