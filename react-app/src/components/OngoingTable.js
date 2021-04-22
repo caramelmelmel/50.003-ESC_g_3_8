@@ -4,13 +4,12 @@ import * as ReactBootStrap from "react-bootstrap";
 import "../index.css";
 import { Dropdown } from "react-bootstrap";
 import { getTypes, getInstitutes } from "../services/Dropdownmenu";
-import SeeUpdatesButton from "./SeeUpdatesButton";
 import ListGroup from "./ListGroup";
 import * as FiIcons from "react-icons/fi";
-import * as FcIcons from "react-icons/fc";
-import { Button } from "react-bootstrap";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 import { VscDebugBreakpointLog } from "react-icons/vsc";
+import * as AiIcons from "react-icons/ai";
+
 
 class OngoingTables extends Component {
   state = {
@@ -24,7 +23,7 @@ class OngoingTables extends Component {
     const type = [{ name: "All" }, ...getTypes()];
     const institute = [{ name: "All" }, ...getInstitutes()];
 
-    fetch("http://localhost:8080/audit/ongoingaudits", {
+    /*fetch("http://localhost:8080/audit/ongoingaudits", {
       method: "GET",
       mode: "cors",
       headers: { jwt_token: localStorage.token }, 
@@ -42,7 +41,7 @@ class OngoingTables extends Component {
         console.log("success");
         this.props.history.push("/audits-staff");
       }
-    })
+    })*/
     
     this.setState({ audits: getAudits(), type, institute });
   }
@@ -159,20 +158,21 @@ class OngoingTables extends Component {
               </thead>
               <tbody>
                 {filtered2.map((audit) => (
-                  <tr key={audit.Tenant_email}>
+                  <tr key={audit.store_name}>
                     <td>{audit.store_name}</td>
                     <td>{audit.date_recorded}</td>
-                    <td>
+                    <td style={{alignContent: "center"}}>
 
-                    
-                      <Button variant="light">
-                        
-                        <FcIcons.FcOpenedFolder size="20" />
-                        
-                      </Button>
-                  
-       
-                    
+                      <Link to={{pathname: '/see-updates', state: {store_name: audit.store_name}}}>
+                        <button className="btn btn-warning">
+                          <AiIcons.AiOutlineFolder/>
+                        </button>
+                          <h4 style={{display: "inline-block"}}>
+                            <span className="badge badge-danger">
+                              3
+                            </span>
+                          </h4>
+                      </Link>
                     </td>
                     <td>{audit.audit_score}</td>
                   </tr>
@@ -188,4 +188,5 @@ class OngoingTables extends Component {
 
 export default OngoingTables;
 //audit.noncompliances
+//                      <SeeUpdatesButton key={audit.store_name} itemId={audit.store_name} />
 //<SeeUpdatesButton key={audit.store_name} itemId={audit.store_name} />

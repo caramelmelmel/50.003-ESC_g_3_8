@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Accordion, Card, Carousel} from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import * as AiIcons from "react-icons/ai";
 import * as IoIcons from "react-icons/io";
@@ -8,21 +8,29 @@ import * as VscIcons from "react-icons/vsc";
 import { audits, getAudits } from "../services/NewAudit";
 import { useLocation } from "react-router-dom";
 import '../index.css';
+import { getAllNoncompliance, getLength, setAllNoncompliance } from "../services/noncomplianceList";
+import { getChecklistItem } from "../services/checklistFB";
+import { getNfbChecklistItem } from "../services/checklistNonFB";
+import FormComponent from './../components/FormComponent';
+import CommentList from './../components/CommentList';
 
 class SeeUpdates extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      noncompliances: [],
+      noncompliance: [],
       itemId: this.props.location.state.itemId,
       //audits: getAudits(),
       nonComId: this.props.location.state.nonComId,
       //resolved: this.props.location.state.Res,
       stufftochange: this.props.location.state.stufftochange,
+      storedArray: [],
+      length: getLength(),
       
     };
     this.handleSolved = this.handleSolved.bind(this);
     this.pushtoDatabase = this.pushtoDatabase.bind(this);
+    this.updateList = this.updateList.bind(this);
   }
   
 
@@ -117,6 +125,27 @@ class SeeUpdates extends Component {
     })
   }
 
+  getItem(id) {
+    console.log("ITEM ID:", id);
+    console.log(getChecklistItem(id).item);
+      if (getChecklistItem(id).item != null) {
+          return getChecklistItem(id).item;
+      } else if (getNfbChecklistItem(id).item != null) {
+          return getNfbChecklistItem(id).item;
+      }
+    }
+
+    
+  updateList(comment) {
+    console.log("UPDATING LIST WITH COMMENT", comment);
+    console.log("NONCOMPLIANCE: ", this.state.noncompliance);
+    if (comment == "YES") {
+      //console.log("CURRENT NC: ", this.state.noncompliance);
+      console.log("UPDATED NC: ", getAllNoncompliance());
+      this.setState({noncompliance: getAllNoncompliance()});
+    }
+  }
+
   //render image and comments from json file 
   render() {
     console.log(this.state);
@@ -125,127 +154,112 @@ class SeeUpdates extends Component {
     //console.log(this.state);
     //console.log(this.props); //this.props.entirething.resolved == true
     return (
-      <div>
-        {this.getfromDatabase()}
-        <h1
-          className="header-style"
-          style={{
-            position: "absolute",
-            left: 20,
-            top: 80,
-          }}
-        >
-          Resolving audit
-        </h1>
 
-        <NavLink
-          to="/audits-staff"
-          style={{
-            position: "absolute",
-            right: 20,
-            top: 20,
-          }}
-        >
-          <AiIcons.AiOutlineClose size="30" />
-        </NavLink>
+      <React.Fragment>
+          <div className="container">
 
-        <div
-          style={{
-            position: "absolute",
-            marginLeft: "5%",
-            top: 130
-            
-          }}
-          
-        >
-          
-          {/*<input
-            type="file"
-            name="myImage"
-            accept="image/x-png,image/gif,image/jpeg"
-            capture="camera"
-          ></input>
-
-          {JSON[key].image}
-          {JSON[key].comments}
-          <img src={JSON[key].portfolioImage} key={key} />*/}
-          
-        </div>
-
-        <Form>
-          <Row style={{ paddingTop: 400 }}>
-            <Col>
-              <Form.Control
-                as="textarea"
-                placeholder="Additional comments to send to tenants"
-                rows={2}
-                style={{
-                  marginLeft: "5%",
-                  marginRight: "0%",
-                  float: "left",
-                  width: "80%",
-                }}
-              />
-              
-              <Button
-                variant="dark"
-                style={{
-                  marginLeft: "0%",
-                  marginRight: "5%",
-                  float: "right",
-                  width: "10%",
-                  height: 40,
-                }}
+          {
+            (this.state.noncompliance = "" ? (
+              <div>
+              <h1 className="header-style">Tenant:{" "}             
+              <h1
+                className="header-style"
+                style={{ display: "inline-block", color: "#f06d1a" }}
               >
-                <IoIcons.IoIosSend />
-              </Button>
-            </Col>
-          </Row>
-        </Form>
+                {this.props.location.state.store_name}
+              </h1>
+              </h1>
+              <h1 className="header-style">
+                You have no non-compliances, good job!
+              </h1>
+              </div>
+            ) : (
+              <div className="container">
+                <h1 className="header-style">Tenant:{" "}             
+                  <h1
+                    className="header-style"
+                    style={{ display: "inline-block", color: "#f06d1a" }}>
+                      {this.props.location.state.store_name}
+                  </h1>
+                </h1>
+                <h1
+                  className="header-style"
+                  style={{ display: "inline-block" }}
+                >
+                  {" "}
+                  Number of unresolved non-compliances:{" "}
+                  <h1
+                    className="header-style"
+                    style={{ display: "inline-block", color: "#F22C49" }}
+                  >
+                    <span className="badge badge-danger">
+                      {this.state.length}
+                    </span>
+                  </h1>
+                </h1>
 
-        <Container
-          style={{
-            position: "absolute",
-            marginTop:"5%",
-          }}
-        >
-          <Row
-            style={{
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            {/*
-            <Button variant="light" >
-              <VscIcons.VscDebugReverseContinue
-                size="20"
-                style={{ marginRight: "5" }}
-              />
-            </Button>
-            */}
+            {getAllNoncompliance().map((nc) => (
+              <Accordion defaultActiveKey="0" key={nc.id}>
+                <Card>
+                  <Accordion.Toggle
+                    as={Card.Header}
+                    eventKey={nc.id}
+                    className="header-style"
+                    style={{ height: 50, padding: 15 }}
 
-            <Button
-              className="sendButton"
-              variant="primary"
-              size="lg"
-              onClick={this.handleSolved}
-            >
-           
-              Solved
-            </Button>
-            
+                  >
+                    <h5>{this.getItem(nc.nc_id)}</h5>
+                  </Accordion.Toggle>
+                  <Accordion.Collapse eventKey={nc.id}>
+                    <Card.Body
+                      className="checklist-body-style"
+                      style={{  height: 530, padding: 15 }}
+                    >
+                      Find all images and comments here
+                      <div className="row">
+                        <div className="col-4 pt-3 border-right">
+                          <FormComponent key={nc.id} nc_id={nc.nc_id} updateList={this.updateList}/>
+                        </div>
 
-            {/*
-            <Button variant="light">
-              <VscIcons.VscDebugContinue
-                size="20"
-                style={{ marginRight: "5" }}
-              />
-            </Button>
-            */}
-          </Row>
-        </Container>
-      </div>
+                        <img
+                          className="phototenant"
+                          src={this.state.storedArray.dataUri}
+                        />
+
+                        <div className="col-4 pt-3 bg-white">
+                          <Carousel style={{ height: 150}}>
+                            {nc.comments.map((comment) => ( 
+                              comment.image != null ? 
+                                (<Carousel.Item style={{ height: 150}}>
+                                  <img width={"100%"} src={comment.image} style={{ height: 150}} />
+                                  </Carousel.Item>) : null
+                              ))}
+                          </Carousel>
+                        </div>
+
+                        <div className="col-7 pt-3">
+                          <CommentList
+                            comments = {nc.comments}
+                            loading={this.state.loading}
+                          />
+                        </div>
+                      </div>
+                      <button className="btn btn-warning"
+                        className="btn btn-warning header-style"
+                        style={{ float: "right", margin: 15 }}
+                        onClick={this.handleSave}
+                      >
+                        Save
+                      </button>
+                    </Card.Body>
+                  </Accordion.Collapse>
+                </Card>
+              </Accordion>
+            ))}
+          </div>
+            ))}
+          </div> 
+      </React.Fragment>
     );
   }
 }
