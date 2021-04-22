@@ -72,7 +72,7 @@ class LoginTenant extends Component {
 
                 this.verifyTenant(JSONdata);
 
-                this.props.history.push("/dashboard");
+                // this.props.history.push("/dashboard");
 
                 // go to tenant home page
                 // this.props.history.push("/register-staff");
@@ -81,7 +81,7 @@ class LoginTenant extends Component {
         }
     }
 
-    verifyTenant(data) {
+    /*verifyTenant(data) {
         fetch("https://shaghao.herokuapp.com/singhealth/tenant/login", {
             method: "POST",
             headers: {
@@ -95,15 +95,47 @@ class LoginTenant extends Component {
             if (!response.status.ok) {
                 console.log("Tenant login failed!")
                 // route back to login tenant page
-                // this.props.history.push("/login-tenant");
+                this.props.history.push("/login-tenant");
             } else {
                 console.log("Tenant logged in!");
                 // put token in local storage
                 console.log(response.headers);
-                // route to tenant home page
-                // this.props.history.push("/success-tenant");
+                // route to dashboard
+                this.props.history.push("/dashboard");
             }
         })
+    }*/
+    async verifyTenant(data){
+        const response = await fetch("http://localhost:8080/tenant/signin",{
+            method:'POST',
+            mode:'cors',
+            credentials:'same-origin',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            referrerPolicy: 'no-referrer',
+            body:JSON.stringify(data)
+        })
+        const parse = await response.json();
+        console.log(`${parse}`)
+        if(!parse.jwtToken){
+            console.log('No token get back to login page rip')
+            this.props.history.push("/login-tenant");
+        }
+        /*if(response.status != 200){
+            console.log(`${response.status}`)
+            //console.log("Tenant registration failed!")
+            // route back to register staff page
+            console.log("the code has an error here")
+            this.setState({error: "login unsuccessful."});
+            this.setState({isInvalid: true});
+            this.props.history.push("/login-tenant");
+        }*/
+        localStorage.setItem("token", parse);
+        console.log(`${localStorage.getItem("token")}`)
+        console.log('Local storage done panggang lo')
+        this.props.history.push("/dashboard");
+        //log the response here        
     }
 
     render() { 

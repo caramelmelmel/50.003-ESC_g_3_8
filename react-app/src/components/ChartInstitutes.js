@@ -12,9 +12,13 @@ class ChartInstitutes extends Component {
       options: {
         chart: {
           id: "basic-bar",
+          fontFamily: "Sofia Pro",
         },
         xaxis: {
           categories: ['KKH','CGH','SGH','SKH','NCCS','OCH'],
+          label: {
+            fontFamily: "Sofia Pro",
+          }
         },
         theme: {
           palette: 'palette1' // upto palette10

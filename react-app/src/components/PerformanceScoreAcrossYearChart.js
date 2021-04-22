@@ -41,6 +41,7 @@ class PerformanceScoreAcrossYearChart extends Component {
               borderColor: "#F06D1A",
               label: {
                 borderColor: "#F06D1A",
+                fontFamily: "Sofia Pro",
                 style: {
                   color: "#fff",
                   background: "#F06D1A",

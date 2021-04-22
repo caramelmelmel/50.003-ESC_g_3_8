@@ -21,7 +21,7 @@ it('(EXPECTS PASS) - underscore accepted', () => {
 
 // (EXPECTS PASS) - numbers accepted
 it('(EXPECTS PASS) - numbers accepted', () => {
-  const email = '123123@singhealth.com.sg'; 
+  const email = '123123@singhealth.com.sg';
   expect(email).toMatch(pattern);
 });
 

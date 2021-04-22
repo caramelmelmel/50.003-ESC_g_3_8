@@ -6,12 +6,14 @@ import sha256 from 'crypto-js/sha256'
 import Base64 from 'crypto-js/enc-base64';
 import axios from 'axios';
 
-// must have "@singhealth.com.sg" and be a word infront
-var regexEmail = /^\w{0,}@singhealth\.com\.sg$/;
+// must have "@(gmail/yahoo) (.com/.com.sg)" and be a word infront
+var regexEmail = /^\w{0,}@(gmail|yahoo)\.com(\.sg)?$/;
 // one uppercase + lowercase + num + symb, min 8 char
 var regexPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 // dd/mm/yyyy format
-var regexDate = /^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](20)\d\d$/;
+// var regexDate = /^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](20)\d\d$/;
+// yyyy-mm-dd format
+var regexDate = /^(20)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/;
 
 class RegisterTenantFirst extends Component {
     state = {
@@ -90,29 +92,34 @@ class RegisterTenantFirst extends Component {
         }
     }
 
-    // https://shaghao.herokuapp.com/singhealth/tenant/signup
-    createTenant(data) {
-        fetch("http://localhost:3000/register-first-tenant/tenant/signup", {
-            method: "POST",
-            headers: {
+    async createTenant(data){
+        const response = await fetch("http://localhost:8080/tenant/signup",{
+            method:'POST',
+            mode:'cors',
+            credentials:'same-origin',
+            headers:{
                 'Content-Type': 'application/json'
-              },
-            body: data,
-        }).then(response => {
-            console.log(response.status)
-            // remove this when backend integration is done
-            this.props.history.push("/success-tenant");
-            if (!response.status.ok) {
-                console.log("Tenant registration failed!")
-                // route back to register staff page
-                // this.props.history.push("/register-tenant");
-            } else {
-                console.log("Tenant created!");
-                // route to tenant success page
-                // this.props.history.push("/success-tenant");
-            }
+            },
+            referrerPolicy: 'no-referrer',
+            body:JSON.stringify(data)
         })
+        if(!response.status.ok){
+            console.log(`${response.status}`)
+            console.log("Tenant registration failed!")
+            // route back to register staff page
+            // this.props.history.push("/register-tenant");
+            console.log("the code has an error here")
+            this.setState({error: "Registration unsuccessful."});
+            this.setState({isInvalid: true});
+
+        }
+        this.props.history.push("/success-tenant");
+        return response.json
     }
+
+    // https://shaghao.herokuapp.com/singhealth/tenant/signup
+    
+
 
     // // synchronous call to create tenant
     // async createTenant(data) {
