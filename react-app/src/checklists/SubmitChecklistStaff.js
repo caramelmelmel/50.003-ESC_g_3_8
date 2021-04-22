@@ -140,12 +140,13 @@ class SubmitChecklistStaff extends Component {
 
   MakedeJson() {
     var jsonobj = {};
-    var noncomp = {};
+    ///var noncomp = {};
     jsonobj.staff_email = localStorage.getItem("staff_email");
     jsonobj.category = localStorage.getItem("category");
     jsonobj.date = localStorage.getItem("date_recorded");
     jsonobj.performancescore= localStorage.getItem("audit_score");
-    jsonobj.store_name = localStorage.getItem("tenant_name") + " " + localStorage.getItem("institution_name")
+    jsonobj.store_name = localStorage.getItem("tenant_name");
+    jsonobj.institution_name = localStorage.getItem("institution_name");
     jsonobj.non_compliances = this.state.noncom;
     //console.log(localStorage);
     //noncomp = { obj : [] }
@@ -219,6 +220,7 @@ class SubmitChecklistStaff extends Component {
         
     
     }
+    //localStorage.clear();
   }
 
     
