@@ -89,7 +89,9 @@ class RegisterStaff extends Component {
             },
             referrerPolicy: 'no-referrer',
             body:JSON.stringify(data)
-        })
+        }).catch((err) => {
+            console.log(err);
+        }) 
         if(response.status != 201){
             console.log(`${response.status}`)
             console.log("staff registration failed!")
@@ -97,7 +99,11 @@ class RegisterStaff extends Component {
             // this.props.history.push("/register-tenant");
             console.log("the code has an error here")
             this.setState({error: "Registration unsuccessful."});
-            this.setState({isInvalid: true});
+            this.setState({ isInvalid: true });
+            this.props.history.push("register-staff")
+        } else {
+            console.log("Registration successful!");
+            this.props.history.push("success-staff");
         }
         return response.json
     }

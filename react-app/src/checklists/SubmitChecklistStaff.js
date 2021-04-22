@@ -199,17 +199,13 @@ class SubmitChecklistStaff extends Component {
 
   submit() {
     console.log("Submit");
+    console.log(localStorage);
 
     if (this.state.noncom != []) {
       const jsonobj = this.MakedeJson();
 
-      (async () => {
-        try {
-         await this.sendData(jsonobj);
-        } catch(e) {
-         console.log('Error happend while connecting to the DB: ', e.message)
-        }
-      })();
+      this.sendData(jsonobj);
+        
     
 
       console.log(jsonobj);
@@ -313,6 +309,7 @@ class SubmitChecklistStaff extends Component {
 */
 
   render() {
+    //localStorage.clear();
     console.log(this.props);
     return (
       <div className="container">
