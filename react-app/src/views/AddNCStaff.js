@@ -119,6 +119,7 @@ class AddNCStaff extends Component {
         JSON.stringify(nextState)
       );
     }
+    console.log(localStorage);
   }
 
   handleChange(e) {
@@ -318,11 +319,13 @@ class AddNCStaff extends Component {
 
               {/* Now it's same as cancel, need to change this */}
               <button
+
                 className="btn btn-lg btn-danger checklist-sideheader-style mt-5"
                 style={{ float: "right", marginRight: "18%" }}
                 onClick={this.context.router.history.goBack}
               >
                 Save
+
               </button>
 
             </Col>
