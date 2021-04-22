@@ -13,6 +13,7 @@ class SeeUpdates extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      noncompliances: [],
       itemId: this.props.location.state.itemId,
       //audits: getAudits(),
       nonComId: this.props.location.state.nonComId,
@@ -21,6 +22,7 @@ class SeeUpdates extends Component {
       
     };
     this.handleSolved = this.handleSolved.bind(this);
+    this.pushtoDatabase = this.pushtoDatabase.bind(this);
   }
   
 
@@ -45,18 +47,75 @@ class SeeUpdates extends Component {
 
     console.log(newnoncom);  */  //this.setState({ stufftochange: this.state.stufftochange });
     this.setState({ stufftochange: { ...this.state.stufftochange, resolved: true } });
+    this.pushtoDatabase();
+
+   
+  
     //find this itemId as tenant_email on database, use this key and push to database
     //js.getJSONObject.tenant_email == itemId
     //.getJSONObject.noncompliances[i].key==nonComId
     //noncompliances[i].put("resolved", "true");
     
-   
-    
+  }
 
+  pushtoDatabase() {
+    console.log(this.state.stufftochange);
+
+    var tobepushed = []
+
+    for (var i = 0; i < this.state.noncompliances.length; i++) {
+      if (this.state.noncompliances[i].key == this.state.nonComId) {
+        tobepushed.push(this.state.stufftochange);
+      }
+      else {
+        tobepushed.push(this.state.noncompliances[i]);
+      }
+    }
     
+    console.log(tobepushed);
+
+    fetch("http://localhost:8080/audit/update", { // or /resolveAudits??
+      method: "PUT",
+      mode: "cors",
+      headers: { jwt_token: localStorage.token },
+      //{ store_name: localStorage.token }, tobepushed
+      body: tobepushed,
+    }).then(response => {
+      console.log(response.status);
+
+      if (!response.status.ok) {
+        console.log("fail to send audit");
+
+      }
+      else {
+        console.log("success");
+        this.props.history.push("/audits-staff");
+      }
+    })
   }
 
 
+  getfromDatabase() {
+    
+    fetch("http://localhost:8080/audit/seennoncomp", {
+      method: "GET",
+      mode: "cors",
+      headers: { jwt_token: localStorage.token },
+      //{ store_name: this.props.location.state.itemId }, { staff_email: localStorage.getItem("staff_email") }
+    }).then(response => {
+      var noncompliances = response.data;
+      this.setState({ noncompliances })
+      console.log(response.status)
+
+      if (!response.status.ok) {
+        console.log("fail to get audit");
+      }
+      else {
+        console.log("success");
+      }
+   
+    })
+  }
 
   //render image and comments from json file 
   render() {
@@ -67,6 +126,7 @@ class SeeUpdates extends Component {
     //console.log(this.props); //this.props.entirething.resolved == true
     return (
       <div>
+        {this.getfromDatabase()}
         <h1
           className="header-style"
           style={{
@@ -189,5 +249,6 @@ class SeeUpdates extends Component {
     );
   }
 }
+
 
 export default SeeUpdates;

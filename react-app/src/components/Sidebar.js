@@ -13,7 +13,7 @@ export const Sidebar = [
 
     {
         title: 'Dashboard',
-        path: '/dashboard-staff',
+        path: '/dashboard',
         icon: <BsIcons.BsGraphUp />,
         cName: 'nav-text',
         actor: 'both'
