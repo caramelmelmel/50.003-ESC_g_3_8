@@ -24,22 +24,25 @@ class OngoingTables extends Component {
     const type = [{ name: "All" }, ...getTypes()];
     const institute = [{ name: "All" }, ...getInstitutes()];
 
-    /*
-    fetch('https://shaghao.herokuapp.com/singhealth/')
-            .then(res => res.json())
-            .then(json => {
-                this.setState({
-                    audits: json,
-                    isLoaded: true, 
-                    type, 
-                    institute,
-                })
-            }).catch((err) => {
-                console.log(err);
-            });
+    fetch("http://localhost:8080/audit/ongoingaudits", {
+      method: "GET",
+      mode: "cors",
+      headers: { jwt_token: localStorage.token }, 
+       //{ staff_email: localStorage.getItem("staff_email") } //ongoing audits is the whole json right? why need store name
+    }).then(response => {
+      const audits = response.data
+      this.setState({audits})
+      console.log(response.status)
 
+      if (!response.status.ok) {
+        console.log("fail to send audit");
 
-    */
+      }
+      else {
+        console.log("success");
+        this.props.history.push("/audits-staff");
+      }
+    })
     
     this.setState({ audits: getAudits(), type, institute });
   }
@@ -161,7 +164,7 @@ class OngoingTables extends Component {
                     <td>{audit.date_recorded}</td>
                     <td>
 
-                      <SeeUpdatesButton key={audit.Tenant_email} itemId={audit.Tenant_email} />
+                      <SeeUpdatesButton key={audit.store_name} itemId={audit.store_name} />
                     
                     </td>
                     <td>{audit.audit_score}</td>
