@@ -95,13 +95,13 @@ class LoginTenant extends Component {
             if (!response.status.ok) {
                 console.log("Tenant login failed!")
                 // route back to login tenant page
-                // this.props.history.push("/login-tenant");
+                this.props.history.push("/login-tenant");
             } else {
                 console.log("Tenant logged in!");
                 // put token in local storage
                 console.log(response.headers);
-                // route to tenant home page
-                // this.props.history.push("/success-tenant");
+                // route to dashboard
+                this.props.history.push("/dashboard");
             }
         })
     }
