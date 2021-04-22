@@ -33,6 +33,7 @@ class NonComplianceTenant extends Component {
     this.putNonCompliances = this.putNonCompliances.bind(this);
     this.fakeDataPush = this.fakeDataPush.bind(this);
     this.sendNonCompliance = this.sendNonCompliance.bind(this);
+    this.handleSave = this.handleSave.bind(this);
   } 
 
   /*
