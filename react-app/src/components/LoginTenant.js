@@ -11,7 +11,7 @@ const {createHash} = require('crypto');
 const hash = createHash('sha256');
 
 // set to tenant email requirements!!
-var regexEmail = /^\w{0,}@singhealth\.com\.sg$/;
+var regexEmail = /^\w{0,}@(gmail|yahoo)\.com(\.sg)?$/;
 // one uppercase + lowercase + num + symb, min 8 char
 var regexPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
@@ -131,7 +131,7 @@ class LoginTenant extends Component {
             this.setState({isInvalid: true});
             this.props.history.push("/login-tenant");
         }*/
-        localStorage.setItem("token", parse);
+        localStorage.setItem("token", parse.jwtToken);
         console.log(`${localStorage.getItem("token")}`)
         console.log('Local storage done panggang lo')
         this.props.history.push("/dashboard");

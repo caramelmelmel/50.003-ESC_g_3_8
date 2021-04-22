@@ -7,8 +7,8 @@ const regex = new RegexTest({
 
 const pattern = /^\w{0,}@singhealth\.com\.sg$/;
 
-// (EXPECTS PASS)
-it('(PASS)', () => {
+// (EXPECTS PASS) - letters accepted
+it('(EXPECTS PASS) - letters accepted', () => {
   const email = 'example@singhealth.com.sg'; 
   expect(email).toMatch(pattern);
 });
@@ -25,26 +25,26 @@ it('(EXPECTS PASS) - numbers accepted', () => {
   expect(email).toMatch(pattern);
 });
 
+// (EXPECTS FAIL) - inverted comma not accepted
+it('(EXPECTS FAIL) - inverted comma not accepted', () => {
+  const email = '"invertedcomma"@singhealth.com.sg'; 
+  expect(email).toMatch(pattern);
+});
+
 // (EXPECTS FAIL) - space infront not allowed
 it('(EXPECTS FAIL) - space infront not allowed', () => {
     const email = '   my_name@singhealth.com.sg'; 
     expect(email).toMatch(pattern);
 });
 
-// (EXPECTS FAIL) - inverted comma not accepted
-it('(EXPECTS FAIL) - inverted comma not accepted', () => {
-  const email = '"invertedcomma"@singhealth.com.sg'; 
+// (EXPECTS FAIL) - spaces not allowed
+it('(EXPECTS FAIL) - spaces not allowed', () => {
+  const email = 'my name@singhealth.com.sg'; 
   expect(email).toMatch(pattern);
 });
  
 // (EXPECTS FAIL) - no "@singhealth.com.sg"
 it('(EXPECTS FAIL) - no "@singhealth.com.sg"', () => {
   const email = 'example@singhealth.com'; 
-  expect(email).toMatch(pattern);
-});
-
-// (EXPECTS FAIL) - spaces not allowed
-it('(EXPECTS FAIL) - spaces not allowed', () => {
-  const email = 'my name@singhealth.com.sg'; 
   expect(email).toMatch(pattern);
 });
