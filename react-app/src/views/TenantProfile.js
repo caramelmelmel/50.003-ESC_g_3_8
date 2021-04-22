@@ -26,7 +26,7 @@ class TenantProfile extends Component {
         //console.log(this.props);
         console.log(this.state);
         return (
-            <div>
+            <div style={{fontFamily: "Sofia Pro"}}>
                 <NavLink
                 to="/tenant-staff"
                 style={{

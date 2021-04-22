@@ -57,7 +57,7 @@ class ChecklistNonFBStaffC extends Component {
                             <th></th>
                         </tr>
                         <tr>
-                            <th className="checklist-header-style">Food Hygiene</th>
+                            <th className="checklist-header-style">Workplace Safety and Health</th>
                         </tr>
                     </thead>
                 <tbody>

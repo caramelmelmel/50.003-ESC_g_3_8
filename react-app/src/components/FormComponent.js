@@ -19,7 +19,9 @@ class FormComponent extends Component {
         email: "tenant01@gmail.com",
         message: "",
         images: []
-      }
+      },
+
+      validComment: true
    };
    //tenantaddon = [this.state.message, [this.state.selected], "tenant"]
    // bind context to methods 
@@ -51,12 +53,24 @@ class FormComponent extends Component {
 
     var comment = {message: this.state.comment.message, images: this.state.comment.images, email: this.state.comment.email};
     console.log("COMMENT ENTERED: ", comment);
-    addComment(this.props.nc_id, comment);
+
+    var validComment = true;
+    console.log("COMMENT MESSAGE CHECK NULL: ", comment.message);
+    if (comment.message == "") {
+      this.setState({validComment: false});
+      validComment=false;
+    }
+
+    console.log("IS VALID COMMENT? ", validComment);
+    if (validComment) {
+      this.setState({validComment: true});
+      addComment(this.props.nc_id, comment);
+      console.log("ALL NC: ", getAllNoncompliance());
+      console.log("PROPS: ", this.props);
+      this.props.updateList("YES");
+      this.state.comment.message = "";
+    }
     
-    console.log("ALL NC: ", getAllNoncompliance());
-    console.log("PROPS: ", this.props);
-    this.props.updateList("YES");
-    this.state.comment.message = "";
     //this.props.updateList("yes");
 
     /*if (!this.isFormValid()) {
@@ -174,7 +188,6 @@ class FormComponent extends Component {
     
   }
 
-
   render() {
     return (
       <React.Fragment>
@@ -183,7 +196,6 @@ class FormComponent extends Component {
         
         <form style={{position:"absolute", left:15, top: 260}} method="post" onSubmit={this.onSubmit}>
           <div className="form-group">
-
             
             <textarea
               onChange={this.handleFieldChange}
@@ -192,7 +204,7 @@ class FormComponent extends Component {
               placeholder="Add Additional Comments Here"
               name="message"
               rows="5"
-              style={{position:"absolute", top:50, width:315 }}
+              style={{position:"absolute", top:50}}
               />
           
 
@@ -204,7 +216,7 @@ class FormComponent extends Component {
             <label
               style={{
                 float:"left",
-                width: 270,
+                width: 230,
                 height: 30,
                 bottom:0,
                 backgroundColor: this.state.bgColor,
@@ -225,7 +237,7 @@ class FormComponent extends Component {
               <button
                 style={{
                   float: "right",
-                  width:45,
+                  width:30,
                   height: 30,
 
                 }}
@@ -236,12 +248,14 @@ class FormComponent extends Component {
             </Row>
             </Container>
 
-            <button onClick={this.onSubmit} disabled={this.state.loading} className="btn btn-warning" style={{position:"absolute", left:0 ,width:315, top:158}}>
+            <button onClick={this.onSubmit} disabled={this.state.loading} className="btn btn-warning" style={{position:"absolute", left:0 ,width:"100%", top:158}}>
               Submit
             </button>
 
+
           </div>
         </form>
+            {this.state.validComment == false? (<div className="alert alert-danger checklist-body-style" style={{position:"absolute", width:230, top:450}}>Please fill in all fields!</div>) : null}
       </React.Fragment>
      );
   }
