@@ -361,7 +361,7 @@ class RegisterTenantFirst extends Component {
                 style={headerStyle}>
                     <Form.Control 
                     type="expiry" 
-                    placeholder="dd/mm/yyyy" 
+                    placeholder="yyyy-mm-dd" 
                     style={fillStyle}
                     value={this.state.expiry}
                     onChange={e => this.setState({ expiry: e.target.value })}/>

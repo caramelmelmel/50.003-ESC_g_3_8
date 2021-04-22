@@ -173,7 +173,6 @@ class OngoingTables extends Component {
                             </span>
                           </h4>
                       </Link>
-                    
                     </td>
                     <td>{audit.audit_score}</td>
                   </tr>
@@ -190,3 +189,4 @@ class OngoingTables extends Component {
 export default OngoingTables;
 //audit.noncompliances
 //                      <SeeUpdatesButton key={audit.store_name} itemId={audit.store_name} />
+//<SeeUpdatesButton key={audit.store_name} itemId={audit.store_name} />

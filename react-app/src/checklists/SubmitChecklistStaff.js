@@ -216,25 +216,26 @@ class SubmitChecklistStaff extends Component {
 
     }
   }
+
     
-  async sendData(jsonobj){
-    fetch("http://localhost:8080/audit/createaudit", {
+  async sendData(jsonobj) {
+    const response = await fetch("http://localhost:8080/audit/createaudit", {
       method: "POST",
       mode: "cors",
-      headers: { jwt_token: localStorage.token },
+      credentials:'same-origin', 
+      headers: { jwt_token: localStorage.token, 'Content-Type':'application/json'}, 
+      referrerPolicy: 'no-referrer',
       body: jsonobj,
-    }).then(response => {
-      console.log(response.status)
-
-      if (!response.status.ok) {
-        console.log("fail to send audit");
-
-      }
-      else {
-        console.log("success");
-        this.props.history.push("/dashboard");
-      }
+    
     })
+    if (response.status !== 200) {
+      console.log("fail to send audit");
+      this.props.history.push("/submit-checklist-staff");
+      
+    }
+    console.log("success");
+    this.props.history.push("/dashboard");
+    
   }
   
 
