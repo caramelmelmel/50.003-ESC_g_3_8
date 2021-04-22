@@ -60,7 +60,7 @@ class LoginStaff extends Component {
 
                 // check data with db
                 setLogin();
-
+                console.log("here")
                 this.verifyStaff(JSONdata);
                 
 
@@ -97,17 +97,18 @@ class LoginStaff extends Component {
             } else {
                 console.log("Staff logged in!");
                 // put token in local storage
-                // localStorage.setItem("staff_email", this.state.email);
+                //localStorage.setItem("staff_email", this.state.email);
                 // console.log(localStorage.getItem("staff_email"));
                 // console.log(localStorage);
                 // console.log(response.headers);
 
                 // route to dashboard
-                localStorage.setItem("token",parse.token)
+                localStorage.setItem("token", parse.token);
+                console.log(localStorage);
                 this.props.history.push("/dashboard");
             }
         }
-        render() {
+    render() {
             console.log(this.state.email); ///pass staff email through 
             const marginVertSpace = 5;
             const titleStyle = {
