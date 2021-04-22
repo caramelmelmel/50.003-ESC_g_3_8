@@ -24,24 +24,30 @@ class OngoingTables extends Component {
     const type = [{ name: "All" }, ...getTypes()];
     const institute = [{ name: "All" }, ...getInstitutes()];
 
-    /*
-    fetch('https://shaghao.herokuapp.com/singhealth/')
-            .then(res => res.json())
-            .then(json => {
-                this.setState({
-                    audits: json,
-                    isLoaded: true, 
-                    type, 
-                    institute,
-                })
-            }).catch((err) => {
-                console.log(err);
-            });
-
-
-    */
     
-    this.setState({ audits: getAudits(), type, institute });
+    fetch("http://localhost:8080/audit/ongoingaudits", {
+      method: "GET",
+      mode: "cors",
+      headers: { jwt_token: localStorage.token }, 
+       //{ staff_email: localStorage.getItem("staff_email") } //ongoing audits is the whole json right? why need store name
+    }).then(response => {
+      const audits = response.data
+      this.setState({audits})
+      console.log(response.status)
+
+      if (!response.status.ok) {
+        console.log("fail to send audit");
+
+      }
+      else {
+        console.log("success");
+        this.props.history.push("/audits-staff");
+      }
+    })
+
+
+
+    this.setState({ audits: getAudits(), type, institute }); //audits: getAudits(), 
   }
 
   handleTypeSelect = (type) => {
@@ -54,11 +60,14 @@ class OngoingTables extends Component {
     this.setState({ selectedInstitution: institute });
   };
 
-  
   render() {
-   
     const { length: auditscount } = this.state.audits;
-    const { isLoaded, selectedType, audits: allAudits, selectedInstitution } = this.state;
+    const {
+      isLoaded,
+      selectedType,
+      audits: allAudits,
+      selectedInstitution,
+    } = this.state;
 
     /*if (!isLoaded)
       return <div>Loading...</div>;
@@ -74,107 +83,101 @@ class OngoingTables extends Component {
     for (var i = 0; i < ongoingAudits.length; i++) {
       console.log(ongoingAudits[i]);
       //check if all resolved is true
-      const tryresolved =[];
+      const tryresolved = [];
       for (var x = 0; x < ongoingAudits[i].noncompliances.length; x++) {
         tryresolved.push(ongoingAudits[i].noncompliances[x].resolved);
-        
       }
       console.log(tryresolved);
       if (tryresolved.includes(false) === true) {
         ongoingAudits2.push(ongoingAudits[i]);
+      } else {
       }
-      else {
-        
-      }
-      
     }
     console.log(ongoingAudits2);
     //post ongoinAudit2 to server
-    
 
+    const filtered =
+      selectedType && selectedType._id
+        ? ongoingAudits2.filter((m) => m.type._id === selectedType._id)
+        : ongoingAudits2;
+    //console.log(ongoingAudits);
 
-      const filtered =
-        selectedType && selectedType._id
-          ? ongoingAudits2.filter((m) => m.type._id === selectedType._id)
-          : ongoingAudits2;
-      //console.log(ongoingAudits);
+    const filtered2 =
+      selectedInstitution && selectedInstitution._id
+        ? filtered.filter((m) => m.institution._id === selectedInstitution._id)
+        : filtered;
+    //console.log(this.state.audits);
 
-      const filtered2 =
-        selectedInstitution && selectedInstitution._id
-          ? filtered.filter((m) => m.institution._id === selectedInstitution._id)
-          : filtered;
-      //console.log(this.state.audits);
-
-      return (
-        <div>
-          <div className="ongoingtable">
-            <div class="sentence">
-              {" "}
-              There are currently {filtered2.length} ongoing audits
-            </div>
-
-            <div class="dropdowntype">
-              <Dropdown>
-                <Dropdown.Toggle variant="warning" id="dropdown-type">
-                  <FiIcons.FiFilter size="10" style={{ marginRight: "5" }} />
-                  Filter Tenants
-                </Dropdown.Toggle>
-
-                <Dropdown.Menu>
-                  <Dropdown.Divider />
-                  <Dropdown.Header>By Type</Dropdown.Header>
-                  <ListGroup
-                    key={this.state.type._id}
-                    items={this.state.type}
-                    selectedItem={this.state.selectedType} //apply active class to selectedItem
-                    onItemSelect={this.handleTypeSelect}
-                  />
-                  <Dropdown.Divider />
-
-                  <Dropdown.Header>By Institute</Dropdown.Header>
-                  <ListGroup
-                    key={this.state.institute._id}
-                    items={this.state.institute}
-                    selectedItem={this.state.selectedInstitution}
-                    onItemSelect={this.handleInstituteSelect}
-                  />
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
+    return (
+      <div>
+        <div className="ongoingtable">
+          <div class="sentence">
+            {" "}
+            There are currently {filtered2.length} ongoing audits
           </div>
 
-          <div>
-            <ReactBootStrap.Table>
-              <thead>
-                <tr>
-                  <th>Tenants with Updates</th>
-                  <th>Audit Date</th>
-                  <th>See Updates from Tenants</th>
-                  <th>Performance Score</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {filtered2.map((audit) => (
-                  <tr key={audit.Tenant_email}>
-                    <td>{audit.store_name}</td>
-                    <td>{audit.date_recorded}</td>
-                    <td>
+          <div class="dropdowntype">
+            <Dropdown>
+              <Dropdown.Toggle variant="warning" id="dropdown-type">
+                <FiIcons.FiFilter size="10" style={{ marginRight: "5" }} />
+                Filter Tenants
+              </Dropdown.Toggle>
 
-                      <SeeUpdatesButton key={audit.Tenant_email} itemId={audit.Tenant_email} />
-                    
-                    </td>
-                    <td>{audit.audit_score}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </ReactBootStrap.Table>
+              <Dropdown.Menu>
+                <Dropdown.Divider />
+                <Dropdown.Header>By Type</Dropdown.Header>
+                <ListGroup
+                  key={this.state.type._id}
+                  items={this.state.type}
+                  selectedItem={this.state.selectedType} //apply active class to selectedItem
+                  onItemSelect={this.handleTypeSelect}
+                />
+                <Dropdown.Divider />
+
+                <Dropdown.Header>By Institute</Dropdown.Header>
+                <ListGroup
+                  key={this.state.institute._id}
+                  items={this.state.institute}
+                  selectedItem={this.state.selectedInstitution}
+                  onItemSelect={this.handleInstituteSelect}
+                />
+              </Dropdown.Menu>
+            </Dropdown>
           </div>
         </div>
-      )
-    }
-  }
 
+        <div>
+          <ReactBootStrap.Table>
+            <thead>
+              <tr>
+                <th>Tenants with Updates</th>
+                <th>Audit Date</th>
+                <th>See Updates from Tenants</th>
+                <th>Performance Score</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered2.map((audit) => (
+                <tr key={audit.store_name}>
+                  <td>{audit.store_name}</td>
+                  <td>{audit.date_recorded}</td>
+                  <td>
+                    <SeeUpdatesButton
+                      key={audit.store_name}
+                      itemId={audit.store_name}
+                    />
+                  </td>
+                  <td>{audit.audit_score}</td>
+                </tr>
+              ))}
+            </tbody>
+          </ReactBootStrap.Table>
+        </div>
+      </div>
+    );
+  }
+}
 
 export default OngoingTables;
 //audit.noncompliances

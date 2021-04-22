@@ -16,7 +16,7 @@ import SeeUpdates from "../components/SeeUpdatesButton";
 
 export const audits = [
   {
-    Tenant_email: "1",
+    store_name: "1",
     auditid: "1",
     institution: { _id: "1", name: "CGH" },
     store_name: "Subway",
@@ -33,7 +33,7 @@ export const audits = [
 
   // noncomplianceslength => when noncompliances[i].resolved==true=> -1
   /*{
-    Tenant_email: "2",
+    store_name: "2",
     staff_email: "2",
     institution_name: "KKH",
     store_name: "Kopitiam",
@@ -48,7 +48,7 @@ export const audits = [
     noofnoncompliances: 3,
   },*/
   {
-    Tenant_email: "3",
+    store_name: "3",
     auditid: "3",
     institution: { _id: "2", name: "SGH" },
     store_name: "Presents",
@@ -63,7 +63,7 @@ export const audits = [
     
   },
   {
-    Tenant_email: "4",
+    store_name: "4",
     auditid: "4",
     institution: { _id: "6", name: "OCH" },
     store_name: "ToastBox",
@@ -78,7 +78,7 @@ export const audits = [
    
   },
   {
-    Tenant_email: "5",
+    store_name: "5",
     auditid: "5",
     institution: { _id: "1", name: "CGH" },
     store_name: "Popular",
@@ -93,7 +93,7 @@ export const audits = [
     
   },
   {
-    Tenant_email: "6",
+    store_name: "6",
     auditid: "6",
     institution: { _id: "1", name: "CGH" },
     store_name: "MrBean",
@@ -104,7 +104,7 @@ export const audits = [
    
   },
   {
-    Tenant_email: "7",
+    store_name: "7",
     auditid: "7",
     institution: { _id: "6", name: "OCH" },
     store_name: "Flowers",
@@ -119,7 +119,7 @@ export const audits = [
 
   },
   {
-    Tenant_email: "8",
+    store_name: "8",
     auditid: "8",
     institution: { _id: "4", name: "SKH" },
     store_name: "Chicken",
@@ -129,7 +129,7 @@ export const audits = [
     noncompliances: [],
   },
   {
-    Tenant_email: "9",
+    store_name: "9",
     auditid: "9",
     institution: { _id: "4", name: "SKH" },
     store_name: "Fairprice",

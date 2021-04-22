@@ -153,11 +153,11 @@ class SubmitChecklistStaff extends Component {
 
   formatScore() {
     let color = "#F06D1A";
-    let category = this.props.location.state.category;
+    let category = localStorage.getItem("category");
     var score = 0;
-    if (category == "fb") {
+    if (category == "F&B") {
       score = calculateScore(getClickedItems(), "totalScore");
-    } else if ((category = "nonfb")) {
+    } else if ((category = "Non-F&B")) {
       score = calculateScoreNonfb(getClickedNfbItems, "totalScore");
     }
 
@@ -170,13 +170,13 @@ class SubmitChecklistStaff extends Component {
   }
 
   getNonCompliances() {
-    let category = this.props.location.state.category;
+    let category = localStorage.getItem("category");
     let difference = [""];
-    if (category == "fb") {
+    if (category == "F&B") {
       difference = getAllChecklistId().filter(
         (x) => !getClickedItems().includes(x)
       );
-    } else if (category == "nonfb") {
+    } else if (category == "Non-F&B") {
       difference = getNfbAllChecklistId().filter(
         (x) => !getClickedNfbItems().includes(x)
       );
@@ -202,8 +202,9 @@ class SubmitChecklistStaff extends Component {
 
     if (this.state.noncom != []) {
       const jsonobj = this.MakedeJson();
-
       console.log(jsonobj);
+      this.sendData(jsonobj);
+      
 
       
      
@@ -221,6 +222,26 @@ class SubmitChecklistStaff extends Component {
 
   }
 
+
+  async sendData(data) {
+    fetch("http://localhost:8080/audit/createaudit", {
+      method: "POST",
+      mode: "cors",
+      headers: { jwt_token: localStorage.token },
+      body: data,
+    }).then(response => {
+      console.log(response.status)
+
+      if (!response.status.ok) {
+        console.log("fail to send audit");
+
+      }
+      else {
+        console.log("success");
+        this.props.history.push("/dashboard");
+      }
+    })
+  }
 
   showImageComments(a) {
     if (this.state.noncom != null) {
@@ -254,19 +275,19 @@ class SubmitChecklistStaff extends Component {
  
 
   getCategory(id) {
-    let category = this.props.location.state.category;
-    if (category == "fb") {
+    let category = localStorage.getItem("category");
+    if (category == "F&B") {
       return getChecklistItem(id).category;
-    } else if (category == "nonfb") {
+    } else if (category == "Non-F&B") {
       return getNfbChecklistItem(id).category;
     }
   }
 
   getItem(id) {
-    let category = this.props.location.state.category;
-    if (category == "fb") {
+    let category =localStorage.getItem("category");
+    if (category == "F&B") {
       return getChecklistItem(id).item;
-    } else if (category == "nonfb") {
+    } else if (category == "Non-F&B") {
       return getNfbChecklistItem(id).item;
     }
   }
@@ -295,6 +316,7 @@ class SubmitChecklistStaff extends Component {
 */
 
   render() {
+    console.log(this.props);
     return (
       <div className="container">
         <button
@@ -322,7 +344,7 @@ class SubmitChecklistStaff extends Component {
               className="header-style"
               style={{ display: "inline-block", color: "#f06d1a" }}
             >
-              {this.props.location.state.tenant}
+              {localStorage.getItem("tenant_name")}
             </h1>
           </h1>
           <h1 className="header-style" style={{ display: "inline-block" }}>
@@ -331,14 +353,14 @@ class SubmitChecklistStaff extends Component {
               className="header-style"
               style={{ display: "inline-block", color: this.formatScore() }}
             >
-              {this.props.location.state.category == "fb"
+              {localStorage.getItem("category") == "F&B"
                 ? calculateScore(getClickedItems(), "totalScore")
                 : calculateScoreNonfb(getClickedNfbItems(), "totalScore")}
             </h1>
           </h1>
           <h2 className="header-style">Breakdown of Scores (%)</h2>
           <div id="chart1">
-            <ChartFinalScore category={this.props.location.state.category} />
+            <ChartFinalScore category={localStorage.getItem("category")} />
           </div>
           <h2 className="header-style">List of Non-Compliances</h2>
           <Container fluid>

@@ -40,15 +40,15 @@ class TenantStaff extends Component {
       >
         <Tabs >
           <TabList id="controlled-tab-example">
-            <Tab onClick={() =>this.handleSelect("CGH")} style={{ minWidth: "5%" }}>CGH</Tab>
-            <Tab onClick={() =>this.handleSelect("KKH")} style={{ minWidth: "5%" }}>KKH</Tab>
-            <Tab onClick={() =>this.handleSelect("SGH")} style={{ minWidth: "5%" }}>SGH</Tab>
-            <Tab onClick={() =>this.handleSelect("SKH")} style={{ minWidth: "5%" }}>SKH</Tab>
-            <Tab onClick={() =>this.handleSelect("NCCS")} style={{ minWidth: "5%" }}>NCCS</Tab>
-            <Tab onClick={() =>this.handleSelect("NHCS")} style={{ minWidth: "5%" }}>NHCS</Tab>
-            <Tab onClick={() =>this.handleSelect("BVH")} style={{ minWidth: "5%" }}>BVH</Tab>
-            <Tab onClick={() =>this.handleSelect("OCH")} style={{ minWidth: "5%" }}>OCH</Tab>
-            <Tab onClick={() =>this.handleSelect("Academia")} style={{ minWidth: "5%" }}>Academia</Tab>
+            <Tab name="CGH" onClick={() =>this.handleSelect("CGH")} style={{ minWidth: "5%" }}>CGH</Tab>
+            <Tab name="KKH" onClick={() =>this.handleSelect("KKH")} style={{ minWidth: "5%" }}>KKH</Tab>
+            <Tab name="SGH"onClick={() =>this.handleSelect("SGH")} style={{ minWidth: "5%" }}>SGH</Tab>
+            <Tab name="SKH"onClick={() =>this.handleSelect("SKH")} style={{ minWidth: "5%" }}>SKH</Tab>
+            <Tab name="NCCS" onClick={() =>this.handleSelect("NCCS")} style={{ minWidth: "5%" }}>NCCS</Tab>
+            <Tab name="NHCS" onClick={() =>this.handleSelect("NHCS")} style={{ minWidth: "5%" }}>NHCS</Tab>
+            <Tab name="BVH" onClick={() =>this.handleSelect("BVH")} style={{ minWidth: "5%" }}>BVH</Tab>
+            <Tab name="OCH" onClick={() =>this.handleSelect("OCH")} style={{ minWidth: "5%" }}>OCH</Tab>
+            <Tab name="Academia" onClick={() =>this.handleSelect("Academia")} style={{ minWidth: "5%" }}>Academia</Tab>
           </TabList>
 
           <TabPanel>
