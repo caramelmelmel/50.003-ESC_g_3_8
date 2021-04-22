@@ -31,6 +31,8 @@ class NonComplianceTenant extends Component {
     super(props);
     this.updateList = this.updateList.bind(this);
     this.putNonCompliances = this.putNonCompliances.bind(this);
+    this.fakeDataPush = this.fakeDataPush.bind(this);
+    this.sendNonCompliance = this.sendNonCompliance.bind(this);
   } 
 
   /*
@@ -42,6 +44,8 @@ class NonComplianceTenant extends Component {
   */
   handleSave() {
     console.log("Saving...");
+    this.sendNonCompliance(this.state.noncompliance);
+
   }
 
   getItem(id) {
@@ -169,6 +173,7 @@ class NonComplianceTenant extends Component {
     console.log("GETALLNC: ", getAllNoncompliance());
     console.log("NONCOMPLIANCE IN STATE: ", this.state.noncompliance);
     this.setState({noncompliance: getAllNoncompliance()});
+    this.setState({length: getLength()});
   }
   
 
@@ -250,7 +255,7 @@ class NonComplianceTenant extends Component {
                           <button
                             className="btn btn-warning header-style"
                             style={{ float: "right", margin: 15 }}
-                            onClick={this.fakeDataPush}
+                            onClick={this.handleSave}
                           >
                             Save
                           </button>
