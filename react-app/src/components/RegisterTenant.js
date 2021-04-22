@@ -92,29 +92,34 @@ class RegisterTenantFirst extends Component {
         }
     }
 
-    // https://shaghao.herokuapp.com/singhealth/tenant/signup
-    createTenant(data) {
-        fetch("http://localhost:3000/register-first-tenant/tenant/signup", {
-            method: "POST",
-            headers: {
+    async createTenant(data){
+        const response = await fetch("http://localhost:8080/tenant/signup",{
+            method:'POST',
+            mode:'cors',
+            credentials:'same-origin',
+            headers:{
                 'Content-Type': 'application/json'
-              },
-            body: data,
-        }).then(response => {
-            console.log(response.status)
-            // remove this when backend integration is done
-            this.props.history.push("/success-tenant");
-            if (!response.status.ok) {
-                console.log("Tenant registration failed!")
-                // route back to register staff page
-                // this.props.history.push("/register-tenant");
-            } else {
-                console.log("Tenant created!");
-                // route to tenant success page
-                // this.props.history.push("/success-tenant");
-            }
+            },
+            referrerPolicy: 'no-referrer',
+            body:JSON.stringify(data)
         })
+        if(!response.status.ok){
+            console.log(`${response.status}`)
+            console.log("Tenant registration failed!")
+            // route back to register staff page
+            // this.props.history.push("/register-tenant");
+            console.log("the code has an error here")
+            this.setState({error: "Registration unsuccessful."});
+            this.setState({isInvalid: true});
+
+        }
+        this.props.history.push("/success-tenant");
+        return response.json
     }
+
+    // https://shaghao.herokuapp.com/singhealth/tenant/signup
+    
+
 
     // // synchronous call to create tenant
     // async createTenant(data) {

@@ -81,7 +81,7 @@ class LoginTenant extends Component {
         }
     }
 
-    verifyTenant(data) {
+    /*verifyTenant(data) {
         fetch("https://shaghao.herokuapp.com/singhealth/tenant/login", {
             method: "POST",
             headers: {
@@ -104,6 +104,29 @@ class LoginTenant extends Component {
                 // this.props.history.push("/success-tenant");
             }
         })
+    }*/
+    async verifyTenant(data){
+        const response = await fetch("http://localhost:8080/tenant/signin",{
+            method:'POST',
+            mode:'cors',
+            credentials:'same-origin',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            referrerPolicy: 'no-referrer',
+            body:JSON.stringify(data)
+        })
+        if(response.status != 200){
+            console.log(`${response.status}`)
+            //console.log("Tenant registration failed!")
+            // route back to register staff page
+            console.log("the code has an error here")
+            this.setState({error: "login unsuccessful."});
+            this.setState({isInvalid: true});
+            this.props.history.push("/login-tenant");
+        }
+        
+        return response.json
     }
 
     render() { 
