@@ -64,13 +64,13 @@ class LoginStaff extends Component {
                 this.verifyStaff(JSONdata);
                 
 
-                //save staff email to local storage
-                localStorage.setItem("staff_email", this.state.email);
-                console.log(localStorage.getItem("staff_email"));
-                console.log(localStorage);
+                // //save staff email to local storage
+                // localStorage.setItem("staff_email", this.state.email);
+                // console.log(localStorage.getItem("staff_email"));
+                // console.log(localStorage);
 
-                // go to staff home page
-                this.props.history.push("/dashboard");
+                // // go to staff home page
+                // this.props.history.push("/dashboard");
 
             }
         }
@@ -90,13 +90,17 @@ class LoginStaff extends Component {
             if (!response.status.ok) {
                 console.log("Staff login failed!")
                 // route back to login staff page
-                // this.props.history.push("/login-staff");
+                this.props.history.push("/login-staff");
             } else {
                 console.log("Staff logged in!");
                 // put token in local storage
-                console.log(response.headers);
-                // route to staff home page
-                // this.props.history.push("/success-staff");
+                // localStorage.setItem("staff_email", this.state.email);
+                // console.log(localStorage.getItem("staff_email"));
+                // console.log(localStorage);
+                // console.log(response.headers);
+
+                // route to dashboard
+                this.props.history.push("/dashboard");
             }
         })
     }
