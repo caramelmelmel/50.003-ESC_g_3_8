@@ -31,7 +31,7 @@ class NonComplianceTenant extends Component {
   constructor(props) {
     super(props);
     this.updateList = this.updateList.bind(this);
-    this.putNonCompliances = this.putNonCompliances.bind(this);
+    this.getNonCompliances = this.getNonCompliances.bind(this);
     this.fakeDataPush = this.fakeDataPush.bind(this);
     this.sendNonCompliance = this.sendNonCompliance.bind(this);
     this.handleSave = this.handleSave.bind(this);
@@ -115,7 +115,7 @@ class NonComplianceTenant extends Component {
     console.log("IMAGE: ", image);
   }
 
-  putNonCompliances() {
+  getNonCompliances() {
     fetch("http://local:8080/tenant/getnoncomp", {
       method: "GET",
       mode: "cors",
@@ -154,7 +154,7 @@ class NonComplianceTenant extends Component {
   }
 
   componentDidMount() {
-    //this.putNonCompliances();
+    this.getNonCompliances();
     var nc = getAllNoncompliance();
     this.setState({noncompliance: nc});
     console.log("NC FROM CDM: " ,this.state.noncompliance);

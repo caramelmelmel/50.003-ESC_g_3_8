@@ -85,6 +85,10 @@ class SubmitChecklistStaff extends Component {
         //console.log(localStorage.getItem("audit_score"));
         continue;
       }
+      if (localStorage.key(i) == "token") {
+        //console.log(localStorage.getItem("audit_score"));
+        continue;
+      }
 
       if (localStorage.key(i) == "token") {
         continue;
@@ -95,8 +99,15 @@ class SubmitChecklistStaff extends Component {
       else {
         eachentry.key = localStorage.key(i);
         //console.log(localStorage.getItem(localStorage.key(i)));
-        
+
         const text = JSON.parse(localStorage.getItem(localStorage.key(i))).val;
+
+        //console.log("I AM i ", i);
+        //console.log("LOCAL STORAGE. KEY")
+        //console.log("LOCAL STORAGE KEY: ", localStorage.getItem(localStorage.key(i)));
+ 
+      
+
         comments.message = text
         console.log(text);
        

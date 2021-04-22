@@ -91,7 +91,7 @@ class ChecklistFBStaffE extends Component {
                     /> : null)}
                 </tbody>
             </table>
-                        <Link to={{pathname: "/submit-checklist-staff", state: {category: "fb", tenant: this.props.location.state.tenant}}} onClick={this.handlePassScore}>
+                        <Link to={{pathname: "/submit-checklist-staff"}} onClick={this.handlePassScore}>
                             <button 
                             type="button" 
                             className="btn btn-primary btn-lg checklist-header-style" 
