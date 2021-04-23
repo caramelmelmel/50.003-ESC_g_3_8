@@ -65,6 +65,10 @@ class SubmitChecklistStaff extends Component {
         //const staff_email = localStorage.getItem("staff_email");
         continue;
       }
+      if (localStorage.key(i) == "store_name") {
+        //localStorage.getItem("tenant_name")
+        continue;
+      }
       if (localStorage.key(i) == "tenant_name") {
         //localStorage.getItem("tenant_name")
         continue;
@@ -90,7 +94,7 @@ class SubmitChecklistStaff extends Component {
         continue;
       }
 
-      if (localStorage.key(i) == "token") {
+      if (localStorage.key(i) == "noncompliances") {
         continue;
       }
       //key
@@ -138,6 +142,7 @@ class SubmitChecklistStaff extends Component {
         eachentry.comments = comment;
       
         noncompliances.push(eachentry)
+      
   
        
       }
@@ -147,16 +152,22 @@ class SubmitChecklistStaff extends Component {
     this.setState({ noncom: noncompliances }, () => {
       console.log(this.state.noncom);
     })
+    console.log(noncompliances);
+    //localStorage.setItem("noncompliances", noncompliances);
+    ///var data = JSON.parse(localStorage.getItem("noncompliances")); 
+   
+    ///console.log(data);
   }
 
   MakedeJson() {
     var jsonobj = {};
-    var noncomp = {};
+    ///var noncomp = {};
     jsonobj.staff_email = localStorage.getItem("staff_email");
     jsonobj.category = localStorage.getItem("category");
     jsonobj.date = localStorage.getItem("date_recorded");
     jsonobj.performancescore= localStorage.getItem("audit_score");
-    jsonobj.store_name = localStorage.getItem("tenant_name") + " " + localStorage.getItem("institution_name")
+    jsonobj.store_name = localStorage.getItem("tenant_name");
+    jsonobj.institution_name = localStorage.getItem("institution_name");
     jsonobj.non_compliances = this.state.noncom;
     //console.log(localStorage);
     //noncomp = { obj : [] }
@@ -230,6 +241,7 @@ class SubmitChecklistStaff extends Component {
         
     
     }
+    //localStorage.clear();
   }
 
     
