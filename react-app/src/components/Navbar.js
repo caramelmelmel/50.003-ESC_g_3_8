@@ -38,7 +38,13 @@ function Navbar() {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
-            {Sidebar.map((item, index) => { if (item.actor == "both" || item.actor == actor) {
+            {Sidebar.map((item, index) => {
+              if (item.actor == "both" || item.actor == actor) {
+                if (item.title == "Logout") {
+                  localStorage.removeItem("tenant_email");
+                  localStorage.removeItem("staff_email");
+                  console.log("reached")
+                }
               return (
                 <li key={index} className={item.cName}>
                   <Link to={item.path}>

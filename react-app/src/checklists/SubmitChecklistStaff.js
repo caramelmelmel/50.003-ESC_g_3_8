@@ -65,6 +65,10 @@ class SubmitChecklistStaff extends Component {
         //const staff_email = localStorage.getItem("staff_email");
         continue;
       }
+      if (localStorage.key(i) == "store_name") {
+        //localStorage.getItem("tenant_name")
+        continue;
+      }
       if (localStorage.key(i) == "tenant_name") {
         //localStorage.getItem("tenant_name")
         continue;
@@ -90,7 +94,7 @@ class SubmitChecklistStaff extends Component {
         continue;
       }
 
-      if (localStorage.key(i) == "token") {
+      if (localStorage.key(i) == "noncompliances") {
         continue;
       }
       //key
@@ -138,6 +142,7 @@ class SubmitChecklistStaff extends Component {
         eachentry.comments = comment;
       
         noncompliances.push(eachentry)
+      
   
        
       }
@@ -147,6 +152,11 @@ class SubmitChecklistStaff extends Component {
     this.setState({ noncom: noncompliances }, () => {
       console.log(this.state.noncom);
     })
+    console.log(noncompliances);
+    //localStorage.setItem("noncompliances", noncompliances);
+    ///var data = JSON.parse(localStorage.getItem("noncompliances")); 
+   
+    ///console.log(data);
   }
 
   MakedeJson() {

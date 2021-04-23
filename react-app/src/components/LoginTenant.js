@@ -36,7 +36,10 @@ class LoginTenant extends Component {
         console.log(this.state.tenant);
         console.log(this.state.email);
         console.log(this.state.password);
-        this.setState({isClicked: true});
+        this.setState({ isClicked: true });
+        
+        localStorage.setItem("tenant_email", this.state.email);
+        console.log(localStorage);
 
         var objString = `{
             "email": "${this.state.email}",
